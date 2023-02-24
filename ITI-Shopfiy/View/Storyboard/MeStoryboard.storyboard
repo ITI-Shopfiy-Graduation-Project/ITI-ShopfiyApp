@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DNK-tv-Sb9">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Me View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="me" id="Y6W-OH-hqX" customClass="MeViewController" customModule="ITI_Shopfiy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="GK3-eR-vpw">
+                        <rightBarButtonItems>
+                            <barButtonItem image="wrench.adjustable.fill" catalog="system" id="2gr-BD-fqn">
+                                <color key="tintColor" name="Green"/>
+                                <connections>
+                                    <action selector="goToSettingsVC:" destination="Y6W-OH-hqX" id="2PP-U4-MyA"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="cart" catalog="system" id="xBu-70-cOk">
+                                <color key="tintColor" name="Green"/>
+                                <connections>
+                                    <action selector="goToCartVC:" destination="Y6W-OH-hqX" id="zQ6-6k-Cs1"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2962.5954198473282" y="5.6338028169014089"/>
+        </scene>
+        <!--settings-->
+        <scene sceneID="EsY-nh-kfC">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsStoryboard" referencedIdentifier="settings" id="3ep-yr-IVg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J1z-wK-lbS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3447.3282442748091" y="-210.56338028169014"/>
+        </scene>
+        <!--favorites-->
+        <scene sceneID="86l-Y8-1u5">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FavoritesStoryboard" referencedIdentifier="favorites" id="xMN-8e-wwN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cUr-fC-Ikw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3477.8625954198474" y="-90.140845070422543"/>
+        </scene>
+        <!--login-->
+        <scene sceneID="sM4-2d-biU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="LoginStoryboard" referencedIdentifier="login" id="UMw-Es-A0v" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mzQ-rI-hMG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3474.8091603053435" y="5.6338028169014089"/>
+        </scene>
+        <!--Storyboard Reference-->
+        <scene sceneID="H85-iw-qUy">
+            <objects>
+                <viewControllerPlaceholder id="yYU-AB-y5q" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pzb-JU-2nc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3496.9465648854962" y="111.9718309859155"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="d38-bN-QOJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DNK-tv-Sb9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4KD-Jt-syZ">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="5g1-d5-Up6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="muc-wu-8Bo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2035.8778625954199" y="5.6338028169014089"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="cart" catalog="system" width="128" height="102"/>
+        <image name="wrench.adjustable.fill" catalog="system" width="128" height="124"/>
+        <namedColor name="Green">
+            <color red="0.37999999523162842" green="0.71399998664855957" blue="0.6470000147819519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

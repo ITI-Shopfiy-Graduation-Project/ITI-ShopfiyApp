@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fcv-IB-fkI">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Shopify-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="products" id="Y6W-OH-hqX" customClass="ProductsViewController" customModule="ITI_Shopfiy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hyy-so-KB3">
+                                <rect key="frame" x="16" y="175" width="361" height="627"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hn5-1N-3rl">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <searchBar contentMode="redraw" placeholder="What's in your mind ?" translatesAutoresizingMaskIntoConstraints="NO" id="nc3-4g-oO2">
+                                <rect key="frame" x="16" y="103" width="361" height="56"/>
+                                <color key="tintColor" name="Green"/>
+                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" name="Gray"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="Green"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="tFt-nx-Ite"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hyy-so-KB3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="7Nh-at-ysL"/>
+                            <constraint firstItem="nc3-4g-oO2" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="7dg-IG-zQ0"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="nc3-4g-oO2" secondAttribute="trailing" constant="16" id="BOg-zH-Gob"/>
+                            <constraint firstItem="hyy-so-KB3" firstAttribute="top" secondItem="nc3-4g-oO2" secondAttribute="bottom" constant="16" id="DHj-Vi-Max"/>
+                            <constraint firstItem="nc3-4g-oO2" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Hu2-qq-6z0"/>
+                            <constraint firstItem="hyy-so-KB3" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-16" id="b00-7b-kIy"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hyy-so-KB3" secondAttribute="trailing" constant="16" id="dR5-iA-FSA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Shopify" id="djS-tc-4sO">
+                        <rightBarButtonItems>
+                            <barButtonItem image="heart" catalog="system" id="Y82-vj-ax7">
+                                <color key="tintColor" name="Green"/>
+                                <connections>
+                                    <action selector="likesScreen:" destination="Y6W-OH-hqX" id="lG8-cs-xua"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="cart" catalog="system" id="10N-DR-NBn">
+                                <color key="tintColor" name="Green"/>
+                                <connections>
+                                    <action selector="cartScreen:" destination="Y6W-OH-hqX" id="f4X-ba-l49"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cart_btn" destination="10N-DR-NBn" id="Hzr-0i-9gO"/>
+                        <outlet property="like_btn" destination="Y82-vj-ax7" id="s6e-Co-SYl"/>
+                        <outlet property="productSearchBar" destination="nc3-4g-oO2" id="71N-X4-ai5"/>
+                        <outlet property="productsCollectionView" destination="hyy-so-KB3" id="rcy-Zn-pyL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="973.28244274809151" y="-2.1126760563380285"/>
+        </scene>
+        <!--Product Details View Controller-->
+        <scene sceneID="wvr-PZ-fJl">
+            <objects>
+                <viewController storyboardIdentifier="productDetails" id="nyP-Rh-kfk" customClass="ProductDetailsViewController" customModule="ITI_Shopfiy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Gn-kR-5wD">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4is-n6-rXw">
+                                <rect key="frame" x="0.0" y="59.000000000000014" width="393" height="227.33333333333337"/>
+                                <color key="backgroundColor" name="White"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pVF-VG-4xV">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" name="White"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </collectionView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="vJq-mS-HNv">
+                                <rect key="frame" x="16" y="237.66666666666666" width="361" height="32.666666666666657"/>
+                                <color key="tintColor" name="Green"/>
+                                <color key="pageIndicatorTintColor" name="Gray"/>
+                                <color key="currentPageIndicatorTintColor" name="Green"/>
+                            </pageControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Product Review" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llm-Ga-BB3">
+                                <rect key="frame" x="16" y="310.33333333333331" width="361" height="29"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <color key="textColor" name="Red"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZg-aB-3sO">
+                                <rect key="frame" x="16" y="462.33333333333331" width="361" height="29.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="19"/>
+                                <color key="textColor" name="Red"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d04-Pl-f21">
+                                <rect key="frame" x="24" y="499.66666666666669" width="345" height="154.33333333333331"/>
+                                <color key="backgroundColor" name="thirdGray"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" name="Black"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJM-3A-aBS">
+                                <rect key="frame" x="123" y="678" width="230" height="41.333333333333371"/>
+                                <color key="tintColor" name="Green"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="ADD TO CART" cornerStyle="capsule">
+                                    <color key="baseForegroundColor" name="White"/>
+                                    <color key="baseBackgroundColor" name="Green"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" name="SecondGray"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addToCartButton:" destination="nyP-Rh-kfk" eventType="touchUpInside" id="kqg-Q2-UaZ"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P2W-br-3H8">
+                                <rect key="frame" x="24" y="347.33333333333331" width="345" height="91"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0I-C3-Dg0">
+                                        <rect key="frame" x="8" y="7.9999999999999982" width="329" height="30.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWc-DJ-wMp">
+                                        <rect key="frame" x="8" y="46.333333333333371" width="114" height="30.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="thirdGray"/>
+                                <constraints>
+                                    <constraint firstItem="XWc-DJ-wMp" firstAttribute="leading" secondItem="P2W-br-3H8" secondAttribute="leading" constant="8" id="Ght-6K-iTn"/>
+                                    <constraint firstItem="Z0I-C3-Dg0" firstAttribute="leading" secondItem="P2W-br-3H8" secondAttribute="leading" constant="8" id="H3Y-fJ-J3e"/>
+                                    <constraint firstAttribute="trailing" secondItem="Z0I-C3-Dg0" secondAttribute="trailing" constant="8" id="Vo9-PX-c1J"/>
+                                    <constraint firstItem="XWc-DJ-wMp" firstAttribute="top" secondItem="Z0I-C3-Dg0" secondAttribute="bottom" constant="8" id="Wbb-6b-a1W"/>
+                                    <constraint firstItem="Z0I-C3-Dg0" firstAttribute="height" secondItem="P2W-br-3H8" secondAttribute="height" multiplier="1:3" id="aVG-fv-3sG"/>
+                                    <constraint firstItem="Z0I-C3-Dg0" firstAttribute="top" secondItem="P2W-br-3H8" secondAttribute="top" constant="8" id="dHB-rq-t9x"/>
+                                    <constraint firstItem="XWc-DJ-wMp" firstAttribute="height" secondItem="P2W-br-3H8" secondAttribute="height" multiplier="1:3" id="nWW-T8-Jsg"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUG-vu-K1b">
+                                <rect key="frame" x="40" y="681.66666666666663" width="51" height="34"/>
+                                <color key="tintColor" name="Green"/>
+                                <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
+                                <connections>
+                                    <action selector="addToLikesButton:" destination="nyP-Rh-kfk" eventType="touchUpInside" id="q0D-4r-zwu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mHo-fw-vrx"/>
+                        <color key="backgroundColor" name="White"/>
+                        <constraints>
+                            <constraint firstItem="TJM-3A-aBS" firstAttribute="top" secondItem="d04-Pl-f21" secondAttribute="bottom" constant="24" id="0ia-zq-h0E"/>
+                            <constraint firstItem="mHo-fw-vrx" firstAttribute="trailing" secondItem="P2W-br-3H8" secondAttribute="trailing" constant="24" id="2ek-9b-qnE"/>
+                            <constraint firstItem="P2W-br-3H8" firstAttribute="height" secondItem="4is-n6-rXw" secondAttribute="height" multiplier="1.2:3" id="37K-T5-2UK"/>
+                            <constraint firstItem="vJq-mS-HNv" firstAttribute="bottom" secondItem="4is-n6-rXw" secondAttribute="bottom" constant="-16" id="3Rj-F5-VfK"/>
+                            <constraint firstItem="iUG-vu-K1b" firstAttribute="centerY" secondItem="TJM-3A-aBS" secondAttribute="centerY" id="4EE-cA-bZJ"/>
+                            <constraint firstItem="vZg-aB-3sO" firstAttribute="leading" secondItem="mHo-fw-vrx" secondAttribute="leading" constant="16" id="4Vh-By-boJ"/>
+                            <constraint firstItem="llm-Ga-BB3" firstAttribute="leading" secondItem="mHo-fw-vrx" secondAttribute="leading" constant="16" id="9de-XZ-Idk"/>
+                            <constraint firstItem="mHo-fw-vrx" firstAttribute="trailing" secondItem="llm-Ga-BB3" secondAttribute="trailing" constant="16" id="E7U-s7-OvI"/>
+                            <constraint firstItem="d04-Pl-f21" firstAttribute="top" secondItem="vZg-aB-3sO" secondAttribute="bottom" constant="8" id="F4H-9l-psX"/>
+                            <constraint firstItem="llm-Ga-BB3" firstAttribute="height" secondItem="vJq-mS-HNv" secondAttribute="height" multiplier="0.9" id="K3P-Mc-0tQ"/>
+                            <constraint firstItem="TJM-3A-aBS" firstAttribute="trailing" secondItem="d04-Pl-f21" secondAttribute="trailing" constant="-16" id="MmT-K9-fud"/>
+                            <constraint firstItem="d04-Pl-f21" firstAttribute="leading" secondItem="mHo-fw-vrx" secondAttribute="leading" constant="24" id="OKD-sl-qMd"/>
+                            <constraint firstItem="llm-Ga-BB3" firstAttribute="top" secondItem="4is-n6-rXw" secondAttribute="bottom" constant="24" id="RdS-W6-7bR"/>
+                            <constraint firstItem="d04-Pl-f21" firstAttribute="height" secondItem="P2W-br-3H8" secondAttribute="height" multiplier="1.7" id="Uok-iG-db5"/>
+                            <constraint firstItem="vJq-mS-HNv" firstAttribute="leading" secondItem="mHo-fw-vrx" secondAttribute="leading" constant="16" id="Usr-nN-eNg"/>
+                            <constraint firstItem="4is-n6-rXw" firstAttribute="top" secondItem="mHo-fw-vrx" secondAttribute="top" id="W9O-1g-I2g"/>
+                            <constraint firstItem="4is-n6-rXw" firstAttribute="height" secondItem="1Gn-kR-5wD" secondAttribute="height" multiplier="0.8:3" id="WL7-iw-zy9"/>
+                            <constraint firstItem="P2W-br-3H8" firstAttribute="top" secondItem="llm-Ga-BB3" secondAttribute="bottom" constant="8" id="ZTj-oy-xav"/>
+                            <constraint firstItem="mHo-fw-vrx" firstAttribute="trailing" secondItem="d04-Pl-f21" secondAttribute="trailing" constant="24" id="a3Z-fL-zvI"/>
+                            <constraint firstItem="vJq-mS-HNv" firstAttribute="height" secondItem="4is-n6-rXw" secondAttribute="height" multiplier="1:7" id="iGp-pO-uQv"/>
+                            <constraint firstItem="vZg-aB-3sO" firstAttribute="top" secondItem="P2W-br-3H8" secondAttribute="bottom" constant="24" id="l00-97-9gS"/>
+                            <constraint firstItem="vZg-aB-3sO" firstAttribute="height" secondItem="llm-Ga-BB3" secondAttribute="height" id="lRk-rM-fAX"/>
+                            <constraint firstItem="4is-n6-rXw" firstAttribute="trailing" secondItem="mHo-fw-vrx" secondAttribute="trailing" id="ljK-rU-h3l"/>
+                            <constraint firstItem="4is-n6-rXw" firstAttribute="leading" secondItem="mHo-fw-vrx" secondAttribute="leading" id="mBc-eQ-S3L"/>
+                            <constraint firstItem="TJM-3A-aBS" firstAttribute="height" secondItem="d04-Pl-f21" secondAttribute="height" multiplier="0.8:3" id="mpD-Un-ROc"/>
+                            <constraint firstItem="iUG-vu-K1b" firstAttribute="leading" secondItem="d04-Pl-f21" secondAttribute="leading" constant="16" id="njX-5T-wCb"/>
+                            <constraint firstItem="mHo-fw-vrx" firstAttribute="trailing" secondItem="vJq-mS-HNv" secondAttribute="trailing" constant="16" id="oFc-xz-A7M"/>
+                            <constraint firstItem="TJM-3A-aBS" firstAttribute="width" secondItem="d04-Pl-f21" secondAttribute="width" multiplier="2:3" id="pHy-XU-dE6"/>
+                            <constraint firstItem="P2W-br-3H8" firstAttribute="leading" secondItem="mHo-fw-vrx" secondAttribute="leading" constant="24" id="pnY-aY-gHU"/>
+                            <constraint firstItem="mHo-fw-vrx" firstAttribute="trailing" secondItem="vZg-aB-3sO" secondAttribute="trailing" constant="16" id="rSU-sq-mER"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cart_btn" destination="TJM-3A-aBS" id="Bjl-9r-Dls"/>
+                        <outlet property="like_btn" destination="iUG-vu-K1b" id="Y6U-vF-XrX"/>
+                        <outlet property="pageControl" destination="vJq-mS-HNv" id="AkT-Uu-ibr"/>
+                        <outlet property="productImagesCollectionView" destination="4is-n6-rXw" id="iuK-sA-ekM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yls-x7-doJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1672.5190839694656" y="-2.1126760563380285"/>
+        </scene>
+        <!--favorites-->
+        <scene sceneID="G3g-WT-QFS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FavoritesStoryboard" referencedIdentifier="favorites" id="ofu-Ve-mla" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JsN-U0-cGx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2490" y="28"/>
+        </scene>
+        <!--cart-->
+        <scene sceneID="zQH-HT-NsY">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CartStoryboard" referencedIdentifier="cart" id="wC3-ka-M7h" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eXu-OP-u3c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2333" y="217"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SPO-J2-gY1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Fcv-IB-fkI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bNs-0v-OZe">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="aLX-O5-8h4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pyD-VA-Tn5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="cart" catalog="system" width="128" height="102"/>
+        <image name="heart" catalog="system" width="128" height="107"/>
+        <namedColor name="Black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Gray">
+            <color red="0.51399999856948853" green="0.51399999856948853" blue="0.51399999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Green">
+            <color red="0.37999999523162842" green="0.71399998664855957" blue="0.6470000147819519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Red">
+            <color red="0.89999997615814209" green="0.42199999094009399" blue="0.50400000810623169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SecondGray">
+            <color red="0.76899999380111694" green="0.76899999380111694" blue="0.76899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="White">
+            <color red="0.98000001907348633" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="thirdGray">
+            <color red="0.76899999380111694" green="0.76899999380111694" blue="0.76899999380111694" alpha="0.48800000548362732" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
