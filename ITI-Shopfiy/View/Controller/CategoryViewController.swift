@@ -8,11 +8,20 @@
 import UIKit
 
 class CategoryViewController: UIViewController {
-
+    @IBAction func cartBtn(_ sender: Any) {
+        let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
+        navigationController?.pushViewController(cartVC, animated: true)
+    }
+    @IBAction func favouritesBtn(_ sender: Any) {
+        let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
+        navigationController?.pushViewController(FavVC, animated: true)
+    }
+    var staticimgs = [UIImage(named: "ct1")!,UIImage(named: "ct2")!,UIImage(named: "ct3")!,UIImage(named: "ct4")!,UIImage(named: "ct5")!]
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        CategoryCollectionView.dataSource = self
+        CategoryCollectionView.dataSource = self
         CategoryCollectionView.delegate = self
     }
     
@@ -21,66 +30,60 @@ class CategoryViewController: UIViewController {
 extension CategoryViewController:UICollectionViewDelegate {
     
 }
-//extension CategoryViewController :UICollectionViewDataSource{
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        <#code#>
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 0
-//    }
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        
-////
-////        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailcell", for:indexPath)as! DetailsCollectionViewCell
-////        let detiliedteam = player [indexPath.row]
-////        cell.playerName.text =  detiliedteam.player_name
-////        cell.playerAge.text = detiliedteam.player_age
-////        cell.playerNumber.text = detiliedteam.player_number
-////        cell.playerPostion.text = detiliedteam.player_type
-////        cell.layer.borderColor = UIColor.darkGray.cgColor
-////         cell.layer.borderWidth = 3.0
-////        cell.layer.cornerRadius = 20.0
-////
-////        let playerimg = URL(string:detiliedteam.player_image ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
-////        cell.playerImg.layer.cornerRadius = 50
-////        cell.playerImg.layer.borderWidth = 2
-////        cell.playerImg.clipsToBounds = false
-////        cell.playerImg.layer.masksToBounds = true
-////        cell.playerImg?.kf.setImage(with:playerimg)
-//        return cell
-//    }
-
-    
-
-
-
-
-extension CategoryViewController: UICollectionViewDelegateFlowLayout
-
-{
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width*0.48, height: self.view.frame.height*0.32)
+extension CategoryViewController :UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
-    }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: <#T##CGFloat#>, left: <#T##CGFloat#>, bottom: <#T##CGFloat#>, right: <#T##CGFloat#>)
-//    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: self.view.frame.width*0.1, height: self.view.frame.height*0.1)
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for:indexPath)as! CategoryCollectionViewCell
+        cell.layer.borderColor = UIColor.systemGray.cgColor
+        cell.layer.borderWidth = 0
+        cell.layer.cornerRadius = 0
+        cell.borderColor = UIColor.clear
+        cell.productImage.layer.cornerRadius = 35
+        cell.productImage.layer.borderWidth = 0
+        cell.productImage.clipsToBounds = false
+        cell.productImage.layer.masksToBounds = true
+        cell.productImage.image = staticimgs[indexPath.row]
+        
+        
+        return cell
+        
     }
     
     
     
 }
+    
+    
+    extension CategoryViewController: UICollectionViewDelegateFlowLayout
+    
+    {
+        
+        
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: self.view.frame.width*0.45, height: self.view.frame.height*0.32)
+        }
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+            return 10
+        }
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+            return 10
+        }
+            func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+                return UIEdgeInsets(top: 7, left: 12, bottom: 0, right: 12)
+            }
+        
+//        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//            return CGSize(width: self.view.frame.width*0.4, height: self.view.frame.height*0.1)
+//        }
+        
+        
 
-
+        
+    }
+    
+    
+    
 

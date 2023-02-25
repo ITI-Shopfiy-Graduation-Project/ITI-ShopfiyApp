@@ -9,6 +9,19 @@ import UIKit
 import Foundation
 class HomeViewController: UIViewController {
     
+    @IBAction func searchBtn(_ sender: Any) {
+        let productVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
+        navigationController?.pushViewController(productVC, animated: true)
+       
+    }
+    @IBAction func cartBtn(_ sender: Any) {
+        let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
+        navigationController?.pushViewController(cartVC, animated: true)
+    }
+    @IBAction func favBtn(_ sender: Any) {
+        let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
+        navigationController?.pushViewController(FavVC, animated: true)
+    }
     @IBOutlet weak var pageControl: UIPageControl!
     var staticimgs = [UIImage(named: "ad1")!,UIImage(named: "ad2")!,UIImage(named: "ad3")!]
     var timer : Timer?
@@ -109,6 +122,11 @@ extension HomeViewController:UICollectionViewDelegateFlowLayout
         else {
             return 10
         }
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if collectionView == self.AdsCollectionView{
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)}
+        else  {return UIEdgeInsets(top: 0, left: 15, bottom: 15, right: 15)}
     }
 }
 extension HomeViewController
