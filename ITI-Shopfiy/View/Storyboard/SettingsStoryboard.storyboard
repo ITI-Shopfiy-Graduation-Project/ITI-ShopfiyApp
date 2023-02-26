@@ -59,7 +59,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <segments>
                                             <segment title="USD"/>
-                                            <segment title="EP"/>
+                                            <segment title="EGP"/>
                                         </segments>
                                     </segmentedControl>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kei-FG-DTr">
@@ -78,6 +78,9 @@
                                             <color key="baseForegroundColor" red="0.091787283440000006" green="0.14986227020000001" blue="0.097840475829999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="baseBackgroundColor" red="0.36399999259999999" green="0.78100001809999997" blue="0.56400001050000004" alpha="0.74344862379999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="QCX-y3-nJB" kind="presentation" id="S07-15-nQi"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -119,6 +122,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="62" y="-14"/>
+        </scene>
+        <!--AddressDetailsStoryboard-->
+        <scene sceneID="FJW-2K-jIL">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="address" storyboardName="AddressDetailsStoryboard" id="QCX-y3-nJB" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="al7-b8-WhX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="454" y="388"/>
         </scene>
         <!--About Us View Controller-->
         <scene sceneID="MRu-pm-kvo">

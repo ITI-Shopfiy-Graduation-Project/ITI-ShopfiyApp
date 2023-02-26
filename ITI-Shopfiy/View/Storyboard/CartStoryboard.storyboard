@@ -66,6 +66,7 @@
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="proceedToCheckout:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="OCK-3S-XAK"/>
+                                            <segue destination="8uN-TK-tVe" kind="show" id="jwj-8B-wo7"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -226,16 +227,26 @@
             </objects>
             <point key="canvasLocation" x="130.53435114503816" y="-27.464788732394368"/>
         </scene>
+        <!--PaymentStoryboard-->
+        <scene sceneID="83n-9l-pHg">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="payment" storyboardName="PaymentStoryboard" id="8uN-TK-tVe" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="CTR-XG-H85"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rbi-0c-Obz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="693" y="-107"/>
+        </scene>
     </scenes>
     <resources>
         <namedColor name="Green">
-            <color red="0.38197922709999999" green="0.71259492639999999" blue="0.64808213709999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.37999999523162842" green="0.71399998664855957" blue="0.6470000147819519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Red">
-            <color red="0.89986002450000002" green="0.42159268259999999" blue="0.50429815050000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89999997615814209" green="0.42199999094009399" blue="0.50400000810623169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="White">
-            <color red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.98000001907348633" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
