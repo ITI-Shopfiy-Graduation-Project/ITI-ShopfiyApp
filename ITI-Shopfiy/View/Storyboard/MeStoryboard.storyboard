@@ -21,7 +21,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="GK3-eR-vpw">
                         <rightBarButtonItems>
-                            <barButtonItem image="wrench.adjustable.fill" catalog="system" id="2gr-BD-fqn">
+                            <barButtonItem image="gear" catalog="system" id="2gr-BD-fqn">
                                 <color key="tintColor" name="Green"/>
                                 <connections>
                                     <action selector="goToSettingsVC:" destination="Y6W-OH-hqX" id="2PP-U4-MyA"/>
@@ -36,6 +36,9 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="meView" destination="5EZ-qb-Rvc" id="mlT-Tb-ZYj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -65,10 +68,10 @@
             </objects>
             <point key="canvasLocation" x="3474.8091603053435" y="5.6338028169014089"/>
         </scene>
-        <!--Storyboard Reference-->
+        <!--orders-->
         <scene sceneID="H85-iw-qUy">
             <objects>
-                <viewControllerPlaceholder id="yYU-AB-y5q" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="OrdersStoryboard" referencedIdentifier="orders" id="yYU-AB-y5q" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pzb-JU-2nc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3496.9465648854962" y="111.9718309859155"/>
@@ -94,7 +97,7 @@
     </scenes>
     <resources>
         <image name="cart" catalog="system" width="128" height="102"/>
-        <image name="wrench.adjustable.fill" catalog="system" width="128" height="124"/>
+        <image name="gear" catalog="system" width="128" height="122"/>
         <namedColor name="Green">
             <color red="0.37999999523162842" green="0.71399998664855957" blue="0.6470000147819519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
