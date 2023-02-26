@@ -6,8 +6,14 @@
 //
 
 import UIKit
-
+import Kingfisher
 class CategoryViewController: UIViewController {
+    var CategoryModel: CategoryViewModel?
+//    var AllProductsUrl : String?
+    var pttt : [Products] = []
+    var product :[Products] = []
+    var AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json"
+   
     @IBAction func cartBtn(_ sender: Any) {
         let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
         navigationController?.pushViewController(cartVC, animated: true)
@@ -16,23 +22,42 @@ class CategoryViewController: UIViewController {
         let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
         navigationController?.pushViewController(FavVC, animated: true)
     }
-    var staticimgs = [UIImage(named: "ct1")!,UIImage(named: "ct2")!,UIImage(named: "ct3")!,UIImage(named: "ct4")!,UIImage(named: "ct5")!]
+  
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        CategoryModel = CategoryViewModel()
         CategoryCollectionView.dataSource = self
         CategoryCollectionView.delegate = self
+        CategoryModel?.ProductsUrl = self.AllProductsUrl
+        CategoryModel?.getProducts()
+        CategoryModel?.bindingProducts = {()in
+        self.renderProducts()
+            
+        
+        }
+        
+        
     }
-    
-
+    func renderProducts(){
+        DispatchQueue.main.async {
+            self.product = self.CategoryModel?.productsResults ?? []
+            self.CategoryCollectionView.reloadData()
+          
+          
+     
+        }
+        
+    }
 }
 extension CategoryViewController:UICollectionViewDelegate {
     
 }
 extension CategoryViewController :UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return product.count
+       
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -42,11 +67,16 @@ extension CategoryViewController :UICollectionViewDataSource{
         cell.layer.cornerRadius = 0
         cell.borderColor = UIColor.clear
         cell.productImage.layer.cornerRadius = 35
-        cell.productImage.layer.borderWidth = 0
+        cell.productImage.layer.borderWidth = 0.5
         cell.productImage.clipsToBounds = false
         cell.productImage.layer.masksToBounds = true
-        cell.productImage.image = staticimgs[indexPath.row]
+        cell.productImage.layer.backgroundColor = UIColor.lightGray.cgColor
+        let productt = self.product [indexPath.row]
+        let productimg = URL(string:productt.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
+        cell.productImage?.kf.setImage(with:productimg)
         
+        
+        cell.productPrice.text = productt.variants?[0].price?.appending(" $")
         
         return cell
         
