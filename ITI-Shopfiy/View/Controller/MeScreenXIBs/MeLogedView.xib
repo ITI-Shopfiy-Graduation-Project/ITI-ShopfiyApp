@@ -9,13 +9,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MeLogedViewController" customModule="ITI_Shopfiy" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MeLogedView" customModule="ITI_Shopfiy" customModuleProvider="target">
             <connections>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="user_img" destination="qp4-0N-Qhe" id="zRR-qs-sL0"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="MeLogedView" customModule="ITI_Shopfiy" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -41,7 +41,7 @@
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="More"/>
                     <connections>
-                        <action selector="goToAllOrders:" destination="-1" eventType="touchUpInside" id="edY-p3-Uy6"/>
+                        <action selector="goToAllOrders:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="sXD-kM-4b1"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eoj-n0-3dc">
@@ -104,7 +104,7 @@
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="More"/>
                     <connections>
-                        <action selector="goToAllFavorites:" destination="-1" eventType="touchUpInside" id="urF-bl-Elh"/>
+                        <action selector="goToAllFavorites:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="2kW-CI-7bU"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="frs-UL-paH">
@@ -117,7 +117,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGn-F2-gL1">
-                            <rect key="frame" x="143" y="7.5" width="52" height="21"/>
+                            <rect key="frame" x="143" y="8" width="52" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -155,24 +155,13 @@
                         <constraint firstItem="tBX-Mf-eML" firstAttribute="leading" secondItem="frs-UL-paH" secondAttribute="leading" constant="8" id="uQR-pi-XM9"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySa-hN-cDh">
-                    <rect key="frame" x="69.5" y="494.5" width="181" height="35"/>
-                    <color key="tintColor" name="Green"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Log Out" cornerStyle="capsule"/>
-                    <connections>
-                        <action selector="logout_btn:" destination="-1" eventType="touchUpInside" id="1gB-Sa-y1O"/>
-                    </connections>
-                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="Ssu-GT-DVx" firstAttribute="top" secondItem="qp4-0N-Qhe" secondAttribute="bottom" constant="16" id="38v-Jj-8Ia"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Sye-fs-VmH" secondAttribute="trailing" id="5P7-kC-Snp"/>
-                <constraint firstItem="ySa-hN-cDh" firstAttribute="top" secondItem="frs-UL-paH" secondAttribute="bottom" constant="24" id="6OX-4g-SF0"/>
                 <constraint firstItem="qp4-0N-Qhe" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="1.3:3" id="Bfu-yO-0X3"/>
-                <constraint firstItem="ySa-hN-cDh" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="COA-nZ-xHf"/>
                 <constraint firstItem="eoj-n0-3dc" firstAttribute="top" secondItem="FVn-0T-f4L" secondAttribute="bottom" constant="8" id="Gie-9w-aeo"/>
                 <constraint firstItem="qp4-0N-Qhe" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="1:7" id="H2t-ti-Rk0"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eoj-n0-3dc" secondAttribute="trailing" constant="24" id="KnA-1X-3sR"/>
@@ -186,7 +175,6 @@
                 <constraint firstItem="qp4-0N-Qhe" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="amq-s6-sWS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="frs-UL-paH" secondAttribute="trailing" constant="24" id="f6t-Wx-p3m"/>
                 <constraint firstItem="FVn-0T-f4L" firstAttribute="top" secondItem="Ssu-GT-DVx" secondAttribute="bottom" constant="56" id="hQc-W8-avJ"/>
-                <constraint firstItem="ySa-hN-cDh" firstAttribute="width" secondItem="frs-UL-paH" secondAttribute="width" multiplier="2:3" id="hzG-vo-egl"/>
                 <constraint firstItem="Sye-fs-VmH" firstAttribute="centerY" secondItem="FVn-0T-f4L" secondAttribute="centerY" id="iMJ-ms-Sgr"/>
                 <constraint firstItem="qp4-0N-Qhe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="mWg-jc-a2i"/>
                 <constraint firstItem="Ssu-GT-DVx" firstAttribute="width" secondItem="qp4-0N-Qhe" secondAttribute="width" id="oRB-Zb-h83"/>

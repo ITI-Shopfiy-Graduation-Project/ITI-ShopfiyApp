@@ -26,15 +26,16 @@
 		5EA83B8829A62A380018E90E /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA83B8729A62A380018E90E /* CategoryViewController.swift */; };
 		5EF5D5DB29A9E81500E62B4D /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF5D5DA29A9E81500E62B4D /* CategoryCollectionViewCell.swift */; };
 		A705F64F29A8E3B300301207 /* MeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A705F64E29A8E3B300301207 /* MeStoryboard.storyboard */; };
-		A705F65229A8E3E700301207 /* MeUnLogedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705F65029A8E3E700301207 /* MeUnLogedViewController.swift */; };
-		A705F65329A8E3E700301207 /* MeUnLogedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705F65129A8E3E700301207 /* MeUnLogedViewController.xib */; };
-		A705F65729A8E51F00301207 /* MeLogedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705F65529A8E51F00301207 /* MeLogedViewController.swift */; };
-		A705F65829A8E51F00301207 /* MeLogedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705F65629A8E51F00301207 /* MeLogedViewController.xib */; };
 		A705F65A29A8E55300301207 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705F65929A8E55300301207 /* MeViewController.swift */; };
 		A7157ABC29A694D700D9A41A /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7157ABB29A694D700D9A41A /* ProductsViewController.swift */; };
 		A7157ABE29A694EE00D9A41A /* ProductsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7157ABD29A694EE00D9A41A /* ProductsStoryboard.storyboard */; };
 		A736054729A6B33600D99935 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A736054629A6B33600D99935 /* ProductDetailsViewController.swift */; };
 		A746331529A5A3EA0074EC8A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A746331429A5A3EA0074EC8A /* SignUpViewController.swift */; };
+		A774B4F029AA94D5008E01AA /* MeViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A774B4EF29AA94D5008E01AA /* MeViewDelegate.swift */; };
+		A78BCBA129AAC9910023B8AC /* MeUnlogedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A78BCBA029AAC9910023B8AC /* MeUnlogedView.xib */; };
+		A78BCBA329AACAD60023B8AC /* MeUnlogedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78BCBA229AACAD60023B8AC /* MeUnlogedView.swift */; };
+		A78F10F029AAD7CD00201272 /* MeLogedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A78F10EF29AAD7CD00201272 /* MeLogedView.xib */; };
+		A78F10F229AAD82300201272 /* MeLogedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78F10F129AAD82300201272 /* MeLogedView.swift */; };
 		A79C157729A81A4D00AB6C20 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79C157629A81A4D00AB6C20 /* FavoritesViewController.swift */; };
 		A79C157929A81A5D00AB6C20 /* FavoritesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A79C157829A81A5D00AB6C20 /* FavoritesStoryboard.storyboard */; };
 		A7FFA85E29A594CC00474CB1 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FFA85D29A594CC00474CB1 /* LoginStoryboard.storyboard */; };
@@ -111,15 +112,16 @@
 		5EA83B8729A62A380018E90E /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		5EF5D5DA29A9E81500E62B4D /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A705F64E29A8E3B300301207 /* MeStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MeStoryboard.storyboard; sourceTree = "<group>"; };
-		A705F65029A8E3E700301207 /* MeUnLogedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeUnLogedViewController.swift; sourceTree = "<group>"; };
-		A705F65129A8E3E700301207 /* MeUnLogedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeUnLogedViewController.xib; sourceTree = "<group>"; };
-		A705F65529A8E51F00301207 /* MeLogedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeLogedViewController.swift; sourceTree = "<group>"; };
-		A705F65629A8E51F00301207 /* MeLogedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeLogedViewController.xib; sourceTree = "<group>"; };
 		A705F65929A8E55300301207 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		A7157ABB29A694D700D9A41A /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		A7157ABD29A694EE00D9A41A /* ProductsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductsStoryboard.storyboard; sourceTree = "<group>"; };
 		A736054629A6B33600D99935 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		A746331429A5A3EA0074EC8A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		A774B4EF29AA94D5008E01AA /* MeViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewDelegate.swift; sourceTree = "<group>"; };
+		A78BCBA029AAC9910023B8AC /* MeUnlogedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeUnlogedView.xib; sourceTree = "<group>"; };
+		A78BCBA229AACAD60023B8AC /* MeUnlogedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeUnlogedView.swift; sourceTree = "<group>"; };
+		A78F10EF29AAD7CD00201272 /* MeLogedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeLogedView.xib; sourceTree = "<group>"; };
+		A78F10F129AAD82300201272 /* MeLogedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeLogedView.swift; sourceTree = "<group>"; };
 		A79C157629A81A4D00AB6C20 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		A79C157829A81A5D00AB6C20 /* FavoritesStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FavoritesStoryboard.storyboard; sourceTree = "<group>"; };
 		A7FFA85D29A594CC00474CB1 /* LoginStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginStoryboard.storyboard; sourceTree = "<group>"; };
@@ -200,12 +202,20 @@
 		A705F65429A8E3F400301207 /* MeScreenXIBs */ = {
 			isa = PBXGroup;
 			children = (
-				A705F65029A8E3E700301207 /* MeUnLogedViewController.swift */,
-				A705F65129A8E3E700301207 /* MeUnLogedViewController.xib */,
-				A705F65529A8E51F00301207 /* MeLogedViewController.swift */,
-				A705F65629A8E51F00301207 /* MeLogedViewController.xib */,
+				A78BCBA029AAC9910023B8AC /* MeUnlogedView.xib */,
+				A78BCBA229AACAD60023B8AC /* MeUnlogedView.swift */,
+				A78F10EF29AAD7CD00201272 /* MeLogedView.xib */,
+				A78F10F129AAD82300201272 /* MeLogedView.swift */,
 			);
 			path = MeScreenXIBs;
+			sourceTree = "<group>";
+		};
+		A774B4EE29AA94C1008E01AA /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+				A774B4EF29AA94D5008E01AA /* MeViewDelegate.swift */,
+			);
+			path = Contracts;
 			sourceTree = "<group>";
 		};
 		D54FE7A6DF500CBB4F3393F8 /* Pods */ = {
@@ -255,6 +265,7 @@
 		E29FA8FB29A2AEE100CE0786 /* ITI-Shopfiy */ = {
 			isa = PBXGroup;
 			children = (
+				A774B4EE29AA94C1008E01AA /* Contracts */,
 				E29FA93329A2AF7F00CE0786 /* Common */,
 				E29FA93229A2AF7C00CE0786 /* View */,
 				E29FA93129A2AF7A00CE0786 /* ViewModel */,
@@ -566,11 +577,10 @@
 				E2DA33EF29A53DDB00FD7DCA /* AdsCollectionViewCell.xib in Resources */,
 				E29FA94E29A30E3500CE0786 /* SettingsStoryboard.storyboard in Resources */,
 				E2CD1CAA29A60EAB0079C09A /* ProductCollectionViewCell.xib in Resources */,
+				A78F10F029AAD7CD00201272 /* MeLogedView.xib in Resources */,
 				E29FA90C29A2AEE700CE0786 /* LaunchScreen.storyboard in Resources */,
 				E26F77E229A4C30B00ADDC86 /* CartTableViewCell.xib in Resources */,
-				A705F65329A8E3E700301207 /* MeUnLogedViewController.xib in Resources */,
 				A7157ABE29A694EE00D9A41A /* ProductsStoryboard.storyboard in Resources */,
-				A705F65829A8E51F00301207 /* MeLogedViewController.xib in Resources */,
 				5EA83B8629A621B40018E90E /* CategoryStoryboard.storyboard in Resources */,
 				E29FA94A29A2F4F000CE0786 /* CartStoryboard.storyboard in Resources */,
 				A705F64F29A8E3B300301207 /* MeStoryboard.storyboard in Resources */,
@@ -579,6 +589,7 @@
 				E26F77DE29A4B4B600ADDC86 /* PaymentStoryboard.storyboard in Resources */,
 				5E55DE7E29AA158100EB6516 /* OrdersStoryboard.storyboard in Resources */,
 				5EA83B8429A5F7600018E90E /* Home.storyboard in Resources */,
+				A78BCBA129AAC9910023B8AC /* MeUnlogedView.xib in Resources */,
 				E29FA90429A2AEE100CE0786 /* Main.storyboard in Resources */,
 				E2CD1C9F29A6069C0079C09A /* AddressDetailsStoryboard.storyboard in Resources */,
 			);
@@ -674,7 +685,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A705F65729A8E51F00301207 /* MeLogedViewController.swift in Sources */,
 				5EF5D5DB29A9E81500E62B4D /* CategoryCollectionViewCell.swift in Sources */,
 				E2E2A20729A682E3006958CD /* AdsCollectionViewCell.swift in Sources */,
 				A7FFA86029A594EF00474CB1 /* LoginViewController.swift in Sources */,
@@ -687,8 +697,8 @@
 				E2008ED429A41B9F003D55A0 /* ViewHelper.swift in Sources */,
 				5E55DE8029AA18F300EB6516 /* OrdersViewController.swift in Sources */,
 				E29FA8FD29A2AEE100CE0786 /* AppDelegate.swift in Sources */,
+				A78F10F229AAD82300201272 /* MeLogedView.swift in Sources */,
 				E2CD1CA329A60D580079C09A /* AddressViewController.swift in Sources */,
-				A705F65229A8E3E700301207 /* MeUnLogedViewController.swift in Sources */,
 				E29FA94C29A30B1500CE0786 /* CartViewController.swift in Sources */,
 				A746331529A5A3EA0074EC8A /* SignUpViewController.swift in Sources */,
 				E2E2A20929A68665006958CD /* AboutUsViewController.swift in Sources */,
@@ -709,6 +719,8 @@
 				5E55DE8A29AAF9A300EB6516 /* NetworkService.swift in Sources */,
 				E29FA95029A310FD00CE0786 /* SettingsViewController.swift in Sources */,
 				5E55DE8829AAE40E00EB6516 /* image.swift in Sources */,
+				A78BCBA329AACAD60023B8AC /* MeUnlogedView.swift in Sources */,
+				A774B4F029AA94D5008E01AA /* MeViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

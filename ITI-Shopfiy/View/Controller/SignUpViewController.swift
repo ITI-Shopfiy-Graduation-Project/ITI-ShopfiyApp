@@ -16,9 +16,18 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
+        swipe.direction = .right
+
+        view.addGestureRecognizer(swipe)
     }
     
-    @IBAction func createAccount_btn(_ sender: UIButton) {
+    @objc func dismissVC() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func createAccount_btn(_ sender: UIButton){
+        
     }
     
 

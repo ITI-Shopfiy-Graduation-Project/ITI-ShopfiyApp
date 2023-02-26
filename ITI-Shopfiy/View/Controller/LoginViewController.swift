@@ -18,6 +18,14 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
+        swipe.direction = .right
+
+        view.addGestureRecognizer(swipe)
+    }
+    
+    @objc func dismissVC() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func login_btn(_ sender: Any) {
@@ -30,8 +38,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func skip_btn(_ sender: Any) {
-        
-    }
+        let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
+        navigationController?.pushViewController(homeVC, animated: true)    }
 
 
 }
