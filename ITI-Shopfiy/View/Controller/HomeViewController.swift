@@ -51,7 +51,7 @@ class HomeViewController: UIViewController {
             
         
         }
-        
+        navigationItem.title = "Shopify App"
         
     }
     func renderBrands(){
@@ -72,7 +72,8 @@ extension HomeViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //Code Here
         let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-        
+        productsVC.Brand_ID = brand[indexPath.row].id
+        productsVC.vendor = brand[indexPath.row].title
         navigationController?.pushViewController(productsVC, animated: true)
     }
 }

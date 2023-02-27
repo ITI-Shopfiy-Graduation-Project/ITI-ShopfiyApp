@@ -15,5 +15,5 @@ protocol ProductNetwork{
 
 //MARK: From Products
 protocol GET_PRODUCTS {
-    static func fetchData(completionHandler: @escaping (ProductResult?)->Void, Brand_ID: String)
+    static func fetchData(completionHandler: @escaping (ProductResult?)->Void, Brand_ID: Int)
 }
