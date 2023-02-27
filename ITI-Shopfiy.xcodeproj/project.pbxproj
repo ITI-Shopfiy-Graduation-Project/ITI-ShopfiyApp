@@ -51,6 +51,7 @@
 		E26F77DE29A4B4B600ADDC86 /* PaymentStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E26F77DD29A4B4B600ADDC86 /* PaymentStoryboard.storyboard */; };
 		E26F77E129A4C30B00ADDC86 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F77DF29A4C30B00ADDC86 /* CartTableViewCell.swift */; };
 		E26F77E229A4C30B00ADDC86 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E26F77E029A4C30B00ADDC86 /* CartTableViewCell.xib */; };
+		E273D5CE29AC7F88006AE49A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E273D5CD29AC7F88006AE49A /* Alert.swift */; };
 		E29FA8FD29A2AEE100CE0786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA8FC29A2AEE100CE0786 /* AppDelegate.swift */; };
 		E29FA8FF29A2AEE100CE0786 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA8FE29A2AEE100CE0786 /* SceneDelegate.swift */; };
 		E29FA90129A2AEE100CE0786 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA90029A2AEE100CE0786 /* ViewController.swift */; };
@@ -144,6 +145,7 @@
 		E26F77DD29A4B4B600ADDC86 /* PaymentStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PaymentStoryboard.storyboard; sourceTree = "<group>"; };
 		E26F77DF29A4C30B00ADDC86 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		E26F77E029A4C30B00ADDC86 /* CartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
+		E273D5CD29AC7F88006AE49A /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		E29FA8F929A2AEE100CE0786 /* ITI-Shopfiy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ITI-Shopfiy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29FA8FC29A2AEE100CE0786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E29FA8FE29A2AEE100CE0786 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				E2008ED329A41B9F003D55A0 /* ViewHelper.swift */,
+				E273D5CD29AC7F88006AE49A /* Alert.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				5EA83B8229A5920A0018E90E /* BrandsCollectionViewCell.swift in Sources */,
 				5E55DE8A29AAF9A300EB6516 /* NetworkService.swift in Sources */,
 				5E55DE9E29AC1BFE00EB6516 /* getBrandsProtocol.swift in Sources */,
+				E273D5CE29AC7F88006AE49A /* Alert.swift in Sources */,
 				E29FA95029A310FD00CE0786 /* SettingsViewController.swift in Sources */,
 				5E55DE8829AAE40E00EB6516 /* image.swift in Sources */,
 				A78BCBA329AACAD60023B8AC /* MeUnlogedView.swift in Sources */,
