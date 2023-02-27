@@ -11,12 +11,12 @@ class MeUnlogedView: UIView {
     weak var meProtocol: (unLogedMeProtocol)?
 
     
-    @IBAction func goToOrders(_ sender: UIButton) {
-        meProtocol?.goToAllOrdersfromUnLogedMe()
+    @IBAction func Login(_ sender: UIButton) {
+        meProtocol?.goToLogin()
     }
     
-    @IBAction func goToAllFavorites(_ sender: UIButton) {
-        meProtocol?.goToAllFavoritesfromUnLogedMe()
+    @IBAction func Register(_ sender: UIButton) {
+        meProtocol?.goToRegister()
     }
     
 }

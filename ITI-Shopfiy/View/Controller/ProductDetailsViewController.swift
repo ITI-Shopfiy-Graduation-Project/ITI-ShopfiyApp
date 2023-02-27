@@ -41,7 +41,8 @@ class ProductDetailsViewController: UIViewController{
         self.productName.text = self.product?.title
         self.productDescription.text = self.product?.body_html
         self.ProductImages = self.product?.images
-        self.productPrice.text = self.product?.variants?[0].price
+        self.productPrice.text = self.product?.product_type
+//        self.productPrice.text = self.product?.variants?[0].price
         
         pageControl.hidesForSinglePage = true
         pageControl.currentPage = currentCellIndex

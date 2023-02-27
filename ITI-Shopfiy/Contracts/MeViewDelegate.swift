@@ -8,9 +8,8 @@
 import Foundation
 
 protocol unLogedMeProtocol: AnyObject{
-    func goToAllOrdersfromUnLogedMe()
-    func goToAllFavoritesfromUnLogedMe()
-    func showAlert()
+    func goToLogin()
+    func goToRegister()
 }
 
 
