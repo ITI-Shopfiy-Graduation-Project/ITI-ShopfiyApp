@@ -70,7 +70,11 @@ extension CategoryViewController :UICollectionViewDataSource{
         cell.productImage.layer.borderWidth = 0.5
         cell.productImage.clipsToBounds = false
         cell.productImage.layer.masksToBounds = true
-        cell.productImage.layer.backgroundColor = UIColor.lightGray.cgColor
+        cell.productImage.layer.backgroundColor = UIColor.white.cgColor
+        cell.productImage.layer.shadowColor =  UIColor.gray.cgColor
+        cell.productImage.layer.shadowRadius = 100.0
+       
+        
         let productt = self.product [indexPath.row]
         let productimg = URL(string:productt.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.productImage?.kf.setImage(with:productimg)
