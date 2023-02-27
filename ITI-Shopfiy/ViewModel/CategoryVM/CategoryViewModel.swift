@@ -16,9 +16,9 @@ class CategoryViewModel{
         }
     }
 }
-extension CategoryViewModel :getProductsProtocol
+extension CategoryViewModel :getProductsFromCategoryProtocol
 {
-    func getProducts() {
+    func getProductsFromCategory() {
         NetworkServices.fetchData(url:ProductsUrl, handlerComplition: { result in
             self.productsResults =  result?.products
             

@@ -6,6 +6,6 @@
 //
 
 import Foundation
-protocol getProductsProtocol{
-    func getProducts()
+protocol getProductsFromCategoryProtocol{
+    func getProductsFromCategory()
 }

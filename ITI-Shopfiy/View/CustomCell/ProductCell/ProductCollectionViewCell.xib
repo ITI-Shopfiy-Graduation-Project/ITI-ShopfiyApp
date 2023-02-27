@@ -36,45 +36,34 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJN-eK-VM4">
-                                <rect key="frame" x="8" y="85.333333333333329" width="42.333333333333336" height="18.333333333333329"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dJN-eK-VM4">
+                                <rect key="frame" x="8" y="85.333333333333329" width="33.333333333333336" height="18.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <color key="textColor" name="Green"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LeT-xr-v3C">
-                                <rect key="frame" x="86.333333333333329" y="64.333333333333329" width="11.666666666666671" height="9"/>
-                                <color key="tintColor" name="Green"/>
+                                <rect key="frame" x="88.333333333333329" y="11.999999999999998" width="17.666666666666671" height="18.333333333333329"/>
+                                <color key="tintColor" name="Red"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
-                                    <imageReference key="image" image="heart" catalog="system" symbolScale="small"/>
+                                    <imageReference key="image" image="heart" catalog="system"/>
                                 </buttonConfiguration>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EGP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3K4-6X-gJF">
-                                <rect key="frame" x="50.333333333333343" y="85.333333333333329" width="33" height="18"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <color key="textColor" name="Green"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="LeT-xr-v3C" firstAttribute="bottom" secondItem="7Nz-Ei-HWA" secondAttribute="bottom" constant="-8" id="5mG-pK-DB9"/>
+                            <constraint firstItem="LeT-xr-v3C" firstAttribute="top" secondItem="7Nz-Ei-HWA" secondAttribute="top" constant="4" id="5mG-pK-DB9"/>
                             <constraint firstItem="dJN-eK-VM4" firstAttribute="height" secondItem="7Nz-Ei-HWA" secondAttribute="height" multiplier="1:4" id="AIR-uB-cc8"/>
-                            <constraint firstItem="dJN-eK-VM4" firstAttribute="width" secondItem="7Nz-Ei-HWA" secondAttribute="width" multiplier="1.8:4" id="HPe-T4-REn"/>
-                            <constraint firstItem="3K4-6X-gJF" firstAttribute="leading" secondItem="dJN-eK-VM4" secondAttribute="trailing" id="M7U-uR-t3U"/>
-                            <constraint firstItem="LeT-xr-v3C" firstAttribute="height" secondItem="3K4-6X-gJF" secondAttribute="height" multiplier="1:2" id="Oct-k9-en2"/>
-                            <constraint firstItem="3K4-6X-gJF" firstAttribute="top" secondItem="7Nz-Ei-HWA" secondAttribute="bottom" constant="4" id="QTX-20-rwC"/>
-                            <constraint firstItem="dJN-eK-VM4" firstAttribute="leading" secondItem="oh2-Lv-A95" secondAttribute="leading" constant="8" id="VsD-H4-0oU"/>
+                            <constraint firstItem="dJN-eK-VM4" firstAttribute="leading" secondItem="7Nz-Ei-HWA" secondAttribute="leading" id="VsD-H4-0oU"/>
                             <constraint firstItem="dJN-eK-VM4" firstAttribute="top" secondItem="7Nz-Ei-HWA" secondAttribute="bottom" constant="4" id="d3s-Bk-p8n"/>
                             <constraint firstItem="7Nz-Ei-HWA" firstAttribute="leading" secondItem="oh2-Lv-A95" secondAttribute="leading" constant="8" id="eHD-NU-HmT"/>
-                            <constraint firstItem="3K4-6X-gJF" firstAttribute="height" secondItem="dJN-eK-VM4" secondAttribute="height" multiplier="0.981818" id="iTJ-v5-TCp"/>
                             <constraint firstItem="7Nz-Ei-HWA" firstAttribute="top" secondItem="oh2-Lv-A95" secondAttribute="top" constant="8" id="rkZ-6n-6DZ"/>
-                            <constraint firstItem="LeT-xr-v3C" firstAttribute="trailing" secondItem="7Nz-Ei-HWA" secondAttribute="trailing" constant="-4" id="sk4-Mm-6fY"/>
-                            <constraint firstItem="LeT-xr-v3C" firstAttribute="width" secondItem="7Nz-Ei-HWA" secondAttribute="width" multiplier="1:8" id="vfv-Oa-pIO"/>
+                            <constraint firstItem="LeT-xr-v3C" firstAttribute="trailing" secondItem="oh2-Lv-A95" secondAttribute="trailing" constant="-4" id="sk4-Mm-6fY"/>
+                            <constraint firstItem="LeT-xr-v3C" firstAttribute="width" secondItem="7Nz-Ei-HWA" secondAttribute="width" multiplier="1.5:8" id="vfv-Oa-pIO"/>
+                            <constraint firstItem="LeT-xr-v3C" firstAttribute="height" secondItem="7Nz-Ei-HWA" secondAttribute="height" multiplier="1:4" id="way-hv-63a"/>
                             <constraint firstItem="7Nz-Ei-HWA" firstAttribute="height" secondItem="oh2-Lv-A95" secondAttribute="height" multiplier="2:3" id="zdS-h2-BLz"/>
                             <constraint firstAttribute="trailing" secondItem="7Nz-Ei-HWA" secondAttribute="trailing" constant="8" id="ziJ-mm-htB"/>
-                            <constraint firstItem="3K4-6X-gJF" firstAttribute="width" secondItem="7Nz-Ei-HWA" secondAttribute="width" multiplier="1.4:4" id="zue-CB-Bt4"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -97,10 +86,9 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="currency" destination="3K4-6X-gJF" id="0hF-j4-VFB"/>
                 <outlet property="like_btn" destination="LeT-xr-v3C" id="gUT-9x-icA"/>
                 <outlet property="productImageview" destination="7Nz-Ei-HWA" id="NtV-AA-dxg"/>
-                <outlet property="productPrice" destination="dJN-eK-VM4" id="4XY-3M-J2m"/>
+                <outlet property="productTitle" destination="dJN-eK-VM4" id="3Wg-4T-PL1"/>
             </connections>
             <point key="canvasLocation" x="-7.6335877862595414" y="-117.95774647887325"/>
         </collectionViewCell>
@@ -115,6 +103,9 @@
         </namedColor>
         <namedColor name="Green">
             <color red="0.37999999523162842" green="0.71399998664855957" blue="0.6470000147819519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Red">
+            <color red="0.89999997615814209" green="0.42199999094009399" blue="0.50400000810623169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="SecondGray">
             <color red="0.76899999380111694" green="0.76899999380111694" blue="0.76899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
