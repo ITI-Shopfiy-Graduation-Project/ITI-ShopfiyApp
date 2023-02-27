@@ -10,3 +10,7 @@ class image: Decodable{
     var src : String?
    
 }
+
+class Image: Decodable{
+    var src: String?
+}

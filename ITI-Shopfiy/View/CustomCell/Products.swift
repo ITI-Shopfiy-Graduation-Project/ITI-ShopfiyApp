@@ -7,10 +7,13 @@
 
 import Foundation
 class Products : Decodable{
-//    var id : Int?
+    var id : Int?
     var title : String?
-//    var vendor : String?
+    var vendor : String?
+    var body_html: String?
 //    var product_type : String?
+    var created_at: String?
     var variants : [variants]?
     var image : image?
+    var images: [Image]?
 }
