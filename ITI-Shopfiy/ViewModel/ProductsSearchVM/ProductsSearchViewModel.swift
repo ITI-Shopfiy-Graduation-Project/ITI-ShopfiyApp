@@ -1,5 +1,5 @@
 //
-//  ProductsViewModel.swift
+//  ProductsSearchViewModel.swift
 //  ITI-Shopfiy
 //
 //  Created by MESHO on 27/02/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProductsVM{
+class ProductsSearchVM{
     
     var bindingProducts : (()->()) = {}
     var productsResults :[Products]?{
@@ -19,16 +19,11 @@ class ProductsVM{
 }
 
 
-extension ProductsVM: getProductsProtocol{
-    
-    func getProducts(Brand_ID: Int){
-        ProductsService.fetchData(completionHandler: { result in
+extension ProductsVM: getProductsSearchProtocol{
+    func getProductsSearch() {
+        ProductsSearchService.fetchData(completionHandler: { result in
             self.productsResults = result?.products
-        }, Brand_ID: Brand_ID)
-    
+        })
     }
-    
-    
-    
     
 }

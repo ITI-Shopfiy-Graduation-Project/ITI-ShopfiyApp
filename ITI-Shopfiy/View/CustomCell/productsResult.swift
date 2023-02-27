@@ -9,3 +9,8 @@ import Foundation
 class ProductResult : Decodable {
     var products : [Products]?
 }
+
+
+class ProductDetailsResult: Decodable{
+    var product: Products?
+}

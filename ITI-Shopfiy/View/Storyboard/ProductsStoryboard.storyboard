@@ -245,7 +245,7 @@
                 <viewControllerPlaceholder storyboardName="FavoritesStoryboard" referencedIdentifier="favorites" id="ofu-Ve-mla" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JsN-U0-cGx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2490" y="28"/>
+            <point key="canvasLocation" x="2544" y="-2"/>
         </scene>
         <!--cart-->
         <scene sceneID="zQH-HT-NsY">

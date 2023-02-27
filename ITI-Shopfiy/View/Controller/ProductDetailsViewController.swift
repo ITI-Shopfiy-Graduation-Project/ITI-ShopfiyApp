@@ -18,7 +18,7 @@ class ProductDetailsViewController: UIViewController{
     @IBOutlet weak var cart_btn: UIButton!
     @IBOutlet weak var like_btn: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
-//    var staticimgs = [UIImage(named: "ad1")!,UIImage(named: "ad2")!,UIImage(named: "ad3")!]
+
     var currentCellIndex = 0
     @IBOutlet weak var productImagesCollectionView: UICollectionView!{
         didSet{
@@ -28,24 +28,29 @@ class ProductDetailsViewController: UIViewController{
     }
     
     var product: Products?
+    var product_ID: Int?
     var ProductImages: [Image]?
     var currentProduct: Products?
+    var productDetailsVM: ProductDetailsVM?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.center = view.center
+        view.addSubview(indicator)
+        indicator.startAnimating()
+        
+        productDetailsVM = ProductDetailsVM()
+        productDetailsVM?.getProductDetails(Product_ID: self.product_ID ?? 8117840150809)
+        productDetailsVM?.bindingProducts = { () in
+            self.renderView()
+            indicator.stopAnimating()
+        }
+        
         // Do any additional setup after loading the view.
         let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
         productImagesCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
-        
-        self.productName.text = self.product?.title
-        self.productDescription.text = self.product?.body_html
-        self.ProductImages = self.product?.images
-        self.productPrice.text = self.product?.variants?[0].price
-        
-        pageControl.hidesForSinglePage = true
-        pageControl.currentPage = currentCellIndex
-        pageControl.numberOfPages  = ProductImages?.count ?? 5
         
         let likesScreen = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(goToFavoritesScreen(sender: )))
         likesScreen.tintColor = UIColor(named: "Red")
@@ -135,5 +140,24 @@ extension ProductDetailsViewController: UICollectionViewDelegate, UICollectionVi
         
     }
     
+    
+}
+
+extension ProductDetailsViewController{
+    func renderView() {
+        DispatchQueue.main.async {
+            self.product = self.productDetailsVM?.productsResults
+            self.productName.text = self.product?.title
+            self.productDescription.text = self.product?.body_html
+            self.ProductImages = self.product?.images
+            self.product?.id = self.product_ID
+            self.productPrice.text = self.product?.variants?[0].price
+            self.pageControl.hidesForSinglePage = true
+            self.pageControl.currentPage = self.currentCellIndex
+            self.pageControl.numberOfPages  = self.ProductImages?.count ?? 5
+            self.productImagesCollectionView.reloadData()
+        }
+    }
+
     
 }
