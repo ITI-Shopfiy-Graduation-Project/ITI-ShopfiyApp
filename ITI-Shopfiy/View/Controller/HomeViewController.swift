@@ -7,8 +7,12 @@
 
 import UIKit
 import Foundation
+import Kingfisher
 class HomeViewController: UIViewController {
-    
+    var brandsModel: BrandViewModel?
+    var brand :[Brands] = []
+    var AllBrandsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/smart_collections.json?since_id=482865238"
+
     @IBAction func searchBtn(_ sender: Any) {
         let productVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
         navigationController?.pushViewController(productVC, animated: true)
@@ -39,8 +43,27 @@ class HomeViewController: UIViewController {
         AdsCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
         starttimer()
         pageControl.numberOfPages  = staticimgs.count
+        brandsModel = BrandViewModel()
+        brandsModel?.BrandssUrl = self.AllBrandsUrl
+        brandsModel?.getBrands()
+        brandsModel?.bindingBrands = {()in
+        self.renderBrands()
+            
+        
+        }
+        navigationItem.title = "Shopify App"
         
     }
+    func renderBrands(){
+        DispatchQueue.main.async {
+            self.brand = self.brandsModel?.brandsResults ?? []
+            self.BrandsCollectionView.reloadData()
+           
+        
+        }
+        
+    }
+
 
 }
 
@@ -49,7 +72,8 @@ extension HomeViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //Code Here
         let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-        
+        productsVC.Brand_ID = brand[indexPath.row].id
+        productsVC.vendor = brand[indexPath.row].title
         navigationController?.pushViewController(productsVC, animated: true)
     }
 }
@@ -62,7 +86,7 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         else {
             
-            return 10
+            return brand.count
             
         }
     }
@@ -89,6 +113,10 @@ extension HomeViewController: UICollectionViewDataSource {
             cell2.layer.borderColor = UIColor.systemGray.cgColor
             cell2.layer.borderWidth = 3.0
             cell2.layer.cornerRadius = 20.0
+            let cellBrnad = self.brand [indexPath.row]
+            cell2.brandLbl.text = cellBrnad.title
+            let Brandimg = URL(string:cellBrnad.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
+            cell2.brandImg?.kf.setImage(with:Brandimg)
             return cell2
             
         }

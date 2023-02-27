@@ -21,7 +21,7 @@ class ProductsVM{
 
 extension ProductsVM: getProductsProtocol{
     
-    func getProducts(Brand_ID: String){
+    func getProducts(Brand_ID: Int){
         ProductsService.fetchData(completionHandler: { result in
             self.productsResults = result?.products
         }, Brand_ID: Brand_ID)

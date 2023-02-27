@@ -9,4 +9,6 @@ import UIKit
 
 class BrandsCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var brandImg: UIImageView!
+    @IBOutlet weak var brandLbl: UILabel!
 }
