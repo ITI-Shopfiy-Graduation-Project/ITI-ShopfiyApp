@@ -60,7 +60,7 @@
                     <navigationItem key="navigationItem" title="Shopify" id="djS-tc-4sO">
                         <rightBarButtonItems>
                             <barButtonItem image="heart" catalog="system" id="Y82-vj-ax7">
-                                <color key="tintColor" name="Green"/>
+                                <color key="tintColor" name="Red"/>
                                 <connections>
                                     <action selector="likesScreen:" destination="Y6W-OH-hqX" id="lG8-cs-xua"/>
                                 </connections>
@@ -126,7 +126,7 @@
                                 <color key="textColor" name="Red"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d04-Pl-f21">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d04-Pl-f21">
                                 <rect key="frame" x="24" y="499.66666666666669" width="345" height="154.33333333333331"/>
                                 <color key="backgroundColor" name="thirdGray"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -157,7 +157,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P2W-br-3H8">
                                 <rect key="frame" x="24" y="347.33333333333331" width="345" height="91"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0I-C3-Dg0">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z0I-C3-Dg0">
                                         <rect key="frame" x="8" y="7.9999999999999982" width="329" height="30.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <nil key="textColor"/>
@@ -229,7 +229,10 @@
                         <outlet property="cart_btn" destination="TJM-3A-aBS" id="Bjl-9r-Dls"/>
                         <outlet property="like_btn" destination="iUG-vu-K1b" id="Y6U-vF-XrX"/>
                         <outlet property="pageControl" destination="vJq-mS-HNv" id="AkT-Uu-ibr"/>
+                        <outlet property="productDescription" destination="d04-Pl-f21" id="kgz-t0-RpG"/>
                         <outlet property="productImagesCollectionView" destination="4is-n6-rXw" id="iuK-sA-ekM"/>
+                        <outlet property="productName" destination="Z0I-C3-Dg0" id="BVM-2Z-MeC"/>
+                        <outlet property="productPrice" destination="XWc-DJ-wMp" id="j27-YD-0kc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yls-x7-doJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
