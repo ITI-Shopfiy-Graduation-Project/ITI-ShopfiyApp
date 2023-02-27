@@ -65,7 +65,7 @@ class MeViewController: UIViewController {
 
 
 extension MeViewController: logedMeProtocol, unLogedMeProtocol{
-    
+
     //MARK: LogedMe
     func goToAllOrders() {
         let ordersVC = UIStoryboard(name: "OrdersStoryboard", bundle: nil).instantiateViewController(withIdentifier: "orders") as! OrdersViewController
@@ -79,26 +79,27 @@ extension MeViewController: logedMeProtocol, unLogedMeProtocol{
     
     
     //MARK: UnLogedMe
-    func goToAllOrdersfromUnLogedMe() {
-        showAlert()
+    func goToLogin() {
+        let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+        self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
-    func goToAllFavoritesfromUnLogedMe() {
-        print("me2moo")
-        showAlert()
+    func goToRegister() {
+        let registerVC = UIStoryboard(name: "SignUpStoryboard", bundle: nil).instantiateViewController(withIdentifier: "signup") as! SignUpViewController
+        self.navigationController?.pushViewController(registerVC, animated: true)
     }
     
-    //MARK: Alert
-    func showAlert() {
-        let alert = UIAlertController(title: "Not Allowed Authority", message: "You can login with your account first", preferredStyle: UIAlertController.Style.alert)
-
-        alert.addAction(UIAlertAction(title: "Login Now", style: UIAlertAction.Style.default, handler: { [self] action in
-            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
-            self.navigationController?.pushViewController(loginVC, animated: true)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
-
-        present(alert, animated: true, completion: nil)
-    }
+//    //MARK: Alert
+//    func showAlert() {
+//        let alert = UIAlertController(title: "Not Allowed Authority", message: "You can login with your account first", preferredStyle: UIAlertController.Style.alert)
+//
+//        alert.addAction(UIAlertAction(title: "Login Now", style: UIAlertAction.Style.default, handler: { [self] action in
+//            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+//            self.navigationController?.pushViewController(loginVC, animated: true)
+//        }))
+//        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+//
+//        present(alert, animated: true, completion: nil)
+//    }
     
 }
