@@ -5,11 +5,10 @@ target 'ITI-Shopfiy' do
 
 pod 'Alamofire', '~> 5.6'
       pod 'Kingfisher', '~> 7.0'
-          pod 'Reachability', '~> 3.2'
+      pod 'Reachability', '~> 3.2'
       pod 'TTGSnackbar', '~> 1.11'
-      pod 'lottie-ios', '~> 4.1'
       pod 'Cosmos', '~> 23.0'
-
+      pod 'DropDown', '~> 2.3.2'
   # Pods for ITI-Shopfiy
 
   target 'ITI-ShopfiyTests' do

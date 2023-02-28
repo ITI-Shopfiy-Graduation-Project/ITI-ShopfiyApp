@@ -357,7 +357,7 @@
 				A77E12BB29AC369100EB4C13 /* ProductsVM */,
 				A77E12BA29AC367D00EB4C13 /* CategoryVM */,
 				5E55DE8B29AAF9C600EB6516 /* CategoryViewModel.swift */,
-				5E55DE8F29AAFFFF00EB6516 /* getProductsProtocol.swift */,
+				5E55DE8F29AAFFFF00EB6516 /* getProductsFromCategoryProtocol.swift */,
 				5E55DE9B29AC196B00EB6516 /* BrandsViewModel.swift */,
 				5E55DE9D29AC1BFE00EB6516 /* getBrandsProtocol.swift */,
 			);
@@ -522,6 +522,7 @@
 				E29FA8F529A2AEE100CE0786 /* Sources */,
 				E29FA8F629A2AEE100CE0786 /* Frameworks */,
 				E29FA8F729A2AEE100CE0786 /* Resources */,
+				64C157F916ACCBDE7C69C4E4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -559,6 +560,7 @@
 				E29FA91829A2AEE700CE0786 /* Sources */,
 				E29FA91929A2AEE700CE0786 /* Frameworks */,
 				E29FA91A29A2AEE700CE0786 /* Resources */,
+				8DEAF4F48989B339A2D2B421 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -677,6 +679,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		64C157F916ACCBDE7C69C4E4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8DEAF4F48989B339A2D2B421 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8E7775BCF9937A2AF0FE7424 /* [CP] Check Pods Manifest.lock */ = {
