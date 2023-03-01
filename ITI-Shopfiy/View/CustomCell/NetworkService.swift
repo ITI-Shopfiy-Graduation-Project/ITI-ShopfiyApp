@@ -35,7 +35,7 @@ class NetworkServices:ProductNetwork{
 class ProductsService: GET_PRODUCTS{
     static func fetchData(completionHandler: @escaping (ProductResult?) -> Void, Brand_ID: Int) {
         
-        guard let url = URL(string: "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/\(Brand_ID)/products.json") else {
+        guard let url = URL(string: URLService.produts(Brand_ID: Brand_ID)) else {
             completionHandler(nil)
             return
         }
@@ -61,7 +61,7 @@ class ProductsService: GET_PRODUCTS{
 //MARK: From Products Details
 class ProductDetailsService: GET_PRODUCTDETAILS{
     static func fetchData(completionHandler: @escaping (Products?) -> Void, Product_ID: Int) {
-        guard let url = URL(string: "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products/\(Product_ID).json") else {
+        guard let url = URL(string: URLService.productDetails(Product_ID: Product_ID)) else {
             completionHandler(nil)
             return
         }
@@ -86,8 +86,8 @@ class ProductDetailsService: GET_PRODUCTDETAILS{
 
 //MARK: From Products Search
 class ProductsSearchService: GET_PRODUCTSSEARCH{
-    static func fetchData(completionHandler: @escaping (ProductResult?) -> Void) {
-        guard let url = URL(string: "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json") else {
+    static func fetchData(url: String?, completionHandler: @escaping (ProductResult?) -> Void) {
+        guard let url = URL(string: "\(url!)") else {
             completionHandler(nil)
             return
         }

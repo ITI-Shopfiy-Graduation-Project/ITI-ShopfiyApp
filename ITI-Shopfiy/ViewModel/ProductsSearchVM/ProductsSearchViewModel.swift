@@ -19,9 +19,9 @@ class ProductsSearchVM{
 }
 
 
-extension ProductsVM: getProductsSearchProtocol{
-    func getProductsSearch() {
-        ProductsSearchService.fetchData(completionHandler: { result in
+extension ProductsSearchVM: getProductsSearchProtocol{
+    func getProductsSearch(url: String) {
+        ProductsSearchService.fetchData(url: url, completionHandler: { result in
             self.productsResults = result?.products
         })
     }

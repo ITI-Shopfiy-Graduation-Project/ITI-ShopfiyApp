@@ -37,18 +37,23 @@ class SignUpViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    
+    @IBAction func chooseOnMap(_ sender: UIButton) {
+        
+    }
+    
     @IBAction func createAccount_btn(_ sender: UIButton){
-            guard let name = username_txt.text else {return}
-            guard let email = Email_txt.text else {return}
-            guard let password = password_txt.text else {return}
-            guard let confirmPassword = confirmPassword_txt.text else {return}
-            guard let phone = phoneNumber_txt.text else {return}
-            guard let address = currentAddress_txt.text else {return}
-            if ValdiateCustomerInfomation(UserName: name, password: password, confirmPassword: confirmPassword, userPhone: phone, email: email, userAddress: address){
-                register(UserName: name, password: password, confirmPassword: confirmPassword, UserPhone: phone, email: email, UserAddress: address)
-            } else {
-                showAlertError(title: "Couldnot register", message: "Please try again later.")
-            }
+        guard let name = username_txt.text else {return}
+        guard let email = Email_txt.text else {return}
+        guard let password = password_txt.text else {return}
+        guard let confirmPassword = confirmPassword_txt.text else {return}
+        guard let phone = phoneNumber_txt.text else {return}
+        guard let address = currentAddress_txt.text else {return}
+        if ValdiateCustomerInfomation(UserName: name, password: password, confirmPassword: confirmPassword, userPhone: phone, email: email, userAddress: address){
+            register(UserName: name, password: password, confirmPassword: confirmPassword, UserPhone: phone, email: email, UserAddress: address)
+        } else {
+            showAlertError(title: "Couldnot register", message: "Please try again later.")
+        }
         
     }
     

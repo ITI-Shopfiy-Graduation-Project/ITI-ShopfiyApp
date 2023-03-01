@@ -20,11 +20,8 @@
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="B8Z-7F-4Pv">
                                 <rect key="frame" x="16" y="103" width="361" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="jEC-UV-3eE"/>
-                                </connections>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Ef-g1-ohT">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Ef-g1-ohT">
                                 <rect key="frame" x="16" y="175" width="361" height="627"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0DP-OQ-kA1">
@@ -53,22 +50,22 @@
                             <barButtonItem image="heart" catalog="system" id="yjI-O2-jHL">
                                 <color key="tintColor" name="Red"/>
                                 <connections>
-                                    <action selector="goToFavorites:" destination="Y6W-OH-hqX" id="lDt-4f-bRn"/>
+                                    <action selector="goToFavorites:" destination="Y6W-OH-hqX" id="hg8-Gs-Kty"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="cart" catalog="system" id="fhS-QX-yuZ">
                                 <color key="tintColor" name="Green"/>
                                 <connections>
-                                    <action selector="goToCart:" destination="Y6W-OH-hqX" id="Jw6-aX-VK6"/>
+                                    <action selector="goToCart:" destination="Y6W-OH-hqX" id="FaR-0N-hux"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="ProductsSearchBar" destination="B8Z-7F-4Pv" id="VyR-0F-mzi"/>
-                        <outlet property="cart_btn" destination="fhS-QX-yuZ" id="CHz-J4-Mbe"/>
-                        <outlet property="like_btn" destination="yjI-O2-jHL" id="Cxx-PM-aKw"/>
-                        <outlet property="productsCollectionView" destination="7Ef-g1-ohT" id="a8O-Yi-Zgf"/>
+                        <outlet property="ProductsSearchBar" destination="B8Z-7F-4Pv" id="RAh-Ov-cJK"/>
+                        <outlet property="cart_btn" destination="fhS-QX-yuZ" id="FoK-LE-eCy"/>
+                        <outlet property="like_btn" destination="yjI-O2-jHL" id="UZy-Vp-Mgy"/>
+                        <outlet property="productsCollectionView" destination="7Ef-g1-ohT" id="oZ1-Vt-RfG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
