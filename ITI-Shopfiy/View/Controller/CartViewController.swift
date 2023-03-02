@@ -16,10 +16,16 @@ class CartViewController: UIViewController {
     @IBOutlet weak var totalPrice: UILabel!
     @IBOutlet weak var promoCodeValue: UILabel!
     @IBOutlet weak var allItemsCost: UILabel!
-   // private var cartArray: Cart
+    private var cartArray: [LineItem]?
     override func viewDidLoad() {
         super.viewDidLoad()
         tableConfiguration()
+        var lineItem = LineItem()
+        lineItem.price = "231 $"
+        lineItem.title = "gray t-shirt"
+        lineItem.quantity = 3
+        lineItem.image = "ct4"
+        cartArray = [lineItem , lineItem , lineItem]
         // Do any additional setup after loading the view.
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
@@ -55,13 +61,16 @@ extension CartViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // return cartArray.count
-        return 0
+        return cartArray?.count ?? 0
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:CartTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CartTableViewCell
-        
+        cell.itemName.text = cartArray?[indexPath.row].title
+        cell.itemPrice.text = cartArray?[indexPath.row].price
+        cell.itemQuntity.text = cartArray?[indexPath.row].quantity?.formatted()
+        cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].image ?? "ct4")
             
         return cell
     }
@@ -69,13 +78,14 @@ extension CartViewController: UITableViewDataSource {
 
 extension CartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 150
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        
     }
-    
-   
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
 }
 

@@ -10,15 +10,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="167.99999988079071" id="KGk-i7-Jjw" customClass="CartTableViewCell" customModule="ITI_Shopfiy" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="562" height="168"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="312.99999988079071" id="KGk-i7-Jjw" customClass="CartTableViewCell" customModule="ITI_Shopfiy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="546" height="313"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="562" height="168"/>
+                <rect key="frame" x="0.0" y="0.0" width="546" height="313"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i4N-DM-2si">
-                        <rect key="frame" x="16" y="16" width="140.66666666666666" height="136"/>
+                        <rect key="frame" x="16" y="16" width="136.66666666666666" height="281"/>
+                        <color key="backgroundColor" name="White"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                 <real key="value" value="1"/>
@@ -29,22 +30,25 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                 <real key="value" value="4"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQP-OO-kZ6">
-                        <rect key="frame" x="180.66666666666663" y="16" width="281" height="21"/>
+                        <rect key="frame" x="176.66666666666663" y="16" width="273" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qty: 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIC-qD-WkO">
-                        <rect key="frame" x="180.66666666666663" y="45" width="281" height="21"/>
+                        <rect key="frame" x="176.66666666666663" y="45" width="273" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" name="Gray"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTH-CJ-RbC">
-                        <rect key="frame" x="180.66666666666666" y="111.66666666666667" width="40" height="40.333333333333329"/>
+                        <rect key="frame" x="176.66666666666666" y="256.66666666666669" width="40" height="40.333333333333314"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="Mnk-x7-djt"/>
                             <constraint firstAttribute="height" constant="40.333333333333343" id="OUm-f6-u2l"/>
@@ -67,13 +71,13 @@
                         </userDefinedRuntimeAttributes>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDz-gi-eDX">
-                        <rect key="frame" x="236.66666666666666" y="121.33333333333331" width="29.999999999999972" height="21"/>
+                        <rect key="frame" x="232.66666666666666" y="266.33333333333331" width="29.999999999999972" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                         <color key="textColor" name="Black"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8k-jB-Nwu">
-                        <rect key="frame" x="282.66666666666669" y="111.66666666666667" width="40" height="40.333333333333329"/>
+                        <rect key="frame" x="278.66666666666669" y="256.66666666666669" width="40" height="40.333333333333314"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title="+">
                             <fontDescription key="titleFontDescription" type="boldSystem" pointSize="22"/>
@@ -92,12 +96,13 @@
                         </userDefinedRuntimeAttributes>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234 $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54M-2N-PnR">
-                        <rect key="frame" x="476" y="121.33333333333331" width="54" height="21"/>
+                        <rect key="frame" x="460" y="266.33333333333331" width="54" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <color key="textColor" name="Red"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" name="White"/>
                 <constraints>
                     <constraint firstItem="i4N-DM-2si" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.25" id="0Ag-ah-lBn"/>
                     <constraint firstItem="gDz-gi-eDX" firstAttribute="centerY" secondItem="WTH-CJ-RbC" secondAttribute="centerY" id="1Qy-fF-Wme"/>
@@ -119,22 +124,29 @@
                     <constraint firstAttribute="trailing" secondItem="54M-2N-PnR" secondAttribute="trailing" constant="32" id="j0b-Ig-4OF"/>
                     <constraint firstItem="GIC-qD-WkO" firstAttribute="height" secondItem="KQP-OO-kZ6" secondAttribute="height" id="lp5-uF-PR3"/>
                     <constraint firstItem="i4N-DM-2si" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="myF-ps-nTg"/>
+                    <constraint firstItem="WTH-CJ-RbC" firstAttribute="height" secondItem="GIC-qD-WkO" secondAttribute="height" multiplier="1.92063" id="uGN-8S-4HT"/>
                     <constraint firstItem="I8k-jB-Nwu" firstAttribute="leading" secondItem="gDz-gi-eDX" secondAttribute="trailing" constant="16" id="uGR-R9-4xS"/>
                     <constraint firstItem="I8k-jB-Nwu" firstAttribute="width" secondItem="WTH-CJ-RbC" secondAttribute="width" id="ywS-SN-z1S"/>
                     <constraint firstItem="i4N-DM-2si" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" constant="-32" id="zTd-Yf-E6u"/>
                 </constraints>
                 <userDefinedRuntimeAttributes>
                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                        <color key="value" name="Gray"/>
+                        <color key="value" name="Green"/>
                     </userDefinedRuntimeAttribute>
                     <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                         <real key="value" value="20"/>
                     </userDefinedRuntimeAttribute>
                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                        <real key="value" value="2"/>
+                        <real key="value" value="0.5"/>
                     </userDefinedRuntimeAttribute>
                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                         <real key="value" value="20"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                        <color key="value" name="Black"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="size" keyPath="shadowSize">
+                        <size key="value" width="20" height="20"/>
                     </userDefinedRuntimeAttribute>
                 </userDefinedRuntimeAttributes>
                 <variation key="default">
@@ -151,7 +163,7 @@
                 <outlet property="itemQuntity" destination="GIC-qD-WkO" id="aOA-Zs-94o"/>
                 <outlet property="quantityCount" destination="gDz-gi-eDX" id="gsr-d8-nVS"/>
             </connections>
-            <point key="canvasLocation" x="555.14018691588785" y="-485.96112311015122"/>
+            <point key="canvasLocation" x="543.92523364485976" y="-438.98488120950327"/>
         </tableViewCell>
     </objects>
     <resources>
@@ -161,8 +173,14 @@
         <namedColor name="Gray">
             <color red="0.51399999856948853" green="0.51399999856948853" blue="0.51399999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Green">
+            <color red="0.37999999523162842" green="0.71399998664855957" blue="0.6470000147819519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Red">
             <color red="0.89999997615814209" green="0.42199999094009399" blue="0.50400000810623169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="White">
+            <color red="0.98000001907348633" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

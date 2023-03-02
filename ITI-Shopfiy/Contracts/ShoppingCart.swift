@@ -6,7 +6,22 @@
 //
 
 import Foundation
-class ShoppingCart{
-  //  var draft_order: DraftOrder?
-    
+class ShoppingCart : Codable{
+    var draft_order: DrafOrder?
+}
+
+class DrafOrder : Codable {
+    var id : Int?
+    var email: String?
+    var currency: String?
+    var line_items : [LineItem]?
+}
+
+class LineItem : Codable {
+    var id : Int?
+    var product_id : Int?
+    var title : String?
+    var price : String?
+    var quantity : Int?
+    var image : String?
 }
