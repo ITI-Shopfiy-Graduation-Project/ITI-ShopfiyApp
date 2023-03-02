@@ -7,24 +7,22 @@
 
 import UIKit
 import Kingfisher
+import JJFloatingActionButton
 class CategoryViewController: UIViewController {
+    
+    @IBOutlet weak var AllBtn: UIBarButtonItem!
+    @IBOutlet weak var MenCtegory: UIBarButtonItem!
+    @IBOutlet weak var WomenCategory: UIBarButtonItem!
+    @IBOutlet weak var MainCategory: UIToolbar!
+    @IBOutlet weak var kidCategory: UIBarButtonItem!
+    @IBOutlet weak var SaleCategory: UIBarButtonItem!
+  
+    let indicator = UIActivityIndicatorView(style: .large)
+    let actionButton = JJFloatingActionButton()
     var CategoryModel: CategoryViewModel?
-//    var AllProductsUrl : String?
-    var pttt : [Products] = []
     var product :[Products] = []
-    
     var AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json"
-   
-    func search(){
-        let searchVC = UIStoryboard(name: "SearchStoryboard", bundle: nil).instantiateViewController(withIdentifier: "search") as! SearchViewController
-//if toolbar is all & switch
-//        searchVC.current_URL = URLService.customCategory(category_ID: <#T##Int#>)
-        searchVC.current_URL = URLService.allcategories()
-        searchVC.vendor = "All Categories"
-        navigationController?.pushViewController(searchVC, animated: true)
-    }
-    
-    
+    var id : Int?
     @IBAction func cartBtn(_ sender: Any) {
         let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
         navigationController?.pushViewController(cartVC, animated: true)
@@ -35,9 +33,14 @@ class CategoryViewController: UIViewController {
     }
   
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
-    
+  
+
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        indicator.center = view.center
+        view.addSubview(indicator)
+        indicator.startAnimating()
         CategoryModel = CategoryViewModel()
         CategoryCollectionView.dataSource = self
         CategoryCollectionView.delegate = self
@@ -45,9 +48,10 @@ class CategoryViewController: UIViewController {
         CategoryModel?.getProductsFromCategory()
         CategoryModel?.bindingProducts = {()in
         self.renderProducts()
-            
-        
+            self.btn()
+             
         }
+        
         
         
     }
@@ -55,7 +59,7 @@ class CategoryViewController: UIViewController {
         DispatchQueue.main.async {
             self.product = self.CategoryModel?.productsResults ?? []
             self.CategoryCollectionView.reloadData()
-          
+            self.indicator.stopAnimating()
           
      
         }
@@ -78,7 +82,7 @@ extension CategoryViewController :UICollectionViewDataSource{
         cell.layer.cornerRadius = 0
         cell.borderColor = UIColor.clear
         cell.productImage.layer.cornerRadius = 35
-        cell.productImage.layer.borderWidth = 0.5
+        cell.productImage.layer.borderWidth = 0
         cell.productImage.clipsToBounds = false
         cell.productImage.layer.masksToBounds = true
         cell.productImage.layer.backgroundColor = UIColor.white.cgColor
@@ -91,7 +95,7 @@ extension CategoryViewController :UICollectionViewDataSource{
         cell.productImage?.kf.setImage(with:productimg)
         
         
-        cell.productPrice.text = productt.variants?[0].price?.appending(" $")
+        cell.productPrice.text = productt.title
         
         return cell
         
@@ -120,15 +124,113 @@ extension CategoryViewController :UICollectionViewDataSource{
                 return UIEdgeInsets(top: 7, left: 12, bottom: 0, right: 12)
             }
         
-//        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//            return CGSize(width: self.view.frame.width*0.4, height: self.view.frame.height*0.1)
-//        }
-        
+
         
 
+        
+    }
+extension CategoryViewController {
+    func render() {
+        CategoryModel?.ProductsUrl = self.AllProductsUrl
+        CategoryModel?.getProductsFromCategory()
+        CategoryModel?.bindingProducts = {()in
+        self.renderProducts()
+        }
+    }
+    
+    
+    
+}
+extension CategoryViewController {
+    
+    func toolbarBtnClr() {
+        AllBtn.tintColor = UIColor.gray
+        MenCtegory.tintColor = UIColor.gray
+        WomenCategory.tintColor = UIColor.gray
+        kidCategory.tintColor = UIColor.gray
+        SaleCategory.tintColor = UIColor.gray
+        
         
     }
     
     
     
+    
+    
+    
+}
+extension CategoryViewController {
+    @IBAction func allCategory(_ sender: UIBarButtonItem) {
+        toolbarBtnClr()
+        AllBtn.tintColor = UIColor(named: "Green")
+        AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json"
+      render()
+    
+    }
+
+@IBAction func MenCategory(_ sender: UIBarButtonItem) {
+        toolbarBtnClr()
+        MenCtegory.tintColor = UIColor(named: "Green")
+        AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787230489/products.json"
+      render()
+
+    }
+@IBAction func WomenCategory(_ sender: UIBarButtonItem) {
+        toolbarBtnClr()
+        WomenCategory.tintColor = UIColor(named: "Green")
+        AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787263257/products.json"
+         render()
+    
+
+    }
+@IBAction func KidCategory(_ sender: UIBarButtonItem) {
+            toolbarBtnClr()
+            kidCategory.tintColor = UIColor(named: "Green")
+            AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787296025/products.json"
+             render()
+        
+
+        }
+@IBAction func SaleCategory(_ sender: UIBarButtonItem) {
+                toolbarBtnClr()
+    SaleCategory.tintColor = UIColor(named: "Green")
+                AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787328793/products.json"
+                 render()
+            
+
+            }
+    
+}
+extension CategoryViewController {
+    
+    func btn ()
+    {   actionButton.itemAnimationConfiguration = .circularSlideIn(withRadius: 120)
+        actionButton.buttonAnimationConfiguration = .rotation(toAngle: .pi * 3 / 4)
+        actionButton.buttonAnimationConfiguration.opening.duration = 0.8
+        actionButton.buttonAnimationConfiguration.closing.duration = 0.6
+        actionButton.buttonColor = UIColor(named: "Green") ?? .green
+        
+        actionButton.addItem(title: "", image: UIImage(named: "fb1")?.withRenderingMode(.alwaysTemplate)) { item in
+           
+      }
+        actionButton.addItem(title: "", image: UIImage(named: "fb2")?.withRenderingMode(.alwaysTemplate)) { item in
+          
+        }
+        actionButton.addItem(title: "", image: UIImage(named: "fb3")?.withRenderingMode(.alwaysTemplate)) { item in
+       
+        }
+        
+        actionButton.display(inViewController: self)
+    
+        
+
+    }
+
+    
+    
+    
+    
+    
+}
+
 

@@ -23,22 +23,37 @@
                                 <items>
                                     <barButtonItem title="All" id="4NN-Uz-qo7">
                                         <color key="tintColor" name="Green"/>
+                                        <connections>
+                                            <action selector="allCategory:" destination="Y6W-OH-hqX" id="lV9-VA-BfC"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="ta4-6I-NeC"/>
                                     <barButtonItem title="Men" id="YUP-Zy-K68">
                                         <color key="tintColor" name="Gray"/>
+                                        <connections>
+                                            <action selector="MenCategory:" destination="Y6W-OH-hqX" id="8S4-ZU-eyq"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="I4h-2M-6ty"/>
                                     <barButtonItem title="Women" id="vch-iT-MCs">
                                         <color key="tintColor" name="Gray"/>
+                                        <connections>
+                                            <action selector="WomenCategory:" destination="Y6W-OH-hqX" id="iO4-Zg-opL"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="zrB-Wm-SIo"/>
                                     <barButtonItem title="KID" id="zsg-jJ-uld">
                                         <color key="tintColor" name="Gray"/>
+                                        <connections>
+                                            <action selector="KidCategory:" destination="Y6W-OH-hqX" id="aIF-u2-JAN"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Ot1-eH-tm9"/>
                                     <barButtonItem title="Sale" width="71.666666666666686" id="Ods-9j-apJ">
                                         <color key="tintColor" name="Gray"/>
+                                        <connections>
+                                            <action selector="SaleCategory:" destination="Y6W-OH-hqX" id="udQ-Uy-m1y"/>
+                                        </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
@@ -80,8 +95,8 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 272.27" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brA-X9-oaD">
-                                                    <rect key="frame" x="0.0" y="191" width="121" height="33"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                                    <rect key="frame" x="0.0" y="191" width="166" height="33"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -98,7 +113,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="Iu6-VK-Yap" secondAttribute="bottom" constant="52" id="7uo-ES-mpZ"/>
                                                 <constraint firstItem="Iu6-VK-Yap" firstAttribute="top" secondItem="0Bj-um-WD6" secondAttribute="bottom" constant="-43" id="87R-mn-8Vk"/>
                                                 <constraint firstItem="brA-X9-oaD" firstAttribute="leading" secondItem="Iu6-VK-Yap" secondAttribute="leading" id="A25-Ac-5Y5"/>
-                                                <constraint firstItem="brA-X9-oaD" firstAttribute="width" secondItem="xIH-kp-EBH" secondAttribute="width" multiplier="0.672222" id="Baj-82-U0R"/>
+                                                <constraint firstItem="brA-X9-oaD" firstAttribute="width" secondItem="xIH-kp-EBH" secondAttribute="width" multiplier="0.922222" id="Baj-82-U0R"/>
                                                 <constraint firstItem="Iu6-VK-Yap" firstAttribute="leading" secondItem="xIH-kp-EBH" secondAttribute="leading" id="DT1-9k-RnP"/>
                                                 <constraint firstItem="Iu6-VK-Yap" firstAttribute="top" secondItem="xIH-kp-EBH" secondAttribute="top" id="RiQ-Ef-dJM"/>
                                                 <constraint firstItem="0Bj-um-WD6" firstAttribute="width" secondItem="Iu6-VK-Yap" secondAttribute="width" multiplier="0.283333" id="TJF-L5-1lf"/>
@@ -151,7 +166,12 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="AllBtn" destination="4NN-Uz-qo7" id="37B-EJ-24i"/>
                         <outlet property="CategoryCollectionView" destination="1Ar-uW-xNj" id="hh2-Mf-CIZ"/>
+                        <outlet property="MenCtegory" destination="YUP-Zy-K68" id="sEL-6v-sq8"/>
+                        <outlet property="SaleCategory" destination="Ods-9j-apJ" id="khe-Az-I4R"/>
+                        <outlet property="WomenCategory" destination="vch-iT-MCs" id="US3-1K-aPh"/>
+                        <outlet property="kidCategory" destination="zsg-jJ-uld" id="ShE-0x-5B9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
