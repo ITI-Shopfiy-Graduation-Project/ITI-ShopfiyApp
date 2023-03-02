@@ -9,6 +9,7 @@ import UIKit
 
 class CartTableViewCell: UITableViewCell {
 
+    var counterProtocol: counterProtocol?
     @IBOutlet weak var itemPrice: UILabel!
     @IBOutlet weak var quantityCount: UILabel!
     @IBOutlet weak var itemQuntity: UILabel!
@@ -25,4 +26,10 @@ class CartTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @IBAction func increaseBtn(_ sender: Any) {
+        counterProtocol?.increaseCounter()
+    }
+    @IBAction func dcreaseBtn(_ sender: Any) {
+        counterProtocol?.decreaseCounter()
+    }
 }

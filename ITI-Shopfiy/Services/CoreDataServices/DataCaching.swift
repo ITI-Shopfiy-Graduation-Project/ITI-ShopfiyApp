@@ -23,7 +23,7 @@ class DataCaching {
             for item in (fetchedLeagueArray)
             {
                 let proudct = Products()
-                proudct.id = item.value(forKey:"league_id") as? Int
+                proudct.id = item.value(forKey:"product_id") as? Int
                 proudct.title = item.value(forKey: "title") as? String
                 proudct.image?.src = item.value(forKey: "src") as? String
                 proudct.variants?.first?.price = item.value(forKey: "price") as? String

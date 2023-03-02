@@ -17,6 +17,7 @@ class CartViewController: UIViewController {
     @IBOutlet weak var promoCodeValue: UILabel!
     @IBOutlet weak var allItemsCost: UILabel!
     private var cartArray: [LineItem]?
+    private var counter: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         tableConfiguration()
@@ -69,7 +70,7 @@ extension CartViewController: UITableViewDataSource {
         let cell:CartTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CartTableViewCell
         cell.itemName.text = cartArray?[indexPath.row].title
         cell.itemPrice.text = cartArray?[indexPath.row].price
-        cell.itemQuntity.text = cartArray?[indexPath.row].quantity?.formatted()
+        cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
         cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].image ?? "ct4")
             
         return cell
@@ -89,3 +90,17 @@ extension CartViewController: UITableViewDelegate {
     }
 }
 
+extension CartViewController : counterProtocol {
+    func increaseCounter() {
+        counter = counter + 1
+    }
+    
+    func decreaseCounter() {
+        if counter <= 0 {
+            showAlert(msg: "njbhvgfc")
+        }
+        else {
+            counter = counter - 1
+        }
+    }
+}
