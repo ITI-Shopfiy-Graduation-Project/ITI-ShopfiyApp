@@ -168,14 +168,6 @@
             </objects>
             <point key="canvasLocation" x="980.91603053435108" y="-55.633802816901408"/>
         </scene>
-        <!--search-->
-        <scene sceneID="JDx-XL-wng">
-            <objects>
-                <viewControllerPlaceholder storyboardName="SearchStoryboard" referencedIdentifier="search" id="gBJ-UA-xxJ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gDF-oj-QUm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1649" y="-230"/>
-        </scene>
         <!--products-->
         <scene sceneID="Xyv-hp-QWV">
             <objects>

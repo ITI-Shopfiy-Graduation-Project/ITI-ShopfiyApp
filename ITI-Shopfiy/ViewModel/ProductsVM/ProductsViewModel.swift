@@ -21,10 +21,10 @@ class ProductsVM{
 
 extension ProductsVM: getProductsProtocol{
     
-    func getProducts(Brand_ID: Int){
-        ProductsService.fetchData(completionHandler: { result in
+    func getProducts(URL: String){
+        ProductsService.fetchData(url: URL,completionHandler: { result in
             self.productsResults = result?.products
-        }, Brand_ID: Brand_ID)
+        })
     
     }
     
