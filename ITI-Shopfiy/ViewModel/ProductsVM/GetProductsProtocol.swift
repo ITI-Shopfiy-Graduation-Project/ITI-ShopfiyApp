@@ -8,5 +8,5 @@
 import Foundation
 
 protocol getProductsProtocol{
-    func getProducts(Brand_ID: Int)
+    func getProducts(URL: String)
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import CoreData
 
 class ProductsViewController: UIViewController{
     @IBOutlet weak var like_btn: UIBarButtonItem!
@@ -29,7 +30,7 @@ class ProductsViewController: UIViewController{
     var productsVM: ProductsVM?
     var searchArray: [Products]?
     var currentProduct: Products?
-    var Brand_ID: Int?
+    var url: String?
     var vendor: String?
     
     override func viewDidLoad() {
@@ -41,7 +42,7 @@ class ProductsViewController: UIViewController{
         indicator.startAnimating()
         
         productsVM = ProductsVM()
-        productsVM?.getProducts(Brand_ID: Brand_ID ?? 437786837273)
+        productsVM?.getProducts(URL: url ?? "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json")
         productsVM?.bindingProducts = { () in
             self.renderView()
             indicator.stopAnimating()

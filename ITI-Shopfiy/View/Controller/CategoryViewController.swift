@@ -23,6 +23,18 @@ class CategoryViewController: UIViewController {
     var product :[Products] = []
     var AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json"
     var id : Int?
+   
+    func search(){
+        let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
+        productsVC.vendor = "All Products"
+//if toolbar is all & switch
+//        searchVC.current_URL = URLService.customCategory(category_ID: <#T##Int#>)
+        productsVC.url = URLService.allcategories()
+        productsVC.vendor = "All Categories"
+        navigationController?.pushViewController(productsVC, animated: true)
+    }
+    
+    
     @IBAction func cartBtn(_ sender: Any) {
         let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
         navigationController?.pushViewController(cartVC, animated: true)
