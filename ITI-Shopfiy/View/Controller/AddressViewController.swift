@@ -8,20 +8,39 @@
 import UIKit
 import MapKit
 import CoreLocation
+import DropDown
+
 class AddressViewController: UIViewController , CLLocationManagerDelegate {
    
+    let dropDown = DropDown()
+    var addressArray = ["cairo" , "bilbias" , "naser city" ]
     @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var mabView: MKMapView!
-    private var locationManager = CLLocationManager()
+    private var perviousLocation : CLLocation? = nil
+    var locationManager = CLLocationManager()
         override func viewDidLoad() {
             super.viewDidLoad()
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest // accuracy best is not better for battery
-            locationManager.allowsBackgroundLocationUpdates = true
+            mabView.delegate = self
+            configureLocation()
             configureAuthority()
-            
-            
+            dropDown.anchorView = searchTF
+            dropDown.dataSource = addressArray
+            dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+
+            dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
+            dropDown.direction = .bottom
+            dropDown.selectionAction = { [unowned self] (index, item) in
+                
+                self.searchTF.text = addressArray[index]
+            }
         }
+    
+    
+    func configureLocation(){
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest // accuracy best is not better for battery
+        locationManager.allowsBackgroundLocationUpdates = true
+    }
         func configureAuthority(){
             DispatchQueue.global().async { [self] in
                 if isLocationServiceEnabled()
@@ -38,17 +57,38 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
         }
         
        
-        func zoomToUserLocation(location : CLLocation)
+    @IBAction func show3(_ sender: Any) {
+        print("1")
+        dropDown.show()
+
+    }
+    @IBAction func show1(_ sender: Any) {
+        dropDown.show()
+        print("2")
+
+    }
+    @IBAction func show(_ sender: Any) {
+        dropDown.show()
+        print("3")
+
+    }
+    @IBAction func showDropDown(_ sender: Any) {
+        dropDown.show()
+        print("4")
+
+    }
+  
+    func zoomToUserLocation(location : CLLocation)
         {
             let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
             mabView.setRegion(region, animated: true)
         }
     
-    
+
     @IBAction func search(_ sender: Any) {
         let destination = searchTF.text
         if destination != "" {
-            searchForDestination(destination: destination ?? "")
+            setLocation(destination: destination ?? "")
         }
         else{
             showAlert(msg: "error")
@@ -119,7 +159,7 @@ extension AddressViewController {
 
 //MARK: - search
 extension AddressViewController {
-    func searchForDestination(destination: String)
+    func setLocation(destination: String)
     {
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(destination) { places, error in
@@ -142,7 +182,37 @@ extension AddressViewController {
     
 }
 
-
+// MARK: - get location info
+extension AddressViewController : MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let newLocation =  CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+        if perviousLocation == nil || perviousLocation!.distance(from: newLocation) > 50 {
+            if perviousLocation != nil
+            {
+                print ("Destination \(perviousLocation!.distance(from: newLocation))")
+            }
+            getLocationInfo(location: newLocation)
+        }
+    }
+    
+    
+    func getLocationInfo(location : CLLocation)
+    {
+        perviousLocation = location
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(location) { places , error in
+            guard let place = places?.first , error == nil else {return}
+            
+            print("name \(place.name ?? "no name")")
+            print("name \(place.country ?? "no country")")
+            print("name \(String(describing: place.location?.coordinate.longitude))")
+            print("name \(String(describing: place.location?.coordinate.latitude) )")
+            print("name \(place.postalCode ?? "no postal code")")
+            print("name \(place.locality ?? "no locality")")
+            
+        }
+    }
+}
 // MARK: - Alert
 extension AddressViewController{
     func showAlert(msg: String , type: String) {
