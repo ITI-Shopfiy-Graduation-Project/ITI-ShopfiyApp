@@ -25,5 +25,5 @@ protocol GET_PRODUCTDETAILS{
 
 //MARK: From Products Search
 protocol GET_PRODUCTSSEARCH{
-    static func fetchData(completionHandler: @escaping (ProductResult?)->Void)
+    static func fetchData(url: String?, completionHandler: @escaping (ProductResult?)->Void)
 }

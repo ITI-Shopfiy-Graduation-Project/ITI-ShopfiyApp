@@ -15,6 +15,16 @@ class CategoryViewController: UIViewController {
     
     var AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json"
    
+    func search(){
+        let searchVC = UIStoryboard(name: "SearchStoryboard", bundle: nil).instantiateViewController(withIdentifier: "search") as! SearchViewController
+//if toolbar is all & switch
+//        searchVC.current_URL = URLService.customCategory(category_ID: <#T##Int#>)
+        searchVC.current_URL = URLService.allcategories()
+        searchVC.vendor = "All Categories"
+        navigationController?.pushViewController(searchVC, animated: true)
+    }
+    
+    
     @IBAction func cartBtn(_ sender: Any) {
         let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
         navigationController?.pushViewController(cartVC, animated: true)

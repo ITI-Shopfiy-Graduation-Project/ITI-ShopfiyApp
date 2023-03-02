@@ -8,5 +8,5 @@
 import Foundation
 
 protocol getProductsSearchProtocol{
-    func getProductsSearch()
+    func getProductsSearch(url: String)
 }
