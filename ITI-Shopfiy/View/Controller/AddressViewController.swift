@@ -13,7 +13,7 @@ import DropDown
 class AddressViewController: UIViewController , CLLocationManagerDelegate {
    
     let dropDown = DropDown()
-    var addressArray = ["cairo" , "bilbias" , "naser city" ]
+    var addressArray = ["cairo" , "belbias" , "new capital" , "octaber" , "ميدان التحرير"]
     @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var mabView: MKMapView!
     private var perviousLocation : CLLocation? = nil

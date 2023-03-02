@@ -50,6 +50,10 @@
 		A7FFA86029A594EF00474CB1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FFA85F29A594EF00474CB1 /* LoginViewController.swift */; };
 		B5A1F7BBE5425E1C57E2A213 /* libPods-ITI-ShopfiyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2412EDFEB830031444D8BF43 /* libPods-ITI-ShopfiyTests.a */; };
 		E2008ED429A41B9F003D55A0 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2008ED329A41B9F003D55A0 /* ViewHelper.swift */; };
+		E23D188529B025E200D4AFB2 /* PaymentServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188429B025E200D4AFB2 /* PaymentServices.swift */; };
+		E23D188729B02A3400D4AFB2 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188629B02A3400D4AFB2 /* PaymentViewModel.swift */; };
+		E23D188929B033F700D4AFB2 /* IPaymentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188829B033F700D4AFB2 /* IPaymentDelegate.swift */; };
+		E23D188B29B03BCE00D4AFB2 /* AddressDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188A29B03BCE00D4AFB2 /* AddressDelegate.swift */; };
 		E269E84B29AFA32E005448EA /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269E84A29AFA32E005448EA /* Constans.swift */; };
 		E26F77DE29A4B4B600ADDC86 /* PaymentStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E26F77DD29A4B4B600ADDC86 /* PaymentStoryboard.storyboard */; };
 		E26F77E129A4C30B00ADDC86 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F77DF29A4C30B00ADDC86 /* CartTableViewCell.swift */; };
@@ -150,6 +154,11 @@
 		B91BC6BDC89668C61B2F645D /* Pods-ITI-ShopfiyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITI-ShopfiyTests.release.xcconfig"; path = "Target Support Files/Pods-ITI-ShopfiyTests/Pods-ITI-ShopfiyTests.release.xcconfig"; sourceTree = "<group>"; };
 		C2B9DD6EAB0BBBA9777CC60B /* Pods-ITI-Shopfiy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITI-Shopfiy.debug.xcconfig"; path = "Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy.debug.xcconfig"; sourceTree = "<group>"; };
 		E2008ED329A41B9F003D55A0 /* ViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
+		E23D188229AFDAD000D4AFB2 /* ITI-Shopfiy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ITI-Shopfiy.entitlements"; sourceTree = "<group>"; };
+		E23D188429B025E200D4AFB2 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
+		E23D188629B02A3400D4AFB2 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
+		E23D188829B033F700D4AFB2 /* IPaymentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPaymentDelegate.swift; sourceTree = "<group>"; };
+		E23D188A29B03BCE00D4AFB2 /* AddressDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDelegate.swift; sourceTree = "<group>"; };
 		E269E84A29AFA32E005448EA /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constans.swift; path = "ITI-Shopfiy/Contracts/Constans.swift"; sourceTree = SOURCE_ROOT; };
 		E26F77DD29A4B4B600ADDC86 /* PaymentStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PaymentStoryboard.storyboard; sourceTree = "<group>"; };
 		E26F77DF29A4C30B00ADDC86 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
@@ -241,6 +250,8 @@
 			children = (
 				A774B4EF29AA94D5008E01AA /* MeViewDelegate.swift */,
 				E2C45E4B29AEFC1A00840AC2 /* IDataCaching.swift */,
+				E23D188829B033F700D4AFB2 /* IPaymentDelegate.swift */,
+				E23D188A29B03BCE00D4AFB2 /* AddressDelegate.swift */,
 			);
 			path = Contracts;
 			sourceTree = "<group>";
@@ -283,6 +294,14 @@
 			path = AdsCell;
 			sourceTree = "<group>";
 		};
+		E23D188329B0243000D4AFB2 /* PaymentService */ = {
+			isa = PBXGroup;
+			children = (
+				E23D188429B025E200D4AFB2 /* PaymentServices.swift */,
+			);
+			path = PaymentService;
+			sourceTree = "<group>";
+		};
 		E29FA8F029A2AEE100CE0786 = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +327,7 @@
 		E29FA8FB29A2AEE100CE0786 /* ITI-Shopfiy */ = {
 			isa = PBXGroup;
 			children = (
+				E23D188229AFDAD000D4AFB2 /* ITI-Shopfiy.entitlements */,
 				A774B4EE29AA94C1008E01AA /* Contracts */,
 				E29FA93329A2AF7F00CE0786 /* Common */,
 				E29FA93229A2AF7C00CE0786 /* View */,
@@ -352,6 +372,7 @@
 		E29FA93029A2AF7600CE0786 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E23D188329B0243000D4AFB2 /* PaymentService */,
 				E29FA93A29A2B06800CE0786 /* NetworkServices */,
 				E29FA93929A2B05200CE0786 /* CoreDataServices */,
 			);
@@ -367,6 +388,7 @@
 				5E55DE8F29AAFFFF00EB6516 /* getProductsFromCategoryProtocol.swift */,
 				5E55DE9B29AC196B00EB6516 /* BrandsViewModel.swift */,
 				5E55DE9D29AC1BFE00EB6516 /* getBrandsProtocol.swift */,
+				E23D188629B02A3400D4AFB2 /* PaymentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -782,10 +804,12 @@
 				A7FFA86029A594EF00474CB1 /* LoginViewController.swift in Sources */,
 				5EA83B8829A62A380018E90E /* CategoryViewController.swift in Sources */,
 				E2C45E4829AEFAFA00840AC2 /* DataCaching.swift in Sources */,
+				E23D188529B025E200D4AFB2 /* PaymentServices.swift in Sources */,
 				5E55DE8C29AAF9C600EB6516 /* CategoryViewModel.swift in Sources */,
 				5E55DE9A29AC15F700EB6516 /* BrandsProtocol.swift in Sources */,
 				5E55DE8629AAE3DB00EB6516 /* variants.swift in Sources */,
 				A736054729A6B33600D99935 /* ProductDetailsViewController.swift in Sources */,
+				E23D188929B033F700D4AFB2 /* IPaymentDelegate.swift in Sources */,
 				A7157ABC29A694D700D9A41A /* ProductsViewController.swift in Sources */,
 				E2C45E4A29AEFBAA00840AC2 /* LocalDataManager.swift in Sources */,
 				E29FA90129A2AEE100CE0786 /* ViewController.swift in Sources */,
@@ -803,6 +827,7 @@
 				A746331529A5A3EA0074EC8A /* SignUpViewController.swift in Sources */,
 				E2E2A20929A68665006958CD /* AboutUsViewController.swift in Sources */,
 				5E55DE9029AAFFFF00EB6516 /* getProductsFromCategoryProtocol.swift in Sources */,
+				E23D188729B02A3400D4AFB2 /* PaymentViewModel.swift in Sources */,
 				E2CD1CA929A60EAB0079C09A /* ProductCollectionViewCell.swift in Sources */,
 				5E55DE8E29AAFA3B00EB6516 /* ProductsProtocol.swift in Sources */,
 				E2C45E4C29AEFC1A00840AC2 /* IDataCaching.swift in Sources */,
@@ -823,6 +848,7 @@
 				E273D5CE29AC7F88006AE49A /* Alert.swift in Sources */,
 				E29FA95029A310FD00CE0786 /* SettingsViewController.swift in Sources */,
 				5E55DE8829AAE40E00EB6516 /* image.swift in Sources */,
+				E23D188B29B03BCE00D4AFB2 /* AddressDelegate.swift in Sources */,
 				A78BCBA329AACAD60023B8AC /* MeUnlogedView.swift in Sources */,
 				A774B4F029AA94D5008E01AA /* MeViewDelegate.swift in Sources */,
 			);
@@ -1000,8 +1026,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ITI-Shopfiy/ITI-Shopfiy.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FW278M9LJ4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ITI-Shopfiy/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "require location for payment process";
@@ -1031,8 +1059,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ITI-Shopfiy/ITI-Shopfiy.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FW278M9LJ4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ITI-Shopfiy/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "require location for payment process";
