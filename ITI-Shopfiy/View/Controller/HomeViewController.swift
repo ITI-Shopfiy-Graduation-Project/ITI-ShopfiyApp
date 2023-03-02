@@ -14,8 +14,8 @@ class HomeViewController: UIViewController {
     var AllBrandsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/smart_collections.json?since_id=482865238"
 
     @IBAction func searchBtn(_ sender: Any) {
-        let productVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-        navigationController?.pushViewController(productVC, animated: true)
+        let searchVC = UIStoryboard(name: "SearchStoryboard", bundle: nil).instantiateViewController(withIdentifier: "search") as! SearchViewController
+        navigationController?.pushViewController(searchVC, animated: true)
        
     }
     @IBAction func cartBtn(_ sender: Any) {

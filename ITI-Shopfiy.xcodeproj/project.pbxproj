@@ -37,7 +37,23 @@
 		A7157ABE29A694EE00D9A41A /* ProductsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7157ABD29A694EE00D9A41A /* ProductsStoryboard.storyboard */; };
 		A736054729A6B33600D99935 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A736054629A6B33600D99935 /* ProductDetailsViewController.swift */; };
 		A746331529A5A3EA0074EC8A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A746331429A5A3EA0074EC8A /* SignUpViewController.swift */; };
+		A74C467029AD54DF00266614 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C466F29AD54DF00266614 /* SearchViewController.swift */; };
+		A74C467229AD54F900266614 /* SearchStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74C467129AD54F900266614 /* SearchStoryboard.storyboard */; };
+		A74C467629AD5D3A00266614 /* GetProductsSearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C467529AD5D3A00266614 /* GetProductsSearchProtocol.swift */; };
+		A74C467829AD5D5700266614 /* ProductsSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C467729AD5D5700266614 /* ProductsSearchViewModel.swift */; };
+		A74C467A29AD5D7B00266614 /* GetProductDetailsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C467929AD5D7B00266614 /* GetProductDetailsProtocol.swift */; };
+		A74C467C29AD5D8E00266614 /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C467B29AD5D8E00266614 /* ProductDetailsViewModel.swift */; };
+		A759787029AFD52F002D7888 /* GetLoginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A759786F29AFD52F002D7888 /* GetLoginProtocol.swift */; };
+		A759787229AFD540002D7888 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A759787129AFD540002D7888 /* LoginViewModel.swift */; };
 		A774B4F029AA94D5008E01AA /* MeViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A774B4EF29AA94D5008E01AA /* MeViewDelegate.swift */; };
+		A775493829AE985A009E6D88 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775493729AE985A009E6D88 /* Customer.swift */; };
+		A775493A29AE999D009E6D88 /* URLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775493929AE999D009E6D88 /* URLService.swift */; };
+		A775493C29AE9DD1009E6D88 /* CustomerNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775493B29AE9DD1009E6D88 /* CustomerNetworkService.swift */; };
+		A775493E29AE9DE5009E6D88 /* CustomerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775493D29AE9DE5009E6D88 /* CustomerProtocols.swift */; };
+		A775494429AF4176009E6D88 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775494329AF4176009E6D88 /* UserDefaultManager.swift */; };
+		A775494D29AF44A2009E6D88 /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775494C29AF44A2009E6D88 /* UserDefaultsProtocol.swift */; };
+		A775495029AF569F009E6D88 /* PutRegisterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775494F29AF569F009E6D88 /* PutRegisterProtocol.swift */; };
+		A775495229AF56B1009E6D88 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775495129AF56B1009E6D88 /* RegisterViewModel.swift */; };
 		A77E12BD29AC36B600EB4C13 /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E12BC29AC36B600EB4C13 /* ProductsViewModel.swift */; };
 		A77E12BF29AC36CE00EB4C13 /* GetProductsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E12BE29AC36CE00EB4C13 /* GetProductsProtocol.swift */; };
 		A78BCBA129AAC9910023B8AC /* MeUnlogedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A78BCBA029AAC9910023B8AC /* MeUnlogedView.xib */; };
@@ -136,7 +152,23 @@
 		A7157ABD29A694EE00D9A41A /* ProductsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductsStoryboard.storyboard; sourceTree = "<group>"; };
 		A736054629A6B33600D99935 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		A746331429A5A3EA0074EC8A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		A74C466F29AD54DF00266614 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		A74C467129AD54F900266614 /* SearchStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchStoryboard.storyboard; sourceTree = "<group>"; };
+		A74C467529AD5D3A00266614 /* GetProductsSearchProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductsSearchProtocol.swift; sourceTree = "<group>"; };
+		A74C467729AD5D5700266614 /* ProductsSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsSearchViewModel.swift; sourceTree = "<group>"; };
+		A74C467929AD5D7B00266614 /* GetProductDetailsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductDetailsProtocol.swift; sourceTree = "<group>"; };
+		A74C467B29AD5D8E00266614 /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
+		A759786F29AFD52F002D7888 /* GetLoginProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLoginProtocol.swift; sourceTree = "<group>"; };
+		A759787129AFD540002D7888 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A774B4EF29AA94D5008E01AA /* MeViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewDelegate.swift; sourceTree = "<group>"; };
+		A775493729AE985A009E6D88 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Customer.swift; path = "ITI-Shopfiy/ViewModel/ProductDetailsVM/Customer.swift"; sourceTree = SOURCE_ROOT; };
+		A775493929AE999D009E6D88 /* URLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = URLService.swift; path = "ITI-Shopfiy/Services/NetworkServices/CustomerService/URLService.swift"; sourceTree = SOURCE_ROOT; };
+		A775493B29AE9DD1009E6D88 /* CustomerNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomerNetworkService.swift; path = "ITI-Shopfiy/Services/NetworkServices/CustomerService/CustomerNetworkService.swift"; sourceTree = SOURCE_ROOT; };
+		A775493D29AE9DE5009E6D88 /* CustomerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomerProtocols.swift; path = "ITI-Shopfiy/Services/NetworkServices/CustomerService/CustomerProtocols.swift"; sourceTree = SOURCE_ROOT; };
+		A775494329AF4176009E6D88 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		A775494C29AF44A2009E6D88 /* UserDefaultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocol.swift; sourceTree = "<group>"; };
+		A775494F29AF569F009E6D88 /* PutRegisterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutRegisterProtocol.swift; sourceTree = "<group>"; };
+		A775495129AF56B1009E6D88 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		A77E12BC29AC36B600EB4C13 /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
 		A77E12BE29AC36CE00EB4C13 /* GetProductsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductsProtocol.swift; sourceTree = "<group>"; };
 		A78BCBA029AAC9910023B8AC /* MeUnlogedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeUnlogedView.xib; sourceTree = "<group>"; };
@@ -236,6 +268,33 @@
 			path = MeScreenXIBs;
 			sourceTree = "<group>";
 		};
+		A74C467329AD5CEB00266614 /* ProductDetailsVM */ = {
+			isa = PBXGroup;
+			children = (
+				A74C467929AD5D7B00266614 /* GetProductDetailsProtocol.swift */,
+				A74C467B29AD5D8E00266614 /* ProductDetailsViewModel.swift */,
+			);
+			path = ProductDetailsVM;
+			sourceTree = "<group>";
+		};
+		A74C467429AD5D0000266614 /* ProductsSearchVM */ = {
+			isa = PBXGroup;
+			children = (
+				A74C467729AD5D5700266614 /* ProductsSearchViewModel.swift */,
+				A74C467529AD5D3A00266614 /* GetProductsSearchProtocol.swift */,
+			);
+			path = ProductsSearchVM;
+			sourceTree = "<group>";
+		};
+		A759786E29AFD512002D7888 /* LoginVM */ = {
+			isa = PBXGroup;
+			children = (
+				A759787129AFD540002D7888 /* LoginViewModel.swift */,
+				A759786F29AFD52F002D7888 /* GetLoginProtocol.swift */,
+			);
+			path = LoginVM;
+			sourceTree = "<group>";
+		};
 		A774B4EE29AA94C1008E01AA /* Contracts */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +302,34 @@
 				E2C45E4B29AEFC1A00840AC2 /* IDataCaching.swift */,
 			);
 			path = Contracts;
+			sourceTree = "<group>";
+		};
+		A775493F29AE9DEE009E6D88 /* CustomerService */ = {
+			isa = PBXGroup;
+			children = (
+				A775493929AE999D009E6D88 /* URLService.swift */,
+				A775493B29AE9DD1009E6D88 /* CustomerNetworkService.swift */,
+				A775493D29AE9DE5009E6D88 /* CustomerProtocols.swift */,
+			);
+			path = CustomerService;
+			sourceTree = "<group>";
+		};
+		A775494B29AF4484009E6D88 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				A775494329AF4176009E6D88 /* UserDefaultManager.swift */,
+				A775494C29AF44A2009E6D88 /* UserDefaultsProtocol.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		A775494E29AF5677009E6D88 /* RegisterVM */ = {
+			isa = PBXGroup;
+			children = (
+				A775495129AF56B1009E6D88 /* RegisterViewModel.swift */,
+				A775494F29AF569F009E6D88 /* PutRegisterProtocol.swift */,
+			);
+			path = RegisterVM;
 			sourceTree = "<group>";
 		};
 		A77E12BA29AC367D00EB4C13 /* CategoryVM */ = {
@@ -345,6 +432,7 @@
 				5E55DE9129AB07DD00EB6516 /* productsResult.swift */,
 				5E55DE9329AC134800EB6516 /* BrandsResults.swift */,
 				5E55DE9529AC142B00EB6516 /* Brands.swift */,
+				A775493729AE985A009E6D88 /* Customer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -361,6 +449,10 @@
 		E29FA93129A2AF7A00CE0786 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A759786E29AFD512002D7888 /* LoginVM */,
+				A775494E29AF5677009E6D88 /* RegisterVM */,
+				A74C467429AD5D0000266614 /* ProductsSearchVM */,
+				A74C467329AD5CEB00266614 /* ProductDetailsVM */,
 				A77E12BB29AC369100EB4C13 /* ProductsVM */,
 				A77E12BA29AC367D00EB4C13 /* CategoryVM */,
 				5E55DE8B29AAF9C600EB6516 /* CategoryViewModel.swift */,
@@ -434,6 +526,7 @@
 				A79C157829A81A5D00AB6C20 /* FavoritesStoryboard.storyboard */,
 				A705F64E29A8E3B300301207 /* MeStoryboard.storyboard */,
 				5E55DE7D29AA158100EB6516 /* OrdersStoryboard.storyboard */,
+				A74C467129AD54F900266614 /* SearchStoryboard.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -456,6 +549,7 @@
 				A79C157629A81A4D00AB6C20 /* FavoritesViewController.swift */,
 				A705F65929A8E55300301207 /* MeViewController.swift */,
 				5E55DE7F29AA18F300EB6516 /* OrdersViewController.swift */,
+				A74C466F29AD54DF00266614 /* SearchViewController.swift */,
 				A705F65429A8E3F400301207 /* MeScreenXIBs */,
 			);
 			path = Controller;
@@ -464,6 +558,7 @@
 		E29FA93929A2B05200CE0786 /* CoreDataServices */ = {
 			isa = PBXGroup;
 			children = (
+				A775494B29AF4484009E6D88 /* UserDefaults */,
 				E29FA93B29A2B08000CE0786 /* Entities */,
 				E2C45E4729AEFAFA00840AC2 /* DataCaching.swift */,
 				E2C45E4929AEFBAA00840AC2 /* LocalDataManager.swift */,
@@ -478,6 +573,7 @@
 				5E55DE8D29AAFA3B00EB6516 /* ProductsProtocol.swift */,
 				5E55DE9729AC155500EB6516 /* BrandsNetwork.swift */,
 				5E55DE9929AC15F700EB6516 /* BrandsProtocol.swift */,
+				A775493F29AE9DEE009E6D88 /* CustomerService */,
 			);
 			path = NetworkServices;
 			sourceTree = "<group>";
@@ -631,6 +727,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A79C157929A81A5D00AB6C20 /* FavoritesStoryboard.storyboard in Resources */,
+				A74C467229AD54F900266614 /* SearchStoryboard.storyboard in Resources */,
 				E2DA33EF29A53DDB00FD7DCA /* AdsCollectionViewCell.xib in Resources */,
 				E29FA94E29A30E3500CE0786 /* SettingsStoryboard.storyboard in Resources */,
 				E2CD1CAA29A60EAB0079C09A /* ProductCollectionViewCell.xib in Resources */,
@@ -776,6 +873,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A775494D29AF44A2009E6D88 /* UserDefaultsProtocol.swift in Sources */,
 				A77E12BF29AC36CE00EB4C13 /* GetProductsProtocol.swift in Sources */,
 				5EF5D5DB29A9E81500E62B4D /* CategoryCollectionViewCell.swift in Sources */,
 				E2E2A20729A682E3006958CD /* AdsCollectionViewCell.swift in Sources */,
@@ -790,8 +888,10 @@
 				E2C45E4A29AEFBAA00840AC2 /* LocalDataManager.swift in Sources */,
 				E29FA90129A2AEE100CE0786 /* ViewController.swift in Sources */,
 				5E55DE9C29AC196B00EB6516 /* BrandsViewModel.swift in Sources */,
+				A74C467A29AD5D7B00266614 /* GetProductDetailsProtocol.swift in Sources */,
 				E2008ED429A41B9F003D55A0 /* ViewHelper.swift in Sources */,
 				5E55DE9829AC155500EB6516 /* BrandsNetwork.swift in Sources */,
+				A74C467829AD5D5700266614 /* ProductsSearchViewModel.swift in Sources */,
 				5E55DE8029AA18F300EB6516 /* OrdersViewController.swift in Sources */,
 				5E55DE9629AC142B00EB6516 /* Brands.swift in Sources */,
 				E29FA8FD29A2AEE100CE0786 /* AppDelegate.swift in Sources */,
@@ -808,20 +908,32 @@
 				E2C45E4C29AEFC1A00840AC2 /* IDataCaching.swift in Sources */,
 				5E55DE8429AAE1CE00EB6516 /* Products.swift in Sources */,
 				E29FA8FF29A2AEE100CE0786 /* SceneDelegate.swift in Sources */,
+				A775493A29AE999D009E6D88 /* URLService.swift in Sources */,
+				A74C467C29AD5D8E00266614 /* ProductDetailsViewModel.swift in Sources */,
 				5E55DE9229AB07DD00EB6516 /* productsResult.swift in Sources */,
 				E269E84B29AFA32E005448EA /* Constans.swift in Sources */,
+				A775494429AF4176009E6D88 /* UserDefaultManager.swift in Sources */,
 				E2CD1CA129A60D450079C09A /* PaymentViewController.swift in Sources */,
 				5E55DE8229AA192000EB6516 /* OrdersTableViewCell.swift in Sources */,
+				A775495029AF569F009E6D88 /* PutRegisterProtocol.swift in Sources */,
 				E29FA90729A2AEE100CE0786 /* ITI_Shopfiy.xcdatamodeld in Sources */,
+				A775495229AF56B1009E6D88 /* RegisterViewModel.swift in Sources */,
+				A775493E29AE9DE5009E6D88 /* CustomerProtocols.swift in Sources */,
 				A705F65A29A8E55300301207 /* MeViewController.swift in Sources */,
 				A79C157729A81A4D00AB6C20 /* FavoritesViewController.swift in Sources */,
+				A759787029AFD52F002D7888 /* GetLoginProtocol.swift in Sources */,
+				A759787229AFD540002D7888 /* LoginViewModel.swift in Sources */,
 				E26F77E129A4C30B00ADDC86 /* CartTableViewCell.swift in Sources */,
+				A74C467029AD54DF00266614 /* SearchViewController.swift in Sources */,
 				E29FA94729A2D6B400CE0786 /* HomeViewController.swift in Sources */,
+				A74C467629AD5D3A00266614 /* GetProductsSearchProtocol.swift in Sources */,
 				5EA83B8229A5920A0018E90E /* BrandsCollectionViewCell.swift in Sources */,
 				5E55DE8A29AAF9A300EB6516 /* NetworkService.swift in Sources */,
 				5E55DE9E29AC1BFE00EB6516 /* getBrandsProtocol.swift in Sources */,
+				A775493829AE985A009E6D88 /* Customer.swift in Sources */,
 				E273D5CE29AC7F88006AE49A /* Alert.swift in Sources */,
 				E29FA95029A310FD00CE0786 /* SettingsViewController.swift in Sources */,
+				A775493C29AE9DD1009E6D88 /* CustomerNetworkService.swift in Sources */,
 				5E55DE8829AAE40E00EB6516 /* image.swift in Sources */,
 				A78BCBA329AACAD60023B8AC /* MeUnlogedView.swift in Sources */,
 				A774B4F029AA94D5008E01AA /* MeViewDelegate.swift in Sources */,
