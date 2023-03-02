@@ -33,9 +33,9 @@ class NetworkServices:ProductNetwork{
 
 //MARK: From Products
 class ProductsService: GET_PRODUCTS{
-    static func fetchData(completionHandler: @escaping (ProductResult?) -> Void, Brand_ID: Int) {
+    static func fetchData(url: String?, completionHandler: @escaping (ProductResult?) -> Void) {
         
-        guard let url = URL(string: URLService.produts(Brand_ID: Brand_ID)) else {
+        guard let url = URL(string: "\(url!)") else {
             completionHandler(nil)
             return
         }
@@ -79,35 +79,6 @@ class ProductDetailsService: GET_PRODUCTDETAILS{
                 }
                 
               }
-    }
-    
-    
-}
-
-//MARK: From Products Search
-class ProductsSearchService: GET_PRODUCTSSEARCH{
-    static func fetchData(url: String?, completionHandler: @escaping (ProductResult?) -> Void) {
-        guard let url = URL(string: "\(url!)") else {
-            completionHandler(nil)
-            return
-        }
-        AF.request(url).responseData {response in
-                guard let data = response.data else {
-                    return
-                }
-                
-                do{
-                    let result = try JSONDecoder().decode(ProductResult.self, from: data)
-                    completionHandler(result)
-                }catch let error {
-                    print(error.localizedDescription)
-                    completionHandler(nil)
-                }
-                
-              }
-    }
-    
-    
-    
+    }    
     
 }

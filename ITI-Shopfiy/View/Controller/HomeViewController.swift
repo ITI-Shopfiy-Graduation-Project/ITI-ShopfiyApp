@@ -14,10 +14,10 @@ class HomeViewController: UIViewController {
     var AllBrandsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/smart_collections.json?since_id=482865238"
 
     @IBAction func searchBtn(_ sender: Any) {
-        let searchVC = UIStoryboard(name: "SearchStoryboard", bundle: nil).instantiateViewController(withIdentifier: "search") as! SearchViewController
-        searchVC.current_URL = URLService.allProducts()
-        searchVC.vendor = "All Products"
-        navigationController?.pushViewController(searchVC, animated: true)
+        let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
+        productsVC.url = URLService.allProducts()
+        productsVC.vendor = "All Products"
+        navigationController?.pushViewController(productsVC, animated: true)
        
     }
     @IBAction func cartBtn(_ sender: Any) {
@@ -74,7 +74,7 @@ extension HomeViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //Code Here
         let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-        productsVC.Brand_ID = brand[indexPath.row].id
+        productsVC.url = URLService.produts(Brand_ID: brand[indexPath.row].id ?? 437786837273)
         productsVC.vendor = brand[indexPath.row].title
         navigationController?.pushViewController(productsVC, animated: true)
     }
