@@ -49,7 +49,7 @@ class PaymentViewController: UIViewController {
 extension PaymentViewController: IPaymentDelegate {
     
     func getPaymentRequestToViewController() {
-        paymentRequest = { PaymentVM.getPaymentRequest() }()
+        paymentRequest = PaymentVM.paymentRequest
     }
     
 }

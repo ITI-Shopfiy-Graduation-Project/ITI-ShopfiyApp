@@ -8,5 +8,5 @@
 import Foundation
 protocol AddressDelegate {
     
-    func getAddressInfo(Address: String)
+    func getAddressInfo(Address: Address)
 }

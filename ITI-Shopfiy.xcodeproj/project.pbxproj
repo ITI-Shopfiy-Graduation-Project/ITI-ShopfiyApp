@@ -70,6 +70,7 @@
 		E23D188729B02A3400D4AFB2 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188629B02A3400D4AFB2 /* PaymentViewModel.swift */; };
 		E23D188929B033F700D4AFB2 /* IPaymentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188829B033F700D4AFB2 /* IPaymentDelegate.swift */; };
 		E23D188B29B03BCE00D4AFB2 /* AddressDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188A29B03BCE00D4AFB2 /* AddressDelegate.swift */; };
+		E2465CFD29B07A7200C92820 /* ShoppingCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2465CFC29B07A7200C92820 /* ShoppingCart.swift */; };
 		E269E84B29AFA32E005448EA /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269E84A29AFA32E005448EA /* Constans.swift */; };
 		E26F77DE29A4B4B600ADDC86 /* PaymentStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E26F77DD29A4B4B600ADDC86 /* PaymentStoryboard.storyboard */; };
 		E26F77E129A4C30B00ADDC86 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F77DF29A4C30B00ADDC86 /* CartTableViewCell.swift */; };
@@ -191,6 +192,7 @@
 		E23D188629B02A3400D4AFB2 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		E23D188829B033F700D4AFB2 /* IPaymentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPaymentDelegate.swift; sourceTree = "<group>"; };
 		E23D188A29B03BCE00D4AFB2 /* AddressDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDelegate.swift; sourceTree = "<group>"; };
+		E2465CFC29B07A7200C92820 /* ShoppingCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShoppingCart.swift; path = "ITI-Shopfiy/Contracts/ShoppingCart.swift"; sourceTree = SOURCE_ROOT; };
 		E269E84A29AFA32E005448EA /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constans.swift; path = "ITI-Shopfiy/Contracts/Constans.swift"; sourceTree = SOURCE_ROOT; };
 		E26F77DD29A4B4B600ADDC86 /* PaymentStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PaymentStoryboard.storyboard; sourceTree = "<group>"; };
 		E26F77DF29A4C30B00ADDC86 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				5E55DE9329AC134800EB6516 /* BrandsResults.swift */,
 				5E55DE9529AC142B00EB6516 /* Brands.swift */,
 				A775493729AE985A009E6D88 /* Customer.swift */,
+				E2465CFC29B07A7200C92820 /* ShoppingCart.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -896,6 +899,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A775494D29AF44A2009E6D88 /* UserDefaultsProtocol.swift in Sources */,
+				E2465CFD29B07A7200C92820 /* ShoppingCart.swift in Sources */,
 				A77E12BF29AC36CE00EB4C13 /* GetProductsProtocol.swift in Sources */,
 				5EF5D5DB29A9E81500E62B4D /* CategoryCollectionViewCell.swift in Sources */,
 				E2E2A20729A682E3006958CD /* AdsCollectionViewCell.swift in Sources */,

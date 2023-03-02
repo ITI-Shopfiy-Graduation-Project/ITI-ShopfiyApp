@@ -17,7 +17,9 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
     @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var mabView: MKMapView!
     private var perviousLocation : CLLocation? = nil
-    var locationManager = CLLocationManager()
+    private var userAddress : Address?
+    var addressDelegate : AddressDelegate?
+    private var locationManager = CLLocationManager()
         override func viewDidLoad() {
             super.viewDidLoad()
             mabView.delegate = self
@@ -200,8 +202,12 @@ extension AddressViewController : MKMapViewDelegate {
     {
         perviousLocation = location
         let geoCoder = CLGeocoder()
-        geoCoder.reverseGeocodeLocation(location) { places , error in
+        geoCoder.reverseGeocodeLocation(location) { [self] places , error in
             guard let place = places?.first , error == nil else {return}
+            
+            userAddress?.country = place.country
+            userAddress?.city = place.locality
+            userAddress?.address1 = place.name
             
             print("name \(place.name ?? "no name")")
             print("name \(place.country ?? "no country")")
@@ -241,4 +247,12 @@ extension AddressViewController{
         present(alert , animated: true , completion: nil)
     }
 
+}
+
+extension AddressViewController {
+    
+    func setUserAddressInfo(){
+        addressDelegate?.getAddressInfo(Address: userAddress!)
+    }
+    
 }

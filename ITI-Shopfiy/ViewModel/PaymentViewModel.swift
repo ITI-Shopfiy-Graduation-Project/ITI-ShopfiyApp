@@ -15,7 +15,7 @@ class PaymentViewModel{
         }
     }
     
-    func getPaymentRequest() -> PKPaymentRequest {
+    func getPaymentRequest() {
         self.paymentRequest = PaymentService.sharedInstance.getPayment()
     }
     
