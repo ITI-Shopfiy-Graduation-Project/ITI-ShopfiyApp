@@ -9,6 +9,7 @@ pod 'Alamofire', '~> 5.6'
       pod 'TTGSnackbar', '~> 1.11'
       pod 'Cosmos', '~> 23.0'
       pod 'DropDown', '~> 2.3.2'
+      pod 'JJFloatingActionButton'
   # Pods for ITI-Shopfiy
 
   target 'ITI-ShopfiyTests' do
