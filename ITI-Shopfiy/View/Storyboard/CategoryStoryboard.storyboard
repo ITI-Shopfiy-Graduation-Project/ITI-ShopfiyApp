@@ -148,6 +148,9 @@
                     <navigationItem key="navigationItem" title="Category" id="abN-rq-VuU">
                         <barButtonItem key="leftBarButtonItem" image="magnifyingglass" catalog="system" id="x21-qC-aRq">
                             <color key="tintColor" name="Green"/>
+                            <connections>
+                                <action selector="searchBtn:" destination="Y6W-OH-hqX" id="d6V-bQ-fsJ"/>
+                            </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="cart" catalog="system" id="4Kr-P0-r2j">

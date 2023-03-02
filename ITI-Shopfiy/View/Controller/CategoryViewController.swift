@@ -35,6 +35,17 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
   
 
+    @IBAction func searchBtn(_ sender: Any) {
+        
+//        search button here
+        
+        
+        
+    }
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
