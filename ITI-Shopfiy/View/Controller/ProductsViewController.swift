@@ -112,7 +112,7 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
     // MARK: Navigation
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let productDetialsVC = self.storyboard?.instantiateViewController(withIdentifier: "productDetails") as! ProductDetailsViewController
+        let productDetialsVC = UIStoryboard(name: "ProductDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "productDetails") as! ProductDetailsViewController
         
 //        productDetialsVC.product = productsArray?[indexPath.row]
         productDetialsVC.product_ID = productsArray?[indexPath.row].id

@@ -10,7 +10,7 @@ import Alamofire
 
 class CustomerRegister: PUT_REGISTER{
     static func registerCustomer(newCustomer: NewCustomer, completionHandler:@escaping (Data?, URLResponse? , Error?)->()){
-        guard let url = URL(string: "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/customers.json") else { return }
+        guard let url = URL(string: URLService.customers()) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let session = URLSession.shared
@@ -36,7 +36,7 @@ class CustomerRegister: PUT_REGISTER{
 
 class CustomerLogin: GET_LOGIN{
     static func login(user_name: String, password: String, completionHandler: @escaping (LoginResponse?) -> Void) {
-        guard let url = URL(string: "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/customers.json") else {
+        guard let url = URL(string: URLService.customers()) else {
             completionHandler(nil)
             return
         }

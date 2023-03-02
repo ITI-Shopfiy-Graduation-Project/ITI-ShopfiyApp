@@ -15,6 +15,8 @@ class HomeViewController: UIViewController {
 
     @IBAction func searchBtn(_ sender: Any) {
         let searchVC = UIStoryboard(name: "SearchStoryboard", bundle: nil).instantiateViewController(withIdentifier: "search") as! SearchViewController
+        searchVC.current_URL = URLService.allProducts()
+        searchVC.vendor = "All Products"
         navigationController?.pushViewController(searchVC, animated: true)
        
     }
