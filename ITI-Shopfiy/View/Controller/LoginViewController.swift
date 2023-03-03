@@ -12,7 +12,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var username_txt: UITextField!
     @IBOutlet weak var password_txt: UITextField!
     @IBOutlet weak var validationLabel: UILabel!
-    var loginVM: LoginVM?
+    var loginVM: loginProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,17 +33,13 @@ class LoginViewController: UIViewController {
     @IBAction func login_btn(_ sender: Any) {
         let userName = username_txt.text ?? ""
         let password = password_txt.text ?? ""
-        if ValdiateCustomerInfomation(UserName: userName, password: password){
-            login(userName: userName, password: password)
-        }else {
-            showAlertError(title: "Couldnot register", message: "Please try again later.")
-        }
+        
+        login(userName: userName, password: password)
         
     }
     
     
     @IBAction func signUp_btn(_ sender: Any) {
-//        let leagueSB: UIStoryboard = UIStoryboard(name: "NewStoryboard", bundle: nil)
         let signUpVC: SignUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "signup") as! SignUpViewController
         self.navigationController?.pushViewController(signUpVC, animated: true)
     }
@@ -58,42 +54,42 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController{
     
-    func ValdiateCustomerInfomation(UserName: String, password: String) -> Bool{
-            
-        var isSuccess = true
-        self.loginVM?.validateCustomer(userName: UserName, password: password, completionHandler: { message in
-            
-            switch message {
-            case "ErrorAllInfoIsNotFound":
-                isSuccess = false
-                self.showAlertError(title: "Missing Information", message: "please, enter all the required information.")
-                
-            case "ErrorPassword":
-                isSuccess = false
-                self.showAlertError(title: "Check Password", message: "please, enter password again.")
-                
-
-
-            default:
-                self.showToastMessage(message: "Congratulations", color: UIColor(named: "Green") ?? .systemGreen)
-                isSuccess = true
-            }
-        })
-        return isSuccess
-    }
+//    func ValdiateCustomerInfomation(UserName: String, password: String) -> Bool{
+//            
+//        var isSuccess = true
+//        self.loginVM?.validateCustomer(userName: UserName, password: password, completionHandler: { message in
+//            
+//            switch message {
+//            case "ErrorAllInfoIsNotFound":
+//                isSuccess = false
+//                self.showAlertError(title: "Missing Information", message: "please, enter all the required information.")
+//                
+//            case "ErrorPassword":
+//                isSuccess = false
+//                self.showAlertError(title: "Check Password", message: "please, enter password again.")
+//                
+//
+//
+//            default:
+//                isSuccess = true
+//            }
+//        })
+//        return isSuccess
+//    }
     
     
     func login(userName: String, password: String){
         loginVM?.login(userName: userName, password: password, completionHandler: { Customer in
             if Customer != nil {
                 UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: true)
+                self.showToastMessage(message: "Congratulations", color: UIColor(named: "Green") ?? .systemGreen)
                 print("customer logged in successfully")
                 //Navigation
                 let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
                 self.navigationController?.pushViewController(homeVC, animated: true)
             }else{
                 UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: false)
-                self.showAlertError(title: "failed to login", message: "please check your email or password")
+                self.showAlertError(title: "failed to login", message: "please check your userName or Password")
                 print("failed to login")
             }
         })

@@ -23,17 +23,6 @@ class CategoryViewController: UIViewController {
     var product :[Products] = []
     var AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json"
     var id : Int?
-   
-    func search(){
-        let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-        productsVC.vendor = "All Products"
-//if toolbar is all & switch
-//        searchVC.current_URL = URLService.customCategory(category_ID: <#T##Int#>)
-        productsVC.url = URLService.allcategories()
-        productsVC.vendor = "All Categories"
-        navigationController?.pushViewController(productsVC, animated: true)
-    }
-    
     
     @IBAction func cartBtn(_ sender: Any) {
         let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
@@ -50,13 +39,30 @@ class CategoryViewController: UIViewController {
     @IBAction func searchBtn(_ sender: Any) {
         
 //        search button here
+        let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
         
+        switch self.AllProductsUrl {
+        case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787230489/products.json":
+            productsVC.url = AllProductsUrl
+            productsVC.vendor = "Men"
+        case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787263257/products.json":
+            productsVC.url = AllProductsUrl
+            productsVC.vendor = "Women"
+        case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787296025/products.json":
+            productsVC.url = AllProductsUrl
+            productsVC.vendor = "Kids"
+        case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787328793/products.json":
+            productsVC.url = AllProductsUrl
+            productsVC.vendor = "Sale"
+        default:
+            productsVC.url = AllProductsUrl
+            productsVC.vendor = "All Categories"
+        }
+
         
+        navigationController?.pushViewController(productsVC, animated: true)
         
     }
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +84,11 @@ class CategoryViewController: UIViewController {
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.CategoryCollectionView.reloadData()
+    }
+    
     func renderProducts(){
         DispatchQueue.main.async {
             self.product = self.CategoryModel?.productsResults ?? []
@@ -96,6 +107,13 @@ extension CategoryViewController :UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return product.count
        
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let productDetialsVC = UIStoryboard(name: "ProductDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "productDetails") as! ProductDetailsViewController
+        
+        productDetialsVC.product_ID = product[indexPath.row].id
+        
+        self.navigationController?.pushViewController(productDetialsVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
