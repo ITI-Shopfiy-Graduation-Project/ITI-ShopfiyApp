@@ -181,6 +181,14 @@
             </objects>
             <point key="canvasLocation" x="973.28244274809151" y="-23.239436619718312"/>
         </scene>
+        <!--productDetails-->
+        <scene sceneID="WY4-av-Jsp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ProductDetailsStoryboard" referencedIdentifier="productDetails" id="qcY-T0-k5S" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5oe-FK-lei" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1831" y="-70"/>
+        </scene>
         <!--Category-->
         <scene sceneID="aKw-0w-gHz">
             <objects>

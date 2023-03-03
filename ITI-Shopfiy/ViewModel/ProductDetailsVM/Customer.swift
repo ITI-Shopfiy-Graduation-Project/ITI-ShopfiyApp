@@ -17,7 +17,7 @@ struct Customer: Codable {
     var id: Int?
     var verified_email: Bool?
     var addresses: [Address]?
-    var default_address: Address?
+//    var default_address: Address?
     
 }
 
@@ -25,7 +25,7 @@ struct Address: Codable {
     var address1, city, province, phone: String?
     var zip, first_name, country: String?
     var id, customer_id: Int?
-    var default_add = true
+//    var default_add = true
 }
 
 struct PutAddress: Codable {

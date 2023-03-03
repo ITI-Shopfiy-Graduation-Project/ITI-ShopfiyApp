@@ -115,7 +115,6 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetialsVC = UIStoryboard(name: "ProductDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "productDetails") as! ProductDetailsViewController
         
-//        productDetialsVC.product = productsArray?[indexPath.row]
         productDetialsVC.product_ID = productsArray?[indexPath.row].id
         
         self.navigationController?.pushViewController(productDetialsVC, animated: true)

@@ -20,7 +20,9 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet weak var phoneNumber_txt: UITextField!
     @IBOutlet weak var createAccount_btn: UIButton!
-    var registerVM: RegisterVM?
+    var registerVM: registerProtocol?
+    var adresses: [Address]? = []
+    var chosenAddress = Address()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,9 @@ class SignUpViewController: UIViewController {
     
     
     @IBAction func chooseOnMap(_ sender: UIButton) {
+        let addressVC = UIStoryboard(name: "AddressDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "address") as! AddressViewController
+        addressVC.addressDelegate = self
+        navigationController?.pushViewController(addressVC, animated: true)
         
     }
     
@@ -48,9 +53,13 @@ class SignUpViewController: UIViewController {
         guard let password = password_txt.text else {return}
         guard let confirmPassword = confirmPassword_txt.text else {return}
         guard let phone = phoneNumber_txt.text else {return}
-        guard let address = currentAddress_txt.text else {return}
-        if ValdiateCustomerInfomation(UserName: name, password: password, confirmPassword: confirmPassword, userPhone: phone, email: email, userAddress: address){
-            register(UserName: name, password: password, confirmPassword: confirmPassword, UserPhone: phone, email: email, UserAddress: address)
+        self.chosenAddress.address1 = currentAddress_txt.text
+        self.adresses?.removeAll()
+        self.adresses?.append(chosenAddress)
+        
+//        guard let address = currentAddress_txt.text else {return}
+        if ValdiateCustomerInfomation(UserName: name, password: password, confirmPassword: confirmPassword, userPhone: phone, email: email, userAddress: chosenAddress){
+            register(UserName: name, password: password, confirmPassword: confirmPassword, UserPhone: phone, email: email, UserAddress: chosenAddress)
         } else {
             showAlertError(title: "Couldnot register", message: "Please try again later.")
         }
@@ -60,9 +69,17 @@ class SignUpViewController: UIViewController {
 
 }
 
+extension SignUpViewController: AddressDelegate{
+    func getAddressInfo(Address userAddress: Address) {
+        self.adresses?.removeAll()
+        self.adresses?.append(userAddress)
+        self.currentAddress_txt.text = userAddress.address1
+    }
+}
+
 extension SignUpViewController {
     
-    func ValdiateCustomerInfomation(UserName: String, password: String, confirmPassword: String, userPhone: String, email: String, userAddress: String) -> Bool{
+    func ValdiateCustomerInfomation(UserName: String, password: String, confirmPassword: String, userPhone: String, email: String, userAddress: Address) -> Bool{
             
         var isSuccess = true
         self.registerVM?.validateCustomer(userName: UserName, password: password, confirmPassword: confirmPassword, userPhone: userPhone, email: email, userAddress: userAddress, completionHandler: { message in
@@ -75,6 +92,10 @@ extension SignUpViewController {
             case "ErrorPassword":
                 isSuccess = false
                 self.showAlertError(title: "Check Password", message: "please, enter password again.")
+                
+            case "InvalidUserName":
+                isSuccess = false
+                self.showAlertError(title: "Invalid User Name", message: "please, try another User Name.")
                 
             case "ErrorEmail":
                 isSuccess = false
@@ -89,9 +110,9 @@ extension SignUpViewController {
         return isSuccess
     }
     
-    func register(UserName: String, password: String, confirmPassword: String, UserPhone: String, email: String, UserAddress: String){
+    func register(UserName: String, password: String, confirmPassword: String, UserPhone: String, email: String, UserAddress: Address){
         
-        let customer = Customer(first_name: UserName,phone: UserPhone, tags: password, email: email, verified_email: true)
+        let customer = Customer(first_name: UserName,phone: UserPhone, tags: password, email: email, addresses: self.adresses)
         let newCustomer = NewCustomer(customer: customer)
         self.registerVM?.createNewCustomer(newCustomer: newCustomer) { data, response, error in
                     
@@ -102,7 +123,7 @@ extension SignUpViewController {
                 return
             }
             
-            guard response?.statusCode != 422 else {
+            guard response?.statusCode == 422 else {
                 DispatchQueue.main.async {
                     self.showAlertError(title: "Couldnot register", message: "Please, try another email.")
                 }
@@ -112,9 +133,13 @@ extension SignUpViewController {
             print("registered successfully")
             
             DispatchQueue.main.async {
-                let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
-                loginVC.modalPresentationStyle = .fullScreen
-                self.present(loginVC, animated: true, completion: nil)
+                let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
+                
+                self.navigationController?.pushViewController(homeVC, animated: true)
+//                let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+//
+//                loginVC.modalPresentationStyle = .fullScreen
+//                self.present(loginVC, animated: true, completion: nil)
             }
         }
             

@@ -18,6 +18,7 @@ class CustomerRegister: PUT_REGISTER{
         
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: newCustomer.asDictionary(), options: .prettyPrinted)
+            print("fady samehh")
         } catch let error {
             print(error.localizedDescription)
         }
@@ -35,7 +36,7 @@ class CustomerRegister: PUT_REGISTER{
 
 
 class CustomerLogin: GET_LOGIN{
-    static func login(user_name: String, password: String, completionHandler: @escaping (LoginResponse?) -> Void) {
+    static func login(completionHandler: @escaping (LoginResponse?) -> Void) {
         guard let url = URL(string: URLService.customers()) else {
             completionHandler(nil)
             return
