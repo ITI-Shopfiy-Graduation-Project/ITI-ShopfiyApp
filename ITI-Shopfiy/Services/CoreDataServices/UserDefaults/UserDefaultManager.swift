@@ -63,6 +63,14 @@ class UserDefaultsManager: UserDefaultProtocol{
         return UserDefaults.standard.string(forKey: "User_Address")
     }
     
+    func setUserAddressID(userAddressID: Int?){
+        UserDefaults.standard.set(userAddressID, forKey: "User_Address_ID")
+    }
+    
+    func getUserAddressID()-> Int?{
+        return UserDefaults.standard.integer(forKey: "User_Address_ID")
+    }
+    
     func setUserStatus(userIsLogged: Bool){
         UserDefaults.standard.set(userIsLogged, forKey: "User_Status")
     }

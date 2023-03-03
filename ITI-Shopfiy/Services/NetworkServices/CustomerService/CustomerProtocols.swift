@@ -13,5 +13,5 @@ protocol PUT_REGISTER{
 }
 
 protocol GET_LOGIN{
-    static func login(user_name: String, password: String, completionHandler: @escaping (LoginResponse?) -> Void)
+    static func login(completionHandler: @escaping (LoginResponse?) -> Void)
 }
