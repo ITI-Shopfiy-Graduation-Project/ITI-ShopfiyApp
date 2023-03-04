@@ -25,7 +25,7 @@ struct Address: Codable {
     var address1, city, province, phone: String?
     var zip, first_name, country: String?
     var id, customer_id: Int?
-//    var default_add = true
+    //var default_add = true
 }
 
 struct PutAddress: Codable {
@@ -41,7 +41,9 @@ struct CustomerAddress: Codable {
 }
 
 
-
+struct PostAddress : Codable {
+    var customer_address : Address?
+}
 
 
 //struct UpdateAddress: Codable {

@@ -34,4 +34,12 @@ struct URLService{
         return baseUrl + "products.json?collection_id=\(category_ID)"
     }
     
+    static func postAddress(userID : Int) -> String{
+        return baseUrl + "customers/\(userID)/addresses.json"
+    }
+    
+    static func allUserAddress(userID: Int) -> String
+    {
+        return baseUrl + "customers/\(userID)/addresses.json"
+    }
 }

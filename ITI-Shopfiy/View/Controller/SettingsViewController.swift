@@ -23,6 +23,8 @@ class SettingsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
 
+    @IBAction func logout_btn(_ sender: Any) {
+    }
     /*
     // MARK: - Navigation
 
