@@ -11,9 +11,12 @@ import CoreLocation
 import DropDown
 
 class AddressViewController: UIViewController , CLLocationManagerDelegate {
-   
+    @IBOutlet weak var addressHisoryTable: UITableView!
+    var addressHistoryArray: [Address] = [Address()]
+    var address : Address = Address()
+    let addressVM = AddressViewModel()
     let dropDown = DropDown()
-    var addressArray = ["cairo" , "belbias" , "new capital" , "octaber" , "ميدان التحرير"]
+    var addressArray: [String] = []
     @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var mabView: MKMapView!
     private var perviousLocation : CLLocation? = nil
@@ -25,6 +28,8 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
             mabView.delegate = self
             configureLocation()
             configureAuthority()
+           // getAllAddresses()
+            renderView()
             dropDown.anchorView = searchTF
             dropDown.dataSource = addressArray
             dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
@@ -37,6 +42,9 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
             }
         }
     
+    @IBAction func saveAddress_btn(_ sender: Any) {
+        postAddress()
+    }
     
     func configureLocation(){
         locationManager.delegate = self
@@ -215,7 +223,10 @@ extension AddressViewController : MKMapViewDelegate {
             print("name \(String(describing: place.location?.coordinate.latitude) )")
             print("name \(place.postalCode ?? "no postal code")")
             print("name \(place.locality ?? "no locality")")
-            
+            address.address1 = place.name
+            address.customer_id = 6860199723289
+            address.city = place.locality
+            address.country = place.country
         }
     }
 }
@@ -229,7 +240,7 @@ extension AddressViewController{
             if type == "locationService"
             {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-               // UIApplication.shared.open(URL(string: "App-prefs:Privacy&path=LOCATION")!)
+              
 
             }
             else if type == "authSettings" {
@@ -253,6 +264,106 @@ extension AddressViewController {
     
     func setUserAddressInfo(){
         addressDelegate?.getAddressInfo(Address: userAddress!)
+    }
+}
+
+extension AddressViewController {
+    func renderView(){
+      
+            let indicator = UIActivityIndicatorView(style: .large)
+            indicator.center = self.view.center
+            self.view.addSubview(indicator)
+            indicator.startAnimating()
+            self.addressVM.getAllUserAddress(userId:6860199723289)
+        DispatchQueue.main.async {
+            self.addressHistoryArray = self.addressVM.addressList ?? [Address()]
+            self.addressHisoryTable.reloadData()
+            indicator.stopAnimating()
+        }
+    }
+  /*  func getAllAddresses(){
+        
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.center = view.center
+        view.addSubview(indicator)
+        indicator.startAnimating()
+        
+        self.addressVM.getAllUserAddress(userId:6860199723289)
+        self.addressVM.bindingAddress = {
+            self.renderView()
+            indicator.stopAnimating()
+        }
+    }
+    */
+    func postAddress(){
+        let customerAddress : PostAddress = PostAddress(customer_address: address)
+        self.addressVM.postNewAddress(userAddress: customerAddress) { data, response, error in
+                guard error == nil else {
+                    DispatchQueue.main.async {
+                        print ("Address Error \n \(error?.localizedDescription ?? "")" )
+                    }
+                    return
+                }
+                
+            guard response?.statusCode ?? 0 >= 200 && response?.statusCode ?? 0 < 300   else {
+                    DispatchQueue.main.async {
+                        print ("Address Response \n \(response ?? HTTPURLResponse())" )
+
+                    }
+                    return
+                }
+            
+                print("address was added successfully")
+                
+                DispatchQueue.main.async {
+                    let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+                    loginVC.modalPresentationStyle = .fullScreen
+                    self.present(loginVC, animated: true, completion: nil)
+                }
+            }
+    }
+}
+
+extension AddressViewController : UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView : UIView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
+    }
+    
+}
+
+extension AddressViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return addressHistoryArray.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: AddressHistoryTableViewCell = tableView.dequeueReusableCell(withIdentifier: "addressCell", for:indexPath) as? AddressHistoryTableViewCell ?? AddressHistoryTableViewCell()
+        addressArray.append(addressHistoryArray[indexPath.row].address1 ?? "")
+        cell.street.text = addressHistoryArray[indexPath.row].address1
+        cell.city.text = addressHistoryArray[indexPath.row].city
+        cell.country.text = addressHistoryArray[indexPath.row].country
+    return cell
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Address History"
     }
     
 }
