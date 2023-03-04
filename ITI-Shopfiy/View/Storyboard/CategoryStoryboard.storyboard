@@ -198,6 +198,14 @@
             </objects>
             <point key="canvasLocation" x="1831" y="-70"/>
         </scene>
+        <!--login-->
+        <scene sceneID="6rB-QY-pSX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="LoginStoryboard" referencedIdentifier="login" id="wLf-EY-rVc" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0SF-5M-Qq4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1867" y="105"/>
+        </scene>
         <!--Category-->
         <scene sceneID="aKw-0w-gHz">
             <objects>

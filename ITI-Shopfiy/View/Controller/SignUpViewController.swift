@@ -26,6 +26,7 @@ class SignUpViewController: UIViewController {
         
         registerVM = RegisterVM()
         // Do any additional setup after loading the view.
+        navigationItem.title = "Shopify App"
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
 

@@ -12,6 +12,16 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var username_txt: UITextField!
     @IBOutlet weak var password_txt: UITextField!
     @IBOutlet weak var validationLabel: UILabel!
+    @IBOutlet weak var pagesControl: UIPageControl!
+    @IBOutlet weak var adsCollectionView: UICollectionView!{
+        didSet{
+            adsCollectionView.delegate = self
+            adsCollectionView.dataSource = self
+        }
+    }
+    var staticimgs = [UIImage(named: "ad1")!,UIImage(named: "ad2")!,UIImage(named: "ad3")!]
+    var timer : Timer?
+    var currentCellIndex = 0
     var loginVM: loginProtocol?
     
     override func viewDidLoad() {
@@ -19,7 +29,12 @@ class LoginViewController: UIViewController {
 
         loginVM = LoginVM()
         // Do any additional setup after loading the view.
-        
+        let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
+        adsCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
+        starttimer()
+        pagesControl.numberOfPages  = staticimgs.count
+        navigationItem.title = "Shopify App"
+        adsCollectionView.reloadData()
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
 
@@ -98,4 +113,61 @@ extension LoginViewController{
         }
     }
     
+}
+
+extension LoginViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return staticimgs.count
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+            return 1
+    }
+ 
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! AdsCollectionViewCell
+        cell.cellImage.image =  staticimgs[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+            self.pagesControl.currentPage = indexPath.row
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
+  
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+            return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+
+}
+
+extension LoginViewController{
+    
+    func starttimer(){
+        
+        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(movetoindex), userInfo: nil, repeats: true)
+        
+        
+    }
+    @objc func movetoindex () {
+        if currentCellIndex < staticimgs.count - 1 {
+            currentCellIndex += 1
+        }
+        else{
+            currentCellIndex = 0
+        }
+    
+        adsCollectionView.scrollToItem(at: IndexPath(item: currentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
+        pagesControl.currentPage = currentCellIndex
+        
+        
+    }
 }

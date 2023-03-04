@@ -273,11 +273,11 @@ extension ProductsViewController{
     func showLoginAlert(Title: String, Message: String) {
         let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.default, handler: { [self] action in
+        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
             let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
             self.navigationController?.pushViewController(loginVC, animated: true)
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
     }
