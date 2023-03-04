@@ -92,6 +92,9 @@
 		E29FA94C29A30B1500CE0786 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA94B29A30B1500CE0786 /* CartViewController.swift */; };
 		E29FA94E29A30E3500CE0786 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E29FA94D29A30E3500CE0786 /* SettingsStoryboard.storyboard */; };
 		E29FA95029A310FD00CE0786 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA94F29A310FD00CE0786 /* SettingsViewController.swift */; };
+		E2B49FA329B25861001F4952 /* AddressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B49FA229B25861001F4952 /* AddressProtocol.swift */; };
+		E2B49FA529B25900001F4952 /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B49FA429B25900001F4952 /* AddressViewModel.swift */; };
+		E2B49FA929B2D2F6001F4952 /* AddressHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B49FA829B2D2F6001F4952 /* AddressHistoryTableViewCell.swift */; };
 		E2C45E4829AEFAFA00840AC2 /* DataCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C45E4729AEFAFA00840AC2 /* DataCaching.swift */; };
 		E2C45E4A29AEFBAA00840AC2 /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C45E4929AEFBAA00840AC2 /* LocalDataManager.swift */; };
 		E2C45E4C29AEFC1A00840AC2 /* IDataCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C45E4B29AEFC1A00840AC2 /* IDataCaching.swift */; };
@@ -103,6 +106,8 @@
 		E2DA33EF29A53DDB00FD7DCA /* AdsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2DA33EE29A53DDB00FD7DCA /* AdsCollectionViewCell.xib */; };
 		E2E2A20729A682E3006958CD /* AdsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2A20629A682E3006958CD /* AdsCollectionViewCell.swift */; };
 		E2E2A20929A68665006958CD /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2A20829A68665006958CD /* AboutUsViewController.swift */; };
+		E2E308FA29B17C09009B9A7C /* AddressNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E308F929B17C09009B9A7C /* AddressNetwork.swift */; };
+		E2E308FC29B17C41009B9A7C /* IAddressNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E308FB29B17C41009B9A7C /* IAddressNetwork.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +224,9 @@
 		E29FA94B29A30B1500CE0786 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		E29FA94D29A30E3500CE0786 /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsStoryboard.storyboard; sourceTree = "<group>"; };
 		E29FA94F29A310FD00CE0786 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		E2B49FA229B25861001F4952 /* AddressProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressProtocol.swift; sourceTree = "<group>"; };
+		E2B49FA429B25900001F4952 /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
+		E2B49FA829B2D2F6001F4952 /* AddressHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		E2C45E4729AEFAFA00840AC2 /* DataCaching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCaching.swift; sourceTree = "<group>"; };
 		E2C45E4929AEFBAA00840AC2 /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		E2C45E4B29AEFC1A00840AC2 /* IDataCaching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDataCaching.swift; sourceTree = "<group>"; };
@@ -230,6 +238,8 @@
 		E2DA33EE29A53DDB00FD7DCA /* AdsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsCollectionViewCell.xib; sourceTree = "<group>"; };
 		E2E2A20629A682E3006958CD /* AdsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCollectionViewCell.swift; sourceTree = "<group>"; };
 		E2E2A20829A68665006958CD /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
+		E2E308F929B17C09009B9A7C /* AddressNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressNetwork.swift; sourceTree = "<group>"; };
+		E2E308FB29B17C41009B9A7C /* IAddressNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAddressNetwork.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +325,8 @@
 				E23D188829B033F700D4AFB2 /* IPaymentDelegate.swift */,
 				E23D188A29B03BCE00D4AFB2 /* AddressDelegate.swift */,
 				E25F817429B0B50000A5839A /* CounterProtocol.swift */,
+				E2E308FB29B17C41009B9A7C /* IAddressNetwork.swift */,
+				E2B49FA229B25861001F4952 /* AddressProtocol.swift */,
 			);
 			path = Contracts;
 			sourceTree = "<group>";
@@ -485,6 +497,7 @@
 				5E55DE9B29AC196B00EB6516 /* BrandsViewModel.swift */,
 				5E55DE9D29AC1BFE00EB6516 /* getBrandsProtocol.swift */,
 				E23D188629B02A3400D4AFB2 /* PaymentViewModel.swift */,
+				E2B49FA429B25900001F4952 /* AddressViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -602,6 +615,7 @@
 				5E55DE9729AC155500EB6516 /* BrandsNetwork.swift */,
 				5E55DE9929AC15F700EB6516 /* BrandsProtocol.swift */,
 				A775493F29AE9DEE009E6D88 /* CustomerService */,
+				E2E308F929B17C09009B9A7C /* AddressNetwork.swift */,
 			);
 			path = NetworkServices;
 			sourceTree = "<group>";
@@ -623,6 +637,7 @@
 				5EA83B8129A5920A0018E90E /* BrandsCollectionViewCell.swift */,
 				5EF5D5DA29A9E81500E62B4D /* CategoryCollectionViewCell.swift */,
 				5E55DE8129AA192000EB6516 /* OrdersTableViewCell.swift */,
+				E2B49FA829B2D2F6001F4952 /* AddressHistoryTableViewCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -914,6 +929,7 @@
 				E23D188529B025E200D4AFB2 /* PaymentServices.swift in Sources */,
 				5E55DE8C29AAF9C600EB6516 /* CategoryViewModel.swift in Sources */,
 				5E55DE9A29AC15F700EB6516 /* BrandsProtocol.swift in Sources */,
+				E2E308FA29B17C09009B9A7C /* AddressNetwork.swift in Sources */,
 				5E55DE8629AAE3DB00EB6516 /* variants.swift in Sources */,
 				A736054729A6B33600D99935 /* ProductDetailsViewController.swift in Sources */,
 				E23D188929B033F700D4AFB2 /* IPaymentDelegate.swift in Sources */,
@@ -926,6 +942,7 @@
 				5E55DE9829AC155500EB6516 /* BrandsNetwork.swift in Sources */,
 				5E55DE8029AA18F300EB6516 /* OrdersViewController.swift in Sources */,
 				5E55DE9629AC142B00EB6516 /* Brands.swift in Sources */,
+				E2B49FA329B25861001F4952 /* AddressProtocol.swift in Sources */,
 				E29FA8FD29A2AEE100CE0786 /* AppDelegate.swift in Sources */,
 				A78F10F229AAD82300201272 /* MeLogedView.swift in Sources */,
 				5E55DE9429AC134800EB6516 /* BrandsResults.swift in Sources */,
@@ -941,6 +958,7 @@
 				5E55DE8E29AAFA3B00EB6516 /* ProductsProtocol.swift in Sources */,
 				E2C45E4C29AEFC1A00840AC2 /* IDataCaching.swift in Sources */,
 				5E55DE8429AAE1CE00EB6516 /* Products.swift in Sources */,
+				E2B49FA529B25900001F4952 /* AddressViewModel.swift in Sources */,
 				E29FA8FF29A2AEE100CE0786 /* SceneDelegate.swift in Sources */,
 				A775493A29AE999D009E6D88 /* URLService.swift in Sources */,
 				A74C467C29AD5D8E00266614 /* ProductDetailsViewModel.swift in Sources */,
@@ -958,8 +976,10 @@
 				A759787029AFD52F002D7888 /* GetLoginProtocol.swift in Sources */,
 				A759787229AFD540002D7888 /* LoginViewModel.swift in Sources */,
 				E26F77E129A4C30B00ADDC86 /* CartTableViewCell.swift in Sources */,
+				E2E308FC29B17C41009B9A7C /* IAddressNetwork.swift in Sources */,
 				E29FA94729A2D6B400CE0786 /* HomeViewController.swift in Sources */,
 				5EA83B8229A5920A0018E90E /* BrandsCollectionViewCell.swift in Sources */,
+				E2B49FA929B2D2F6001F4952 /* AddressHistoryTableViewCell.swift in Sources */,
 				5E55DE8A29AAF9A300EB6516 /* NetworkService.swift in Sources */,
 				A76AA54C29B2BDDA00F9373F /* FavoritesViewModel.swift in Sources */,
 				5E55DE9E29AC1BFE00EB6516 /* getBrandsProtocol.swift in Sources */,

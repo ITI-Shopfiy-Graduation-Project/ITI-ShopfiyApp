@@ -73,7 +73,9 @@ class CustomerAddress: Codable {
 }
 
 
-
+struct PostAddress : Codable {
+    var customer_address : Address?
+}
 
 
 //struct UpdateAddress: Codable {
