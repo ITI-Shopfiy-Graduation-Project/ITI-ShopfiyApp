@@ -13,14 +13,14 @@ class DataCaching {
     static let sharedInstance = DataCaching()
     private init(){}
     
-    func fetchSavedLeagues(appDelegate : AppDelegate) -> [Products] {
+    func fetchSavedProducts(appDelegate : AppDelegate) -> [Products] {
         var productArray: [Products] = []
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.ProductEntity)
         
         do {
-            let fetchedLeagueArray = try managedContext.fetch(fetchRequest)
-            for item in (fetchedLeagueArray)
+            let fetchedProductArray = try managedContext.fetch(fetchRequest)
+            for item in (fetchedProductArray)
             {
                 let proudct = Products()
                 proudct.id = item.value(forKey:"product_id") as? Int
@@ -36,7 +36,7 @@ class DataCaching {
         return productArray
     }
     
-    func deleteLeagueFromFavourites(appDelegate: AppDelegate, product_id: Int , complition : (Error?) -> Void?){
+    func deleteProductFromFavourites(appDelegate: AppDelegate, product_id: Int , complition : (Error?) -> Void?){
         let managedContext = appDelegate.persistentContainer.viewContext
         do{
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.ProductEntity)
@@ -55,12 +55,12 @@ class DataCaching {
         }
     }
     
-    func saveLeagueToFavourites(product : Products, appDelegate : AppDelegate) -> Void
+    func saveProductToFavourites(product : Products, appDelegate : AppDelegate) -> Void
     {
         let managedContext = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: Constants.ProductEntity, in: managedContext)
         let league = NSManagedObject(entity: entity!, insertInto: managedContext)
-        league.setValue(product.id ?? 0, forKey: "league_id")
+        league.setValue(product.id ?? 0, forKey: "product_id")
         league.setValue(product.title , forKey: "title")
         league.setValue(product.image?.src , forKey: "src")
         league.setValue(product.user_id ?? 0, forKey: "user_id")
@@ -73,12 +73,12 @@ class DataCaching {
             print(error.localizedDescription)
         }
     }
-    func isFavouriteLeague (productID: Int, appDelegate : AppDelegate) -> Bool
+    func isFavouriteProduct (productID: Int, appDelegate : AppDelegate) -> Bool
     {
         var state : Bool = false
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.ProductEntity)
-        let pred = NSPredicate(format: "league_id == %i", productID )
+        let pred = NSPredicate(format: "product_id == %i", productID )
         fetchRequest.predicate = pred
             do{
                 let fetchedLeagueArray = try managedContext.fetch(fetchRequest)
