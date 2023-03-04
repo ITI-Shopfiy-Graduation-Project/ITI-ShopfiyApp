@@ -24,11 +24,14 @@ struct URLService{
     }
     
     static func allProducts() -> String {
-        return baseUrl + "products.json"
+        return baseUrl + "products.json?"
     }
     
     static func customCategory(category_ID: Int) -> String {
         return baseUrl + "collections/\(category_ID)/products.json"
+    }
+   static func mainCategory(category_ID: Int) -> String {
+        return baseUrl + "products.json?collection_id=\(category_ID)"
     }
     
 }
