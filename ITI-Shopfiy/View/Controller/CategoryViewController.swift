@@ -21,19 +21,11 @@ class CategoryViewController: UIViewController {
     let actionButton = JJFloatingActionButton()
     var CategoryModel: CategoryViewModel?
     var product :[Products] = []
-    var AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json"
-    var id : Int?
-   
-    func search(){
-        let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-        productsVC.vendor = "All Products"
-//if toolbar is all & switch
-//        searchVC.current_URL = URLService.customCategory(category_ID: <#T##Int#>)
-        productsVC.url = URLService.allcategories()
-        productsVC.vendor = "All Categories"
-        navigationController?.pushViewController(productsVC, animated: true)
-    }
     
+    
+    var AllProductsUrl = URLService.allProducts()
+       
+    var id : Int?
     
     @IBAction func cartBtn(_ sender: Any) {
         let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
@@ -50,13 +42,30 @@ class CategoryViewController: UIViewController {
     @IBAction func searchBtn(_ sender: Any) {
         
 //        search button here
+        let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
         
+        switch self.AllProductsUrl {
+        case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787230489/products.json":
+            productsVC.url = AllProductsUrl
+            productsVC.vendor = "Men"
+        case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787263257/products.json":
+            productsVC.url = AllProductsUrl
+            productsVC.vendor = "Women"
+        case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787296025/products.json":
+            productsVC.url = AllProductsUrl
+            productsVC.vendor = "Kids"
+        case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787328793/products.json":
+            productsVC.url = AllProductsUrl
+            productsVC.vendor = "Sale"
+        default:
+            productsVC.url = AllProductsUrl
+            productsVC.vendor = "All Categories"
+        }
+
         
+        navigationController?.pushViewController(productsVC, animated: true)
         
     }
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,21 +81,33 @@ class CategoryViewController: UIViewController {
         CategoryModel?.bindingProducts = {()in
         self.renderProducts()
             self.btn()
+         
              
         }
-        
+     
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.CategoryCollectionView.reloadData()
+    }
+    
     func renderProducts(){
         DispatchQueue.main.async {
             self.product = self.CategoryModel?.productsResults ?? []
             self.CategoryCollectionView.reloadData()
             self.indicator.stopAnimating()
-          
+            if self.product.count == 0 {
+            self.CategoryCollectionView.isHidden = true
+            }
+            else {
+                self.CategoryCollectionView.isHidden = false
+                
+            }
+            
+            }
      
-        }
-        
     }
 }
 extension CategoryViewController:UICollectionViewDelegate {
@@ -97,11 +118,18 @@ extension CategoryViewController :UICollectionViewDataSource{
         return product.count
        
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let productDetialsVC = UIStoryboard(name: "ProductDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "productDetails") as! ProductDetailsViewController
+        
+        productDetialsVC.product_ID = product[indexPath.row].id
+        
+        self.navigationController?.pushViewController(productDetialsVC, animated: true)
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for:indexPath)as! CategoryCollectionViewCell
-        cell.layer.borderColor = UIColor.systemGray.cgColor
-        cell.layer.borderWidth = 0
+        cell.layer.borderColor = UIColor.white.cgColor
+        cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 0
         cell.borderColor = UIColor.clear
         cell.productImage.layer.cornerRadius = 35
@@ -110,8 +138,8 @@ extension CategoryViewController :UICollectionViewDataSource{
         cell.productImage.layer.masksToBounds = true
         cell.productImage.layer.backgroundColor = UIColor.white.cgColor
         cell.productImage.layer.shadowColor =  UIColor.gray.cgColor
-        cell.productImage.layer.shadowRadius = 100.0
-       
+        cell.productImage.layer.shadowRadius = 100
+
         
         let productt = self.product [indexPath.row]
         let productimg = URL(string:productt.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
@@ -158,7 +186,9 @@ extension CategoryViewController {
         CategoryModel?.getProductsFromCategory()
         CategoryModel?.bindingProducts = {()in
         self.renderProducts()
+        
         }
+        
     }
     
     
@@ -186,22 +216,24 @@ extension CategoryViewController {
     @IBAction func allCategory(_ sender: UIBarButtonItem) {
         toolbarBtnClr()
         AllBtn.tintColor = UIColor(named: "Green")
-        AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json"
+        AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json?"
       render()
     
     }
 
 @IBAction func MenCategory(_ sender: UIBarButtonItem) {
         toolbarBtnClr()
+    AllProductsUrl = URLService.mainCategory(category_ID:437787230489)
         MenCtegory.tintColor = UIColor(named: "Green")
-        AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787230489/products.json"
+//        AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json?collection_id=437787230489"
       render()
 
     }
 @IBAction func WomenCategory(_ sender: UIBarButtonItem) {
         toolbarBtnClr()
         WomenCategory.tintColor = UIColor(named: "Green")
-        AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787263257/products.json"
+    AllProductsUrl = URLService.mainCategory(category_ID: 437787263257)
+//        AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json?collection_id=437787263257"
          render()
     
 
@@ -209,7 +241,8 @@ extension CategoryViewController {
 @IBAction func KidCategory(_ sender: UIBarButtonItem) {
             toolbarBtnClr()
             kidCategory.tintColor = UIColor(named: "Green")
-            AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787296025/products.json"
+    AllProductsUrl = URLService.mainCategory(category_ID: 437787296025)
+//            AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json?collection_id=437787296025"
              render()
         
 
@@ -217,7 +250,8 @@ extension CategoryViewController {
 @IBAction func SaleCategory(_ sender: UIBarButtonItem) {
                 toolbarBtnClr()
     SaleCategory.tintColor = UIColor(named: "Green")
-                AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787328793/products.json"
+    AllProductsUrl = URLService.mainCategory(category_ID:437787328793)
+//                AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json?collection_id=437787328793"
                  render()
             
 
@@ -235,11 +269,19 @@ extension CategoryViewController {
         
         actionButton.addItem(title: "", image: UIImage(named: "fb1")?.withRenderingMode(.alwaysTemplate)) { item in
            
+            self.AllProductsUrl =  self.AllProductsUrl + "&product_type=SHOES"
+            
+            self.render()
+           
       }
         actionButton.addItem(title: "", image: UIImage(named: "fb2")?.withRenderingMode(.alwaysTemplate)) { item in
+            self.AllProductsUrl =  self.AllProductsUrl + "&product_type=T-SHIRTS"
+            self.render()
           
         }
         actionButton.addItem(title: "", image: UIImage(named: "fb3")?.withRenderingMode(.alwaysTemplate)) { item in
+            self.AllProductsUrl =  self.AllProductsUrl + "&product_type=ACCESSORIES"
+            self.render()
        
         }
         

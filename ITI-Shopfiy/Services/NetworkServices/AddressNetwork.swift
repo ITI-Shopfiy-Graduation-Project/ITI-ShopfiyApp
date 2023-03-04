@@ -14,7 +14,7 @@ class AddressNetwork : IAdressNetwork{
     private init(){}
     
     func postAddress(userAddress: PostAddress, completionHandler:@escaping (Data?, URLResponse? , Error?)->()){
-        guard let url = URL(string: URLService.postAddress(userID: userAddress.customer_address.customer_id ?? 1)) else { return }
+        guard let url = URL(string: URLService.postAddress(userID: userAddress.customer_address?.customer_id ?? 1)) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let session = URLSession.shared

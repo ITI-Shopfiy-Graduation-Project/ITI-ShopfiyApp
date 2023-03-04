@@ -316,9 +316,7 @@ extension AddressViewController {
                 print("address was added successfully")
                 
                 DispatchQueue.main.async {
-                    let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
-                    loginVC.modalPresentationStyle = .fullScreen
-                    self.present(loginVC, animated: true, completion: nil)
+                    print("Address Saved")
                 }
             }
     }

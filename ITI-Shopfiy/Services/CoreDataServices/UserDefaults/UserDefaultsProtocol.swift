@@ -18,6 +18,8 @@ protocol UserDefaultProtocol{
     func getUserPhone()-> String?
     func setUserAddress(userAddress: String?)
     func getUserAddress()-> String?
+    func setUserAddressID(userAddressID: Int?)
+    func getUserAddressID()-> Int?
     func setUserStatus(userIsLogged: Bool)
     func getUserStatus()-> Bool
     func getCurrency(key:String) -> String
