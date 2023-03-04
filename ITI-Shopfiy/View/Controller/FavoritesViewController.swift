@@ -53,7 +53,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 10
+        return 0
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {

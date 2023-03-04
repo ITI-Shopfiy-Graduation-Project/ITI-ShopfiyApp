@@ -10,6 +10,7 @@ import UIKit
 class MeUnlogedView: UIView {
     weak var meProtocol: (unLogedMeProtocol)?
 
+    @IBOutlet weak var guestImageView: UIImageView!
     
     @IBAction func Login(_ sender: UIButton) {
         meProtocol?.goToLogin()

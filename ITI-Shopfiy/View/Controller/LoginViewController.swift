@@ -40,55 +40,31 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func signUp_btn(_ sender: Any) {
-        let signUpVC: SignUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "signup") as! SignUpViewController
+        let signUpVC = UIStoryboard(name: "SignUpStoryboard", bundle: nil).instantiateViewController(withIdentifier: "signup") as! SignUpViewController
         self.navigationController?.pushViewController(signUpVC, animated: true)
     }
     
     @IBAction func skip_btn(_ sender: Any) {
         let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
         UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: false)
-        navigationController?.pushViewController(homeVC, animated: true)    }
+        UserDefaultsManager.sharedInstance.logut()
+        navigationController?.pushViewController(homeVC, animated: true)
+    }
 
 
 }
 
 extension LoginViewController{
     
-//    func ValdiateCustomerInfomation(UserName: String, password: String) -> Bool{
-//            
-//        var isSuccess = true
-//        self.loginVM?.validateCustomer(userName: UserName, password: password, completionHandler: { message in
-//            
-//            switch message {
-//            case "ErrorAllInfoIsNotFound":
-//                isSuccess = false
-//                self.showAlertError(title: "Missing Information", message: "please, enter all the required information.")
-//                
-//            case "ErrorPassword":
-//                isSuccess = false
-//                self.showAlertError(title: "Check Password", message: "please, enter password again.")
-//                
-//
-//
-//            default:
-//                isSuccess = true
-//            }
-//        })
-//        return isSuccess
-//    }
-    
-    
     func login(userName: String, password: String){
         loginVM?.login(userName: userName, password: password, completionHandler: { Customer in
             if Customer != nil {
-                UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: true)
                 self.showToastMessage(message: "Congratulations", color: UIColor(named: "Green") ?? .systemGreen)
                 print("customer logged in successfully")
                 //Navigation
                 let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
                 self.navigationController?.pushViewController(homeVC, animated: true)
             }else{
-                UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: false)
                 self.showAlertError(title: "failed to login", message: "please check your userName or Password")
                 print("failed to login")
             }

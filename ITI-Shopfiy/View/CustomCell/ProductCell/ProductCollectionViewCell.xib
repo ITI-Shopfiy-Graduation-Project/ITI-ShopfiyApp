@@ -49,6 +49,9 @@
                                 <buttonConfiguration key="configuration" style="plain">
                                     <imageReference key="image" image="heart" catalog="system"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="addToLikes:" destination="gTV-IL-0wX" eventType="touchUpInside" id="ghM-5p-YQd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

@@ -11,15 +11,12 @@ import Foundation
 class SignUpViewController: UIViewController {
     @IBOutlet weak var username_txt: UITextField!
     @IBOutlet weak var Email_txt: UITextField!
-    
     @IBOutlet weak var password_txt: UITextField!
     @IBOutlet weak var confirmPassword_txt: UITextField!
-
-    
     @IBOutlet weak var currentAddress_txt: UITextField!
-    
     @IBOutlet weak var phoneNumber_txt: UITextField!
     @IBOutlet weak var createAccount_btn: UIButton!
+    
     var registerVM: registerProtocol?
     var adresses: [Address]? = []
     var chosenAddress = Address()
@@ -112,7 +109,7 @@ extension SignUpViewController {
     
     func register(UserName: String, password: String, confirmPassword: String, UserPhone: String, email: String, UserAddress: Address){
         
-        let customer = Customer(first_name: UserName,phone: UserPhone, tags: password, email: email, addresses: self.adresses)
+        let customer = Customer(first_name: UserName,state: UserPhone, tags: password, email: email, addresses: self.adresses)
         let newCustomer = NewCustomer(customer: customer)
         self.registerVM?.createNewCustomer(newCustomer: newCustomer) { data, response, error in
                     
@@ -133,13 +130,13 @@ extension SignUpViewController {
             print("registered successfully")
             
             DispatchQueue.main.async {
-                let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
-                
-                self.navigationController?.pushViewController(homeVC, animated: true)
-//                let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+//                let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
 //
-//                loginVC.modalPresentationStyle = .fullScreen
-//                self.present(loginVC, animated: true, completion: nil)
+//                self.navigationController?.pushViewController(homeVC, animated: true)
+            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+
+            loginVC.modalPresentationStyle = .fullScreen
+            self.present(loginVC, animated: true, completion: nil)
             }
         }
             

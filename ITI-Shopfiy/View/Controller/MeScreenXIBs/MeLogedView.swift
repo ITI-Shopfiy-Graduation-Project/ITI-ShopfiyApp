@@ -12,6 +12,8 @@ class MeLogedView: UIView {
     var meProtocol: logedMeProtocol?
     @IBOutlet weak var user_img: UIImageView!
     
+    @IBOutlet weak var userName_txt: UILabel!
+    
     @IBAction func goToAllOrders(_ sender: UIButton) {
         meProtocol?.goToAllOrders()
     }

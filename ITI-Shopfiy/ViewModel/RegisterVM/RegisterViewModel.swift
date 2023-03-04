@@ -10,15 +10,16 @@ import Foundation
 class RegisterVM: registerProtocol{
 
     func validateCustomer(userName: String, password: String, confirmPassword: String, userPhone: String, email: String, userAddress: Address?, completionHandler: @escaping (String?) ->Void) {
-//        CustomerLogin.login(){ result in
-//            guard let customers = result?.customers else {return}
-//            for customer in customers {
-//                if (userName == customer.first_name) {
-//                    completionHandler("InvalidUserName")
-//                    return
-//                }
-//                
-//            }}
+        
+        CustomerLogin.login(){ result in
+            guard let customers = result?.customers else {return}
+            for customer in customers {
+                if (userName == customer.first_name) {
+                    completionHandler("InvalidUserName")
+                    return
+                }
+                
+            }}
                 
                 if (userName.isEmpty && userName.count <= 2) && email.isEmpty && (password.isEmpty || password.count <= 6) || confirmPassword.isEmpty || userPhone.isEmpty || (userAddress?.address1 == nil){
                     completionHandler("ErrorAllInfoIsNotFound")
@@ -63,7 +64,7 @@ class RegisterVM: registerProtocol{
         let customerID = customer?["id"] as? Int ?? 0
         let customerUserName = customer?["first_name"] as? String ?? ""
         let customerEmail = customer?["email"] as? String ?? ""
-        let customerPhone = customer?["first_name"] as? String ?? ""
+        let customerPhone = customer?["state"] as? String ?? ""
         let customerPassword = customer?["tags"] as? String ?? ""
         let customerAddress = customer?["addresses"] as? Dictionary<String, Any>
         let defaultAdress = customerAddress?["address1"] as? String ?? ""
@@ -77,8 +78,8 @@ class RegisterVM: registerProtocol{
         UserDefaultsManager.sharedInstance.setUserPhone(userPhone: customerPhone)
         UserDefaultsManager.sharedInstance.setUserAddress(userAddress: defaultAdress)
         UserDefaultsManager.sharedInstance.setUserAddressID(userAddressID: defaultAdressID)
-        
         UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: true)
+        UserDefaultsManager.sharedInstance.login()
     }
     
     func isValidPassword(password: String, confirmPassword: String) -> Bool {
