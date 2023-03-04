@@ -72,11 +72,19 @@ class UserDefaultsManager: UserDefaultProtocol{
     }
     
     func setUserStatus(userIsLogged: Bool){
-        UserDefaults.standard.set(userIsLogged, forKey: "User_Status")
+        UserDefaults.standard.set(userIsLogged, forKey: "User_Register")
     }
     
     func getUserStatus()-> Bool{
-        return UserDefaults.standard.bool(forKey: "User_Status")
+        return UserDefaults.standard.bool(forKey: "User_Register")
+    }
+    
+    func setFavorites(Favorites: Bool) {
+        UserDefaults.standard.set(Favorites, forKey: "User_Favorites")
+    }
+    
+    func getFavorites() -> Bool {
+        return UserDefaults.standard.bool(forKey: "User_Favorites")
     }
     
     func logut() {
