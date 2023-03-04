@@ -132,6 +132,7 @@ extension CategoryViewController :UICollectionViewDataSource{
         productDetialsVC.product_ID = product[indexPath.row].id
         
         self.navigationController?.pushViewController(productDetialsVC, animated: true)
+       
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
