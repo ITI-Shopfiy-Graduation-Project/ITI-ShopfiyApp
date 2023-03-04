@@ -23,12 +23,20 @@ class DataCaching {
             for item in (fetchedProductArray)
             {
                 let proudct = Products()
-                proudct.id = item.value(forKey:"product_id") as? Int
-                proudct.title = item.value(forKey: "title") as? String
-                proudct.image?.src = item.value(forKey: "src") as? String
-                proudct.variants?.first?.price = item.value(forKey: "price") as? String
-                proudct.user_id = item.value(forKey: "user_id") as? Int
-                productArray.append(proudct)
+                CustomerLogin.login { result in
+                    guard let customers = result?.customers else {return}
+                for customer in customers {
+                    if (customer.id == proudct.user_id) {
+
+                        proudct.id = item.value(forKey:"product_id") as? Int
+                        proudct.title = item.value(forKey: "title") as? String
+                        proudct.image?.src = item.value(forKey: "src") as? String
+                        proudct.variants?.first?.price = item.value(forKey: "price") as? String
+                        proudct.user_id = item.value(forKey: "user_id") as? Int
+                        productArray.append(proudct)
+                        }
+                    }
+                }
             }
         } catch let error {
             print("fetch all leagues error :", error)
@@ -59,13 +67,13 @@ class DataCaching {
     {
         let managedContext = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: Constants.ProductEntity, in: managedContext)
-        let league = NSManagedObject(entity: entity!, insertInto: managedContext)
-        league.setValue(product.id ?? 0, forKey: "product_id")
-        league.setValue(product.title , forKey: "title")
-        league.setValue(product.image?.src , forKey: "src")
-        league.setValue(product.user_id ?? 0, forKey: "user_id")
-        league.setValue(product.variants?.first?.price, forKey: "price")
-        league.setValue(true , forKey: "product_state")
+        let Product = NSManagedObject(entity: entity!, insertInto: managedContext)
+        Product.setValue(product.id ?? 0, forKey: "product_id")
+        Product.setValue(product.title , forKey: "title")
+        Product.setValue(product.image?.src , forKey: "src")
+        Product.setValue(product.user_id ?? 0, forKey: "user_id")
+        Product.setValue(product.variants?.first?.price, forKey: "price")
+        Product.setValue(true , forKey: "product_state")
         do{
             try managedContext.save()
             print("Saved!")
@@ -73,6 +81,7 @@ class DataCaching {
             print(error.localizedDescription)
         }
     }
+    
     func isFavouriteProduct (productID: Int, appDelegate : AppDelegate) -> Bool
     {
         var state : Bool = false

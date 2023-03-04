@@ -28,12 +28,20 @@ class CategoryViewController: UIViewController {
     var id : Int?
     
     @IBAction func cartBtn(_ sender: Any) {
-        let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
-        navigationController?.pushViewController(cartVC, animated: true)
+        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+            let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
+            navigationController?.pushViewController(cartVC, animated: true)
+        }else{
+            showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
+        }
     }
     @IBAction func favouritesBtn(_ sender: Any) {
-        let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
-        navigationController?.pushViewController(FavVC, animated: true)
+        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+            let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
+            navigationController?.pushViewController(FavVC, animated: true)
+        }else{
+            showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
+        }
     }
   
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
@@ -207,7 +215,17 @@ extension CategoryViewController {
     }
     
     
-    
+    func showLoginAlert(Title: String, Message: String) {
+        let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
+            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
     
     
     
