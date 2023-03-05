@@ -76,6 +76,14 @@
             </objects>
             <point key="canvasLocation" x="3496.9465648854962" y="111.9718309859155"/>
         </scene>
+        <!--signup-->
+        <scene sceneID="Pdb-au-Lli">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SignUpStoryboard" referencedIdentifier="signup" id="33W-BZ-FkE" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Na5-fu-oHv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3497" y="170"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="d38-bN-QOJ">
             <objects>

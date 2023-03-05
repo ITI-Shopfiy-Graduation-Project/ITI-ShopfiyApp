@@ -8,11 +8,15 @@
 import UIKit
 import Foundation
 import Kingfisher
+import TTGSnackbar
 class HomeViewController: UIViewController {
     var brandsModel: BrandViewModel?
+    var discountModel : DiscountViewModel?
     var brand :[Brands] = []
+    var discount : [Discount] = []
     var AllBrandsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/smart_collections.json?since_id=482865238"
-
+    var dicountUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com//admin/api/2023-01/price_rules/1377368047897/discount_codes.json"
+    let indicator = UIActivityIndicatorView(style: .large)
     @IBAction func searchBtn(_ sender: Any) {
         let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
         productsVC.url = URLService.allProducts()
@@ -21,12 +25,20 @@ class HomeViewController: UIViewController {
        
     }
     @IBAction func cartBtn(_ sender: Any) {
-        let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
-        navigationController?.pushViewController(cartVC, animated: true)
+        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+            let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
+            navigationController?.pushViewController(cartVC, animated: true)
+        }else{
+            showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
+        }
     }
     @IBAction func favBtn(_ sender: Any) {
-        let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
-        navigationController?.pushViewController(FavVC, animated: true)
+        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+            let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
+            navigationController?.pushViewController(FavVC, animated: true)
+        }else{
+            showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
+        }
     }
     @IBOutlet weak var pageControl: UIPageControl!
     var staticimgs = [UIImage(named: "ad1")!,UIImage(named: "ad2")!,UIImage(named: "ad3")!]
@@ -37,6 +49,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
      
         super.viewDidLoad()
+        indicator.center = view.center
+        view.addSubview(indicator)
         AdsCollectionView.delegate = self
         AdsCollectionView.dataSource = self
         BrandsCollectionView.delegate = self
@@ -50,22 +64,21 @@ class HomeViewController: UIViewController {
         brandsModel?.getBrands()
         brandsModel?.bindingBrands = {()in
         self.renderBrands()
-            
-        
         }
+        discountModel = DiscountViewModel()
+        discountModel?.discountUrl = self.dicountUrl
+        discountModel?.getDiscount()
+        discountModel?.bindingDiscount =
+        {()in
+        self.renderDiscount()
+        }
+        
         navigationItem.title = "Shopify App"
         
     }
-    func renderBrands(){
-        DispatchQueue.main.async {
-            self.brand = self.brandsModel?.brandsResults ?? []
-            self.BrandsCollectionView.reloadData()
-           
-        
-        }
-        
-    }
-
+    
+  
+   
 
 }
 
@@ -73,11 +86,31 @@ extension HomeViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //Code Here
-        let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-        productsVC.url = URLService.produts(Brand_ID: brand[indexPath.row].id ?? 437786837273)
-        productsVC.vendor = brand[indexPath.row].title
-        navigationController?.pushViewController(productsVC, animated: true)
+        if collectionView == AdsCollectionView {
+            if   UIPasteboard.general.string != discount[0].code {
+               
+                UIPasteboard.general.string = discount[0].code!
+                let snackbar = TTGSnackbar(message: "🎉 congratulations you get discount code!", duration: .middle)
+                snackbar.tintColor =  UIColor(named: "Green")
+                snackbar.show()
+            }
+            else {
+                let snackbar = TTGSnackbar(message: "already used!", duration: .middle)
+                snackbar.show()
+            }
+          
+            
+            
+            
+        }
+        else
+        {
+            let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
+            productsVC.url = URLService.produts(Brand_ID: brand[indexPath.row].id ?? 437786837273)
+            productsVC.vendor = brand[indexPath.row].title
+            navigationController?.pushViewController(productsVC, animated: true)}
     }
+  
 }
 
 extension HomeViewController: UICollectionViewDataSource {
@@ -180,9 +213,45 @@ extension HomeViewController
         
         
     }
+
+    
+
+}
+extension HomeViewController {
+    func renderBrands(){
+        DispatchQueue.main.async {
+            self.brand = self.brandsModel?.brandsResults ?? []
+            self.BrandsCollectionView.reloadData()
+            self.indicator.stopAnimating()
+        
+        }
+        
+    }
+    func renderDiscount () {
+        
+        DispatchQueue.main.async {
+            self.discount = self.discountModel?.discoutsResults ?? []
+            self.AdsCollectionView.reloadData()
+        
+        }
+        
+        
+        
+    }
     
     
     
+    func showLoginAlert(Title: String, Message: String) {
+        let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
+            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
     
     
     

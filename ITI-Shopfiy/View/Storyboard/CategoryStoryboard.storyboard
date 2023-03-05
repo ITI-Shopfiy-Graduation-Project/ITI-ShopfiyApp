@@ -98,7 +98,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 272.27" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brA-X9-oaD">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 272.27" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brA-X9-oaD">
                                                     <rect key="frame" x="0.0" y="191" width="166" height="33"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -197,6 +197,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5oe-FK-lei" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1831" y="-70"/>
+        </scene>
+        <!--login-->
+        <scene sceneID="6rB-QY-pSX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="LoginStoryboard" referencedIdentifier="login" id="wLf-EY-rVc" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0SF-5M-Qq4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1867" y="105"/>
         </scene>
         <!--Category-->
         <scene sceneID="aKw-0w-gHz">

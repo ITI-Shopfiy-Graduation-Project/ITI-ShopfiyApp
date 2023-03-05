@@ -37,7 +37,7 @@ class LoginVM: loginProtocol{
         UserDefaultsManager.sharedInstance.setUserID(customerID: customerID)
         UserDefaultsManager.sharedInstance.setUserName(userName: userFirstName)
         UserDefaultsManager.sharedInstance.setUserPassword(userPassword: userPassword)
-        UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: true)
+        UserDefaultsManager.sharedInstance.login()
     }
     
     func isValidPassword(password: String) -> Bool {
