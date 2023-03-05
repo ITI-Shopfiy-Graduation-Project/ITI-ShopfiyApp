@@ -8,11 +8,11 @@
 import Foundation
 
 protocol FavoriteActionFavoritesScreen{
-    func deleteFavourite(appDelegate: AppDelegate, product: Product) -> Void
+    func deleteFavourite(appDelegate: AppDelegate, product: Products) -> Void
 }
 
 protocol FavouriteActionProductScreen{
-    func addFavourite(appDelegate: AppDelegate, product: Product) -> Void
-    func deleteFavourite(appDelegate: AppDelegate, product: Product) -> Void
+    func addFavourite(appDelegate: AppDelegate, product: Products) -> Void
+    func deleteFavourite(appDelegate: AppDelegate, product: Products) -> Void
     func showAlert(title: String, message: String) -> Void
 }

@@ -54,16 +54,16 @@ extension FavouritesVM{
     }
     
     
-    func saveProduct(appDelegate: AppDelegate , product: Products)
-    {
-        dataCaching.saveProductToFavourites(appDelegate: appDelegate, product: product)
-    }
-    
-    
-    func isFavourite(appDelegate : AppDelegate , productID : Int) -> Bool
-    {
-        return dataCaching.isFavourite(appDelegate: appDelegate, productID: productID)
-    }
+//    func saveProduct(appDelegate: AppDelegate , product: Products)
+//    {
+//        dataCaching.saveProductToFavourites(appDelegate: appDelegate, product: product)
+//    }
+//    
+//    
+//    func isFavourite(appDelegate : AppDelegate , productID : Int) -> Bool
+//    {
+//        return dataCaching.isFavourite(appDelegate: appDelegate, productID: productID)
+//    }
     
     
 }
