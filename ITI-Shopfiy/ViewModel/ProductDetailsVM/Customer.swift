@@ -37,7 +37,7 @@ class Address: Codable {
     var address1, address2, city, province, phone: String?
     var zip, first_name, country: String?
     var id, customer_id: Int?
-    var province_code: String?
+//    var province_code: String?
 //    var default_add = true
   
 }

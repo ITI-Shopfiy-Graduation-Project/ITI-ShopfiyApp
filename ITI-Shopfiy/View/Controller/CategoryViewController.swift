@@ -19,9 +19,11 @@ class CategoryViewController: UIViewController {
   
     @IBAction func addFavourite(_ sender: UIButton) {
         
-        favourite.province_code = String(product[0].id!)
-        favourite.customer_id = 6867170722073
-     
+        favourite.province = String(product[0].id!)
+        favourite.customer_id = 6867209290009
+        print (favourite.province)
+        print ("hereeeeeee")
+        postAddress()
     
         
         
@@ -30,7 +32,7 @@ class CategoryViewController: UIViewController {
     let actionButton = JJFloatingActionButton()
     var CategoryModel: CategoryViewModel?
     var product :[Products] = []
-    var favourite: Address = Address()
+    var favourite : Address = Address()
     var FavVM = AddressViewModel()
     
     var AllProductsUrl = URLService.allProducts()
@@ -327,11 +329,12 @@ extension CategoryViewController {
     
 }
 extension CategoryViewController {
-    
     func postAddress(){
-    let customerAddress : PostAddress = PostAddress(customer_address:favourite)
-    self.FavVM.postNewAddress(userAddress: customerAddress) { data, response, error in
-     guard error == nil else {
+        let customerAddress : PostAddress = PostAddress()
+        customerAddress.customer_address = favourite
+        //(customer_address: address)
+        self.FavVM.postNewAddress(userAddress: customerAddress) { data, response, error in
+                guard error == nil else {
                     DispatchQueue.main.async {
                         print ("Address Error \n \(error?.localizedDescription ?? "")" )
                     }
@@ -353,5 +356,7 @@ extension CategoryViewController {
                 }
             }
     }
+    
+    
 }
 
