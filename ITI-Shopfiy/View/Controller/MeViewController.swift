@@ -19,16 +19,15 @@ class MeViewController: UIViewController {
         //MARK: Conditions of view
         // condition: If user is logged
         if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-            let meLogedVC = (Bundle.main.loadNibNamed("MeLogedView", owner: self, options: nil)?.first as? MeLogedView)!
-            meLogedVC.meProtocol = self
-            self.meView.addSubview(meLogedVC)
-            
+            let meLogedVC = (Bundle.main.loadNibNamed("MeLogedView", owner: self, options: nil)?.first as? MeLogedView)
+            self.meView.addSubview(meLogedVC!)
+            meLogedVC?.meProtocol = self
         } // condition: If user is unlogged
         else{
             let meUnLogedVC = Bundle.main.loadNibNamed("MeUnlogedView", owner: self, options: nil)?.first as? MeUnlogedView
             meUnLogedVC?.guestImageView.image = UIImage(named: "person")
-            meUnLogedVC?.meProtocol = self
             self.meView.addSubview(meUnLogedVC!)
+            meUnLogedVC?.meProtocol = self
         }
         
 

@@ -121,7 +121,7 @@ extension SignUpViewController {
                 return
             }
             
-            guard response?.statusCode == 422 else {
+            guard response?.statusCode != 422 else {
                 DispatchQueue.main.async {
                     self.showAlertError(title: "Couldnot register", message: "Please, try another email.")
                 }
@@ -131,13 +131,13 @@ extension SignUpViewController {
             print("registered successfully")
             
             DispatchQueue.main.async {
-//                let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
-//
-//                self.navigationController?.pushViewController(homeVC, animated: true)
-            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+                let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
 
-            loginVC.modalPresentationStyle = .fullScreen
-            self.present(loginVC, animated: true, completion: nil)
+                self.navigationController?.pushViewController(homeVC, animated: true)
+//            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+//
+//            loginVC.modalPresentationStyle = .fullScreen
+//            self.present(loginVC, animated: true, completion: nil)
             }
         }
             
