@@ -37,18 +37,9 @@ class Address: Codable {
     var address1, city, province, phone: String?
     var zip, first_name, country: String?
     var id, customer_id: Int?
+    var province_code: String?
 //    var default_add = true
-    init(address1: String? = nil, city: String? = nil, province: String? = nil, phone: String? = nil, zip: String? = nil, first_name: String? = nil, country: String? = nil, id: Int? = nil, customer_id: Int? = nil) {
-        self.address1 = address1
-        self.city = city
-        self.province = province
-        self.phone = phone
-        self.zip = zip
-        self.first_name = first_name
-        self.country = country
-        self.id = id
-        self.customer_id = customer_id
-    }
+  
 }
 
 class PutAddress: Codable {

@@ -20,6 +20,7 @@ extension AddressViewModel : AddressProtocol{
         AddressNetwork.sharedInstance.fetchAllUserAddresses(userId: userId) { result in
             if let result = result {
                 self.addressList = result.addresses
+                print("ViewModel : \(String(describing: self.addressList))")
             }
         }
     }
