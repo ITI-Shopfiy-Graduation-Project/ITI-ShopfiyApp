@@ -34,11 +34,10 @@ class AddressNetwork : IAdressNetwork{
             completionHandler(data, response, error)
         }.resume()
     }
-    
+    /*
     func fetchAllUserAddresses(userId: Int,handlerComplition : @escaping (CustomerAddress?)->()) {
-       
             let request = AF.request("https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/customers/\(userId)/addresses.json")
-            request.responseDecodable (of: CustomerAddress.self) {(olddata) in
+        request.responseDecodable (of: CustomerAddress.self) {(olddata) in
                 guard let data = olddata.value
                 else{
                     handlerComplition(nil)
@@ -46,5 +45,21 @@ class AddressNetwork : IAdressNetwork{
                 }
                 handlerComplition(data)
             }
-      }
+      }*/
+    func fetchAllUserAddresses(userId: Int,handlerComplition : @escaping (CustomerAddress?)->()) {
+        AF.request("https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/customers/\(userId)/addresses.json").responseData {response in
+            guard let data = response.data else {
+                return
+            }
+            do{
+                let result = try JSONDecoder().decode(CustomerAddress.self, from: data)
+                handlerComplition(result)
+            }catch let error {
+                print(error.localizedDescription)
+                handlerComplition(nil)
+            }
+        }
+    }
+    
+    
 }

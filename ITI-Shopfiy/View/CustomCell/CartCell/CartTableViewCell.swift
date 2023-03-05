@@ -9,7 +9,9 @@ import UIKit
 
 class CartTableViewCell: UITableViewCell {
 
-    var counterProtocol: counterProtocol?
+    @IBOutlet weak var increaseItem: UIButton!
+    @IBOutlet weak var decreseItem: UIButton!
+    var counterProtocol: CounterProtocol?
     @IBOutlet weak var itemPrice: UILabel!
     @IBOutlet weak var quantityCount: UILabel!
     @IBOutlet weak var itemQuntity: UILabel!
@@ -17,6 +19,7 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet weak var cartImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        counterProtocol = CounterProtocol.self as? CounterProtocol
         // Initialization code
     }
 
@@ -26,10 +29,10 @@ class CartTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func increaseBtn(_ sender: Any) {
+    @IBAction func increaseBtn(_ sender: UIButton) {
         counterProtocol?.increaseCounter()
     }
-    @IBAction func dcreaseBtn(_ sender: Any) {
+    @IBAction func dcreaseBtn(_ sender: UIButton) {
         counterProtocol?.decreaseCounter()
     }
 }
