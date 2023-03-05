@@ -6,7 +6,7 @@
 //
 
 import Foundation
-protocol counterProtocol {
+protocol CounterProtocol {
     
     func increaseCounter()
     func decreaseCounter()

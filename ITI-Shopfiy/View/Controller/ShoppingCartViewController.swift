@@ -1,59 +1,38 @@
 //
-//  CartViewController.swift
+//  ShoppingCartViewController.swift
 //  ITI-Shopfiy
 //
-//  Created by ahmed on 20/02/2023.
+//  Created by ahmed on 04/03/2023.
 //
 
 import UIKit
 
-class CartViewController: UIViewController {
-
-    @IBOutlet weak var codeError: UILabel!
-    @IBOutlet weak var CartTable: UITableView!
-    @IBOutlet weak var itemCount: UILabel!
-    @IBOutlet weak var promoCodeET: UITextField!
-    @IBOutlet weak var totalPrice: UILabel!
-    @IBOutlet weak var promoCodeValue: UILabel!
-    @IBOutlet weak var allItemsCost: UILabel!
-    private var shoppingCartVM = ShoppingCartViewModel()
-
+class ShoppingCartViewController: UIViewController {
+    
+    @IBOutlet weak var cartTable: UITableView!
     private var cartArray: [LineItem]?
+    var lineItem = LineItem()
     private var counter: Int = 0
+    private var shoppingCartVM = ShoppingCartViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableConfiguration()
-        var lineItem = LineItem()
         lineItem.price = "231 $"
         lineItem.title = "gray t-shirt"
         lineItem.quantity = 3
         lineItem.image = "ct4"
         cartArray = [lineItem , lineItem , lineItem]
-        // Do any additional setup after loading the view.
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
-        swipe.direction = .right
-        view.addGestureRecognizer(swipe)
+        tableConfiguration()
         getData()
-    }
-    
-    @objc func dismissVC() {
-        self.navigationController?.popViewController(animated: true)
+        
     }
     func tableConfiguration(){
-        CartTable.delegate = self
-        CartTable.dataSource = self
+        cartTable.delegate = self
+        cartTable.dataSource = self
         let nib = UINib(nibName: "CartTableViewCell", bundle: nil)
-        CartTable.register(nib, forCellReuseIdentifier: "cell")
-    }
-    
-    @IBAction func applyPromoCode(_ sender: Any) {
-    }
-    
-    @IBAction func proceedToCheckout(_ sender: Any) {
+        cartTable.register(nib, forCellReuseIdentifier: "cell")
     }
 }
-
-extension CartViewController: UITableViewDataSource {
+extension ShoppingCartViewController: UITableViewDataSource {
     
      func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Shopping Cart"
@@ -72,18 +51,16 @@ extension CartViewController: UITableViewDataSource {
         let cell:CartTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CartTableViewCell
         cell.itemName.text = cartArray?[indexPath.row].title
         cell.itemPrice.text = cartArray?[indexPath.row].price
-       // cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
+        cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
         cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].image ?? "ct4")
-        cell.quantityCount.isHidden = true
-        cell.decreseItem.isHidden = true
-        cell.increaseItem.isHidden = true
+        cell.counterProtocol = self
         return cell
     }
 }
 
-extension CartViewController: UITableViewDelegate {
+extension ShoppingCartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 150
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -92,15 +69,42 @@ extension CartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView : UIView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
+    }
+    
 }
 
-extension CartViewController {
+extension ShoppingCartViewController: CounterProtocol {
+    func increaseCounter() {
+        counter = counter + 1
+        print(counter)
+    }
+    
+    func decreaseCounter() {
+        if counter <= 0 {
+            self.showAlert(msg: "do you want to delete this item")
+        }
+        else {
+            counter = counter - 1
+        }
+    }
+}
+
+extension ShoppingCartViewController {
     func getData(){
         shoppingCartVM.getShoppingCart(userId: 132)
         shoppingCartVM.bindingCart = {
             self.cartArray = self.shoppingCartVM.cartList
             DispatchQueue.main.async {
-                self.CartTable.reloadData()
+                self.cartTable.reloadData()
             }
         }
     }
