@@ -28,6 +28,8 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
             super.viewDidLoad()
             addressHistoryArray = []
             mabView.delegate = self
+            addressHisoryTable.delegate = self
+            addressHisoryTable.dataSource = self
             configureLocation()
             configureAuthority()
            // getAllAddresses()
@@ -289,9 +291,10 @@ extension AddressViewController {
            
         DispatchQueue.main.async {
             self.addressHistoryArray = self.addressVM.addressList ?? []
-            //self.addressArray = self.addressHistoryArray.
-            print ("ADDRESS :  \(self.addressVM.addressList)")
-            print("response : \(self.addressHistoryArray ) ")
+            self.addressArray.removeAll()
+            self.addressHistoryArray?.forEach({ address in
+                self.addressArray.append(address.address1 ?? "")
+            })
             self.addressHisoryTable.reloadData()
             self.indicator.stopAnimating()
         }
@@ -311,7 +314,9 @@ extension AddressViewController {
     }
     */
     func postAddress(){
-        let customerAddress : PostAddress = PostAddress(customer_address: address)
+        let customerAddress : PostAddress = PostAddress()
+        customerAddress.customer_address = address
+        //(customer_address: address)
         self.addressVM.postNewAddress(userAddress: customerAddress) { data, response, error in
                 guard error == nil else {
                     DispatchQueue.main.async {
@@ -338,19 +343,16 @@ extension AddressViewController {
 }
 
 extension AddressViewController : UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let location = "\(addressHistoryArray?[indexPath.row].address1 ?? ""), \(addressHistoryArray?[indexPath.row].city ?? ""), \(addressHistoryArray?[indexPath.row].country ?? "")"
+        setLocation(destination: location)
+        print ("cell selected")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView : UIView = UIView()
-        headerView.backgroundColor = UIColor.clear
-        return headerView
-    }
+    
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5
@@ -360,7 +362,7 @@ extension AddressViewController : UITableViewDelegate {
 
 extension AddressViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return addressHistoryArray?.count ?? 0
+        return addressHistoryArray?.count ?? 5
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -369,7 +371,6 @@ extension AddressViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: AddressHistoryTableViewCell = tableView.dequeueReusableCell(withIdentifier: "addressCell", for:indexPath) as? AddressHistoryTableViewCell ?? AddressHistoryTableViewCell()
-        addressArray.append(addressHistoryArray?[indexPath.row].address1 ?? "")
         cell.street.text = addressHistoryArray?[indexPath.row].address1
         cell.city.text = addressHistoryArray?[indexPath.row].city
         cell.country.text = addressHistoryArray?[indexPath.row].country

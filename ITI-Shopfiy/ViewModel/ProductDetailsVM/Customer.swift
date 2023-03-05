@@ -58,13 +58,11 @@ class LoginResponse: Codable {
 
 class CustomerAddress: Codable {
     var addresses: [Address]?
-    init(addresses: [Address]? = nil) {
-        self.addresses = addresses
-    }
+    
 }
 
 
-struct PostAddress : Codable {
+class PostAddress : Codable {
     var customer_address : Address?
 }
 

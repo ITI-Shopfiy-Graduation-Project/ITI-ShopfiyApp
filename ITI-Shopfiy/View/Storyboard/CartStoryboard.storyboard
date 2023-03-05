@@ -59,7 +59,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyV-jv-QX1">
                                         <rect key="frame" x="32" y="124.33333333333324" width="317" height="45.333333333333329"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Proceed to checkout" cornerStyle="capsule">
+                                        <buttonConfiguration key="configuration" style="filled" title="Proceed to checkout" cornerStyle="large">
                                             <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
                                             <color key="baseForegroundColor" name="White"/>
                                             <color key="baseBackgroundColor" name="Green"/>
@@ -144,7 +144,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="code error" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JlJ-HL-xcI">
-                                                <rect key="frame" x="219.66666666666663" y="81.333333333333371" width="157.33333333333337" height="25.666666666666671"/>
+                                                <rect key="frame" x="16" y="81.333333333333371" width="361" height="25.666666666666671"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" name="Red"/>
                                                 <nil key="highlightedColor"/>
@@ -154,7 +154,6 @@
                                         <constraints>
                                             <constraint firstItem="Ss8-Ts-4Md" firstAttribute="height" secondItem="c2J-sX-0Iv" secondAttribute="height" id="3FR-Du-ffs"/>
                                             <constraint firstItem="c2J-sX-0Iv" firstAttribute="height" secondItem="TtZ-uz-HMr" secondAttribute="height" multiplier="0.2" id="EEI-Ce-Vei"/>
-                                            <constraint firstItem="c2J-sX-0Iv" firstAttribute="top" secondItem="TtZ-uz-HMr" secondAttribute="top" constant="1" id="HEH-mu-2vS"/>
                                             <constraint firstItem="c2J-sX-0Iv" firstAttribute="leading" secondItem="TtZ-uz-HMr" secondAttribute="leading" constant="16" id="JtJ-xQ-NHS"/>
                                             <constraint firstItem="JlJ-HL-xcI" firstAttribute="height" secondItem="c2J-sX-0Iv" secondAttribute="height" multiplier="0.768293" id="M0J-Pz-W0m"/>
                                             <constraint firstItem="JlJ-HL-xcI" firstAttribute="top" secondItem="oE3-K4-Chm" secondAttribute="bottom" id="WvD-LK-liK"/>
@@ -162,18 +161,14 @@
                                             <constraint firstItem="c2J-sX-0Iv" firstAttribute="width" secondItem="TtZ-uz-HMr" secondAttribute="width" multiplier="1:2.5" id="ajA-FX-0Kz"/>
                                             <constraint firstItem="oE3-K4-Chm" firstAttribute="trailing" secondItem="Ss8-Ts-4Md" secondAttribute="trailing" id="cP4-mq-fWM"/>
                                             <constraint firstItem="oE3-K4-Chm" firstAttribute="top" secondItem="c2J-sX-0Iv" secondAttribute="bottom" constant="6" id="ed9-eG-QQK"/>
+                                            <constraint firstItem="JlJ-HL-xcI" firstAttribute="trailing" secondItem="Ss8-Ts-4Md" secondAttribute="trailing" id="ftQ-QW-NM8"/>
                                             <constraint firstItem="Ss8-Ts-4Md" firstAttribute="top" secondItem="TtZ-uz-HMr" secondAttribute="top" constant="8" id="kZz-TN-LgC"/>
                                             <constraint firstItem="c2J-sX-0Iv" firstAttribute="centerY" secondItem="Ss8-Ts-4Md" secondAttribute="centerY" id="o4F-wI-8rH"/>
-                                            <constraint firstItem="JlJ-HL-xcI" firstAttribute="width" secondItem="c2J-sX-0Iv" secondAttribute="width" id="oNB-g5-2Jb"/>
+                                            <constraint firstItem="JlJ-HL-xcI" firstAttribute="width" secondItem="oE3-K4-Chm" secondAttribute="width" id="oNB-g5-2Jb"/>
                                             <constraint firstItem="Ss8-Ts-4Md" firstAttribute="width" secondItem="TtZ-uz-HMr" secondAttribute="width" multiplier="1:5.5" id="rsI-8H-PRw"/>
                                             <constraint firstItem="JlJ-HL-xcI" firstAttribute="trailing" secondItem="oE3-K4-Chm" secondAttribute="trailing" id="yGg-m8-MJt"/>
                                             <constraint firstItem="oE3-K4-Chm" firstAttribute="leading" secondItem="c2J-sX-0Iv" secondAttribute="leading" id="z2q-yq-g8E"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="HEH-mu-2vS"/>
-                                            </mask>
-                                        </variation>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Upc-1L-u4y">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="427"/>
