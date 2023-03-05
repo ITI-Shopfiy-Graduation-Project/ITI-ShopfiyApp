@@ -57,7 +57,6 @@
                         <color key="baseBackgroundColor" name="Green"/>
                     </buttonConfiguration>
                     <connections>
-                        <action selector="Login:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="epe-M8-4Qu"/>
                         <action selector="Register:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="uvc-F8-9Bz"/>
                     </connections>
                 </button>

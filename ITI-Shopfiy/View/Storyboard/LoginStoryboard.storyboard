@@ -170,15 +170,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="847.5" y="-2.112676056338028"/>
+            <point key="canvasLocation" x="863" y="-2"/>
         </scene>
         <!--signup-->
-        <scene sceneID="dPc-PM-gXP">
+        <scene sceneID="jIM-Eu-SXB">
             <objects>
-                <viewControllerPlaceholder storyboardName="SignUpStoryboard" referencedIdentifier="signup" id="Coo-M7-8pS" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZtU-Yk-rE0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="SignUpStoryboard" referencedIdentifier="signup" id="GF3-8N-8pM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dli-gH-xD8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1615" y="-135"/>
+            <point key="canvasLocation" x="1464" y="-159"/>
         </scene>
         <!--home-->
         <scene sceneID="foq-h3-hE6">
@@ -202,7 +202,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Ze-HL-Iv9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0bJ-Rz-6WD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
