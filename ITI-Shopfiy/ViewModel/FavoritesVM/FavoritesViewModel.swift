@@ -39,10 +39,8 @@ extension FavouritesVM{
             if let error = error {
                 self.error = error
             }
-            
         }
     }
-    
     
     func deleteProductItemFromFavourites (appDeleget : AppDelegate , ProductID: Int)
     {
@@ -54,16 +52,13 @@ extension FavouritesVM{
     }
     
     
-//    func saveProduct(appDelegate: AppDelegate , product: Products)
-//    {
-//        dataCaching.saveProductToFavourites(appDelegate: appDelegate, product: product)
-//    }
-//    
-//    
-//    func isFavourite(appDelegate : AppDelegate , productID : Int) -> Bool
-//    {
-//        return dataCaching.isFavourite(appDelegate: appDelegate, productID: productID)
-//    }
+    func addFavourite(appDelegate: AppDelegate, product: Products) {
+        self.dataCaching.saveProductToFavourites(appDelegate: appDelegate, product: product)
+    }
     
+    func isProductsInFavourites(appDelegate: AppDelegate, product: Products) -> Bool {
+        return self.dataCaching.isFavourite(appDelegate: appDelegate, productID: product.id ?? -1)
+    }
+
     
 }

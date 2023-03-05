@@ -22,7 +22,6 @@ class DataManager: IDataCaching {
     
     func saveProductToFavourites(appDelegate: AppDelegate, product: Products) {
         dbManger.saveProductToFavourites(product: product, appDelegate: appDelegate)
-
     }
     
     func isFavourite(appDelegate: AppDelegate, productID: Int) -> Bool {

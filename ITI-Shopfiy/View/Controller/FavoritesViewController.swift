@@ -8,7 +8,7 @@
 import UIKit
 import TTGSnackbar
 
-class FavoritesViewController: UIViewController, UISearchBarDelegate {
+class FavoritesViewController: UIViewController {
 
     @IBOutlet weak var cart_btn: UIBarButtonItem!
     @IBOutlet weak var favoritesSearchBar: UISearchBar!{
@@ -25,16 +25,17 @@ class FavoritesViewController: UIViewController, UISearchBarDelegate {
     }
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     private var savedProductsArray = [Products]()
+    var searchArray: [Products]? = []
     private let favouriteVM = FavouritesVM()
     private var deletedProductItem : Products?
     private var flag : Bool = true
+    var indicator: UIActivityIndicatorView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-//        getSavedProducts()
-
+        viewWillAppear(false)
         let productNib = UINib(nibName: "ProductCollectionViewCell", bundle: nil)
         favoritesCollectionView.register(productNib, forCellWithReuseIdentifier: "cell")
         navigationItem.title = "Favorites"
@@ -50,6 +51,7 @@ class FavoritesViewController: UIViewController, UISearchBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         getSavedProducts()
+        self.favoritesCollectionView.reloadData()
     }
     
     @IBAction func goToCartViewController(_ sender: UIBarButtonItem) {
@@ -83,9 +85,8 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
-        
-        cell.favouritesView = self
-        cell.configureCell(product: savedProductsArray[indexPath.row], isFavourite: true, isInFavouriteScreen: true)
+        cell.productsView = self
+        cell.configureCell(product: savedProductsArray[indexPath.row])
         return cell
     }
 
@@ -100,10 +101,27 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     
+}
+
+//MARK: Search
+extension FavoritesViewController: UISearchBarDelegate{
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        savedProductsArray = []
+        if searchText == "" {
+            savedProductsArray = searchArray ?? []
+        }
+        for product in searchArray ?? [] {
+            if product.title!.uppercased().contains(searchText.uppercased()){
+                savedProductsArray.append(product)
+            }
+        }
+        self.favoritesCollectionView.reloadData()
+    }
     
 }
 
+//MARK: Fetch Data
 extension FavoritesViewController{
     func getSavedProducts(){
         favouriteVM.fetchSavedProducts(appDelegate: self.appDelegate)
@@ -125,33 +143,33 @@ extension FavoritesViewController{
             }
     }
     
-    func deleteProductItem(indexPath: IndexPath){
-        if (favouriteVM.error == nil)
-        {
-            DispatchQueue.main.async { [self] in
-                deletedProductItem = self.savedProductsArray[indexPath.row]
-                savedProductsArray.remove(at: indexPath.row)
-                self.favoritesCollectionView.deleteItems(at: [indexPath])
-                // savedLeagueTable.reloadData()
-                if let name = deletedProductItem?.title
-                {
-                    let successMsg = "\(String(describing: name)) was unsaved successfully"
-                    showSuccessSnakbar(msg: successMsg, index: indexPath.row)
-                    DispatchQueue.main.asyncAfter(deadline: .now()+5){
-                        if self.flag == true {
-                            self.favouriteVM.deleteProductItemFromFavourites(appDeleget: self.appDelegate, ProductID: self.deletedProductItem?.id ?? -1)
-                        }
-                    }
-                    
-                }
-            }
-        }
-            else
-            {
-                self.showErrorSnakbar(msg: favouriteVM.error?.localizedDescription  ?? "")
-                print(favouriteVM.error ?? "")
-            }
-    }
+//    func deleteProductItem(indexPath: IndexPath){
+//        if (favouriteVM.error == nil)
+//        {
+//            DispatchQueue.main.async { [self] in
+//                deletedProductItem = self.savedProductsArray[indexPath.row]
+//                savedProductsArray.remove(at: indexPath.row)
+//                self.favoritesCollectionView.deleteItems(at: [indexPath])
+//                // savedLeagueTable.reloadData()
+//                if let name = deletedProductItem?.title
+//                {
+//                    let successMsg = "\(String(describing: name)) was unsaved successfully"
+//                    showSuccessSnakbar(msg: successMsg, index: indexPath.row)
+//                    DispatchQueue.main.asyncAfter(deadline: .now()+5){
+//                        if self.flag == true {
+//                            self.favouriteVM.deleteProductItemFromFavourites(appDeleget: self.appDelegate, ProductID: self.deletedProductItem?.id ?? -1)
+//                        }
+//                    }
+//
+//                }
+//            }
+//        }
+//            else
+//            {
+//                self.showErrorSnakbar(msg: favouriteVM.error?.localizedDescription  ?? "")
+//                print(favouriteVM.error ?? "")
+//            }
+//    }
     
     private func showSuccessSnakbar(msg : String, index: Int ){
         let snackbar = TTGSnackbar(
@@ -192,22 +210,50 @@ extension FavoritesViewController{
     
     func showAlert(Title: String, Message: String, ProductID: Int) {
         let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
-        
+
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
             self.favouriteVM.deleteProductItemFromFavourites(appDeleget: appDelegate, ProductID: ProductID)
             showErrorSnakbar(msg: "Item Removed")
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-        
+
         self.present(alert, animated: true, completion: nil)
     }
     
     
 }
 
-extension FavoritesViewController: FavoriteActionFavoritesScreen {
-    func deleteFavourite(appDelegate: AppDelegate, product: Products) {
-        favouriteVM.deleteProductItemFromFavourites(appDeleget: appDelegate, ProductID: product.id ?? 0)
-        favoritesCollectionView.reloadData()
+extension FavoritesViewController: FavouriteActionProductScreen {
+    func showAlert(title: String, message: String, product: Products) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
+            favouriteVM.deleteProductItemFromFavourites(appDeleget: appDelegate, ProductID: product.id ?? -1)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
     }
+    
+    func showLoginAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
+            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func addFavourite(appDelegate: AppDelegate, product: Products) {
+        favouriteVM.addFavourite(appDelegate: appDelegate, product: product)
+    }
+    
+    func isFavorite(appDelegate: AppDelegate, product: Products) -> Bool {
+        favouriteVM.isProductsInFavourites(appDelegate: appDelegate, product: product)
+    }
+
 }

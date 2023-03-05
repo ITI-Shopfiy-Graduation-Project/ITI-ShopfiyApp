@@ -7,12 +7,9 @@
 
 import Foundation
 
-protocol FavoriteActionFavoritesScreen{
-    func deleteFavourite(appDelegate: AppDelegate, product: Products) -> Void
-}
-
 protocol FavouriteActionProductScreen{
     func addFavourite(appDelegate: AppDelegate, product: Products) -> Void
-    func deleteFavourite(appDelegate: AppDelegate, product: Products) -> Void
-    func showAlert(title: String, message: String) -> Void
+    func isFavorite(appDelegate: AppDelegate, product: Products) -> Bool
+    func showLoginAlert(title: String, message: String) -> Void
+    func showAlert(title: String, message: String, product: Products) -> Void
 }
