@@ -67,17 +67,3 @@ extension FavouritesVM{
     
     
 }
-
-//protocol baseProtocol {
-//    func addProduct(product: Product)
-//}
-
-//protocol FavouriteViewModelTemp{
-//    func addProduct(product: Product)
-//    func isFavourite(id: Int)->Bool
-//    func deleteFavourite(id: Int)
-//    func addFavourite(product: Product)
-//    func getAllFaourites()->[Product]
-//    var favourites: [Product]{get}
-//    var bindFavouritesList:()->(){set get}
-//}

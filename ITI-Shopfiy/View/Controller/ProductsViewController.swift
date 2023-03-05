@@ -52,7 +52,11 @@ class ProductsViewController: UIViewController{
             indicator.stopAnimating()
         }
         
-        favoritesArray = favoritesVM?.savedProductsArray
+//        favoritesArray = favoritesVM?.savedProductsArray
+//        favoritesVM?.bindingData = { () in
+//            self.favoritesArray = self.favoritesVM?.savedProductsArray ?? []
+////            self?.productsCollectionView.reloadData()
+//        }
         checkFavouritesViewController(products: favoritesArray ?? [], BarButton: self.like_btn)
         
         let productNib = UINib(nibName: "ProductCollectionViewCell", bundle: nil)
@@ -120,23 +124,13 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
     // MARK: Cells
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
-        
-        let product = self.productsArray?[indexPath.row]
-        let productimg = URL(string:product?.image?.src ?? "")
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
+        let productimg = URL(string: productsArray?[indexPath.row].image?.src ?? "")
         cell.productImageview.kf.setImage(with: productimg)
-        cell.productTitle.text = product?.title
-//        checkProductIsLiked(ProductID: product?.id ?? 0, Button: cell.like_btn)
-        if (favoritesVM?.isFavourite(appDelegate: appDelegate, productID: product?.id ?? 0) == true){
-            cell.like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-
-        }else{
-            cell.like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-
-        }
+        cell.productTitle.text = productsArray?[indexPath.row].title
+        cell.isFavourite = favoritesVM?.isFavourite(appDelegate: appDelegate, productID: productsArray?[indexPath.row].id ?? 0)
+        cell.product = productsArray?[indexPath.row]
         cell.delegate = self
-//        cell.isFavourite = favouritesViewModel.isFavourite(id: products[indexPath.row].id)
-//        addToFavorites(Product: product ?? Products() , Button: cell.like_btn)
         
         return cell
     }
@@ -285,30 +279,3 @@ extension ProductsViewController{
     
 }
 
-
-//    func checkProductIsLiked(ProductID: Int, Button: UIButton){
-//        favoritesVM = FavouritesVM()
-//        if ((favoritesVM?.isFavourite(appDelegate: self.appDelegate, productID: ProductID)) == true)
-//        {
-//           Button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-//        }else{
-//           Button.setImage(UIImage(systemName: "heart"), for: .normal)
-//        }
-//    }
-//
-//    //add product to Favorites
-//    @objc func buttonAction(sender: UIButton){
-//        let id = sender.tag
-//
-//        print(id)
-//    }
-//    func addToFavorites(Product: Products, Button: UIButton){
-//        favoritesVM = FavouritesVM()
-//        if ((favoritesVM?.isFavourite(appDelegate: appDelegate, productID: Product.id ?? 0)) != nil) {
-//            showAlert(Title: "Deleting From Favorites", Message: "Are you sure ?", ProductID: Product.id ?? 0, Button: Button)
-//        } else {
-//            Button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-//            favoritesVM?.saveProduct(appDelegate: self.appDelegate, product: Product)
-//            showToastMessage(message: "Added !", color: .systemBlue)
-//        }
-//    }

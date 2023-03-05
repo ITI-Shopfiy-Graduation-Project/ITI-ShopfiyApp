@@ -23,10 +23,10 @@ class DataCaching {
             for item in (fetchedProductArray)
             {
                 let proudct = Products()
-                CustomerLogin.login { result in
-                    guard let customers = result?.customers else {return}
-                for customer in customers {
-                    if (customer.id == proudct.user_id) {
+//                CustomerLogin.login { result in
+//                    guard let customers = result?.customers else {return}
+//                for customer in customers {
+//                    if (customer.id == proudct.user_id) {
 
                         proudct.id = item.value(forKey:"product_id") as? Int
                         proudct.title = item.value(forKey: "title") as? String
@@ -34,12 +34,12 @@ class DataCaching {
                         proudct.variants?.first?.price = item.value(forKey: "price") as? String
                         proudct.user_id = item.value(forKey: "user_id") as? Int
                         productArray.append(proudct)
-                        }
-                    }
-                }
+//                        }
+//                    }
+//                }
             }
         } catch let error {
-            print("fetch all leagues error :", error)
+            print("fetch all products error :", error)
         }
         return productArray
     }
@@ -54,7 +54,7 @@ class DataCaching {
             managedContext.delete((product as! [NSManagedObject]).first!)
             
             try managedContext.save()
-            print("product deleted")
+            print("Product deleted")
             complition(nil)
         } catch let error as NSError{
             complition("Error in deleting" as? Error )
@@ -76,7 +76,7 @@ class DataCaching {
         Product.setValue(true , forKey: "product_state")
         do{
             try managedContext.save()
-            print("Saved!")
+            print("Product Added!")
         }catch let error{
             print(error.localizedDescription)
         }

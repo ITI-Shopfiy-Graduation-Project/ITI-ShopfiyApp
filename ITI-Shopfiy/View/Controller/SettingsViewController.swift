@@ -44,10 +44,9 @@ extension SettingsViewController{
         let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: "Logout", style: UIAlertAction.Style.destructive, handler: { action in
-            let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
             UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: false)
             UserDefaultsManager.sharedInstance.logut()
-            self.navigationController?.pushViewController(homeVC, animated: true)
+            self.navigationController?.popViewController(animated: true)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
         

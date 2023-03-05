@@ -131,9 +131,9 @@ extension SignUpViewController {
             print("registered successfully")
             
             DispatchQueue.main.async {
-                let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
+                let meVC = UIStoryboard(name: "MeStoryboard", bundle: nil).instantiateViewController(withIdentifier: "me") as! MeViewController
 
-                self.navigationController?.pushViewController(homeVC, animated: true)
+                self.navigationController?.pushViewController(meVC, animated: true)
 //            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
 //
 //            loginVC.modalPresentationStyle = .fullScreen
