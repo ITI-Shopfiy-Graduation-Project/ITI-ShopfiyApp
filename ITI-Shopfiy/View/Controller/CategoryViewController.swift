@@ -19,7 +19,7 @@ class CategoryViewController: UIViewController {
   
     @IBAction func addFavourite(_ sender: UIButton) {
         
-        favourite.province = String(product[0].id!)
+        favourite.province = String(product[4].id!)
         favourite.customer_id = 6867209290009
         print (favourite.province)
         print ("hereeeeeee")
