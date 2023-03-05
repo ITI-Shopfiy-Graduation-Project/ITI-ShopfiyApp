@@ -110,6 +110,9 @@
                                                     <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
                                                         <color key="baseForegroundColor" name="Red"/>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="addFavourite:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="41O-j9-89N"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

@@ -17,11 +17,21 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var kidCategory: UIBarButtonItem!
     @IBOutlet weak var SaleCategory: UIBarButtonItem!
   
+    @IBAction func addFavourite(_ sender: UIButton) {
+        
+        favourite.province_code = String(product[0].id!)
+        favourite.customer_id = 6867170722073
+     
+    
+        
+        
+    }
     let indicator = UIActivityIndicatorView(style: .large)
     let actionButton = JJFloatingActionButton()
     var CategoryModel: CategoryViewModel?
     var product :[Products] = []
-    
+    var favourite: Address = Address()
+    var FavVM = AddressViewModel()
     
     var AllProductsUrl = URLService.allProducts()
        
@@ -316,5 +326,32 @@ extension CategoryViewController {
     
     
 }
+extension CategoryViewController {
+    
+    func postAddress(){
+    let customerAddress : PostAddress = PostAddress(customer_address:favourite)
+    self.FavVM.postNewAddress(userAddress: customerAddress) { data, response, error in
+     guard error == nil else {
+                    DispatchQueue.main.async {
+                        print ("Address Error \n \(error?.localizedDescription ?? "")" )
+                    }
+                    return
+                }
+                
+            guard response?.statusCode ?? 0 >= 200 && response?.statusCode ?? 0 < 300   else {
+                    DispatchQueue.main.async {
+                        print ("Address Response \n \(response ?? HTTPURLResponse())" )
 
+                    }
+                    return
+                }
+            
+                print("address was added successfully")
+                
+                DispatchQueue.main.async {
+                    print("Address Saved")
+                }
+            }
+    }
+}
 
