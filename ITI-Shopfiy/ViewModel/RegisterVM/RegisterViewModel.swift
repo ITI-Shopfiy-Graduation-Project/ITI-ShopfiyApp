@@ -19,7 +19,7 @@ class RegisterVM: registerProtocol{
                     return
                 }
                 
-            }}
+            
                 
                 if (userName.isEmpty && userName.count <= 2) && email.isEmpty && (password.isEmpty || password.count <= 6) || confirmPassword.isEmpty || userPhone.isEmpty || (userAddress?.address1 == nil){
                     completionHandler("ErrorAllInfoIsNotFound")
@@ -35,7 +35,7 @@ class RegisterVM: registerProtocol{
                         completionHandler("ErrorPassword")
                         return
                     }
-                
+            }}
                     
     }
     

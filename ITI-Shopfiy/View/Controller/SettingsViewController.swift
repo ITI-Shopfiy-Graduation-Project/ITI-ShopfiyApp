@@ -24,6 +24,7 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func logout_btn(_ sender: Any) {
+        showLogoutAlert(Title: "Do you want to Logout", Message: "We gonnna miss you")
     }
     /*
     // MARK: - Navigation
@@ -35,4 +36,22 @@ class SettingsViewController: UIViewController {
     }
     */
 
+}
+
+extension SettingsViewController{
+    
+    func showLogoutAlert(Title: String, Message: String) {
+        let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Logout", style: UIAlertAction.Style.destructive, handler: { action in
+            let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
+            UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: false)
+            UserDefaultsManager.sharedInstance.logut()
+            self.navigationController?.pushViewController(homeVC, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }
