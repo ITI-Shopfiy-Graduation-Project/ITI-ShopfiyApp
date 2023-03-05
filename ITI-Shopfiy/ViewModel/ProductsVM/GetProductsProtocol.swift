@@ -9,4 +9,5 @@ import Foundation
 
 protocol getProductsProtocol{
     func getProducts(URL: String)
+
 }

@@ -23,20 +23,20 @@ class DataCaching {
             for item in (fetchedProductArray)
             {
                 let proudct = Products()
-//                CustomerLogin.login { result in
-//                    guard let customers = result?.customers else {return}
-//                for customer in customers {
-//                    if (customer.id == proudct.user_id) {
-
+                CustomerLogin.login { result in
+                    guard let customers = result?.customers else {return}
+                for customer in customers {
+                    if (customer.id == proudct.user_id) {
+                
                         proudct.id = item.value(forKey:"product_id") as? Int
                         proudct.title = item.value(forKey: "title") as? String
                         proudct.image?.src = item.value(forKey: "src") as? String
                         proudct.variants?.first?.price = item.value(forKey: "price") as? String
                         proudct.user_id = item.value(forKey: "user_id") as? Int
-                        productArray.append(proudct)
-//                        }
-//                    }
-//                }
+                        }
+                    productArray.append(proudct)
+                    }
+                }
             }
         } catch let error {
             print("fetch all products error :", error)
