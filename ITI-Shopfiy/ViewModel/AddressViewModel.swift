@@ -38,7 +38,7 @@ extension AddressViewModel : AddressProtocol{
             }
             
             let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! Dictionary<String,Any>
-            let customer = json["customer"] as? Dictionary<String,Any>
+            _ = json["customer"] as? Dictionary<String,Any>
             //self.saveCustomerDataToUserDefaults(customer: customer)
             completion(data, response as? HTTPURLResponse, nil)
         }
