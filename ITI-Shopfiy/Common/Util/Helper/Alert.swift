@@ -8,26 +8,31 @@
 import Foundation
 import UIKit
 
-
-func showAlert(msg: String , type: String) {
-    let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
+extension UIViewController {
+    func showAlertForSettings(msg: String , type: String) {
+        let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "close", style: .cancel))
+        alert.addAction(UIAlertAction(title: "settings", style: .default , handler: { action in
+            if type == "locationService"
+            {
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                // UIApplication.shared.open(URL(string: "App-prefs:Privacy&path=LOCATION")!)
+                
+            }
+            else if type == "authSettings" {
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
     
-    alert.addAction(UIAlertAction(title: "close", style: .cancel))
-    alert.addAction(UIAlertAction(title: "settings", style: .default , handler: { action in
-        if type == "locationService"
-        {
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-           // UIApplication.shared.open(URL(string: "App-prefs:Privacy&path=LOCATION")!)
-
-        }
-        else if type == "authSettings" {
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-        }
-    }))
-}
-
-func showAlert(msg: String ) {
-    let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
-    
-    alert.addAction(UIAlertAction(title: "close", style: .cancel))
+    func showAlert(msg: String ) {
+        let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "close", style: .cancel))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
 }

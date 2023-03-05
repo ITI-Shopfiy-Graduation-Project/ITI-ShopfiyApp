@@ -12,7 +12,7 @@ import DropDown
 
 class AddressViewController: UIViewController , CLLocationManagerDelegate {
     @IBOutlet weak var addressHisoryTable: UITableView!
-    var addressHistoryArray: [Address] = [Address()]
+    var addressHistoryArray: [Address]?
     var address : Address = Address()
     let addressVM = AddressViewModel()
     let dropDown = DropDown()
@@ -23,29 +23,35 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
     private var userAddress : Address?
     var addressDelegate : AddressDelegate?
     private var locationManager = CLLocationManager()
+    let indicator = UIActivityIndicatorView(style: .large)
         override func viewDidLoad() {
             super.viewDidLoad()
+            addressHistoryArray = []
             mabView.delegate = self
+            addressHisoryTable.delegate = self
+            addressHisoryTable.dataSource = self
             configureLocation()
             configureAuthority()
            // getAllAddresses()
-            renderView()
-            dropDown.anchorView = searchTF
-            dropDown.dataSource = addressArray
-            dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
-
-            dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
-            dropDown.direction = .bottom
-            dropDown.selectionAction = { [unowned self] (index, item) in
-                
-                self.searchTF.text = addressArray[index]
-            }
+            getAllHistory()
+            setupDropDown()
         }
     
     @IBAction func saveAddress_btn(_ sender: Any) {
         postAddress()
     }
-    
+    func setupDropDown(){
+        dropDown.anchorView = searchTF
+        dropDown.dataSource = addressArray
+        dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+
+        dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
+        dropDown.direction = .bottom
+        dropDown.selectionAction = { [unowned self] (index, item) in
+            
+            self.searchTF.text = addressArray[index]
+        }
+    }
     func configureLocation(){
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest // accuracy best is not better for battery
@@ -251,13 +257,13 @@ extension AddressViewController{
 
     }
 
-    func showAlert(msg: String ) {
+   /* func showAlert(msg: String ) {
         let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "close", style: .cancel))
         present(alert , animated: true , completion: nil)
     }
-
+*/
 }
 
 extension AddressViewController {
@@ -268,17 +274,29 @@ extension AddressViewController {
 }
 
 extension AddressViewController {
+    
+    func getAllHistory(){
+        self.indicator.center = self.view.center
+        self.view.addSubview(indicator)
+        self.indicator.startAnimating()
+        self.addressVM.getAllUserAddress(userId:6860199723289)
+        self.addressVM.bindingAddress = {()in
+        self.renderView()
+            
+        
+        }
+    }
     func renderView(){
       
-            let indicator = UIActivityIndicatorView(style: .large)
-            indicator.center = self.view.center
-            self.view.addSubview(indicator)
-            indicator.startAnimating()
-            self.addressVM.getAllUserAddress(userId:6860199723289)
+           
         DispatchQueue.main.async {
-            self.addressHistoryArray = self.addressVM.addressList ?? [Address()]
+            self.addressHistoryArray = self.addressVM.addressList ?? []
+            self.addressArray.removeAll()
+            self.addressHistoryArray?.forEach({ address in
+                self.addressArray.append(address.address1 ?? "")
+            })
             self.addressHisoryTable.reloadData()
-            indicator.stopAnimating()
+            self.indicator.stopAnimating()
         }
     }
   /*  func getAllAddresses(){
@@ -296,7 +314,9 @@ extension AddressViewController {
     }
     */
     func postAddress(){
-        let customerAddress : PostAddress = PostAddress(customer_address: address)
+        let customerAddress : PostAddress = PostAddress()
+        customerAddress.customer_address = address
+        //(customer_address: address)
         self.addressVM.postNewAddress(userAddress: customerAddress) { data, response, error in
                 guard error == nil else {
                     DispatchQueue.main.async {
@@ -323,19 +343,16 @@ extension AddressViewController {
 }
 
 extension AddressViewController : UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let location = "\(addressHistoryArray?[indexPath.row].address1 ?? ""), \(addressHistoryArray?[indexPath.row].city ?? ""), \(addressHistoryArray?[indexPath.row].country ?? "")"
+        setLocation(destination: location)
+        print ("cell selected")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView : UIView = UIView()
-        headerView.backgroundColor = UIColor.clear
-        return headerView
-    }
+    
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5
@@ -345,7 +362,7 @@ extension AddressViewController : UITableViewDelegate {
 
 extension AddressViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return addressHistoryArray.count
+        return addressHistoryArray?.count ?? 5
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -354,10 +371,9 @@ extension AddressViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: AddressHistoryTableViewCell = tableView.dequeueReusableCell(withIdentifier: "addressCell", for:indexPath) as? AddressHistoryTableViewCell ?? AddressHistoryTableViewCell()
-        addressArray.append(addressHistoryArray[indexPath.row].address1 ?? "")
-        cell.street.text = addressHistoryArray[indexPath.row].address1
-        cell.city.text = addressHistoryArray[indexPath.row].city
-        cell.country.text = addressHistoryArray[indexPath.row].country
+        cell.street.text = addressHistoryArray?[indexPath.row].address1
+        cell.city.text = addressHistoryArray?[indexPath.row].city
+        cell.country.text = addressHistoryArray?[indexPath.row].country
     return cell
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

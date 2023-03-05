@@ -47,6 +47,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
                 print("Liked")
             }
             print("prdouct id: \(product?.id ?? 0)")
+            print("prdouct id: \(product?.title ?? "Adidas")")
         }else{
             delegate?.navTologin()
         }
