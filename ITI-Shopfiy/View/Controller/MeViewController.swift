@@ -18,20 +18,7 @@ class MeViewController: UIViewController {
         
         //MARK: Conditions of view
         // condition: If user is logged
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-            let meLogedVC = (Bundle.main.loadNibNamed("MeLogedView", owner: self, options: nil)?.first as? MeLogedView)
-            self.meView.addSubview(meLogedVC!)
-            self.navigationController?.isNavigationBarHidden = false
-            navigationItem.title = "User Name"
-            meLogedVC?.meProtocol = self
-        } // condition: If user is unlogged
-        else{
-            let meUnLogedVC = Bundle.main.loadNibNamed("MeUnlogedView", owner: self, options: nil)?.first as? MeUnlogedView
-            meUnLogedVC?.guestImageView.image = UIImage(named: "person")
-            self.navigationController?.isNavigationBarHidden = true
-            self.meView.addSubview(meUnLogedVC!)
-            meUnLogedVC?.meProtocol = self
-        }
+        
         
 
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
@@ -46,7 +33,20 @@ class MeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.setHidesBackButton(true, animated: true)
-        viewDidLoad()
+        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+            let meLogedVC = (Bundle.main.loadNibNamed("MeLogedView", owner: self, options: nil)?.first as? MeLogedView)
+            self.meView.addSubview(meLogedVC!)
+            self.navigationController?.isNavigationBarHidden = false
+            navigationItem.title = "User Name"
+            meLogedVC?.meProtocol = self
+        } // condition: If user is unlogged
+        else{
+            let meUnLogedVC = Bundle.main.loadNibNamed("MeUnlogedView", owner: self, options: nil)?.first as? MeUnlogedView
+            meUnLogedVC?.guestImageView.image = UIImage(named: "person")
+            self.navigationController?.isNavigationBarHidden = true
+            self.meView.addSubview(meUnLogedVC!)
+            meUnLogedVC?.meProtocol = self
+        }
     }
 
     /*

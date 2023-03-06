@@ -77,9 +77,7 @@ extension LoginViewController{
                 self.showToastMessage(message: "Congratulations", color: UIColor(named: "Green") ?? .systemGreen)
                 print("customer logged in successfully")
                 //Navigation
-                let meVC = UIStoryboard(name: "MeStoryboard", bundle: nil).instantiateViewController(withIdentifier: "me") as! MeViewController
-
-                self.navigationController?.pushViewController(meVC, animated: true)
+                self.navigationController?.popViewController(animated: true)
             }else{
                 self.showAlertError(title: "failed to login", message: "please check your userName or Password")
                 print("failed to login")

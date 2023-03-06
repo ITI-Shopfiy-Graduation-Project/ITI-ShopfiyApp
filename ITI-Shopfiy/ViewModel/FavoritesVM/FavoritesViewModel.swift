@@ -31,8 +31,8 @@ class FavouritesVM {
 
 extension FavouritesVM{
     
-    func fetchSavedProducts(appDelegate : AppDelegate){
-        dataCaching.fetchSavedProducts(appDelegate: appDelegate) { result , error in
+    func fetchSavedProducts(userID: Int, appDelegate : AppDelegate){
+        dataCaching.fetchSavedProducts(userID: userID, appDelegate: appDelegate) { result , error in
             if let products = result {
                 self.savedProductsArray = products
             }
@@ -52,8 +52,8 @@ extension FavouritesVM{
     }
     
     
-    func addFavourite(appDelegate: AppDelegate, product: Products) {
-        self.dataCaching.saveProductToFavourites(appDelegate: appDelegate, product: product)
+    func addFavourite(userID: Int, appDelegate: AppDelegate, product: Products) {
+        self.dataCaching.saveProductToFavourites(userID: userID, appDelegate: appDelegate, product: product)
     }
     
     func isProductsInFavourites(appDelegate: AppDelegate, product: Products) -> Bool {

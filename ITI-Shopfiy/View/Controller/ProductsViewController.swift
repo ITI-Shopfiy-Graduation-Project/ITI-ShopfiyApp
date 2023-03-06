@@ -31,12 +31,19 @@ class ProductsViewController: UIViewController{
     var favoritesArray: [Products]? = []
     var searchArray: [Products]? = []
     var productsVM: ProductsVM?
-    private var favoritesVM: FavouritesVM?
+    var favoritesVM: FavouritesVM?
+    //
+    var currentProduct = Products()
+//    var likedProducts: [NSManagedObject] = []
+//    var managedContext: NSManagedObjectContext!
+//    var coreDataObject: CoreDataManager?
+    //
     var url: String?
     var vendor: String?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    private var leagueState : Bool = false
+//    private var leagueState : Bool = false
     var indicator: UIActivityIndicatorView?
+    var dataCaching: IDataCaching = DataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +54,8 @@ class ProductsViewController: UIViewController{
         indicator?.startAnimating()
         
         viewWillAppear(false)
-        
+//        coreDataObject = CoreDataManager.getInstance()
+//        likedProducts = coreDataObject?.fetchData(userID: UserDefaultsManager.sharedInstance.getUserID() ?? -10) ?? []
         let productNib = UINib(nibName: "ProductCollectionViewCell", bundle: nil)
         productsCollectionView.register(productNib, forCellWithReuseIdentifier: "cell")
                 
@@ -63,12 +71,25 @@ class ProductsViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         
+//        coreDataObject = CoreDataManager.getInstance()
+//        likedProducts = coreDataObject?.fetchData(userID: UserDefaultsManager.sharedInstance.getUserID() ?? -10) ?? []
+        
+        favoritesVM = FavouritesVM()
+        favoritesVM?.bindingData = { favourites, error in
+            if let favourites = favourites {
+                self.favoritesArray = favourites
+            }
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        //original
         productsVM = ProductsVM()
         navigationItem.title = vendor
         productsVM?.getProducts(URL: url ?? "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json")
         getProducts()
-        let products: [Products] = favoritesVM?.savedProductsArray ?? []
-        checkFavouritesViewController(products: products, BarButton: self.like_btn)
+        checkFavouritesViewController()
         self.productsCollectionView.reloadData()
     }
     
@@ -116,6 +137,7 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
         cell.productsView = self
+        cell.currentProduct = productsArray?[indexPath.row] ?? Products()
         cell.configureCell(product: productsArray?[indexPath.row] ?? Products())
         return cell
     }
@@ -176,10 +198,19 @@ extension ProductsViewController: UISearchBarDelegate{
 
 //MARK: Check cell
 extension ProductsViewController: FavouriteActionProductScreen{
+//    func addFavourite(product: Products) {
+//        let userID: Int? = UserDefaultsManager.sharedInstance.getUserID()
+//        coreDataObject?.saveData(Product: product, userID: userID ?? -1)
+//        print(self.likedProducts.count)
+//        showToastMessage(message: "Added !", color: .green)
+//    }
+    
     func showAlert(title: String, message: String, product: Products) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
 
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
+//            let userID: Int? = UserDefaultsManager.sharedInstance.getUserID()
+//            self.coreDataObject?.deleteProductFromFavourites(product_id: product.id ?? -2, userID: userID ?? -4)
             productsVM?.deleteFavourite(appDelegate: appDelegate, product: product)
             showToastMessage(message: "Removed !", color: .red)
         }))
@@ -202,12 +233,13 @@ extension ProductsViewController: FavouriteActionProductScreen{
     
     
     func addFavourite(appDelegate: AppDelegate, product: Products) {
-        productsVM?.addFavourite(appDelegate: appDelegate, product: product)
+        let userID: Int? = UserDefaultsManager.sharedInstance.getUserID()
+        productsVM?.addFavourite(userID: userID ?? -2, appDelegate: appDelegate, product: product)
         showToastMessage(message: "Item Liked", color: .green)
     }
     
     func isFavorite(appDelegate: AppDelegate, product: Products) -> Bool {
-        return ((productsVM?.isProductsInFavourites(appDelegate: appDelegate, product: product)) != nil)
+        return ((productsVM?.isProductsInFavourites(appDelegate: appDelegate, product: product)) == true)
     }
     
     
@@ -218,19 +250,29 @@ extension ProductsViewController{
     
     //MARK: Check Like & Cart Buttonns
     //Favorites fill !!
-    func checkFavouritesViewController(products: [Products], BarButton: UIBarButtonItem){
-            if products.isEmpty{
-                BarButton.image = UIImage(systemName: "heart")
-//                UserDefaultsManager.sharedInstance.setFavorites(Favorites: false)
-                print("No")
-                
-            } else {
-                BarButton.image = UIImage(systemName: "heart.fill")
-//                UserDefaultsManager.sharedInstance.setFavorites(Favorites: true)
-                print("yes")
-            }
-        
+    
+    func checkFavouritesViewController() {
+        if !(self.favoritesArray?.isEmpty ?? false) {
+            like_btn?.image = UIImage(systemName: "heart.fill")
+            print("yes")
+        } else {
+            print("No")
+        }
     }
+    
+//    func checkFavouritesViewController(){
+//            if products.isEmpty{
+//                BarButton.image = UIImage(systemName: "heart")
+////                UserDefaultsManager.sharedInstance.setFavorites(Favorites: false)
+//                print("No")
+//
+//            } else {
+//                BarButton.image = UIImage(systemName: "heart.fill")
+////                UserDefaultsManager.sharedInstance.setFavorites(Favorites: true)
+//                print("yes")
+//            }
+//
+//    }
     
     //Cart fill !!
     func checkCartViewController(products: [Products], BarButton: UIBarButtonItem){

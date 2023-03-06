@@ -9,9 +9,9 @@ import Foundation
 import CoreData
 protocol IDataCaching{
   
-    func fetchSavedProducts(appDelegate : AppDelegate, completion: @escaping(([Products]?, Error?) -> Void ))
+    func fetchSavedProducts(userID: Int, appDelegate : AppDelegate, completion: @escaping(([Products]?, Error?) -> Void ))
     func deleteProductFromFavourites(appDelegate: AppDelegate, ProductID: Int , completion: (Error?) -> Void)
-    func saveProductToFavourites(appDelegate : AppDelegate , product : Products) -> Void
+    func saveProductToFavourites(userID: Int, appDelegate : AppDelegate , product : Products) -> Void
     func isFavourite(appDelegate : AppDelegate, productID: Int) -> Bool
 
 }
