@@ -10,6 +10,8 @@ pod 'Alamofire', '~> 5.6'
       pod 'Cosmos', '~> 23.0'
       pod 'DropDown', '~> 2.3.2'
       pod 'JJFloatingActionButton'
+      pod 'Braintree'
+
   # Pods for ITI-Shopfiy
 
   target 'ITI-ShopfiyTests' do

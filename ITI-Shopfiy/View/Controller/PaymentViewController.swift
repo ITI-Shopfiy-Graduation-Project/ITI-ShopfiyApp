@@ -7,13 +7,14 @@
 
 import UIKit
 import PassKit
-
+import Braintree
 class PaymentViewController: UIViewController {
     
     
     @IBOutlet weak var paymentView: UIStackView!
     var paymentRequest : PKPaymentRequest?
     var PaymentVM = PaymentViewModel()
+    var braintreeClient: BTAPIClient!
     override func viewDidLoad() {
         super.viewDidLoad()
         paymentView.isUserInteractionEnabled = false
@@ -24,9 +25,13 @@ class PaymentViewController: UIViewController {
         PaymentVM.bindPaymentResult = {
             self.getPaymentRequestToViewController()
         }
+        //paypal token
+        braintreeClient = BTAPIClient(authorization: "sandbox_4x759nm8_bmwnvznx5nj7n6dg")!
+        
     }
     
     @IBAction func GooglePay(_ sender: Any) {
+        setupPayPal()
     }
     @IBAction func applePay(_ sender: Any) {
         showPaymentViewController()
@@ -53,6 +58,7 @@ extension PaymentViewController: IPaymentDelegate {
     }
     
 }
+// MARK: - for Apple pay
 extension PaymentViewController: PKPaymentAuthorizationViewControllerDelegate {
     
     func showPaymentViewController(){
@@ -77,3 +83,48 @@ extension PaymentViewController: PKPaymentAuthorizationViewControllerDelegate {
             completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
         }
 }
+
+
+// MARK: - for PayPal
+extension PaymentViewController : BTViewControllerPresentingDelegate {
+    func paymentDriver(_ driver: Any, requestsPresentationOf viewController: UIViewController) {
+        
+    }
+    
+    func paymentDriver(_ driver: Any, requestsDismissalOf viewController: UIViewController) {
+        
+    }
+    
+    func setupPayPal(){
+        
+        let payPalDriver = BTPayPalDriver(apiClient: braintreeClient)
+        //    payPalDriver.viewControllerPresentingDelegate = self
+        //   payPalDriver.appSwitchDelegate = self // Optional
+        // Specify the transaction amount here. "2.32" is used in this example.
+        let request = BTPayPalCheckoutRequest(amount: "2.32")
+        request.currencyCode = "USD" // Optional; see BTPayPalRequest.h for more options
+        
+        payPalDriver.tokenizePayPalAccount(with: request){ tokenizedPayPalAccount, error in
+            if let tokenizedPayPalAccount = tokenizedPayPalAccount {
+                print("Got a nonce: \(tokenizedPayPalAccount.nonce)")
+                
+                // Access additional information
+                let email = tokenizedPayPalAccount.email
+                let firstName = tokenizedPayPalAccount.firstName
+                let lastName = tokenizedPayPalAccount.lastName
+                let phone = tokenizedPayPalAccount.phone
+                
+                // See BTPostalAddress.h for details
+                let billingAddress = tokenizedPayPalAccount.billingAddress
+                let shippingAddress = tokenizedPayPalAccount.shippingAddress
+            } else if error != nil {
+                // Handle error here...
+            } else {
+                // Buyer canceled payment approval
+            }
+        }
+    }
+                                           
+}
+
+
