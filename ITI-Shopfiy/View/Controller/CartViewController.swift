@@ -25,12 +25,13 @@ class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableConfiguration()
-        let lineItem = LineItem()
+        codeError.text = ""
+       /* let lineItem = LineItem()
         lineItem.price = "231 $"
         lineItem.title = "gray t-shirt"
         lineItem.quantity = 3
         lineItem.image = "ct4"
-        cartArray = [lineItem , lineItem , lineItem]
+        cartArray = [lineItem , lineItem , lineItem]*/
         // Do any additional setup after loading the view.
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
