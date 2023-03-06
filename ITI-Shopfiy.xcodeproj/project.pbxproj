@@ -227,7 +227,7 @@
 		E273D5CD29AC7F88006AE49A /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		E29FA8F929A2AEE100CE0786 /* ITI-Shopfiy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ITI-Shopfiy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29FA8FC29A2AEE100CE0786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E29FA8FE29A2AEE100CE0786 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		E29FA8FE29A2AEE100CE0786 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		E29FA90029A2AEE100CE0786 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E29FA90329A2AEE100CE0786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E29FA90629A2AEE100CE0786 /* ITI_Shopfiy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ITI_Shopfiy.xcdatamodel; sourceTree = "<group>"; };
@@ -710,6 +710,7 @@
 				E29FA8F629A2AEE100CE0786 /* Frameworks */,
 				E29FA8F729A2AEE100CE0786 /* Resources */,
 				64C157F916ACCBDE7C69C4E4 /* [CP] Copy Pods Resources */,
+				1150B419F30CEDC384BA959B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -748,6 +749,7 @@
 				E29FA91929A2AEE700CE0786 /* Frameworks */,
 				E29FA91A29A2AEE700CE0786 /* Resources */,
 				8DEAF4F48989B339A2D2B421 /* [CP] Copy Pods Resources */,
+				314EBEAAEA062D6FDD4B96E0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -850,6 +852,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1150B419F30CEDC384BA959B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		314EBEAAEA062D6FDD4B96E0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5A041CDF39094323CA817870 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

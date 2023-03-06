@@ -34,7 +34,7 @@ class Customer: Codable {
 }
 
 class Address: Codable {
-    var address1, city, province, phone: String?
+    var address1, address2, city, province, phone: String?
     var zip, first_name, country: String?
     var id, customer_id: Int?
     var province_code: String?

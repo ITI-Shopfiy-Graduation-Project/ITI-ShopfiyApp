@@ -9,13 +9,14 @@ import UIKit
 import MapKit
 import CoreLocation
 import DropDown
+import TTGSnackbar
 
 class AddressViewController: UIViewController , CLLocationManagerDelegate {
     @IBOutlet weak var addressHisoryTable: UITableView!
     var addressHistoryArray: [Address]?
     var address : Address = Address()
     let addressVM = AddressViewModel()
-    let dropDown = DropDown()
+    var dropDown = DropDown()
     var addressArray: [String] = []
     @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var mabView: MKMapView!
@@ -34,7 +35,6 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
             configureAuthority()
            // getAllAddresses()
             getAllHistory()
-            setupDropDown()
         }
     
     @IBAction func saveAddress_btn(_ sender: Any) {
@@ -230,7 +230,7 @@ extension AddressViewController : MKMapViewDelegate {
             print("name \(place.postalCode ?? "no postal code")")
             print("name \(place.locality ?? "no locality")")
             address.address1 = place.name
-            address.customer_id = 6860199723289
+            address.customer_id = UserDefaultsManager.sharedInstance.getUserID()
             address.city = place.locality
             address.country = place.country
         }
@@ -279,7 +279,8 @@ extension AddressViewController {
         self.indicator.center = self.view.center
         self.view.addSubview(indicator)
         self.indicator.startAnimating()
-        self.addressVM.getAllUserAddress(userId:6860199723289)
+        //self.addressVM.getAllUserAddress(userId: UserDefaultsManager.sharedInstance.getUserID() ?? 0)
+        self.addressVM.getAllUserAddress(userId: 6867827622169)
         self.addressVM.bindingAddress = {()in
         self.renderView()
             
@@ -293,9 +294,14 @@ extension AddressViewController {
             self.addressHistoryArray = self.addressVM.addressList ?? []
             self.addressArray.removeAll()
             self.addressHistoryArray?.forEach({ address in
-                self.addressArray.append(address.address1 ?? "")
+                if address.address2 == nil{
+                    let location = "\(address.address1 ?? ""), \(address.city ?? ""), \(address.country ?? "")"
+                    self.addressArray.append(location)
+                }
             })
+            print(self.addressArray)
             self.addressHisoryTable.reloadData()
+            self.setupDropDown()
             self.indicator.stopAnimating()
         }
     }
@@ -332,7 +338,9 @@ extension AddressViewController {
                     }
                     return
                 }
-            
+            let snackbar = TTGSnackbar(message: "address was added successfully!", duration: .middle)
+            snackbar.tintColor =  UIColor(named: "Green")
+            snackbar.show()
                 print("address was added successfully")
                 
                 DispatchQueue.main.async {
@@ -371,10 +379,16 @@ extension AddressViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: AddressHistoryTableViewCell = tableView.dequeueReusableCell(withIdentifier: "addressCell", for:indexPath) as? AddressHistoryTableViewCell ?? AddressHistoryTableViewCell()
-        cell.street.text = addressHistoryArray?[indexPath.row].address1
-        cell.city.text = addressHistoryArray?[indexPath.row].city
-        cell.country.text = addressHistoryArray?[indexPath.row].country
-    return cell
+        if addressHistoryArray?[indexPath.row].address2 == nil
+        {
+            cell.street.text = addressHistoryArray?[indexPath.row].address1
+            cell.city.text = addressHistoryArray?[indexPath.row].city
+            cell.country.text = addressHistoryArray?[indexPath.row].country
+        }
+        else {
+            cell.isHidden = true
+        }
+        return cell
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Address History"
