@@ -10,10 +10,12 @@ import Foundation
 import Kingfisher
 import TTGSnackbar
 class HomeViewController: UIViewController {
+    @IBOutlet weak var userName: UILabel!
     var brandsModel: BrandViewModel?
     var discountModel : DiscountViewModel?
     var brand :[Brands] = []
     var discount : [Discount] = []
+    var name = "Guest"
     var AllBrandsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/smart_collections.json?since_id=482865238"
     var dicountUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com//admin/api/2023-01/price_rules/1377368047897/discount_codes.json"
     let indicator = UIActivityIndicatorView(style: .large)
@@ -46,9 +48,24 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var BrandsCollectionView: UICollectionView!
     var currentCellIndex = 0
     @IBOutlet weak var AdsCollectionView: UICollectionView!
+    override func viewWillAppear(_ animated: Bool) {
+        if UserDefaultsManager.sharedInstance.isLoggedIn() == false{
+            userName.text = "Guest"
+        }
+        else {
+            userName.text = UserDefaultsManager.sharedInstance.getUserName()
+        }
+    }
     override func viewDidLoad() {
      
         super.viewDidLoad()
+        if UserDefaultsManager.sharedInstance.isLoggedIn() == false{
+            userName.text = "Guest"
+        }
+        else {
+            userName.text = UserDefaultsManager.sharedInstance.getUserName()
+        }
+    
         indicator.center = view.center
         view.addSubview(indicator)
         AdsCollectionView.delegate = self

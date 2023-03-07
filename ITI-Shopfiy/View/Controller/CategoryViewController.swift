@@ -19,11 +19,7 @@ class CategoryViewController: UIViewController {
   
     @IBAction func addFavourite(_ sender: UIButton) {
         
-        favourite.province = String(product[4].id!)
-        favourite.customer_id = 6867209290009
-        print (favourite.province)
-        print ("hereeeeeee")
-        postAddress()
+       
     
         
         
@@ -36,6 +32,7 @@ class CategoryViewController: UIViewController {
     var FavVM = AddressViewModel()
     
     var AllProductsUrl = URLService.allProducts()
+    
        
     var id : Int?
     
@@ -149,6 +146,7 @@ extension CategoryViewController :UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for:indexPath)as! CategoryCollectionViewCell
+        
         cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 0
@@ -165,9 +163,14 @@ extension CategoryViewController :UICollectionViewDataSource{
         let productt = self.product [indexPath.row]
         let productimg = URL(string:productt.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.productImage?.kf.setImage(with:productimg)
-        
-        
         cell.productPrice.text = productt.title
+        cell.buttonAction = { sender in
+            self.favourite.address2 = String(productt.id!)
+            print (productt.id!)
+            print ("suiiii")
+            self.favourite.customer_id = 6867984711961
+            self.postAddress()
+            }
         
         return cell
         

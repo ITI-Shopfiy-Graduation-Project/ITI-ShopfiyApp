@@ -111,7 +111,7 @@
                                                         <color key="baseForegroundColor" name="Red"/>
                                                     </buttonConfiguration>
                                                     <connections>
-                                                        <action selector="addFavourite:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="41O-j9-89N"/>
+                                                        <action selector="addFavourite:" destination="Hcg-9k-wJn" eventType="touchUpInside" id="BUl-gT-Y3C"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -137,6 +137,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <outlet property="addFav" destination="0Bj-um-WD6" id="COb-zH-aRM"/>
                                             <outlet property="productImage" destination="Iu6-VK-Yap" id="OJd-zn-rPn"/>
                                             <outlet property="productPrice" destination="brA-X9-oaD" id="vEJ-WU-TaH"/>
                                         </connections>
