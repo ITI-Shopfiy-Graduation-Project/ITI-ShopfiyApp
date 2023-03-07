@@ -44,7 +44,6 @@ extension SettingsViewController{
         let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: "Logout", style: UIAlertAction.Style.destructive, handler: { action in
-            UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: false)
             UserDefaultsManager.sharedInstance.logut()
             self.navigationController?.popViewController(animated: true)
         }))

@@ -78,7 +78,6 @@ class RegisterVM: registerProtocol{
         UserDefaultsManager.sharedInstance.setUserPhone(userPhone: customerPhone)
         UserDefaultsManager.sharedInstance.setUserAddress(userAddress: defaultAdress)
         UserDefaultsManager.sharedInstance.setUserAddressID(userAddressID: defaultAdressID)
-        UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: true)
         UserDefaultsManager.sharedInstance.login()
     }
     

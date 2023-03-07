@@ -20,7 +20,7 @@ class MeViewController: UIViewController {
         // condition: If user is logged
         
         
-
+        viewWillAppear(false)
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
 

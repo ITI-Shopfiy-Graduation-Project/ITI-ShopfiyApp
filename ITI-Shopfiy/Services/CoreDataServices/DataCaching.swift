@@ -62,7 +62,6 @@ class DataCaching {
     func saveProductToFavourites(userID: Int, product : Products, appDelegate : AppDelegate) -> Void
     {
         let managedContext = appDelegate.persistentContainer.viewContext
-        print("emann")
         let entity = NSEntityDescription.entity(forEntityName: "Product", in: managedContext)
         let Product = NSManagedObject(entity: entity!, insertInto: managedContext)
         Product.setValue(product.id ?? 0, forKey: "product_id")

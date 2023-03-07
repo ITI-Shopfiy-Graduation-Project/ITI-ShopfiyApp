@@ -8,13 +8,13 @@
 import Foundation
 
 protocol FavouriteActionProductScreen{
-    func addFavourite(appDelegate: AppDelegate, product: Products) -> Void
-    func isFavorite(appDelegate: AppDelegate, product: Products) -> Bool
-    func showLoginAlert(title: String, message: String) -> Void
-    func showAlert(title: String, message: String, product: Products) -> Void
+//    func addFavourite(appDelegate: AppDelegate, product: Products) -> Void
+//    func isFavorite(appDelegate: AppDelegate, product: Products) -> Bool
+//    func showLoginAlert(title: String, message: String) -> Void
+//    func showAlert(title: String, message: String, product: Products) -> Void
     
-//    func addFavourite(product: Products)
-////    func isFavorite(product: Products) -> Bool
-//    func showLoginAlert(title: String, message: String)
-//    func showAlert(title: String, message: String, product: Products)
+    func addFavourite(product: Products)
+//    func isFavorite(product: Products) -> Bool
+    func showLoginAlert(title: String, message: String)
+    func showAlert(title: String, message: String, product: Products)
 }

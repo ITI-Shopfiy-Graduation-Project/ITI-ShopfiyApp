@@ -46,6 +46,7 @@ class CoreDataManager: SAVE_CORE, FETCH_CORE, DELETE_CORE {
         do {
             try managedContext.save()
             print("Saved!")
+            print("Mesho!")
         } catch{
             print(error.localizedDescription)
         }
@@ -54,15 +55,15 @@ class CoreDataManager: SAVE_CORE, FETCH_CORE, DELETE_CORE {
     
     func fetchData(userID: Int) -> [NSManagedObject] {
         var products: [NSManagedObject]?
-//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Product")
-//            fetchRequest.predicate = NSPredicate(format: "user_id == %i", userID )
-            do {
-                let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Product")
-                fetchRequest.predicate = NSPredicate(format: "user_id == %i", userID )
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Product")
+        do {
+            if (userID == UserDefaultsManager.sharedInstance.getUserID()){
                 products = try managedContext.fetch(fetchRequest)
-            } catch let error {
-                print(error.localizedDescription)
+                print("Me2moo!")
             }
+        } catch let error {
+            print(error.localizedDescription)
+        }
         return products ?? []
     }
     
@@ -72,35 +73,12 @@ class CoreDataManager: SAVE_CORE, FETCH_CORE, DELETE_CORE {
         for product in products {
             if (product.value(forKey: "product_id") as! Int == product_id) {
                 managedContext.delete(product)
+                print("AI!")
                 try? managedContext.save()
             }
         }
     }
     
-//    func isFavouriteProduct (productID: Int) -> Bool {
-//        var state : Bool = false
-//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Product")
-//        fetchRequest.predicate = NSPredicate(format: "product_id == %i", productID )
-//            do{
-//                let fetchedLeagueArray = try managedContext.fetch(fetchRequest)
-//                for item in (fetchedLeagueArray)
-//                {
-//                    state = (item.value(forKey: "product_state") as? Bool ?? false)
-//                    print("\(state)")
-//                }
-//            }catch let error{
-//                print(error.localizedDescription)
-//            }
-//        
-//        if state == true
-//        {
-//            return true
-//        }
-//        else
-//        {
-//            return false
-//        }
-//    }
     
     
 }
