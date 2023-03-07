@@ -12,10 +12,10 @@ class FavouritesVM {
     var managedContext: NSManagedObjectContext!
     var coreDataManager = CoreDataManager.getInstance()
     let userId = UserDefaultsManager.sharedInstance.getUserID()
-    var results: [NSManagedObject]?
+    var results: [NSManagedObject] = []
     
     var bindingFavorites: (() -> Void) = {}
-    var savedResults: [Products]? {
+    var savedResults: [Products] = [] {
         didSet {
             bindingFavorites()
         }
@@ -28,35 +28,23 @@ extension FavouritesVM{
     
     func fetchSavedProducts(userID: Int){
         self.results = coreDataManager.fetchData(userID: userID)
-        for item in (self.results ?? [])
+        for item in (self.results )
         {
-            
-            let proudct = Products()
-            
-            proudct.id = item.value(forKey:"product_id") as? Int
-            proudct.title = item.value(forKey: "title") as? String
-            proudct.image?.src = item.value(forKey: "src") as? String
-            proudct.variants?.first?.price = item.value(forKey: "price") as? String
-            proudct.user_id = item.value(forKey: "user_id") as? Int
-            self.savedResults?.append(proudct)
-            print("AI")
+//            let proudct = Products()
+            for product in savedResults{
+                product.id = item.value(forKey:"product_id") as? Int
+                product.title = item.value(forKey: "title") as? String
+                product.image?.src = item.value(forKey: "src") as? String
+                product.variants?.first?.price = item.value(forKey: "price") as? String
+                product.user_id = item.value(forKey: "user_id") as? Int
+                //            self.savedResults?.append(proudct)
+                print(product.title ?? "")
+            }
         }
-    }
-    
-    func saveProduct(product: Products, userId: Int){
-        coreDataManager.saveData(Product: product, userID: userId)
-        self.savedResults?.append(product)
     }
     
     func deleteProductItemFromFavourites (product_id: Int, userID: Int){
-        self.results = coreDataManager.fetchData(userID: userID)
-        for item in (self.results ?? [])
-        {
-            if (item.value(forKey: "user_id") as? Int == product_id){
-                self.savedResults?.remove(at: product_id)
-                print("AI")
-            }
-        }
+        coreDataManager.deleteProductFromFavourites(product_id: product_id, userID: userID)
     }
 
     

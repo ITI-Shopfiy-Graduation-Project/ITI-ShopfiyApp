@@ -28,15 +28,11 @@ class ProductsViewController: UIViewController{
     }
     
     var productsArray: [Products]? = []
-//    var favoritesArray: [Products]? = []
     var searchArray: [Products]? = []
     var productsVM: ProductsVM?
-//    var favoritesVM: FavouritesVM?
-    //
     var likedProducts: [NSManagedObject] = []
     var managedContext: NSManagedObjectContext!
     var coreDataObject: CoreDataManager?
-    //
     var url: String?
     var vendor: String?
     var indicator: UIActivityIndicatorView?
@@ -55,7 +51,11 @@ class ProductsViewController: UIViewController{
         navigationItem.title = vendor
         
         productsVM = ProductsVM()
-        viewWillAppear(false)
+        coreDataObject = CoreDataManager.getInstance()
+        let userId = UserDefaultsManager.sharedInstance.getUserID()
+        likedProducts = coreDataObject?.fetchData(userID: userId ?? 0) ?? []
+        self.productsCollectionView.reloadData()
+        
         let productNib = UINib(nibName: "ProductCollectionViewCell", bundle: nil)
         productsCollectionView.register(productNib, forCellWithReuseIdentifier: "cell")
                 
@@ -79,6 +79,7 @@ class ProductsViewController: UIViewController{
         }
         coreDataObject = CoreDataManager.getInstance()
         likedProducts = coreDataObject?.fetchData(userID: UserDefaultsManager.sharedInstance.getUserID() ?? -10) ?? []
+        checkFavouritesViewController()
         self.productsCollectionView.reloadData()
     }
     
@@ -127,11 +128,12 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
         cell.productsView = self
         let product = self.productsArray?[indexPath.row]
-//        let productimg = URL(string:product?.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
-//        cell.productImageview?.kf.setImage(with:productimg)
-//        cell.productTitle.text = product?.title
-        cell.currentProduct = product ?? Products()
-        cell.configureCell(product: product ?? Products())
+        cell.currentProduct = product
+        cell.Location = false
+        if (likedProducts[indexPath.row].value(forKey: "product_id") as? Int ?? -1 == product?.id){
+            cell.isLiked = likedProducts[indexPath.row].value(forKey: "product_state") as? Bool
+            self.productsCollectionView.reloadData()
+        }
         return cell
     }
 
@@ -176,12 +178,11 @@ extension ProductsViewController: UISearchBarDelegate{
     }
 }
 
-
 //MARK: Check cell
 extension ProductsViewController: FavouriteActionProductScreen{
     func addFavourite(product: Products) {
         let userID: Int? = UserDefaultsManager.sharedInstance.getUserID()
-        coreDataObject?.saveData(Product: product, userID: userID ?? -1)
+        coreDataObject?.saveData(Product: product, userID: userID ?? -4)
         print("productArray\(product)")
         print(self.likedProducts.count)
         showToastMessage(message: "Added !", color: .green)
@@ -228,14 +229,14 @@ extension ProductsViewController{
     func checkFavouritesViewController() {
         if !(self.likedProducts.isEmpty ) {
             like_btn?.image = UIImage(systemName: "heart.fill")
-            print("yes")
+            print("there is favorites")
         } else {
-            print("No")
+            print("No, there is no favorites")
         }
     }
     
     //Cart fill !!
-    func checkCartViewController(products: [Products], BarButton: UIBarButtonItem){
+    func checkCartViewController(){
         print("To Do")
     }
     

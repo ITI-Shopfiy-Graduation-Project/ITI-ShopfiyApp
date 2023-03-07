@@ -18,3 +18,7 @@ protocol FavouriteActionProductScreen{
     func showLoginAlert(title: String, message: String)
     func showAlert(title: String, message: String, product: Products)
 }
+
+protocol FavoriteActionFavoritesScreen{
+    func showAlert(title: String, message: String, product: Products)
+}

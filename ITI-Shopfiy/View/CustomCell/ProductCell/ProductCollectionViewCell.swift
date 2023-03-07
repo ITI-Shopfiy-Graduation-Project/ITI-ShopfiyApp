@@ -14,14 +14,16 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productImageview: UIImageView!
     @IBOutlet weak var like_btn: UIButton!
     @IBOutlet weak var productTitle: UILabel!
-//    var isLiked: Bool?
-//    var product: Products? = Products()
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var productsView: FavouriteActionProductScreen?
-    var currentProduct = Products()
-    var likedProducts: [NSManagedObject] = []
-    var managedContext: NSManagedObjectContext!
-    var coreDataObject: CoreDataManager?
+    var favouritesView: FavoriteActionFavoritesScreen?
+    var Location: Bool = false
+    var isLiked: Bool?
+    var currentProduct: Products?{
+        didSet{
+            configureCell()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,8 +34,11 @@ class ProductCollectionViewCell: UICollectionViewCell {
             productsView?.showLoginAlert(title: "Alert",message: "You must login first")
         }
         else{
-//            configureCell(product: currentProduct)
-            actionTakenInCellInProductsView(product: currentProduct)
+            if ( Location == false ){
+                actionTakenInCellInProductsView()
+            }else{
+                actionTakenInCellInFavoritesView()
+            }
         }
         
     }
@@ -45,36 +50,38 @@ class ProductCollectionViewCell: UICollectionViewCell {
 
 extension ProductCollectionViewCell{
 //    cell is liked check
-    func configureCell(product: Products){
-        coreDataObject = CoreDataManager.getInstance()
-        likedProducts = coreDataObject?.fetchData(userID: UserDefaultsManager.sharedInstance.getUserID() ?? -10) ?? []
-       let imgLink = (product.image?.src) ?? ""
+    func configureCell(){
+        guard let currentProduct else { return }
+        let imgLink = (currentProduct.image?.src) ?? ""
        let url = URL(string: imgLink)
        productImageview.kf.setImage(with: url)
-       productTitle.text = product.title
-        for Product in likedProducts {
-            if (Product.value(forKey: "product_id") as? Int == product.id ){
-                self.like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                print("yes")
+       productTitle.text = currentProduct.title
+        if ( isLiked == true ){
+                like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             } else {
                 like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
             }
         }
 
-    }
-
     
-    func actionTakenInCellInProductsView(product: Products){
-
-        if (self.like_btn.image(for: .normal)) == UIImage(systemName: "heart.fill"){
-                productsView?.showAlert(title: "Deleting From Favorites", message: "Are you sure ?", product: product)
+    func actionTakenInCellInProductsView(){
+        guard let currentProduct else { return }
+        if (like_btn.image(for: .normal)) == UIImage(systemName: "heart.fill"){
+                productsView?.showAlert(title: "Deleting From Favorites", message: "Are you sure ?", product: currentProduct)
             } else {
-                productsView?.addFavourite(product: product)
+                productsView?.addFavourite(product: currentProduct)
                 like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             }
-//        }
 
     }
+    
+    
+    func actionTakenInCellInFavoritesView(){
+        guard let currentProduct else { return }
+        favouritesView?.showAlert(title: "Deleting From Favorites", message: "Are you sure ?", product: currentProduct)
+    }
+    
+    
     
     
 
