@@ -117,6 +117,7 @@ extension SignUpViewController {
             guard error == nil else {
                 DispatchQueue.main.async {
                     self.showAlertError(title: "Couldnot register", message: "Please, try again later.")
+                    print(error?.localizedDescription ?? "errorssssss")
                 }
                 return
             }
