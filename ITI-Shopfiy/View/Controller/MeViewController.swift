@@ -18,6 +18,21 @@ class MeViewController: UIViewController {
         
         //MARK: Conditions of view
         // condition: If user is logged
+        
+        
+        viewWillAppear(false)
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
+        swipe.direction = .right
+
+        view.addGestureRecognizer(swipe)
+    }
+    
+    @objc func dismissVC() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.setHidesBackButton(true, animated: true)
         if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
             let meLogedVC = (Bundle.main.loadNibNamed("MeLogedView", owner: self, options: nil)?.first as? MeLogedView)
             self.meView.addSubview(meLogedVC!)
@@ -32,21 +47,6 @@ class MeViewController: UIViewController {
             self.meView.addSubview(meUnLogedVC!)
             meUnLogedVC?.meProtocol = self
         }
-        
-
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
-        swipe.direction = .right
-
-        view.addGestureRecognizer(swipe)
-    }
-    
-    @objc func dismissVC() {
-        self.navigationController?.popViewController(animated: true)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationItem.setHidesBackButton(true, animated: true)
-        viewDidLoad()
     }
 
     /*

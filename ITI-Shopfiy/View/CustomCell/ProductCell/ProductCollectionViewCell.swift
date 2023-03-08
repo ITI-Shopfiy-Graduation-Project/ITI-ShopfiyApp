@@ -7,18 +7,17 @@
 
 import UIKit
 import Kingfisher
+import CoreData
 
 class ProductCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var productImageview: UIImageView!
     @IBOutlet weak var like_btn: UIButton!
     @IBOutlet weak var productTitle: UILabel!
-    var isFavourite: Bool?
-    var product: Products?
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var productsView: FavouriteActionProductScreen?
     var favouritesView: FavoriteActionFavoritesScreen?
-    var isInFavouriteScreen: Bool?
+    var Location: Bool?
+    var currentProduct:Products?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,53 +25,62 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func addToLikes(_ sender: UIButton) {
-        if isInFavouriteScreen! {
-            actionTakenInCellInFavouritesView()
-        } else {
-            actionTakenInCellInProductsView()
+        if (UserDefaultsManager.sharedInstance.isLoggedIn() == false ){
+            productsView?.showLoginAlert(title: "Alert",message: "You must login first")
         }
+        else{
+            if ( Location == false ){
+                actionTakenInCellInProductsView(currentProduct: currentProduct ?? Products())
+            }else{
+                actionTakenInCellInFavoritesView(currentProduct: currentProduct ?? Products())
+            }
+        }
+        
     }
+
+            
+
 
 }
 
 extension ProductCollectionViewCell{
-    
-    //cell is liked check
-    func configureCell(product: Products, isFavourite: Bool, isInFavouriteScreen: Bool = false) {
-        let imgLink = (product.image?.src) ?? ""
-        let url = URL(string: imgLink)
-        productImageview.kf.setImage(with: url)
-        productTitle.text = product.title
-        if isFavourite {
+//    cell is liked check
+    func configureCell(product: Products, isInFavouriteScreen: Bool = false){
+        if isInFavouriteScreen == true{
             like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        } else {
+        }else{
+            if ( product.state == true ){
+            like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else{
             like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
         }
-        self.product = product
-        self.isFavourite = isFavourite
-        self.isInFavouriteScreen = isInFavouriteScreen
+    }
+        self.Location = isInFavouriteScreen
+        self.currentProduct = product
+        }
+
+    
+    func actionTakenInCellInProductsView(currentProduct: Products){
+        if (like_btn.image(for: .normal)) == UIImage(systemName: "heart.fill"){
+                productsView?.showAlert(title: "Deleting From Favorites", message: "Are you sure ?", product: currentProduct)
+            } else {
+                productsView?.addFavourite(product: currentProduct)
+                like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                currentProduct.state = true
+            }
+
     }
     
-    func actionTakenInCellInProductsView() {
-        if UserDefaultsManager.sharedInstance.isLoggedIn() == false{
-            productsView?.showAlert(title: "Alert",message: "You must login")
-            return
-        }
-        
-        if isFavourite! {
-            productsView?.deleteFavourite(appDelegate: appDelegate, product: product!)
-            like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-        } else {
-            product?.user_id = UserDefaultsManager.sharedInstance.getUserID()!
-            productsView?.addFavourite(appDelegate: appDelegate, product: product!)
-            like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        }
-        isFavourite = !isFavourite!
+    
+    func actionTakenInCellInFavoritesView(currentProduct: Products){
+        favouritesView?.showAlert(title: "Deleting From Favorites", message: "Are you sure ?", product: currentProduct)
     }
     
-    func actionTakenInCellInFavouritesView() {
-        favouritesView?.deleteFavourite(appDelegate: appDelegate, product: product!)
-    }
+    
+    
+    
+
+
     
     
 }

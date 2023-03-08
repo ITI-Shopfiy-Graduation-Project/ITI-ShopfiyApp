@@ -31,4 +31,10 @@ protocol UserDefaultProtocol{
     func isLoggedIn()->Bool
     func login()
     func logut()
+    
+    //for products
+    func isInFavouriteScreen()->Bool
+    func LikesForProducts()
+    func LikesForFavoriteScreen()
 }
+

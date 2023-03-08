@@ -114,3 +114,20 @@ class UserDefaultsManager: UserDefaultProtocol{
     }
     
 }
+
+//For favorites
+extension UserDefaultsManager{
+    
+    func isInFavouriteScreen()->Bool{
+        return UserDefaults.standard.bool(forKey: "favorite")
+    }
+    
+    func LikesForProducts(){
+        UserDefaults.standard.set(false, forKey: "favorite")
+    }
+    
+    func LikesForFavoriteScreen(){
+        UserDefaults.standard.set(true, forKey: "favorite")
+    }
+    
+}

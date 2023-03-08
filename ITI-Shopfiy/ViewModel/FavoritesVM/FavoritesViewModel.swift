@@ -6,64 +6,46 @@
 //
 
 import Foundation
+import CoreData
 
 class FavouritesVM {
+    var managedContext: NSManagedObjectContext!
+    var coreDataManager = CoreDataManager.getInstance()
+    let userId = UserDefaultsManager.sharedInstance.getUserID()
+    var results: [NSManagedObject] = []
     
-    var bindingData: (([Products]?,Error?) -> Void) = {_, _ in }
-    
-    var savedProductsArray:[Products]? {
+    var bindingFavorites: (() -> Void) = {}
+    var savedResults: [Products] = [] {
         didSet {
-            bindingData(savedProductsArray,nil)
+            bindingFavorites()
         }
     }
-    var error: Error? {
-        didSet {
-            bindingData(nil, error)
-        }
-    }
-    
-    let dataCaching: IDataCaching
-    init(dataCaching : IDataCaching = DataManager()) {
-        self.dataCaching = dataCaching
-    }
+
 }
    
 
 extension FavouritesVM{
     
-    func fetchSavedProducts(appDelegate : AppDelegate){
-        dataCaching.fetchSavedProducts(appDelegate: appDelegate) { result , error in
-            if let products = result {
-                self.savedProductsArray = products
-            }
-            if let error = error {
-                self.error = error
-            }
-            
-        }
-    }
-    
-    
-    func deleteProductItemFromFavourites (appDeleget : AppDelegate , ProductID: Int)
-    {
-        dataCaching.deleteProductFromFavourites(appDelegate: appDeleget, ProductID: ProductID) { errorMsg in
-            if let error = errorMsg {
-                self.error = error
+    func fetchSavedProducts(userID: Int){
+        self.results = coreDataManager.fetchData(userID: userID)
+        for item in (self.results )
+        {
+//            let proudct = Products()
+            for product in savedResults{
+                product.id = item.value(forKey:"product_id") as? Int
+                product.title = item.value(forKey: "title") as? String
+                product.image?.src = item.value(forKey: "src") as? String
+                product.variants?.first?.price = item.value(forKey: "price") as? String
+                product.user_id = item.value(forKey: "user_id") as? Int
+                //            self.savedResults?.append(proudct)
+                print(product.title ?? "")
             }
         }
     }
     
-    
-//    func saveProduct(appDelegate: AppDelegate , product: Products)
-//    {
-//        dataCaching.saveProductToFavourites(appDelegate: appDelegate, product: product)
-//    }
-//    
-//    
-//    func isFavourite(appDelegate : AppDelegate , productID : Int) -> Bool
-//    {
-//        return dataCaching.isFavourite(appDelegate: appDelegate, productID: productID)
-//    }
-    
+    func deleteProductItemFromFavourites (product_id: Int, userID: Int){
+        coreDataManager.deleteProductFromFavourites(product_id: product_id, userID: userID)
+    }
+
     
 }

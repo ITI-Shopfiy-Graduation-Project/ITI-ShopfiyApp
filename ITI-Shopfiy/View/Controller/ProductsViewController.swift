@@ -28,34 +28,42 @@ class ProductsViewController: UIViewController{
     }
     
     var productsArray: [Products]? = []
-    var favoritesArray: [Products]? = []
     var searchArray: [Products]? = []
     var productsVM: ProductsVM?
-    private var favoritesVM: FavouritesVM?
+    var likedProducts: [NSManagedObject]? = [NSManagedObject]()
+    var managedContext: NSManagedObjectContext?
+    var coreDataObject: CoreDataManager?
     var url: String?
     var vendor: String?
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    private var leagueState : Bool = false
     var indicator: UIActivityIndicatorView?
+
+//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//    var dataCaching: IDataCaching = DataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         indicator = UIActivityIndicatorView(style: .large)
         indicator?.center = view.center
-        view.addSubview(indicator!)
+        view.addSubview(indicator ?? UIActivityIndicatorView() )
         indicator?.startAnimating()
+        
+        navigationItem.title = vendor
+        
         productsVM = ProductsVM()
+        coreDataObject = CoreDataManager.getInstance()
+        guard let userId = UserDefaultsManager.sharedInstance.getUserID() else {return}
+        likedProducts = coreDataObject?.fetchData(userID: userId ) ?? []
         productsVM?.getProducts(URL: url ?? "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json")
-        getProducts()
-        checkFavouritesViewController(products: favoritesArray ?? [], BarButton: self.like_btn)
+        productsVM?.bindingProducts = { () in
+            self.renderView()
+            self.indicator?.stopAnimating()
+        }
+        self.productsCollectionView.reloadData()
         
         let productNib = UINib(nibName: "ProductCollectionViewCell", bundle: nil)
         productsCollectionView.register(productNib, forCellWithReuseIdentifier: "cell")
-        
-        navigationItem.title = vendor
-        viewWillAppear(false)
-        
+                
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
 
@@ -67,11 +75,12 @@ class ProductsViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getProducts()
-        favoritesVM = FavouritesVM()
-        let products: [Products] = favoritesVM?.savedProductsArray ?? []
-        checkFavouritesViewController(products: products, BarButton: self.like_btn)
-        productsCollectionView.reloadData()
+        navigationItem.title = vendor
+        
+        coreDataObject = CoreDataManager.getInstance()
+        likedProducts = coreDataObject?.fetchData(userID: UserDefaultsManager.sharedInstance.getUserID() ?? 0) ?? []
+        checkFavouritesViewController()
+        self.productsCollectionView.reloadData()
     }
     
     @IBAction func likesScreen(_ sender: UIBarButtonItem) {
@@ -79,7 +88,7 @@ class ProductsViewController: UIViewController{
         let favoritesVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
         navigationController?.pushViewController(favoritesVC, animated: true)
         }else{
-            showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
+            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
         }
     }
     
@@ -88,7 +97,7 @@ class ProductsViewController: UIViewController{
         let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
         navigationController?.pushViewController(cartVC, animated: true)
         }else{
-            showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
+            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
         }
     }
     
@@ -117,9 +126,12 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
+        let product = self.productsArray?[indexPath.row]
+        cell.productTitle.text = product?.title ?? ""
+        let productimg = URL(string:product?.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
+        cell.productImageview?.kf.setImage(with:productimg)
         cell.productsView = self
-        let isFavorite = productsVM!.getProductsInFavourites(appDelegate: appDelegate, product: &productsArray![indexPath.row])
-        cell.configureCell(product: productsArray?[indexPath.row] ?? Products(), isFavourite: isFavorite)
+        cell.configureCell(product: product ?? Products())
         return cell
     }
 
@@ -136,19 +148,6 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
 }
 
 extension ProductsViewController{
-    
-    func getProducts(){
-        productsVM?.bindingProducts = { result, error in
-            if result != nil {
-                self.renderView()
-                self.indicator?.stopAnimating()
-            }
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
-    }
-
     
     func renderView() {
         DispatchQueue.main.async {
@@ -176,21 +175,46 @@ extension ProductsViewController: UISearchBarDelegate{
     }
 }
 
-
 //MARK: Check cell
 extension ProductsViewController: FavouriteActionProductScreen{
-    func addFavourite(appDelegate: AppDelegate, product: Products) {
-        productsVM?.addFavourite(appDelegate: appDelegate, product: product)
+    func addFavourite(product: Products) {
+        let userID: Int? = UserDefaultsManager.sharedInstance.getUserID()
+        coreDataObject?.saveData(Product: product, userID: userID ?? -4)
+        print("productArray\(product)")
+        print(self.likedProducts?.count ?? 0)
+        showToastMessage(message: "Added !", color: .green)
+    }
+
+    
+    func showAlert(title: String, message: String, product: Products) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
+            let userID: Int? = UserDefaultsManager.sharedInstance.getUserID()
+            self.coreDataObject?.deleteProductFromFavourites(product_id: product.id ?? -2, userID: userID ?? -4)
+            product.state = false
+            showToastMessage(message: "Removed !", color: .red)
+        }))
+        self.productsCollectionView.reloadData()
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
     }
     
-    func deleteFavourite(appDelegate: AppDelegate, product: Products) {
-        showAlert(Title: "Remove Item", Message: "Are you sure ?", Product: product)
+    func showLoginAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
+            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
     }
     
-    func showAlert(title: String, message: String) {
-        showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
-    }
     
+
     
     
 }
@@ -200,22 +224,18 @@ extension ProductsViewController{
     
     //MARK: Check Like & Cart Buttonns
     //Favorites fill !!
-    func checkFavouritesViewController(products: [Products], BarButton: UIBarButtonItem){
-            if products.isEmpty{
-                BarButton.image = UIImage(systemName: "heart")
-                UserDefaultsManager.sharedInstance.setFavorites(Favorites: false)
-                print("No")
-                
-            } else {
-                BarButton.image = UIImage(systemName: "heart.fill")
-                UserDefaultsManager.sharedInstance.setFavorites(Favorites: true)
-                print("yes")
-            }
-        
+    
+    func checkFavouritesViewController() {
+        if ((self.likedProducts?.isEmpty) == nil) {
+            like_btn?.image = UIImage(systemName: "heart.fill")
+            print("there is favorites")
+        } else {
+            print("No, there is no favorites")
+        }
     }
     
     //Cart fill !!
-    func checkCartViewController(products: [Products], BarButton: UIBarButtonItem){
+    func checkCartViewController(){
         print("To Do")
     }
     
@@ -224,17 +244,6 @@ extension ProductsViewController{
 
 extension ProductsViewController{
     
-    func showAlert(Title: String, Message: String, Product: Products) {
-        let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
-            productsVM?.deleteFavourite(appDelegate: appDelegate, product: Product)
-            showToastMessage(message: "Removed !", color: .red)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
-    }
     
     func showToastMessage(message: String, color: UIColor) {
         let toastLabel = UILabel(frame: CGRect(x: view.frame.width / 2 - 120, y: view.frame.height - 130, width: 260, height: 30))
@@ -255,17 +264,7 @@ extension ProductsViewController{
         }
     }
     
-    func showLoginAlert(Title: String, Message: String) {
-        let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
-        
-        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
-            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
-            self.navigationController?.pushViewController(loginVC, animated: true)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
-    }
+  
     
     
 }
