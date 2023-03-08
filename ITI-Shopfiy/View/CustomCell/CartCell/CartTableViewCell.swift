@@ -14,7 +14,6 @@ class CartTableViewCell: UITableViewCell {
     var counterProtocol: CounterProtocol?
     @IBOutlet weak var itemPrice: UILabel!
     @IBOutlet weak var quantityCount: UILabel!
-    @IBOutlet weak var itemQuntity: UILabel!
     @IBOutlet weak var itemName: UILabel!
     @IBOutlet weak var cartImage: UIImageView!
     override func awakeFromNib() {
@@ -30,9 +29,9 @@ class CartTableViewCell: UITableViewCell {
     }
     
     @IBAction func increaseBtn(_ sender: UIButton) {
-        counterProtocol?.increaseCounter()
+        quantityCount.text = counterProtocol?.increaseCounter().formatted()
     }
     @IBAction func dcreaseBtn(_ sender: UIButton) {
-        counterProtocol?.decreaseCounter()
+        quantityCount.text = counterProtocol?.decreaseCounter().formatted()
     }
 }

@@ -42,4 +42,9 @@ struct URLService{
     {
         return baseUrl + "customers/\(userID)/addresses.json"
     }
+    
+    static func postOrder() -> String
+    {
+        return baseUrl + "orders.json"
+    }
 }

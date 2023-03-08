@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JyF-O7-OSc">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="645"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="h3B-Lh-U8v">
@@ -30,15 +30,39 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1N-l8-qri">
+                                <rect key="frame" x="32" y="736" width="329" height="53.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Processed to checkout" cornerStyle="large">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
+                                    <color key="baseForegroundColor" name="White"/>
+                                    <color key="baseBackgroundColor" name="Green"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="processedToCheckout:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="EsS-qx-avg"/>
+                                    <segue destination="bGZ-dA-zeG" kind="show" identifier="toPromoCode" id="8DM-EX-Faq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="JyF-O7-OSc" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.85" id="4Jn-qE-2x8"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="JyF-O7-OSc" secondAttribute="trailing" id="HhT-ZW-Ore"/>
+                            <constraint firstItem="m1N-l8-qri" firstAttribute="width" secondItem="JyF-O7-OSc" secondAttribute="width" constant="-64" id="XUw-aR-NAJ"/>
+                            <constraint firstItem="m1N-l8-qri" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.07" id="XkP-oT-cqh"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="JyF-O7-OSc" secondAttribute="bottom" id="ZUG-dC-5Yj"/>
+                            <constraint firstItem="m1N-l8-qri" firstAttribute="top" secondItem="JyF-O7-OSc" secondAttribute="bottom" constant="32" id="fOW-Ve-Gki"/>
+                            <constraint firstItem="m1N-l8-qri" firstAttribute="trailing" secondItem="JyF-O7-OSc" secondAttribute="trailing" constant="-32" id="kjR-Vp-w1D"/>
                             <constraint firstItem="JyF-O7-OSc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sBJ-Ve-ojI"/>
+                            <constraint firstItem="m1N-l8-qri" firstAttribute="leading" secondItem="JyF-O7-OSc" secondAttribute="leading" constant="32" id="sbD-DF-Q24"/>
                             <constraint firstItem="JyF-O7-OSc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="zur-o7-KFy"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ZUG-dC-5Yj"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="cartTable" destination="JyF-O7-OSc" id="pXf-FB-GBc"/>
@@ -46,10 +70,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="-27"/>
+            <point key="canvasLocation" x="130.53435114503816" y="-27.464788732394368"/>
+        </scene>
+        <!--Storyboard Reference-->
+        <scene sceneID="QeB-mz-ZfU">
+            <objects>
+                <viewControllerPlaceholder id="bGZ-dA-zeG" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="HjP-bY-2xz"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="38b-jA-hhP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="778" y="-7"/>
         </scene>
     </scenes>
     <resources>
+        <namedColor name="Green">
+            <color red="0.37999999523162842" green="0.71399998664855957" blue="0.6470000147819519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="White">
+            <color red="0.98000001907348633" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
