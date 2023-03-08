@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -102,6 +102,22 @@
                                 <color key="textColor" name="Red"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKl-wV-ypT">
+                                <rect key="frame" x="64" y="646" width="300" height="46.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Logout">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                    <color key="baseBackgroundColor" name="Red"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.091787283440000006" green="0.14986227020000001" blue="0.097840475829999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="logout_btn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Xwt-Tn-QcC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
@@ -111,6 +127,10 @@
                             <constraint firstItem="AQZ-i0-hmN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="691-vv-e3h"/>
                             <constraint firstItem="Ful-eX-tjs" firstAttribute="height" secondItem="C5M-k1-HIv" secondAttribute="height" id="82x-Lw-8Xp"/>
                             <constraint firstItem="Ful-eX-tjs" firstAttribute="centerY" secondItem="C5M-k1-HIv" secondAttribute="centerY" id="DWA-mt-274"/>
+                            <constraint firstItem="ZKl-wV-ypT" firstAttribute="trailing" secondItem="AQZ-i0-hmN" secondAttribute="trailing" constant="-48" id="Fjt-Cb-Mj4"/>
+                            <constraint firstItem="ZKl-wV-ypT" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.05" id="HKP-kG-tdi"/>
+                            <constraint firstItem="ZKl-wV-ypT" firstAttribute="top" secondItem="AQZ-i0-hmN" secondAttribute="bottom" constant="64" id="XEr-m1-Few"/>
+                            <constraint firstItem="ZKl-wV-ypT" firstAttribute="leading" secondItem="AQZ-i0-hmN" secondAttribute="leading" constant="48" id="Zub-21-ziS"/>
                             <constraint firstItem="AQZ-i0-hmN" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.5" id="b8M-II-0dn"/>
                             <constraint firstItem="C5M-k1-HIv" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="31" id="ddy-TR-BDr"/>
                             <constraint firstItem="AQZ-i0-hmN" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" constant="-32" id="gtG-ob-26w"/>
@@ -118,10 +138,11 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="AQZ-i0-hmN" secondAttribute="trailing" constant="16" id="tDK-Iv-Ub1"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="5S8-28-LAJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="62" y="-14"/>
+            <point key="canvasLocation" x="961.68224299065412" y="-14.254859611231103"/>
         </scene>
         <!--AddressDetailsStoryboard-->
         <scene sceneID="FJW-2K-jIL">
@@ -170,7 +191,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fkZ-SG-gop" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="925" y="-14"/>
+            <point key="canvasLocation" x="1823.8317757009345" y="-14.254859611231103"/>
         </scene>
     </scenes>
     <resources>

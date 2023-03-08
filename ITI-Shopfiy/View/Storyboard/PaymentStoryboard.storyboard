@@ -57,7 +57,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVQ-T7-28P">
-                                        <rect key="frame" x="323" y="36.666666666666671" width="75" height="46"/>
+                                        <rect key="frame" x="323" y="36.666666666666671" width="75" height="46.000000000000014"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="greenRightArrow"/>
                                         <connections>
@@ -100,7 +100,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="398" height="155.33333333333334"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgY-a6-gO2">
-                                                <rect key="frame" x="28" y="15.999999999999993" width="159.33333333333334" height="123.33333333333331"/>
+                                                <rect key="frame" x="28" y="15.999999999999993" width="159.33333333333331" height="123.33333333333331"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="gray" title="Apple Pay">
                                                     <color key="baseForegroundColor" name="Green"/>
@@ -221,7 +221,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="apple_btn" destination="fgY-a6-gO2" id="mgM-an-624"/>
+                        <outlet property="cash_btn" destination="ntV-mA-aaG" id="DtA-j9-80K"/>
                         <outlet property="paymentView" destination="5aK-Y3-YDv" id="mfh-qK-uJ0"/>
+                        <outlet property="paypal_btn" destination="fjL-yc-fmU" id="cdt-aC-TEt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -22,6 +22,10 @@ protocol UserDefaultProtocol{
     func getUserAddressID()-> Int?
     func setUserStatus(userIsLogged: Bool)
     func getUserStatus()-> Bool
+    func setFavorites(Favorites: Bool)
+    func getFavorites()-> Bool
+//    func setProductStatus(IsLiked: Bool)
+//    func getProductStatus()-> Bool
     func getCurrency(key:String) -> String
     func setCurrency(key:String , value:String)
     func isLoggedIn()->Bool

@@ -34,9 +34,7 @@ class RegisterVM: registerProtocol{
             if !self.isValidPassword(password: password, confirmPassword: confirmPassword) {
                     completionHandler("ErrorPassword")
                     return
-                }
-            
-                    
+                }   
     }
     
     func createNewCustomer(newCustomer: NewCustomer, completion: @escaping (Data?, HTTPURLResponse?, Error?) -> ()) {
@@ -64,7 +62,7 @@ class RegisterVM: registerProtocol{
         let customerID = customer?["id"] as? Int ?? 0
         let customerUserName = customer?["first_name"] as? String ?? ""
         let customerEmail = customer?["email"] as? String ?? ""
-        let customerPhone = customer?["phone"] as? String ?? ""
+        let customerPhone = customer?["state"] as? String ?? ""
         let customerPassword = customer?["tags"] as? String ?? ""
         let customerAddress = customer?["addresses"] as? Dictionary<String, Any>
         let defaultAdress = customerAddress?["address1"] as? String ?? ""
@@ -78,8 +76,8 @@ class RegisterVM: registerProtocol{
         UserDefaultsManager.sharedInstance.setUserPhone(userPhone: customerPhone)
         UserDefaultsManager.sharedInstance.setUserAddress(userAddress: defaultAdress)
         UserDefaultsManager.sharedInstance.setUserAddressID(userAddressID: defaultAdressID)
-        
         UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: true)
+        UserDefaultsManager.sharedInstance.login()
     }
     
     func isValidPassword(password: String, confirmPassword: String) -> Bool {

@@ -17,4 +17,18 @@ class Products : Decodable{
     var variants : [variants]?
     var image : image?
     var images: [Image]?
+    
+    init(id: Int? = nil, title: String? = nil, vendor: String? = nil, body_html: String? = nil, product_type: String? = nil, created_at: String? = nil, user_id: Int? = nil, variants: [variants]? = nil, image: image? = nil, images: [Image]? = nil) {
+        self.id = id
+        self.title = title
+        self.vendor = vendor
+        self.body_html = body_html
+        self.product_type = product_type
+        self.created_at = created_at
+        self.user_id = user_id
+        self.variants = variants
+        self.image = image
+        self.images = images
+    }
+    
 }
