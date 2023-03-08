@@ -16,13 +16,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productTitle: UILabel!
     var productsView: FavouriteActionProductScreen?
     var favouritesView: FavoriteActionFavoritesScreen?
-    var Location: Bool = false
-    var isLiked: Bool?
-    var currentProduct: Products?{
-        didSet{
-            configureCell()
-        }
-    }
+    var Location: Bool?
+    var currentProduct:Products?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,9 +30,9 @@ class ProductCollectionViewCell: UICollectionViewCell {
         }
         else{
             if ( Location == false ){
-                actionTakenInCellInProductsView()
+                actionTakenInCellInProductsView(currentProduct: currentProduct ?? Products())
             }else{
-                actionTakenInCellInFavoritesView()
+                actionTakenInCellInFavoritesView(currentProduct: currentProduct ?? Products())
             }
         }
         
@@ -50,34 +45,34 @@ class ProductCollectionViewCell: UICollectionViewCell {
 
 extension ProductCollectionViewCell{
 //    cell is liked check
-    func configureCell(){
-        guard let currentProduct else { return }
-        let imgLink = (currentProduct.image?.src) ?? ""
-       let url = URL(string: imgLink)
-       productImageview.kf.setImage(with: url)
-       productTitle.text = currentProduct.title
-        if ( isLiked == true ){
-                like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            } else {
-                like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-            }
+    func configureCell(product: Products, isInFavouriteScreen: Bool = false){
+        if isInFavouriteScreen == true{
+            like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }else{
+            if ( product.state == true ){
+            like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else{
+            like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+    }
+        self.Location = isInFavouriteScreen
+        self.currentProduct = product
         }
 
     
-    func actionTakenInCellInProductsView(){
-        guard let currentProduct else { return }
+    func actionTakenInCellInProductsView(currentProduct: Products){
         if (like_btn.image(for: .normal)) == UIImage(systemName: "heart.fill"){
                 productsView?.showAlert(title: "Deleting From Favorites", message: "Are you sure ?", product: currentProduct)
             } else {
                 productsView?.addFavourite(product: currentProduct)
                 like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                currentProduct.state = true
             }
 
     }
     
     
-    func actionTakenInCellInFavoritesView(){
-        guard let currentProduct else { return }
+    func actionTakenInCellInFavoritesView(currentProduct: Products){
         favouritesView?.showAlert(title: "Deleting From Favorites", message: "Are you sure ?", product: currentProduct)
     }
     

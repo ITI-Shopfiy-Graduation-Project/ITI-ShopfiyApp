@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Braintree
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?

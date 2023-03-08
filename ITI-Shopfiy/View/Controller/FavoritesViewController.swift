@@ -26,9 +26,9 @@ class FavoritesViewController: UIViewController {
         }
     }
 
-    var savedProductsArray: [NSManagedObject] = []
-    var favoritesProducts: [Products] = []
-    var searchArray: [Products] = []
+    var savedProductsArray: [NSManagedObject]? = []
+//    var favoritesProducts: [Products]? = []
+//    var searchArray: [Products] = []
     var managedContext: NSManagedObjectContext!
     var coreDataManager: CoreDataManager?
     //
@@ -41,29 +41,15 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        indicator = UIActivityIndicatorView(style: .large)
-        indicator?.center = view.center
-        view.addSubview(indicator ?? UIActivityIndicatorView() )
-        indicator?.startAnimating()
+//        indicator = UIActivityIndicatorView(style: .large)
+//        indicator?.center = view.center
+//        view.addSubview(indicator ?? UIActivityIndicatorView() )
+//        indicator?.startAnimating()
                 
         coreDataManager = CoreDataManager.getInstance()
-        let userId = UserDefaultsManager.sharedInstance.getUserID() ?? -5
+//        let userId = UserDefaultsManager.sharedInstance.getUserID()
+//        savedProductsArray = coreDataManager?.fetchData(userID: userId ?? -4) ?? []
         
-//        favoritesVM?.fetchSavedProducts(userID: userId ?? -1)
-//        favoritesVM?.bindingFavorites = { () in
-//            self.renderView()
-//            self.indicator?.stopAnimating()
-//        }
-        DispatchQueue.main.async {
-            self.renderView(userId: userId)
-            self.indicator?.stopAnimating()
-            self.favoritesCollectionView.reloadData()
-        }
-        print(savedProductsArray.count)
-        print("favoriteArrayofiti\(favoritesProducts.count)")
-        print("favoriteArrayofiti\(favoritesProducts.first ?? Products())")
-//        favoritesVM = FavouritesVM()
-        //
         self.favoritesCollectionView.reloadData()
         let productNib = UINib(nibName: "ProductCollectionViewCell", bundle: nil)
         favoritesCollectionView.register(productNib, forCellWithReuseIdentifier: "cell")
@@ -79,6 +65,8 @@ class FavoritesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        let userId = UserDefaultsManager.sharedInstance.getUserID()
+        savedProductsArray = coreDataManager?.fetchData(userID: userId ?? -4) ?? []
         self.favoritesCollectionView.reloadData()
     }
     
@@ -94,9 +82,7 @@ class FavoritesViewController: UIViewController {
 extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(savedProductsArray.count)
-
-        return self.favoritesProducts.count
+        return self.savedProductsArray?.count ?? 20
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -115,17 +101,12 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
         cell.favouritesView = self
-        let product = self.favoritesProducts[indexPath.row]
-        cell.currentProduct = product
-        cell.Location = true
-        if (savedProductsArray[indexPath.row].value(forKey: "product_id") as? Int == product.id){
-            cell.isLiked = true
-            self.favoritesCollectionView.reloadData()
-        }else{
-            cell.isLiked = false
-            favoritesProducts.remove(at: indexPath.row)
-            savedProductsArray.remove(at: indexPath.row)
-        }
+        let temp: NSManagedObject = savedProductsArray?[indexPath.row] ?? NSManagedObject()
+        cell.productTitle.text = temp.value(forKey: "title") as? String
+        cell.productImageview.kf.setImage(with: URL(string: temp.value(forKey: "src") as? String ?? ""))
+        let product: Products = Products()
+        product.id = temp.value(forKey: "product_id") as? Int
+        cell.configureCell(product: product, isInFavouriteScreen: true)
         return cell
     }
 
@@ -134,7 +115,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetialsVC = UIStoryboard(name: "ProductDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "productDetails") as! ProductDetailsViewController
         
-        productDetialsVC.product_ID = favoritesProducts[indexPath.row].id
+        productDetialsVC.product_ID = savedProductsArray?[indexPath.row].value(forKey: "product_id") as? Int
         
         self.navigationController?.pushViewController(productDetialsVC, animated: true)
     }
@@ -145,18 +126,18 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
 //MARK: Search
 extension FavoritesViewController: UISearchBarDelegate{
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        favoritesProducts = []
-        if searchText == "" {
-            favoritesProducts = searchArray
-        }
-        for product in searchArray {
-            if product.title!.uppercased().contains(searchText.uppercased()){
-                favoritesProducts.append(product)
-            }
-        }
-        self.favoritesCollectionView.reloadData()
-    }
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        favoritesProducts = []
+//        if searchText == "" {
+//            favoritesProducts = searchArray
+//        }
+//        for product in searchArray {
+//            if product.title!.uppercased().contains(searchText.uppercased()){
+//                favoritesProducts.append(product)
+//            }
+//        }
+//        self.favoritesCollectionView.reloadData()
+//    }
 }
 
 //MARK: Fetch Data
@@ -170,6 +151,7 @@ extension FavoritesViewController: FavoriteActionFavoritesScreen {
             let userId = UserDefaultsManager.sharedInstance.getUserID()
             self.coreDataManager?.deleteProductFromFavourites(product_id: product.id ?? -3, userID: userId ?? -3)
             self.favoritesCollectionView.reloadData()
+            product.state = false
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
 
@@ -202,20 +184,19 @@ extension FavoritesViewController{
 //    }
     
     
-    func renderView(userId: Int){
-        self.savedProductsArray = coreDataManager?.fetchData(userID: userId) ?? []
-        for item in (self.savedProductsArray )
-        {
-                let product = Products()
-                product.id = item.value(forKey:"product_id") as? Int
-                product.title = item.value(forKey: "title") as? String
-                product.image?.src = item.value(forKey: "src") as? String
-                product.variants?.first?.price = item.value(forKey: "price") as? String
-                product.user_id = item.value(forKey: "user_id") as? Int
-            self.favoritesProducts.append(product)
-                print(product.title ?? "")
-        }
-    }
+//    func renderView(userId: Int){
+//            self.savedProductsArray = self.coreDataManager?.fetchData(userID: userId) ?? []
+//            for item in (self.savedProductsArray ){
+//                    let product = Products()
+//                    product.id = item.value(forKey:"product_id") as? Int
+//                    product.title = item.value(forKey: "title") as? String
+//                    product.image?.src = item.value(forKey: "src") as? String
+//                    product.variants?.first?.price = item.value(forKey: "price") as? String
+//                    product.user_id = item.value(forKey: "user_id") as? Int
+//                self.favoritesProducts.append(product)
+//                    print(product.title ?? "")
+//            }
+//    }
     
     
 }

@@ -30,8 +30,8 @@ class ProductsViewController: UIViewController{
     var productsArray: [Products]? = []
     var searchArray: [Products]? = []
     var productsVM: ProductsVM?
-    var likedProducts: [NSManagedObject] = []
-    var managedContext: NSManagedObjectContext!
+    var likedProducts: [NSManagedObject]? = [NSManagedObject]()
+    var managedContext: NSManagedObjectContext?
     var coreDataObject: CoreDataManager?
     var url: String?
     var vendor: String?
@@ -52,8 +52,13 @@ class ProductsViewController: UIViewController{
         
         productsVM = ProductsVM()
         coreDataObject = CoreDataManager.getInstance()
-        let userId = UserDefaultsManager.sharedInstance.getUserID()
-        likedProducts = coreDataObject?.fetchData(userID: userId ?? 0) ?? []
+        guard let userId = UserDefaultsManager.sharedInstance.getUserID() else {return}
+        likedProducts = coreDataObject?.fetchData(userID: userId ) ?? []
+        productsVM?.getProducts(URL: url ?? "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json")
+        productsVM?.bindingProducts = { () in
+            self.renderView()
+            self.indicator?.stopAnimating()
+        }
         self.productsCollectionView.reloadData()
         
         let productNib = UINib(nibName: "ProductCollectionViewCell", bundle: nil)
@@ -71,14 +76,9 @@ class ProductsViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         navigationItem.title = vendor
-        productsVM = ProductsVM()
-        productsVM?.getProducts(URL: url ?? "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json")
-        productsVM?.bindingProducts = { () in
-            self.renderView()
-            self.indicator?.stopAnimating()
-        }
+        
         coreDataObject = CoreDataManager.getInstance()
-        likedProducts = coreDataObject?.fetchData(userID: UserDefaultsManager.sharedInstance.getUserID() ?? -10) ?? []
+        likedProducts = coreDataObject?.fetchData(userID: UserDefaultsManager.sharedInstance.getUserID() ?? 0) ?? []
         checkFavouritesViewController()
         self.productsCollectionView.reloadData()
     }
@@ -126,14 +126,12 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
-        cell.productsView = self
         let product = self.productsArray?[indexPath.row]
-        cell.currentProduct = product
-        cell.Location = false
-        if (likedProducts[indexPath.row].value(forKey: "product_id") as? Int ?? -1 == product?.id){
-            cell.isLiked = likedProducts[indexPath.row].value(forKey: "product_state") as? Bool
-            self.productsCollectionView.reloadData()
-        }
+        cell.productTitle.text = product?.title ?? ""
+        let productimg = URL(string:product?.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
+        cell.productImageview?.kf.setImage(with:productimg)
+        cell.productsView = self
+        cell.configureCell(product: product ?? Products())
         return cell
     }
 
@@ -155,7 +153,6 @@ extension ProductsViewController{
         DispatchQueue.main.async {
             self.productsArray = self.productsVM?.productsResults ?? []
             self.searchArray = self.productsVM?.productsResults ?? []
-            self.checkFavouritesViewController()
             self.productsCollectionView.reloadData()
         }
     }
@@ -184,7 +181,7 @@ extension ProductsViewController: FavouriteActionProductScreen{
         let userID: Int? = UserDefaultsManager.sharedInstance.getUserID()
         coreDataObject?.saveData(Product: product, userID: userID ?? -4)
         print("productArray\(product)")
-        print(self.likedProducts.count)
+        print(self.likedProducts?.count ?? 0)
         showToastMessage(message: "Added !", color: .green)
     }
 
@@ -195,8 +192,10 @@ extension ProductsViewController: FavouriteActionProductScreen{
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
             let userID: Int? = UserDefaultsManager.sharedInstance.getUserID()
             self.coreDataObject?.deleteProductFromFavourites(product_id: product.id ?? -2, userID: userID ?? -4)
+            product.state = false
             showToastMessage(message: "Removed !", color: .red)
         }))
+        self.productsCollectionView.reloadData()
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
 
         self.present(alert, animated: true, completion: nil)
@@ -227,7 +226,7 @@ extension ProductsViewController{
     //Favorites fill !!
     
     func checkFavouritesViewController() {
-        if !(self.likedProducts.isEmpty ) {
+        if ((self.likedProducts?.isEmpty) == nil) {
             like_btn?.image = UIImage(systemName: "heart.fill")
             print("there is favorites")
         } else {

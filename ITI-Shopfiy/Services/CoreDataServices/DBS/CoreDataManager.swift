@@ -35,11 +35,11 @@ class CoreDataManager: SAVE_CORE, FETCH_CORE, DELETE_CORE {
         guard let entity = NSEntityDescription.entity(forEntityName: "Product", in: managedContext) else { return }
         let product = NSManagedObject(entity: entity, insertInto: managedContext)
 
-        product.setValue(Product.id ?? 0, forKey: "product_id")
-        product.setValue(Product.title , forKey: "title")
-        product.setValue(Product.image?.src , forKey: "src")
-        product.setValue(userID , forKey: "user_id")
-        product.setValue(true , forKey: "product_state")
+        product.setValue(Product.id ?? -1, forKey: "product_id")
+        product.setValue(Product.title ?? "", forKey: "title")
+        product.setValue(Product.image?.src ?? "", forKey: "src")
+        product.setValue(userID, forKey: "user_id")
+        product.setValue(Product.state , forKey: "product_state")
 //        Product.setValue(product.user_id ?? 0, forKey: "user_id")
         product.setValue(Product.variants?.first?.price, forKey: "price")
         
