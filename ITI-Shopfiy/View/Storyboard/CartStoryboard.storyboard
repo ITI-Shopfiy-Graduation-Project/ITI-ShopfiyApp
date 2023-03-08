@@ -64,6 +64,17 @@
                                             <color key="baseForegroundColor" name="White"/>
                                             <color key="baseBackgroundColor" name="Green"/>
                                         </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" name="thirdGray"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowSize">
+                                                <size key="value" width="0.0" height="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="proceedToCheckout:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="OCK-3S-XAK"/>
                                             <segue destination="8uN-TK-tVe" kind="show" id="jwj-8B-wo7"/>
@@ -257,6 +268,9 @@
         </namedColor>
         <namedColor name="White">
             <color red="0.98000001907348633" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="thirdGray">
+            <color red="0.76899999380111694" green="0.76899999380111694" blue="0.76899999380111694" alpha="0.48800000548362732" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

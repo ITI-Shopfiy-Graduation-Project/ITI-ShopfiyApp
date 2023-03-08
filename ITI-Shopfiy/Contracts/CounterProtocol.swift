@@ -8,6 +8,6 @@
 import Foundation
 protocol CounterProtocol {
     
-    func increaseCounter()
-    func decreaseCounter()
+    func increaseCounter() -> Int8
+    func decreaseCounter() -> Int8
 }
