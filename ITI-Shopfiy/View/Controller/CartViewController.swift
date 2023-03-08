@@ -76,9 +76,9 @@ extension CartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:CartTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CartTableViewCell
         cell.itemName.text = cartArray?[indexPath.row].title
-        cell.itemPrice.text = cartArray?[indexPath.row].price
+//        cell.itemPrice.text = cartArray?[indexPath.row].price
        // cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
-        cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].image ?? "ct4")
+//        cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].image ?? "ct4")
         cell.quantityCount.isHidden = true
         cell.decreseItem.isHidden = true
         cell.increaseItem.isHidden = true

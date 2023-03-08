@@ -20,6 +20,11 @@ class ProductDetailsViewController: UIViewController{
     @IBOutlet weak var pageControl: UIPageControl!
 
     var currentCellIndex = 0
+    var cart : DrafOrder = DrafOrder()
+    var cartVM = ShoppingCartViewModel()
+    var lineitem = LineItem()
+//    var lineitemarr:LineItem = [LineItem]
+    var lineItemArray:[LineItem] = []
     @IBOutlet weak var productImagesCollectionView: UICollectionView!{
         didSet{
             productImagesCollectionView.delegate = self
@@ -88,6 +93,19 @@ class ProductDetailsViewController: UIViewController{
     }
     
     @IBAction func addToCartButton(_ sender: Any) {
+//        lineitem.title = "ADIDAS | CLASSIC BACKPACK"
+//        cart.email = "mohamed2323@gmail.com"
+//        cart.customer?.email = "mohamed2323@gmail.com"
+//        cart.customer?.id = 6868122665241
+//        cart.customer?.first_name = "Mohamed"
+//        cart.created_at = "2023-03-06T04:06:34-05:00"
+//        cart.updated_at = "2023-03-06T04:06:34-05:00"
+//        cart.line_items?[0].title = "ADIDAS | CLASSIC BACKPACK"
+//        lineitem.product_id = 8117841854745
+//        lineItemArray.removeAll()
+//        lineItemArray.append(lineitem)
+//        self.cart.id = 1110835953945
+        self.postCart()
     }
     
     @IBAction func addToLikesButton(_ sender: Any) {
@@ -161,3 +179,88 @@ extension ProductDetailsViewController{
 
     
 }
+extension ProductDetailsViewController {
+    func postCart(){
+        let newdraft  : [String : Any] =  [ "draft_order" :
+                                        [
+                                          //"id": user_id  ,//
+//                                          "note": "rush order",
+                                          "email": "youseif@gamil.com",
+//                                          "taxes_included": false,
+//                                          "currency": "Egp",
+                                         
+//                                          "created_at": "2023-02-13T10:18:48-05:00",
+//                                          "updated_at": "2023-02-13T10:18:48-05:00",
+//                                          "tax_exempt": false,
+
+                                       
+//                                          "name": "#d1",
+//                                          "status": "completed",
+                                          "line_items" : [
+                                            [
+//                                              "id": 58237889282329,
+//                                              "variant_id": nil,
+//                                              "product_id": nil,
+                                              "title":  "CONVERSE" ,
+//                                              "variant_title": nil,
+//                                              "sku": nil,
+//                                              "vender" : nil,
+                                              "quantity": 6,
+//                                              "requires_shipping": true,
+//                                              "taxable": true,
+//                                              "gift_card": false,
+//                                              "fulfillment_service": "manual",
+//                                              "grams":567,
+//                                              "tax_lines": [            [
+//                                                  "rate":0.14,
+//                                                  "title":"GST",
+//                                                  "price":"28.00"
+//                                               ]
+//                                              ],
+//                                              "applied_discount":,
+//                                              "name": nil,
+//                                              "properties": [],
+//                                              "custom": false,
+                                              "price": "100.00",
+//                                              "admin_graphql_api_id": "gid://shopify/DraftOrderLineItem/498266019"
+                                          
+                                           ]
+                                          ],
+                                        "customer": [
+                                        "id":6868102218009
+                                                ]
+                                         
+                                        ]
+                                    ]
+        let customerCart : ShoppingCart = ShoppingCart()
+        customerCart.draft_order = cart
+      
+        //(customer_address: address)
+        self.cartVM.postNewCart(userCart:newdraft){ data, response, error in
+                guard error == nil else {
+                    DispatchQueue.main.async {
+                        print ("cart Error \n \(error?.localizedDescription ?? "")" )
+                    }
+                    return
+                }
+                
+            guard response?.statusCode ?? 0 >= 200 && response?.statusCode ?? 0 < 300   else {
+                    DispatchQueue.main.async {
+                        print ("cart Response \n \(response ?? HTTPURLResponse())" )
+
+                    }
+                    return
+                }
+                print ("this is response\(response?.statusCode)")
+                print("address was added successfully")
+                
+                DispatchQueue.main.async {
+                    print("Address Saved")
+                }
+            }
+    }
+    
+    
+}
+
+

@@ -16,10 +16,10 @@ class ShoppingCartViewController: UIViewController {
     private var shoppingCartVM = ShoppingCartViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        lineItem.price = "231 $"
+//        lineItem.price = "231 $"
         lineItem.title = "gray t-shirt"
-        lineItem.quantity = 3
-        lineItem.image = "ct4"
+//        lineItem.quantity = 3
+//        lineItem.image = "ct4"
         cartArray = [lineItem , lineItem , lineItem]
         tableConfiguration()
         getData()
@@ -50,9 +50,9 @@ extension ShoppingCartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:CartTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CartTableViewCell
         cell.itemName.text = cartArray?[indexPath.row].title
-        cell.itemPrice.text = cartArray?[indexPath.row].price
-        cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
-        cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].image ?? "ct4")
+//        cell.itemPrice.text = cartArray?[indexPath.row].price
+//        cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
+//        cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].image ?? "ct4")
         cell.counterProtocol = self
         return cell
     }
