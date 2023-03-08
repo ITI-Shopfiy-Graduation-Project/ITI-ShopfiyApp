@@ -21,7 +21,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var phoneNumber_txt: UITextField!
     @IBOutlet weak var createAccount_btn: UIButton!
     var registerVM: registerProtocol?
-    var adresses: [Address] = []
+    var adresses: [Address]? = []
     var chosenAddress = Address()
     
     override func viewDidLoad() {
@@ -54,12 +54,12 @@ class SignUpViewController: UIViewController {
         guard let confirmPassword = confirmPassword_txt.text else {return}
         guard let phone = phoneNumber_txt.text else {return}
         self.chosenAddress.address1 = currentAddress_txt.text
-        self.adresses.removeAll()
-        self.adresses.append(chosenAddress)
+        self.adresses?.removeAll()
+        self.adresses?.append(chosenAddress)
         
 //        guard let address = currentAddress_txt.text else {return}
         if ValdiateCustomerInfomation(UserName: name, password: password, confirmPassword: confirmPassword, userPhone: phone, email: email, userAddress: chosenAddress){
-            self.register(UserName: name, password: password, confirmPassword: confirmPassword, UserPhone: phone, email: email, UserAddress: chosenAddress)
+            register(UserName: name, password: password, confirmPassword: confirmPassword, UserPhone: phone, email: email, UserAddress: chosenAddress)
         } else {
             showAlertError(title: "Couldnot register", message: "Please try again later.")
         }
@@ -71,8 +71,8 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController: AddressDelegate{
     func getAddressInfo(Address userAddress: Address) {
-        self.adresses.removeAll()
-        self.adresses.append(userAddress)
+        self.adresses?.removeAll()
+        self.adresses?.append(userAddress)
         self.currentAddress_txt.text = userAddress.address1
     }
 }
@@ -111,8 +111,8 @@ extension SignUpViewController {
     }
     
     func register(UserName: String, password: String, confirmPassword: String, UserPhone: String, email: String, UserAddress: Address){
-        //deleted phone in customer
-        let customer = Customer(first_name: UserName, tags: password, email: email, addresses: self.adresses)
+        
+        let customer = Customer(first_name: UserName,phone: UserPhone, tags: password, email: email, addresses: self.adresses)
         let newCustomer = NewCustomer(customer: customer)
         self.registerVM?.createNewCustomer(newCustomer: newCustomer) { data, response, error in
                     
@@ -124,10 +124,9 @@ extension SignUpViewController {
                 return
             }
             
-            guard (response?.statusCode ?? 0 >= 200 && response?.statusCode ?? 0 < 300) else {
+            guard response?.statusCode == 422 else {
                 DispatchQueue.main.async {
-                    self.showAlertError(title: "Couldnot register", message: "Please, try again later.")
-                    print(response)
+                    self.showAlertError(title: "Couldnot register", message: "Please, try another email.")
                 }
                 return
             }
