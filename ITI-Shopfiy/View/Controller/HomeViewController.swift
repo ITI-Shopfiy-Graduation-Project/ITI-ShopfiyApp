@@ -10,6 +10,7 @@ import Foundation
 import Kingfisher
 import TTGSnackbar
 class HomeViewController: UIViewController {
+    @IBOutlet weak var userName: UILabel!
     var brandsModel: BrandViewModel?
     var discountModel : DiscountViewModel?
     var brand :[Brands] = []
@@ -77,7 +78,14 @@ class HomeViewController: UIViewController {
         
     }
     
-  
+    override func viewWillAppear(_ animated: Bool) {
+        if UserDefaultsManager.sharedInstance.isLoggedIn() == false{
+            userName.text = "Guest"
+        }
+        else {
+            userName.text = UserDefaultsManager.sharedInstance.getUserName()
+        }
+    }
    
 
 }
