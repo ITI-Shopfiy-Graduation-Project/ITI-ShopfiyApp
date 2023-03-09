@@ -274,22 +274,17 @@ extension AddressViewController {
 }
 
 extension AddressViewController {
-    
     func getAllHistory(){
         self.indicator.center = self.view.center
         self.view.addSubview(indicator)
         self.indicator.startAnimating()
         //self.addressVM.getAllUserAddress(userId: UserDefaultsManager.sharedInstance.getUserID() ?? 0)
-        self.addressVM.getAllUserAddress(userId: 6867827622169)
+        self.addressVM.getAllUserAddress(userId: UserDefaultsManager.sharedInstance.getUserID() ?? 0)
         self.addressVM.bindingAddress = {()in
         self.renderView()
-            
-        
         }
     }
     func renderView(){
-      
-           
         DispatchQueue.main.async {
             self.addressHistoryArray = self.addressVM.addressList ?? []
             self.addressArray.removeAll()
@@ -338,15 +333,14 @@ extension AddressViewController {
                     }
                     return
                 }
-            let snackbar = TTGSnackbar(message: "address was added successfully!", duration: .middle)
-            snackbar.tintColor =  UIColor(named: "Green")
-            snackbar.show()
+            DispatchQueue.main.async { [self] in
                 print("address was added successfully")
-                
-                DispatchQueue.main.async {
-                    print("Address Saved")
-                }
+                viewDidLoad()
+                let snackbar = TTGSnackbar(message: "address was added successfully!", duration: .middle)
+                snackbar.tintColor =  UIColor(named: "Green")
+                snackbar.show()
             }
+        }
     }
 }
 
@@ -365,6 +359,29 @@ extension AddressViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+           let delete = UIContextualAction(style: .normal, title: "Delete") { (action, view, completionHandler) in
+               let postAddress: PostAddress = PostAddress()
+               postAddress.customer_address = self.addressHistoryArray?[indexPath.row]
+               print("Data \(postAddress.customer_address)")
+               self.addressVM.deleteAddress(userAddress: postAddress )
+               self.addressHistoryArray?.remove(at: indexPath.row)
+               self.addressHisoryTable.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+               completionHandler(true)
+         }
+           let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
+               
+               completionHandler(true)
+         }
+           delete.backgroundColor = UIColor(named: "Red")
+           edit.backgroundColor = UIColor(named: "Green")
+           edit.image = UIImage(systemName: "pencil.circle.fill" )
+          delete.image = UIImage(systemName: "trash.fill")
+           let configuration = UISwipeActionsConfiguration(actions: [delete,edit])
+           return configuration
+       }
+    
     
 }
 

@@ -15,8 +15,5 @@ class PaymentViewModel{
         }
     }
     
-    func getPaymentRequest() {
-        self.paymentRequest = PaymentService.sharedInstance.getPayment()
-    }
     
 }
