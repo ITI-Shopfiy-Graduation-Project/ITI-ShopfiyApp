@@ -10,33 +10,33 @@ import Foundation
 class RegisterVM: registerProtocol{
 
     func validateCustomer(userName: String, password: String, confirmPassword: String, userPhone: String, email: String, userAddress: Address?, completionHandler: @escaping (String?) ->Void) {
-        
-        CustomerLogin.login(){ result in
-            guard let customers = result?.customers else {return}
-            for customer in customers {
-                if (userName == customer.first_name) {
-                    completionHandler("InvalidUserName")
-                    return
-                }
-                
-            
-                
-                if (userName.isEmpty && userName.count <= 2) && email.isEmpty && (password.isEmpty || password.count <= 6) || confirmPassword.isEmpty || userPhone.isEmpty || (userAddress?.address1 == nil){
-                    completionHandler("ErrorAllInfoIsNotFound")
-                    return
-                }
-                    
-                if !self.isValidEmail(email) {
-                        completionHandler("ErrorEmail")
+
+        //
+            CustomerLogin.login(){ result in
+                guard let customers = result?.customers else {return}
+                for customer in customers {
+                    if (userName == customer.first_name) {
+                        completionHandler("InvalidUserName")
                         return
                     }
                     
-                if !self.isValidPassword(password: password, confirmPassword: confirmPassword) {
-                        completionHandler("ErrorPassword")
-                        return
-                    }
-            }}
-                    
+                }}
+            //
+            if (userName.isEmpty && userName.count <= 2) && email.isEmpty && (password.isEmpty || password.count <= 4) || confirmPassword.isEmpty || userPhone.isEmpty || (userAddress?.address1 == nil){
+                completionHandler("ErrorAllInfoIsNotFound")
+                return
+            }
+                
+            if !self.isValidEmail(email) {
+                    completionHandler("ErrorEmail")
+                    return
+                }
+                
+            if !self.isValidPassword(password: password, confirmPassword: confirmPassword) {
+                    completionHandler("ErrorPassword")
+                    return
+                }   
+
     }
     
     func createNewCustomer(newCustomer: NewCustomer, completion: @escaping (Data?, HTTPURLResponse?, Error?) -> ()) {
@@ -78,7 +78,6 @@ class RegisterVM: registerProtocol{
         UserDefaultsManager.sharedInstance.setUserPhone(userPhone: customerPhone)
         UserDefaultsManager.sharedInstance.setUserAddress(userAddress: defaultAdress)
         UserDefaultsManager.sharedInstance.setUserAddressID(userAddressID: defaultAdressID)
-        UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: true)
         UserDefaultsManager.sharedInstance.login()
     }
     

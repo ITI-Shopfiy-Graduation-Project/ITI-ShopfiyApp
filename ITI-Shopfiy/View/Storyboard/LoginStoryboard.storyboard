@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5Ze-HL-Iv9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -18,25 +18,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log  in  to your account           " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iO3-EN-smW">
-                                <rect key="frame" x="16" y="195.5" width="288" height="75.5"/>
+                                <rect key="frame" x="16" y="151.5" width="288" height="75.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
                                 <color key="textColor" name="Black"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QXX-Pc-Z0U">
-                                <rect key="frame" x="16" y="296" width="288" height="20.5"/>
+                                <rect key="frame" x="16" y="274" width="288" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" name="Black"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please enter your Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PGk-Mf-bh0">
-                                <rect key="frame" x="16" y="316.5" width="288" height="25"/>
+                                <rect key="frame" x="16" y="294.5" width="288" height="25"/>
                                 <color key="textColor" name="Gray"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhH-z3-aC4">
-                                <rect key="frame" x="32" y="463.5" width="256" height="38"/>
+                                <rect key="frame" x="32" y="441.5" width="256" height="38"/>
                                 <color key="tintColor" name="White"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Log in" cornerStyle="capsule">
@@ -48,7 +48,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="otg-RO-zQN">
-                                <rect key="frame" x="48" y="501.5" width="224" height="32"/>
+                                <rect key="frame" x="48" y="479.5" width="224" height="32"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doesn't have an account ? " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HS6-qj-Nub">
                                         <rect key="frame" x="0.0" y="0.0" width="130.5" height="32"/>
@@ -70,7 +70,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGa-tc-lhf">
-                                <rect key="frame" x="117.5" y="533.5" width="85" height="25.5"/>
+                                <rect key="frame" x="117.5" y="511.5" width="85" height="25.5"/>
                                 <color key="tintColor" name="Red"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Skip"/>
@@ -79,25 +79,25 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJu-j2-oRn">
-                                <rect key="frame" x="16" y="357.5" width="288" height="20.5"/>
+                                <rect key="frame" x="16" y="335.5" width="288" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" name="Black"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please enter your secret Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0bv-H5-mI6">
-                                <rect key="frame" x="16" y="378" width="288" height="25"/>
+                                <rect key="frame" x="16" y="356" width="288" height="25"/>
                                 <color key="textColor" name="Gray"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forget Password ?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8q-T2-h6N">
-                                <rect key="frame" x="16" y="403" width="288" height="20.5"/>
+                                <rect key="frame" x="16" y="381" width="288" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="SecondGray"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vG2-Wc-wDF">
-                                <rect key="frame" x="0.0" y="44" width="320" height="151.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="151.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jpb-gX-sws">
                                     <size key="itemSize" width="128" height="128"/>
@@ -108,7 +108,7 @@
                                 <cells/>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="mOb-Og-SX8">
-                                <rect key="frame" x="16" y="153.5" width="288" height="26"/>
+                                <rect key="frame" x="16" y="109.5" width="288" height="26"/>
                                 <color key="pageIndicatorTintColor" name="thirdGray"/>
                                 <color key="currentPageIndicatorTintColor" name="Green"/>
                             </pageControl>
@@ -170,7 +170,8 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="863" y="-2"/>
+
+            <point key="canvasLocation" x="458" y="-43"/>
         </scene>
         <!--signup-->
         <scene sceneID="jIM-Eu-SXB">
@@ -178,7 +179,9 @@
                 <viewControllerPlaceholder storyboardName="SignUpStoryboard" referencedIdentifier="signup" id="GF3-8N-8pM" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dli-gH-xD8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1464" y="-159"/>
+
+            <point key="canvasLocation" x="1081" y="-172"/>
+
         </scene>
         <!--home-->
         <scene sceneID="foq-h3-hE6">
@@ -186,33 +189,16 @@
                 <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="home" id="Wqw-Ja-9rf" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBa-K8-ysc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1620" y="-21"/>
+            <point key="canvasLocation" x="1088" y="-43"/>
         </scene>
-        <!--address-->
-        <scene sceneID="1jD-Le-65k">
+        <!--me-->
+        <scene sceneID="QJP-6n-qqh">
             <objects>
-                <viewControllerPlaceholder storyboardName="AddressDetailsStoryboard" referencedIdentifier="address" id="g44-6a-0tx" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TuN-uD-5aF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="MeStoryboard" referencedIdentifier="me" id="k1b-YS-kUL" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ATx-QT-l2c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1613" y="58"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="gjX-iB-iSq">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Ze-HL-Iv9" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0bJ-Rz-6WD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="YLw-HH-i6f"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="72e-oL-KTj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="61.832061068702288" y="-2.1126760563380285"/>
+
+            <point key="canvasLocation" x="1059" y="89"/>
         </scene>
     </scenes>
     <resources>

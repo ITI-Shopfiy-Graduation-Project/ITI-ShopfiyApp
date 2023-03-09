@@ -31,5 +31,14 @@ protocol UserDefaultProtocol{
     func isLoggedIn()->Bool
     func login()
     func logut()
+
     func setUserCart(cartId: Int?)
+
+    
+    //for products
+    func isInFavouriteScreen()->Bool
+    func LikesForProducts()
+    func LikesForFavoriteScreen()
+
 }
+

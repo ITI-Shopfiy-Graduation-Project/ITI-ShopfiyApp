@@ -12,7 +12,7 @@ class ShoppingCartViewController: UIViewController {
     @IBOutlet weak var cartTable: UITableView!
     private var cartArray: [LineItem]?
     var lineItem = LineItem()
-    private var counter: Int = 0
+    private var counter: Int8 = 0
     private var shoppingCartVM = ShoppingCartViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,12 @@ class ShoppingCartViewController: UIViewController {
         cartTable.dataSource = self
         let nib = UINib(nibName: "CartTableViewCell", bundle: nil)
         cartTable.register(nib, forCellReuseIdentifier: "cell")
+    }
+    @IBAction func processedToCheckout(_ sender: Any) {
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! CartViewController
+        vc.cartArray = self.cartArray
     }
 }
 extension ShoppingCartViewController: UITableViewDataSource {
@@ -50,9 +56,9 @@ extension ShoppingCartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:CartTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CartTableViewCell
         cell.itemName.text = cartArray?[indexPath.row].title
-//        cell.itemPrice.text = cartArray?[indexPath.row].price
-//        cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
-//        cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].image ?? "ct4")
+        cell.itemPrice.text = cartArray?[indexPath.row].price
+        //cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
+        cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].image ?? "ct4")
         cell.counterProtocol = self
         return cell
     }
@@ -83,18 +89,20 @@ extension ShoppingCartViewController: UITableViewDelegate {
 }
 
 extension ShoppingCartViewController: CounterProtocol {
-    func increaseCounter() {
+    func increaseCounter() -> Int8 {
         counter = counter + 1
         print(counter)
+        return counter
     }
     
-    func decreaseCounter() {
+    func decreaseCounter() -> Int8{
         if counter <= 0 {
             self.showAlert(msg: "do you want to delete this item")
         }
         else {
             counter = counter - 1
         }
+        return counter
     }
 }
 

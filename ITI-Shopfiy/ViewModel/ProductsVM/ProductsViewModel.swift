@@ -9,14 +9,15 @@ import Foundation
 
 class ProductsVM{
     
-    var bindingProducts : (()->()) = {}
-    var productsResults :[Products]?{
-        didSet{
+    var bindingProducts: (() -> Void) = {}
+    var productsResults: [Products]? {
+        didSet {
             bindingProducts()
         }
     }
-    
+
 }
+
 
 
 extension ProductsVM: getProductsProtocol{
@@ -29,6 +30,5 @@ extension ProductsVM: getProductsProtocol{
     }
     
     
-    
-    
 }
+    

@@ -6,60 +6,81 @@
 //
 
 import UIKit
+import Kingfisher
+import CoreData
 
 class ProductCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var productImageview: UIImageView!
     @IBOutlet weak var like_btn: UIButton!
     @IBOutlet weak var productTitle: UILabel!
-    var product: Products?
-    var delegate: ToAddToLikes?
+    var productsView: FavouriteActionProductScreen?
+    var favouritesView: FavoriteActionFavoritesScreen?
+    var Location: Bool?
+    var currentProduct:Products?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    var isFavourite:Bool!{
-        didSet{
-            if isFavourite == true{
-                like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            }else{
-                like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-            }
-        }
-    }
-    
     @IBAction func addToLikes(_ sender: UIButton) {
-        //        let products = Products()
-        //        addToLikes?.addToFavorites(Product: products, Button: like_btn)
-        if (delegate?.isLogin() == true){
-            if (delegate?.isFavourite(id: product?.id ?? 0) == true){
-                print("\(product?.id ?? 0) is liked product")
-                print("\(product?.title ?? "Adidas") is liked product")
-                delegate?.deleteFromFavourites(id: product?.id ?? 0)
-                like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-                print("UnLiked done")
-                
+        if (UserDefaultsManager.sharedInstance.isLoggedIn() == false ){
+            productsView?.showLoginAlert(title: "Alert",message: "You must login first")
+        }
+        else{
+            if ( Location == false ){
+                actionTakenInCellInProductsView(currentProduct: currentProduct ?? Products())
             }else{
-                delegate?.addToFavourite(product: product ?? Products())
-                like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                print("Liked")
+                actionTakenInCellInFavoritesView(currentProduct: currentProduct ?? Products())
             }
-            print("prdouct id: \(product?.id ?? 0)")
-        }else{
-            delegate?.navTologin()
         }
         
     }
 
+            
+
+
 }
 
-protocol ToAddToLikes {
-    func isFavourite(id: Int)->Bool
-    func deleteFromFavourites(id: Int)
-    func addToFavourite(product: Products)
-    func isLogin()->Bool
-    func navTologin()
-}
+extension ProductCollectionViewCell{
+//    cell is liked check
+    func configureCell(product: Products, isInFavouriteScreen: Bool = false){
+        if isInFavouriteScreen == true{
+            like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }else{
+            if ( product.state == true ){
+            like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else{
+            like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+    }
+        self.Location = isInFavouriteScreen
+        self.currentProduct = product
+        }
 
+    
+    func actionTakenInCellInProductsView(currentProduct: Products){
+        if (like_btn.image(for: .normal)) == UIImage(systemName: "heart.fill"){
+                productsView?.showAlert(title: "Deleting From Favorites", message: "Are you sure ?", product: currentProduct)
+            } else {
+                productsView?.addFavourite(product: currentProduct)
+                like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                currentProduct.state = true
+            }
+
+    }
+    
+    
+    func actionTakenInCellInFavoritesView(currentProduct: Products){
+        favouritesView?.showAlert(title: "Deleting From Favorites", message: "Are you sure ?", product: currentProduct)
+    }
+    
+    
+    
+    
+
+
+    
+    
+}

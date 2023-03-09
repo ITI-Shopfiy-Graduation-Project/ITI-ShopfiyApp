@@ -50,7 +50,7 @@
                                     <imageReference key="image" image="heart" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="addToLikes:" destination="gTV-IL-0wX" eventType="touchUpInside" id="ghM-5p-YQd"/>
+                                    <action selector="addToLikes:" destination="gTV-IL-0wX" eventType="touchUpInside" id="U58-Oc-2xV"/>
                                 </connections>
                             </button>
                         </subviews>

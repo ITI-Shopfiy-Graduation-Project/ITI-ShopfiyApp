@@ -42,11 +42,25 @@ struct URLService{
     {
         return baseUrl + "customers/\(userID)/addresses.json"
     }
+
     static func draftCart() -> String
     {
         return baseUrl + "draft_orders.json"
     }
     static func putCart(lineId : Int) -> String{
         return baseUrl + "draft_orders/\(lineId).json"
+
+    
+    static func postOrder() -> String
+    {
+        return baseUrl + "orders.json"
+    }
+    static func deleteAddress(addressID : Int , userId: Int) -> String
+    {
+        return baseUrl + "customers/\(userId)/addresses/\(addressID).json"
+    }
+    static func updateCustomer(userID: Int) -> String {
+        return baseUrl + "customers/\(userID).json"
+
     }
 }

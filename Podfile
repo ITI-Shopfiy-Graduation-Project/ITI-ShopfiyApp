@@ -1,6 +1,9 @@
 # Uncomment the next line to define a global platform for your project
  platform :ios, '12.0'
 
+# Uncomment this line if you're using Swift
+use_frameworks!
+
 target 'ITI-Shopfiy' do
 
 pod 'Alamofire', '~> 5.6'
@@ -11,6 +14,8 @@ pod 'Alamofire', '~> 5.6'
       pod 'DropDown', '~> 2.3.2'
       pod 'JJFloatingActionButton'
       pod 'Braintree'
+      pod 'BraintreeDropIn', '~> 9.8'
+
 
   # Pods for ITI-Shopfiy
 

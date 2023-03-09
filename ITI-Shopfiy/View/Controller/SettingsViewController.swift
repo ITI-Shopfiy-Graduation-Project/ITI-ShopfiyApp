@@ -9,13 +9,15 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var username: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
-
+        username.text = UserDefaultsManager.sharedInstance.getUserName()
         view.addGestureRecognizer(swipe)
     }
     
@@ -23,6 +25,19 @@ class SettingsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
 
+    @IBAction func changeCurrencey(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            print("USD")
+            UserDefaultsManager.sharedInstance.setCurrency(key: "currency" , value: "USD")
+        case 1:
+            print("EGP")
+            UserDefaultsManager.sharedInstance.setCurrency(key: "currency" , value: "EGP")
+        default:
+            UserDefaultsManager.sharedInstance.setCurrency(key: "currency" , value: "USD")
+        }
+        
+    }
     @IBAction func logout_btn(_ sender: Any) {
         showLogoutAlert(Title: "Do you want to Logout", Message: "We gonnna miss you")
     }
@@ -44,10 +59,10 @@ extension SettingsViewController{
         let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: "Logout", style: UIAlertAction.Style.destructive, handler: { action in
-            let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
-            UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: false)
+
             UserDefaultsManager.sharedInstance.logut()
-            self.navigationController?.pushViewController(homeVC, animated: true)
+            self.navigationController?.popViewController(animated: true)
+
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
         

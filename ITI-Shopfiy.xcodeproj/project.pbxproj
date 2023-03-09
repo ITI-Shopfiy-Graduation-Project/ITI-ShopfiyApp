@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13BFE520DED6326EEC829CF9 /* libPods-ITI-Shopfiy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E701EB06A67148CCDB52A09 /* libPods-ITI-Shopfiy.a */; };
-		16F4F44927AD84A0AB66CF15 /* libPods-ITI-Shopfiy-ITI-ShopfiyUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2065B3E96AC07E25064AEBEB /* libPods-ITI-Shopfiy-ITI-ShopfiyUITests.a */; };
+		1481E2D3C97F9CED43029FE1 /* Pods_ITI_Shopfiy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3240A72A68CFB201B35C0F21 /* Pods_ITI_Shopfiy.framework */; };
+		56AC9008F58B47EA6865940C /* Pods_ITI_ShopfiyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC52A45E2FD480255621FFCA /* Pods_ITI_ShopfiyTests.framework */; };
 		5E012F7529B3116600E516CE /* DiscountCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E012F7429B3116600E516CE /* DiscountCode.swift */; };
 		5E012F7829B3138800E516CE /* DiscountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E012F7729B3138800E516CE /* DiscountViewModel.swift */; };
 		5E012F7A29B314C800E516CE /* getDiscountProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E012F7929B314C800E516CE /* getDiscountProtocol.swift */; };
@@ -38,6 +38,7 @@
 		5EA83B8629A621B40018E90E /* CategoryStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EA83B8529A621B40018E90E /* CategoryStoryboard.storyboard */; };
 		5EA83B8829A62A380018E90E /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA83B8729A62A380018E90E /* CategoryViewController.swift */; };
 		5EF5D5DB29A9E81500E62B4D /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF5D5DA29A9E81500E62B4D /* CategoryCollectionViewCell.swift */; };
+		7C7B4EE8999BADB542F28F4D /* Pods_ITI_Shopfiy_ITI_ShopfiyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F227E3EBA9744D62037EA98C /* Pods_ITI_Shopfiy_ITI_ShopfiyUITests.framework */; };
 		A705F64F29A8E3B300301207 /* MeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A705F64E29A8E3B300301207 /* MeStoryboard.storyboard */; };
 		A705F65A29A8E55300301207 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705F65929A8E55300301207 /* MeViewController.swift */; };
 		A7157ABC29A694D700D9A41A /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7157ABB29A694D700D9A41A /* ProductsViewController.swift */; };
@@ -47,6 +48,8 @@
 		A74C467229AD54F900266614 /* SearchStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74C467129AD54F900266614 /* SearchStoryboard.storyboard */; };
 		A74C467A29AD5D7B00266614 /* GetProductDetailsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C467929AD5D7B00266614 /* GetProductDetailsProtocol.swift */; };
 		A74C467C29AD5D8E00266614 /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C467B29AD5D8E00266614 /* ProductDetailsViewModel.swift */; };
+		A757F1E029B6C08200AD8FB2 /* CoreDataProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A757F1DF29B6C08100AD8FB2 /* CoreDataProtocols.swift */; };
+		A757F1E229B6C09900AD8FB2 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A757F1E129B6C09900AD8FB2 /* CoreDataManager.swift */; };
 		A759787029AFD52F002D7888 /* GetLoginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A759786F29AFD52F002D7888 /* GetLoginProtocol.swift */; };
 		A759787229AFD540002D7888 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A759787129AFD540002D7888 /* LoginViewModel.swift */; };
 		A76AA54C29B2BDDA00F9373F /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76AA54B29B2BDDA00F9373F /* FavoritesViewModel.swift */; };
@@ -60,6 +63,7 @@
 		A775494D29AF44A2009E6D88 /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775494C29AF44A2009E6D88 /* UserDefaultsProtocol.swift */; };
 		A775495029AF569F009E6D88 /* PutRegisterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775494F29AF569F009E6D88 /* PutRegisterProtocol.swift */; };
 		A775495229AF56B1009E6D88 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A775495129AF56B1009E6D88 /* RegisterViewModel.swift */; };
+		A77BF53129B4CC9600557D5D /* FavoritesProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77BF53029B4CC9600557D5D /* FavoritesProtocols.swift */; };
 		A77E12BD29AC36B600EB4C13 /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E12BC29AC36B600EB4C13 /* ProductsViewModel.swift */; };
 		A77E12BF29AC36CE00EB4C13 /* GetProductsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E12BE29AC36CE00EB4C13 /* GetProductsProtocol.swift */; };
 		A78BCBA129AAC9910023B8AC /* MeUnlogedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A78BCBA029AAC9910023B8AC /* MeUnlogedView.xib */; };
@@ -71,9 +75,7 @@
 		A79C157929A81A5D00AB6C20 /* FavoritesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A79C157829A81A5D00AB6C20 /* FavoritesStoryboard.storyboard */; };
 		A7FFA85E29A594CC00474CB1 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FFA85D29A594CC00474CB1 /* LoginStoryboard.storyboard */; };
 		A7FFA86029A594EF00474CB1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FFA85F29A594EF00474CB1 /* LoginViewController.swift */; };
-		B5A1F7BBE5425E1C57E2A213 /* libPods-ITI-ShopfiyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2412EDFEB830031444D8BF43 /* libPods-ITI-ShopfiyTests.a */; };
 		E2008ED429A41B9F003D55A0 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2008ED329A41B9F003D55A0 /* ViewHelper.swift */; };
-		E23D188529B025E200D4AFB2 /* PaymentServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188429B025E200D4AFB2 /* PaymentServices.swift */; };
 		E23D188729B02A3400D4AFB2 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188629B02A3400D4AFB2 /* PaymentViewModel.swift */; };
 		E23D188929B033F700D4AFB2 /* IPaymentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188829B033F700D4AFB2 /* IPaymentDelegate.swift */; };
 		E23D188B29B03BCE00D4AFB2 /* AddressDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188A29B03BCE00D4AFB2 /* AddressDelegate.swift */; };
@@ -88,6 +90,8 @@
 		E26F77E129A4C30B00ADDC86 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F77DF29A4C30B00ADDC86 /* CartTableViewCell.swift */; };
 		E26F77E229A4C30B00ADDC86 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E26F77E029A4C30B00ADDC86 /* CartTableViewCell.xib */; };
 		E273D5CE29AC7F88006AE49A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E273D5CD29AC7F88006AE49A /* Alert.swift */; };
+		E29D8D1C29B8486800515CCB /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29D8D1B29B8486800515CCB /* OrderViewModel.swift */; };
+		E29D8D1E29B84C7E00515CCB /* OrderNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29D8D1D29B84C7E00515CCB /* OrderNetwork.swift */; };
 		E29FA8FD29A2AEE100CE0786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA8FC29A2AEE100CE0786 /* AppDelegate.swift */; };
 		E29FA8FF29A2AEE100CE0786 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA8FE29A2AEE100CE0786 /* SceneDelegate.swift */; };
 		E29FA90129A2AEE100CE0786 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA90029A2AEE100CE0786 /* ViewController.swift */; };
@@ -103,6 +107,7 @@
 		E29FA94C29A30B1500CE0786 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA94B29A30B1500CE0786 /* CartViewController.swift */; };
 		E29FA94E29A30E3500CE0786 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E29FA94D29A30E3500CE0786 /* SettingsStoryboard.storyboard */; };
 		E29FA95029A310FD00CE0786 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA94F29A310FD00CE0786 /* SettingsViewController.swift */; };
+		E2A52F3429B9235B00482A06 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CD1CA029A60D450079C09A /* PaymentViewController.swift */; };
 		E2B49FA329B25861001F4952 /* AddressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B49FA229B25861001F4952 /* AddressProtocol.swift */; };
 		E2B49FA529B25900001F4952 /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B49FA429B25900001F4952 /* AddressViewModel.swift */; };
 		E2B49FA929B2D2F6001F4952 /* AddressHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B49FA829B2D2F6001F4952 /* AddressHistoryTableViewCell.swift */; };
@@ -143,9 +148,7 @@
 		0F78B893E48B3C18D7D6BB37 /* Pods-ITI-Shopfiy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITI-Shopfiy.release.xcconfig"; path = "Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy.release.xcconfig"; sourceTree = "<group>"; };
 		13B8F60081C6ECB58DF969D6 /* Pods-ITI-Shopfiy-ITI-ShopfiyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITI-Shopfiy-ITI-ShopfiyUITests.debug.xcconfig"; path = "Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1B2C31830DE4C856438066D8 /* Pods-ITI-ShopfiyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITI-ShopfiyTests.debug.xcconfig"; path = "Target Support Files/Pods-ITI-ShopfiyTests/Pods-ITI-ShopfiyTests.debug.xcconfig"; sourceTree = "<group>"; };
-		1E701EB06A67148CCDB52A09 /* libPods-ITI-Shopfiy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ITI-Shopfiy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2065B3E96AC07E25064AEBEB /* libPods-ITI-Shopfiy-ITI-ShopfiyUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ITI-Shopfiy-ITI-ShopfiyUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2412EDFEB830031444D8BF43 /* libPods-ITI-ShopfiyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ITI-ShopfiyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3240A72A68CFB201B35C0F21 /* Pods_ITI_Shopfiy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ITI_Shopfiy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E012F7429B3116600E516CE /* DiscountCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCode.swift; sourceTree = "<group>"; };
 		5E012F7729B3138800E516CE /* DiscountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountViewModel.swift; sourceTree = "<group>"; };
 		5E012F7929B314C800E516CE /* getDiscountProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getDiscountProtocol.swift; sourceTree = "<group>"; };
@@ -184,6 +187,8 @@
 		A74C467129AD54F900266614 /* SearchStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchStoryboard.storyboard; sourceTree = "<group>"; };
 		A74C467929AD5D7B00266614 /* GetProductDetailsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductDetailsProtocol.swift; sourceTree = "<group>"; };
 		A74C467B29AD5D8E00266614 /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
+		A757F1DF29B6C08100AD8FB2 /* CoreDataProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProtocols.swift; sourceTree = "<group>"; };
+		A757F1E129B6C09900AD8FB2 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		A759786F29AFD52F002D7888 /* GetLoginProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLoginProtocol.swift; sourceTree = "<group>"; };
 		A759787129AFD540002D7888 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A76AA54B29B2BDDA00F9373F /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
@@ -197,6 +202,7 @@
 		A775494C29AF44A2009E6D88 /* UserDefaultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocol.swift; sourceTree = "<group>"; };
 		A775494F29AF569F009E6D88 /* PutRegisterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutRegisterProtocol.swift; sourceTree = "<group>"; };
 		A775495129AF56B1009E6D88 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		A77BF53029B4CC9600557D5D /* FavoritesProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesProtocols.swift; sourceTree = "<group>"; };
 		A77E12BC29AC36B600EB4C13 /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
 		A77E12BE29AC36CE00EB4C13 /* GetProductsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductsProtocol.swift; sourceTree = "<group>"; };
 		A78BCBA029AAC9910023B8AC /* MeUnlogedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeUnlogedView.xib; sourceTree = "<group>"; };
@@ -212,7 +218,6 @@
 		C2B9DD6EAB0BBBA9777CC60B /* Pods-ITI-Shopfiy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITI-Shopfiy.debug.xcconfig"; path = "Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy.debug.xcconfig"; sourceTree = "<group>"; };
 		E2008ED329A41B9F003D55A0 /* ViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
 		E23D188229AFDAD000D4AFB2 /* ITI-Shopfiy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ITI-Shopfiy.entitlements"; sourceTree = "<group>"; };
-		E23D188429B025E200D4AFB2 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
 		E23D188629B02A3400D4AFB2 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		E23D188829B033F700D4AFB2 /* IPaymentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPaymentDelegate.swift; sourceTree = "<group>"; };
 		E23D188A29B03BCE00D4AFB2 /* AddressDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDelegate.swift; sourceTree = "<group>"; };
@@ -227,6 +232,8 @@
 		E26F77DF29A4C30B00ADDC86 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		E26F77E029A4C30B00ADDC86 /* CartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
 		E273D5CD29AC7F88006AE49A /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		E29D8D1B29B8486800515CCB /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
+		E29D8D1D29B84C7E00515CCB /* OrderNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNetwork.swift; sourceTree = "<group>"; };
 		E29FA8F929A2AEE100CE0786 /* ITI-Shopfiy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ITI-Shopfiy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29FA8FC29A2AEE100CE0786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E29FA8FE29A2AEE100CE0786 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; wrapsLines = 1; };
@@ -262,6 +269,8 @@
 		E2E2A20829A68665006958CD /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		E2E308F929B17C09009B9A7C /* AddressNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressNetwork.swift; sourceTree = "<group>"; };
 		E2E308FB29B17C41009B9A7C /* IAddressNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAddressNetwork.swift; sourceTree = "<group>"; };
+		F227E3EBA9744D62037EA98C /* Pods_ITI_Shopfiy_ITI_ShopfiyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ITI_Shopfiy_ITI_ShopfiyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC52A45E2FD480255621FFCA /* Pods_ITI_ShopfiyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ITI_ShopfiyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,7 +278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13BFE520DED6326EEC829CF9 /* libPods-ITI-Shopfiy.a in Frameworks */,
+				1481E2D3C97F9CED43029FE1 /* Pods_ITI_Shopfiy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +286,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5A1F7BBE5425E1C57E2A213 /* libPods-ITI-ShopfiyTests.a in Frameworks */,
+				56AC9008F58B47EA6865940C /* Pods_ITI_ShopfiyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,7 +294,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16F4F44927AD84A0AB66CF15 /* libPods-ITI-Shopfiy-ITI-ShopfiyUITests.a in Frameworks */,
+				7C7B4EE8999BADB542F28F4D /* Pods_ITI_Shopfiy_ITI_ShopfiyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,9 +304,9 @@
 		14B1EF80D2E2AFEEC1F108B6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1E701EB06A67148CCDB52A09 /* libPods-ITI-Shopfiy.a */,
-				2065B3E96AC07E25064AEBEB /* libPods-ITI-Shopfiy-ITI-ShopfiyUITests.a */,
-				2412EDFEB830031444D8BF43 /* libPods-ITI-ShopfiyTests.a */,
+				3240A72A68CFB201B35C0F21 /* Pods_ITI_Shopfiy.framework */,
+				F227E3EBA9744D62037EA98C /* Pods_ITI_Shopfiy_ITI_ShopfiyUITests.framework */,
+				FC52A45E2FD480255621FFCA /* Pods_ITI_ShopfiyTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -331,6 +340,15 @@
 			path = ProductDetailsVM;
 			sourceTree = "<group>";
 		};
+		A757F1DE29B6C02200AD8FB2 /* DBS */ = {
+			isa = PBXGroup;
+			children = (
+				A757F1DF29B6C08100AD8FB2 /* CoreDataProtocols.swift */,
+				A757F1E129B6C09900AD8FB2 /* CoreDataManager.swift */,
+			);
+			path = DBS;
+			sourceTree = "<group>";
+		};
 		A759786E29AFD512002D7888 /* LoginVM */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				A76AA54B29B2BDDA00F9373F /* FavoritesViewModel.swift */,
+				A77BF53029B4CC9600557D5D /* FavoritesProtocols.swift */,
 			);
 			path = FavoritesVM;
 			sourceTree = "<group>";
@@ -429,14 +448,6 @@
 			path = AdsCell;
 			sourceTree = "<group>";
 		};
-		E23D188329B0243000D4AFB2 /* PaymentService */ = {
-			isa = PBXGroup;
-			children = (
-				E23D188429B025E200D4AFB2 /* PaymentServices.swift */,
-			);
-			path = PaymentService;
-			sourceTree = "<group>";
-		};
 		E29FA8F029A2AEE100CE0786 = {
 			isa = PBXGroup;
 			children = (
@@ -510,7 +521,6 @@
 		E29FA93029A2AF7600CE0786 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E23D188329B0243000D4AFB2 /* PaymentService */,
 				E29FA93A29A2B06800CE0786 /* NetworkServices */,
 				E29FA93929A2B05200CE0786 /* CoreDataServices */,
 			);
@@ -534,6 +544,7 @@
 				5E55DE9D29AC1BFE00EB6516 /* getBrandsProtocol.swift */,
 				E23D188629B02A3400D4AFB2 /* PaymentViewModel.swift */,
 				E2B49FA429B25900001F4952 /* AddressViewModel.swift */,
+				E29D8D1B29B8486800515CCB /* OrderViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -637,6 +648,7 @@
 		E29FA93929A2B05200CE0786 /* CoreDataServices */ = {
 			isa = PBXGroup;
 			children = (
+				A757F1DE29B6C02200AD8FB2 /* DBS */,
 				A775494B29AF4484009E6D88 /* UserDefaults */,
 				E29FA93B29A2B08000CE0786 /* Entities */,
 				E2C45E4729AEFAFA00840AC2 /* DataCaching.swift */,
@@ -657,6 +669,7 @@
 				A775493F29AE9DEE009E6D88 /* CustomerService */,
 				E2E308F929B17C09009B9A7C /* AddressNetwork.swift */,
 				E253591029B3BC2C00FA7D11 /* CartNetwork.swift */,
+				E29D8D1D29B84C7E00515CCB /* OrderNetwork.swift */,
 			);
 			path = NetworkServices;
 			sourceTree = "<group>";
@@ -712,8 +725,10 @@
 				E29FA8F529A2AEE100CE0786 /* Sources */,
 				E29FA8F629A2AEE100CE0786 /* Frameworks */,
 				E29FA8F729A2AEE100CE0786 /* Resources */,
+
 				64C157F916ACCBDE7C69C4E4 /* [CP] Copy Pods Resources */,
 				1150B419F30CEDC384BA959B /* [CP] Embed Pods Frameworks */,
+
 			);
 			buildRules = (
 			);
@@ -751,8 +766,10 @@
 				E29FA91829A2AEE700CE0786 /* Sources */,
 				E29FA91929A2AEE700CE0786 /* Frameworks */,
 				E29FA91A29A2AEE700CE0786 /* Resources */,
+
 				8DEAF4F48989B339A2D2B421 /* [CP] Copy Pods Resources */,
 				314EBEAAEA062D6FDD4B96E0 /* [CP] Embed Pods Frameworks */,
+
 			);
 			buildRules = (
 			);
@@ -788,7 +805,7 @@
 				};
 			};
 			buildConfigurationList = E29FA8F429A2AEE100CE0786 /* Build configuration list for PBXProject "ITI-Shopfiy" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -911,40 +928,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		64C157F916ACCBDE7C69C4E4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8DEAF4F48989B339A2D2B421 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8E7775BCF9937A2AF0FE7424 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -965,6 +948,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		91467E5204F87B2A8E4E3AE1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8FE759F7BE462F0D1AD46C3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ITI-Shopfiy-ITI-ShopfiyUITests/Pods-ITI-Shopfiy-ITI-ShopfiyUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DBFC6CFBFF94BA761A7BCC3C /* [CP] Check Pods Manifest.lock */ = {
@@ -1004,7 +1021,6 @@
 				A7FFA86029A594EF00474CB1 /* LoginViewController.swift in Sources */,
 				5EA83B8829A62A380018E90E /* CategoryViewController.swift in Sources */,
 				E2C45E4829AEFAFA00840AC2 /* DataCaching.swift in Sources */,
-				E23D188529B025E200D4AFB2 /* PaymentServices.swift in Sources */,
 				5E012F7E29B3160000E516CE /* DiscountProtocol.swift in Sources */,
 				5E55DE8C29AAF9C600EB6516 /* CategoryViewModel.swift in Sources */,
 				5E55DE9A29AC15F700EB6516 /* BrandsProtocol.swift in Sources */,
@@ -1013,12 +1029,14 @@
 				A736054729A6B33600D99935 /* ProductDetailsViewController.swift in Sources */,
 				E23D188929B033F700D4AFB2 /* IPaymentDelegate.swift in Sources */,
 				A7157ABC29A694D700D9A41A /* ProductsViewController.swift in Sources */,
+				A757F1E029B6C08200AD8FB2 /* CoreDataProtocols.swift in Sources */,
 				E2C45E4A29AEFBAA00840AC2 /* LocalDataManager.swift in Sources */,
 				5E012F7529B3116600E516CE /* DiscountCode.swift in Sources */,
 				E29FA90129A2AEE100CE0786 /* ViewController.swift in Sources */,
 				5E55DE9C29AC196B00EB6516 /* BrandsViewModel.swift in Sources */,
 				A74C467A29AD5D7B00266614 /* GetProductDetailsProtocol.swift in Sources */,
 				E2008ED429A41B9F003D55A0 /* ViewHelper.swift in Sources */,
+				E29D8D1E29B84C7E00515CCB /* OrderNetwork.swift in Sources */,
 				5E55DE9829AC155500EB6516 /* BrandsNetwork.swift in Sources */,
 				E253590D29B31F3F00FA7D11 /* ShoppingCartViewController.swift in Sources */,
 				5E55DE8029AA18F300EB6516 /* OrdersViewController.swift in Sources */,
@@ -1050,6 +1068,8 @@
 				5E55DE9229AB07DD00EB6516 /* productsResult.swift in Sources */,
 				E269E84B29AFA32E005448EA /* Constans.swift in Sources */,
 				A775494429AF4176009E6D88 /* UserDefaultManager.swift in Sources */,
+				A757F1E229B6C09900AD8FB2 /* CoreDataManager.swift in Sources */,
+				A77BF53129B4CC9600557D5D /* FavoritesProtocols.swift in Sources */,
 				E2CD1CA129A60D450079C09A /* PaymentViewController.swift in Sources */,
 				5E55DE8229AA192000EB6516 /* OrdersTableViewCell.swift in Sources */,
 				A775495029AF569F009E6D88 /* PutRegisterProtocol.swift in Sources */,
@@ -1071,6 +1091,7 @@
 				5E55DE9E29AC1BFE00EB6516 /* getBrandsProtocol.swift in Sources */,
 				5E012F8029B7150300E516CE /* cartNetworkProtocol.swift in Sources */,
 				A775493829AE985A009E6D88 /* Customer.swift in Sources */,
+				E29D8D1C29B8486800515CCB /* OrderViewModel.swift in Sources */,
 				E273D5CE29AC7F88006AE49A /* Alert.swift in Sources */,
 				E29FA95029A310FD00CE0786 /* SettingsViewController.swift in Sources */,
 				A775493C29AE9DD1009E6D88 /* CustomerNetworkService.swift in Sources */,
@@ -1095,6 +1116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E29FA92329A2AEE700CE0786 /* ITI_ShopfiyUITestsLaunchTests.swift in Sources */,
+				E2A52F3429B9235B00482A06 /* PaymentViewController.swift in Sources */,
 				E29FA92129A2AEE700CE0786 /* ITI_ShopfiyUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1257,7 +1279,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ITI-Shopfiy/ITI-Shopfiy.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FW278M9LJ4;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ITI-Shopfiy/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "require location for payment process";
@@ -1290,7 +1312,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ITI-Shopfiy/ITI-Shopfiy.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FW278M9LJ4;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ITI-Shopfiy/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "require location for payment process";

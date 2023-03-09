@@ -89,7 +89,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FrZ-pR-EHc">
-                                <rect key="frame" x="233" y="413.66666666666669" width="167" height="44.666666666666686"/>
+                                <rect key="frame" x="233.66666666666663" y="413.66666666666669" width="166.33333333333337" height="44.666666666666686"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Save New Address" cornerStyle="medium">
                                     <color key="baseForegroundColor" red="0.091787283440000006" green="0.14986227020000001" blue="0.097840475829999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -107,16 +107,14 @@
                                     <action selector="saveAddress_btn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="fNM-BH-fen"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" separatorInsetReference="fromAutomaticInsets" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3ee-rC-Ky3">
+
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3ee-rC-Ky3">
                                 <rect key="frame" x="0.0" y="466.33333333333326" width="414" height="395.66666666666674"/>
-                                <color key="backgroundColor" red="0.76899999379999995" green="0.76899999379999995" blue="0.76899999379999995" alpha="0.19915175280034147" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" name="Green"/>
-                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                                <color key="sectionIndexColor" name="Green"/>
-                                <color key="sectionIndexBackgroundColor" name="White"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="addressCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addressCell" rowHeight="149" id="NhG-TD-qhE" customClass="AddressHistoryTableViewCell" customModule="ITI_Shopfiy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333332061767578" width="414" height="149"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="addressCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="addressCell" rowHeight="149" id="NhG-TD-qhE" customClass="AddressHistoryTableViewCell" customModule="ITI_Shopfiy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="414" height="149"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NhG-TD-qhE" id="l5l-TU-WqN">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="149"/>
@@ -221,9 +219,6 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" name="Green"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>

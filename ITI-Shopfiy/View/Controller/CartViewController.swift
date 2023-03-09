@@ -20,7 +20,7 @@ class CartViewController: UIViewController {
     var discount : [Discount] = []
     let discountModel = DiscountViewModel()
 
-    private var cartArray: [LineItem]?
+     var cartArray: [LineItem]?
     private var counter: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
