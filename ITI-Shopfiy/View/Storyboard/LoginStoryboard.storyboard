@@ -23,13 +23,13 @@
                                 <color key="textColor" name="Black"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QXX-Pc-Z0U">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QXX-Pc-Z0U">
                                 <rect key="frame" x="16" y="274" width="288" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" name="Black"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please enter your Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PGk-Mf-bh0">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please enter your Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PGk-Mf-bh0">
                                 <rect key="frame" x="16" y="294.5" width="288" height="25"/>
                                 <color key="textColor" name="Gray"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
