@@ -43,17 +43,6 @@ class Address: Codable {
     var province_code: String?
 //    var default_add = true
     }
-}
-
-//class PutAddress: Codable {
-//    var customer: CustomerAddress?
-//    init(customer: CustomerAddress? = nil) {
-//        self.customer = customer
-//    }
-//}
-
-  
-}
 
 class PutAddress: Codable {
     var customer: CustomerAddress?

@@ -13,4 +13,7 @@ class image: Decodable{
 
 class Image: Decodable{
     var src: String?
+    init(src: String? = nil) {
+        self.src = src
+    }
 }

@@ -13,7 +13,9 @@ class ProductDetailsViewController: UIViewController{
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productPrice: UILabel!
     @IBOutlet weak var productDescription: UITextView!
-    
+    @IBOutlet weak var companyName: UILabel!
+    @IBOutlet weak var productColor: UILabel!
+    @IBOutlet weak var productSize: UILabel!
     
     @IBOutlet weak var cart_btn: UIButton!
     @IBOutlet weak var like_btn: UIButton!
@@ -30,24 +32,16 @@ class ProductDetailsViewController: UIViewController{
     var product: Products?
     var product_ID: Int?
     var ProductImages: [Image]?
-    var currentProduct: Products?
     var productDetailsVM: ProductDetailsVM?
+    var isFav: Bool?
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.center = view.center
-        view.addSubview(indicator)
-        indicator.startAnimating()
-        
         productDetailsVM = ProductDetailsVM()
-        productDetailsVM?.getProductDetails(Product_ID: self.product_ID ?? 8117840150809)
-        productDetailsVM?.bindingProducts = { () in
-            self.renderView()
-            indicator.stopAnimating()
-        }
-        
+        self.isFav = self.productDetailsVM?.getProductsInFavourites(appDelegate: self.appDelegate, product: &(self.product!))
+        renderView()
         // Do any additional setup after loading the view.
         let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
         productImagesCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
@@ -91,9 +85,30 @@ class ProductDetailsViewController: UIViewController{
     }
     
     @IBAction func addToLikesButton(_ sender: Any) {
+        if !UserDefaultsManager.sharedInstance.isLoggedIn() {
+            self.showLoginAlert(title: "Alert", message: "You must login")
+            return
+        }
+        
+        if isFav! {
+            like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+            productDetailsVM!.removeProductFromFavourites(appDelegate: appDelegate, product: product!)
+        } else {
+            like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            print( UserDefaultsManager.sharedInstance.getUserID()!)
+            product?.variants![0].id = UserDefaultsManager.sharedInstance.getUserID()!
+            print(  product?.variants![0].id! ?? 20)
+            
+            productDetailsVM!.addProductToFavourites(appDelegate: appDelegate, product: product!)
+        }
+        isFav = !isFav!
     }
     
-
+    @IBAction func showReviews(_ sender: UIButton) {
+        let reviewVC = self.storyboard!.instantiateViewController(withIdentifier: "review") as! ReviewsViewController
+        self.navigationController!.pushViewController(reviewVC, animated: true)
+    }
+    
 }
 
 
@@ -144,14 +159,35 @@ extension ProductDetailsViewController: UICollectionViewDelegate, UICollectionVi
 }
 
 extension ProductDetailsViewController{
+    func checkIsFavourite() {
+        if isFav! {
+            like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+    }
+    
+    func showLoginAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
+            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func renderView() {
         DispatchQueue.main.async {
-            self.product = self.productDetailsVM?.productsResults
             self.productName.text = self.product?.title
             self.productDescription.text = self.product?.body_html
             self.ProductImages = self.product?.images
             self.product?.id = self.product_ID
             self.productPrice.text = self.product?.variants?[0].price
+            self.productSize.text = self.product?.variants?[0].option1 ?? "Medium"
+            self.productColor.text = self.product?.variants?[0].option2 ?? "White"
             self.pageControl.hidesForSinglePage = true
             self.pageControl.currentPage = self.currentCellIndex
             self.pageControl.numberOfPages  = self.ProductImages?.count ?? 5
@@ -159,5 +195,5 @@ extension ProductDetailsViewController{
         }
     }
 
-    
 }
+
