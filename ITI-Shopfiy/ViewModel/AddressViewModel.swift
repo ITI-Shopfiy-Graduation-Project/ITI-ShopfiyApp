@@ -43,4 +43,11 @@ extension AddressViewModel : AddressProtocol{
             completion(data, response as? HTTPURLResponse, nil)
         }
     }
+    
+    func deleteAddress(userAddress : PostAddress)
+    {
+        AddressNetwork.sharedInstance.deleteAddress(userAddress: userAddress) { data, response, error in
+            print(response ?? "")
+        }
+    }
 }

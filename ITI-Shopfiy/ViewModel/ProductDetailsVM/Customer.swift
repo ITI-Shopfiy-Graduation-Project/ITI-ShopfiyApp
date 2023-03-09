@@ -22,6 +22,8 @@ class Customer: Codable {
     var id: Int?
     var verified_email: Bool?
     var addresses: [Address]?
+    var last_order_name : String?
+    var currency: String?
 //    var default_address: Address?
 
     init(first_name: String? = nil, state: String? = nil, tags: String? = nil, email: String? = nil, id: Int? = nil, verified_email: Bool? = nil, addresses: [Address]? = nil) {

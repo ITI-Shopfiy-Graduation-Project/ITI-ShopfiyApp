@@ -20,8 +20,18 @@ class ProductDetailsViewController: UIViewController{
     @IBOutlet weak var cart_btn: UIButton!
     @IBOutlet weak var like_btn: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
-
+    
     var currentCellIndex = 0
+    var cart : DrafOrder = DrafOrder()
+    var cartVM = ShoppingCartViewModel()
+    var lineitem = LineItem()
+    var newLineItem : LineItem?
+    //    var lineitemarr:LineItem = [LineItem]
+    var lineItemArray:[LineItem] = []
+    var lineAppend : [LineItem]?
+    var addtoLine : DrafOrder?
+    var cartcount = ShoppingCart()
+    var AllDraftsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/draft_orders.json"
     @IBOutlet weak var productImagesCollectionView: UICollectionView!{
         didSet{
             productImagesCollectionView.delegate = self
@@ -42,6 +52,14 @@ class ProductDetailsViewController: UIViewController{
         productDetailsVM = ProductDetailsVM()
         self.isFav = self.productDetailsVM?.getProductsInFavourites(appDelegate: self.appDelegate, product: &(self.product!))
         renderView()
+
+        cartVM.cartsUrl = self.AllDraftsUrl
+        cartVM.getCart()
+        cartVM.bindingCartt = {()in
+            self.renderCart()
+            
+        }
+        
         // Do any additional setup after loading the view.
         let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
         productImagesCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
@@ -55,7 +73,7 @@ class ProductDetailsViewController: UIViewController{
         
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
-
+        
         view.addGestureRecognizer(swipe)
     }
     
@@ -82,6 +100,37 @@ class ProductDetailsViewController: UIViewController{
     }
     
     @IBAction func addToCartButton(_ sender: Any) {
+       
+        cartcount.draft_orders?.forEach({ email in
+
+            if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
+            {     addtoLine = email
+                UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
+               lineAppend = email.line_items
+                newLineItem = LineItem()
+                newLineItem?.title = product?.title
+                newLineItem?.price = product?.variants![0].price
+                newLineItem?.sku = product?.image?.src
+                newLineItem?.vendor = product?.vendor
+                newLineItem?.product_id = product?.id
+                newLineItem?.grams = product?.variants![0].inventory_quantity
+                newLineItem?.quantity = 1
+                lineAppend?.append(newLineItem!)
+                addtoLine = DrafOrder(line_items: lineAppend )
+                let draftOrderAppend  : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)
+                putCart(cartt: draftOrderAppend)
+                print ("already used")
+           
+            }
+          
+        })
+        if addtoLine == nil
+                    {
+                    self.postCart()
+          
+        }
+        
+
     }
     
     @IBAction func addToLikesButton(_ sender: Any) {
@@ -108,6 +157,11 @@ class ProductDetailsViewController: UIViewController{
         let reviewVC = self.storyboard!.instantiateViewController(withIdentifier: "review") as! ReviewsViewController
         self.navigationController!.pushViewController(reviewVC, animated: true)
     }
+    
+    
+        @IBAction func addToLikesButton(_ sender: Any) {
+        }
+    
     
 }
 
@@ -197,3 +251,137 @@ extension ProductDetailsViewController{
 
 }
 
+extension ProductDetailsViewController {
+    func postCart(){
+        let newdraft  : [String : Any] =  [ "draft_order" :
+                                        [
+                                          //"id": user_id  ,//
+//                                          "note": "rush order",
+                                            "email": UserDefaultsManager.sharedInstance.getUserEmail()!,
+//                                          "taxes_included": false,
+                                            "currency": "Egp",
+
+//                                          "name": "#d1",
+//                                          "status": "completed",
+                                          "line_items" : [
+                                            [
+//                                              "id": 58237889282329,
+                                                "product_id": (self.product?.id)!,
+                                                "title": (self.product?.title)! ,
+//                                              "variant_title": nil,
+                                                "sku": (product?.image?.src)!,
+                                                "vender" : (self.product?.vendor)!,
+                                              "quantity": 1,
+//                                              "requires_shipping": true,
+//                                              "taxable": true,
+//                                              "gift_card": false,
+//                                              "fulfillment_service": "manual",
+                                              "grams":self.product!.variants![0].inventory_quantity!,
+//                                              "tax_lines": [            [
+//                                                  "rate":0.14,
+//                                                  "title":"GST",
+//                                                  "price":"28.00"
+//                                               ]
+//                                              ],
+//                                              "applied_discount":,
+//                                              "name": nil,
+//                                              "properties": [],
+//                                              "custom": false,
+                                                "price": (self.product?.variants![0].price)!,
+//                                              "admin_graphql_api_id": "gid://shopify/DraftOrderLineItem/498266019"
+                                          
+                                           ]
+                                          ],
+                                        "customer": [
+                                            "id":UserDefaultsManager.sharedInstance.getUserID()
+                                                ]
+                                         
+                                        ]
+                                    ]
+//        let customerCart : ShoppingCart = ShoppingCart()
+//        customerCart.draft_order = cart
+      
+        //(customer_address: address)
+        self.cartVM.postNewCart(userCart:newdraft){ data, response, error in
+                guard error == nil else {
+                    DispatchQueue.main.async {
+                        print ("cart Error \n \(error?.localizedDescription ?? "")" )
+                    }
+                    return
+                }
+                
+            guard response?.statusCode ?? 0 >= 200 && response?.statusCode ?? 0 < 300   else {
+                    DispatchQueue.main.async {
+                        print ("cart Response \n \(response ?? HTTPURLResponse())" )
+
+                    }
+                    return
+                }
+            print ("this is response\(String(describing: response?.statusCode))")
+                print("address was added successfully")
+                
+                DispatchQueue.main.async {
+                    print("Address Saved")
+                }
+            }
+    }
+    
+    
+}
+extension ProductDetailsViewController {
+    func renderCart() {
+        DispatchQueue.main.async {
+            self.cartcount = self.cartVM.cartResult!
+            
+            print ("heree email\(String(describing: self.cartcount.draft_orders?[1].email))")
+         
+            
+
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+}
+extension ProductDetailsViewController {
+    
+    func putCart(cartt:ShoppingCartPut){
+   
+        self.cartVM.putNewCart(userCart: cartt) { data, response, error in
+                guard error == nil else {
+                    DispatchQueue.main.async {
+                        print ("Address Error \n \(error?.localizedDescription ?? "")" )
+                    }
+                    return
+                }
+                
+            guard response?.statusCode ?? 0 >= 200 && response?.statusCode ?? 0 < 300   else {
+                    DispatchQueue.main.async {
+                        print ("Address Response \n \(response ?? HTTPURLResponse())" )
+
+                    }
+                    return
+                }
+            
+                print("address was added successfully")
+                
+                DispatchQueue.main.async {
+                    print("Address Saved")
+                }
+            }
+    }
+    
+    
+    
+    
+    
+    
+}

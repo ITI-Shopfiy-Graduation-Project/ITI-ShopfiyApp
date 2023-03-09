@@ -101,9 +101,9 @@ class UserDefaultsManager: UserDefaultProtocol{
     
     func getCurrency(key: String = "currency") -> String {
         let currency = UserDefaults.standard.string(forKey: key)
-        if currency == "" {
+        /*if currency == "" {
             return "USD"
-        }
+        }*/
         return currency ?? "USD"
     }
     
@@ -112,7 +112,12 @@ class UserDefaultsManager: UserDefaultProtocol{
         UserDefaults.standard.set(value, forKey: key)
 
     }
-    
+    func setUserCart(cartId: Int?){
+        UserDefaults.standard.set(cartId, forKey: "Cart_ID")
+    }
+    func getUserCart()-> Int?{
+        return UserDefaults.standard.integer(forKey: "Cart_ID")
+    }
 }
 
 //For favorites
