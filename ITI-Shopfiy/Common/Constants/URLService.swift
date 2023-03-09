@@ -46,4 +46,7 @@ struct URLService{
     {
         return baseUrl + "draft_orders.json"
     }
+    static func putCart(lineId : Int) -> String{
+        return baseUrl + "draft_orders/\(lineId).json"
+    }
 }

@@ -31,4 +31,5 @@ protocol UserDefaultProtocol{
     func isLoggedIn()->Bool
     func login()
     func logut()
+    func setUserCart(cartId: Int?)
 }

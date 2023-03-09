@@ -18,13 +18,18 @@ class ProductDetailsViewController: UIViewController{
     @IBOutlet weak var cart_btn: UIButton!
     @IBOutlet weak var like_btn: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
-
+    
     var currentCellIndex = 0
     var cart : DrafOrder = DrafOrder()
     var cartVM = ShoppingCartViewModel()
     var lineitem = LineItem()
-//    var lineitemarr:LineItem = [LineItem]
+    var newLineItem : LineItem?
+    //    var lineitemarr:LineItem = [LineItem]
     var lineItemArray:[LineItem] = []
+    var lineAppend : [LineItem]?
+    var addtoLine : DrafOrder?
+    var cartcount = ShoppingCart()
+    var AllDraftsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/draft_orders.json"
     @IBOutlet weak var productImagesCollectionView: UICollectionView!{
         didSet{
             productImagesCollectionView.delegate = self
@@ -52,6 +57,12 @@ class ProductDetailsViewController: UIViewController{
             self.renderView()
             indicator.stopAnimating()
         }
+        cartVM.cartsUrl = self.AllDraftsUrl
+        cartVM.getCart()
+        cartVM.bindingCartt = {()in
+            self.renderCart()
+            
+        }
         
         // Do any additional setup after loading the view.
         let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
@@ -66,7 +77,7 @@ class ProductDetailsViewController: UIViewController{
         
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
-
+        
         view.addGestureRecognizer(swipe)
     }
     
@@ -93,25 +104,44 @@ class ProductDetailsViewController: UIViewController{
     }
     
     @IBAction func addToCartButton(_ sender: Any) {
-//        lineitem.title = "ADIDAS | CLASSIC BACKPACK"
-//        cart.email = "mohamed2323@gmail.com"
-//        cart.customer?.email = "mohamed2323@gmail.com"
-//        cart.customer?.id = 6868122665241
-//        cart.customer?.first_name = "Mohamed"
-//        cart.created_at = "2023-03-06T04:06:34-05:00"
-//        cart.updated_at = "2023-03-06T04:06:34-05:00"
-//        cart.line_items?[0].title = "ADIDAS | CLASSIC BACKPACK"
-//        lineitem.product_id = 8117841854745
-//        lineItemArray.removeAll()
-//        lineItemArray.append(lineitem)
-//        self.cart.id = 1110835953945
-        self.postCart()
-    }
-    
-    @IBAction func addToLikesButton(_ sender: Any) {
-    }
-    
+       
+        cartcount.draft_orders?.forEach({ email in
 
+            if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
+            {     addtoLine = email
+                UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
+               lineAppend = email.line_items
+                newLineItem = LineItem()
+                newLineItem?.title = product?.title
+                newLineItem?.price = product?.variants![0].price
+                newLineItem?.sku = product?.image?.src
+                newLineItem?.vendor = product?.vendor
+                newLineItem?.product_id = product?.id
+                newLineItem?.grams = product?.variants![0].inventory_quantity
+                newLineItem?.quantity = 1
+                lineAppend?.append(newLineItem!)
+                addtoLine = DrafOrder(line_items: lineAppend )
+                let draftOrderAppend  : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)
+                putCart(cartt: draftOrderAppend)
+                print ("already used")
+           
+            }
+          
+        })
+        if addtoLine == nil
+                    {
+                    self.postCart()
+          
+        }
+        
+
+    }
+    
+    
+        @IBAction func addToLikesButton(_ sender: Any) {
+        }
+    
+    
 }
 
 
@@ -185,32 +215,26 @@ extension ProductDetailsViewController {
                                         [
                                           //"id": user_id  ,//
 //                                          "note": "rush order",
-                                          "email": "youseif@gamil.com",
+                                            "email": UserDefaultsManager.sharedInstance.getUserEmail()!,
 //                                          "taxes_included": false,
-//                                          "currency": "Egp",
-                                         
-//                                          "created_at": "2023-02-13T10:18:48-05:00",
-//                                          "updated_at": "2023-02-13T10:18:48-05:00",
-//                                          "tax_exempt": false,
+                                            "currency": "Egp",
 
-                                       
 //                                          "name": "#d1",
 //                                          "status": "completed",
                                           "line_items" : [
                                             [
 //                                              "id": 58237889282329,
-//                                              "variant_id": nil,
-//                                              "product_id": nil,
-                                              "title":  "CONVERSE" ,
+                                                "product_id": (self.product?.id)!,
+                                                "title": (self.product?.title)! ,
 //                                              "variant_title": nil,
-//                                              "sku": nil,
-//                                              "vender" : nil,
-                                              "quantity": 6,
+                                                "sku": (product?.image?.src)!,
+                                                "vender" : (self.product?.vendor)!,
+                                              "quantity": 1,
 //                                              "requires_shipping": true,
 //                                              "taxable": true,
 //                                              "gift_card": false,
 //                                              "fulfillment_service": "manual",
-//                                              "grams":567,
+                                              "grams":self.product!.variants![0].inventory_quantity!,
 //                                              "tax_lines": [            [
 //                                                  "rate":0.14,
 //                                                  "title":"GST",
@@ -221,19 +245,19 @@ extension ProductDetailsViewController {
 //                                              "name": nil,
 //                                              "properties": [],
 //                                              "custom": false,
-                                              "price": "100.00",
+                                                "price": (self.product?.variants![0].price)!,
 //                                              "admin_graphql_api_id": "gid://shopify/DraftOrderLineItem/498266019"
                                           
                                            ]
                                           ],
                                         "customer": [
-                                        "id":6868102218009
+                                            "id":UserDefaultsManager.sharedInstance.getUserID()
                                                 ]
                                          
                                         ]
                                     ]
-        let customerCart : ShoppingCart = ShoppingCart()
-        customerCart.draft_order = cart
+//        let customerCart : ShoppingCart = ShoppingCart()
+//        customerCart.draft_order = cart
       
         //(customer_address: address)
         self.cartVM.postNewCart(userCart:newdraft){ data, response, error in
@@ -251,7 +275,7 @@ extension ProductDetailsViewController {
                     }
                     return
                 }
-                print ("this is response\(response?.statusCode)")
+            print ("this is response\(String(describing: response?.statusCode))")
                 print("address was added successfully")
                 
                 DispatchQueue.main.async {
@@ -262,5 +286,60 @@ extension ProductDetailsViewController {
     
     
 }
+extension ProductDetailsViewController {
+    func renderCart() {
+        DispatchQueue.main.async {
+            self.cartcount = self.cartVM.cartResult!
+            
+            print ("heree email\(String(describing: self.cartcount.draft_orders?[1].email))")
+         
+            
 
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+}
+extension ProductDetailsViewController {
+    
+    func putCart(cartt:ShoppingCartPut){
+   
+        self.cartVM.putNewCart(userCart: cartt) { data, response, error in
+                guard error == nil else {
+                    DispatchQueue.main.async {
+                        print ("Address Error \n \(error?.localizedDescription ?? "")" )
+                    }
+                    return
+                }
+                
+            guard response?.statusCode ?? 0 >= 200 && response?.statusCode ?? 0 < 300   else {
+                    DispatchQueue.main.async {
+                        print ("Address Response \n \(response ?? HTTPURLResponse())" )
 
+                    }
+                    return
+                }
+            
+                print("address was added successfully")
+                
+                DispatchQueue.main.async {
+                    print("Address Saved")
+                }
+            }
+    }
+    
+    
+    
+    
+    
+    
+}

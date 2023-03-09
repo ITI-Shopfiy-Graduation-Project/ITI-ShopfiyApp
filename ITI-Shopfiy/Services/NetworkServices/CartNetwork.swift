@@ -88,3 +88,39 @@ extension CartNetwork{
     
     
 }
+extension CartNetwork {
+        
+      
+        
+        func putCart(userCart: ShoppingCartPut , completionHandler:@escaping (Data?, URLResponse? , Error?)->()){
+            let cartId = UserDefaultsManager.sharedInstance.getUserCart()!
+            guard let url = URL(string: URLService.putCart(lineId:cartId)) else { return }
+            var request = URLRequest(url: url)
+            request.httpMethod = "PUT"
+            let session = URLSession.shared
+            request.httpShouldHandleCookies = false
+            
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: userCart.asDictionary(), options: .prettyPrinted)
+            } catch let error {
+                print(error.localizedDescription)
+            }
+            
+            //HTTP Headers
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            session.dataTask(with: request) { (data, response, error) in
+                completionHandler(data, response, error)
+            }.resume()
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+
+}

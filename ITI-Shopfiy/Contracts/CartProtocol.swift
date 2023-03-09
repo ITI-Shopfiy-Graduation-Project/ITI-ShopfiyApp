@@ -8,4 +8,5 @@
 import Foundation
 protocol CartProtocol {
     func postNewCart(userCart: [String:Any], completion: @escaping (Data?, HTTPURLResponse?, Error?) -> ())
+     func getCart()
 }
