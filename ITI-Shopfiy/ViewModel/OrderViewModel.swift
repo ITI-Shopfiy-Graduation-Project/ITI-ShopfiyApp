@@ -30,4 +30,27 @@ extension OrderViewModel{
             completion(data, response as? HTTPURLResponse, nil)
         }
     }
+    
+    func updateUserWithCoupon(coupon : String) {
+        let userID = UserDefaultsManager.sharedInstance.getUserID()
+        let username = UserDefaultsManager.sharedInstance.getUserName()
+        let userEmail = UserDefaultsManager.sharedInstance.getUserEmail()
+        /*let userAddress = UserDefaultsManager.sharedInstance.getUserAddress()*/
+        let customer = Customer()
+        customer.id = userID
+        customer.email = userEmail
+        customer.first_name = username
+        customer.currency = coupon
+        let newCustomer = NewCustomer()
+        newCustomer.customer = customer
+        OrderNetwork.sharedinstance.putCustomer(customer: customer) { data, response, error in
+            if response != nil {
+                print("response: \(response)")
+            }
+            else if error != nil {
+                print("error \(error?.localizedDescription)")
+            }
+        }
+        
+    }
 }

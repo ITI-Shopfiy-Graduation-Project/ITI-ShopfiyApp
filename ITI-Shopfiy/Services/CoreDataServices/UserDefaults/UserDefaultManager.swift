@@ -101,9 +101,9 @@ class UserDefaultsManager: UserDefaultProtocol{
     
     func getCurrency(key: String = "currency") -> String {
         let currency = UserDefaults.standard.string(forKey: key)
-        if currency == "" {
+        /*if currency == "" {
             return "USD"
-        }
+        }*/
         return currency ?? "USD"
     }
     
