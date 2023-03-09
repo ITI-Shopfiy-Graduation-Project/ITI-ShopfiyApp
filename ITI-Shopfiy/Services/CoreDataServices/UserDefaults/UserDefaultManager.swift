@@ -112,7 +112,12 @@ class UserDefaultsManager: UserDefaultProtocol{
         UserDefaults.standard.set(value, forKey: key)
 
     }
-    
+    func setUserCart(cartId: Int?){
+        UserDefaults.standard.set(cartId, forKey: "Cart_ID")
+    }
+    func getUserCart()-> Int?{
+        return UserDefaults.standard.integer(forKey: "Cart_ID")
+    }
 }
 
 //For favorites
