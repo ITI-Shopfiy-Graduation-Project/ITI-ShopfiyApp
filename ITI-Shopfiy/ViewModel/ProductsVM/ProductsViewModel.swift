@@ -15,6 +15,7 @@ class ProductsVM{
             bindingProducts()
         }
     }
+    var dataBaseManager = CoreManager()
 
 }
 
@@ -27,6 +28,14 @@ extension ProductsVM: getProductsProtocol{
             self.productsResults = result?.products
         })
     
+    }
+    
+    func addFavourite(appDelegate: AppDelegate, product: Products){
+        dataBaseManager.saveData(appDelegate: appDelegate, product: product)
+    }
+    
+    func deleteFavourite(appDelegate: AppDelegate, product: Products){
+        dataBaseManager.deleteProductFromFavourites(appDelegate: appDelegate, product: product)
     }
     
     

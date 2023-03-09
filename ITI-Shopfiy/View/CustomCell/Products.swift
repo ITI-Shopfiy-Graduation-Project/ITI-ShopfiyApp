@@ -35,3 +35,10 @@ class Products : Decodable{
    
     
 }
+
+struct Review{
+    var image: String?
+    var rating: Double?
+    var review: String?
+    var user: String?
+}

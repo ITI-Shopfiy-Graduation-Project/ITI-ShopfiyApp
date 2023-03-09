@@ -18,6 +18,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     var favouritesView: FavoriteActionFavoritesScreen?
     var Location: Bool?
     var currentProduct:Products?
+    var isfavorite : Bool?
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,8 +47,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
 
 extension ProductCollectionViewCell{
 //    cell is liked check
-    func configureCell(product: Products, isInFavouriteScreen: Bool = false){
-        if isInFavouriteScreen == true{
+    func configureCell(product: Products, isLiked: Bool,   isInFavouriteScreen: Bool = false){
+        if isLiked == true{
             like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         }else{
             if ( product.state == true ){
@@ -55,25 +57,27 @@ extension ProductCollectionViewCell{
             like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
         }
     }
+        self.isfavorite = isLiked
         self.Location = isInFavouriteScreen
         self.currentProduct = product
         }
 
-    
     func actionTakenInCellInProductsView(currentProduct: Products){
-        if (like_btn.image(for: .normal)) == UIImage(systemName: "heart.fill"){
-                productsView?.showAlert(title: "Deleting From Favorites", message: "Are you sure ?", product: currentProduct)
-            } else {
-                productsView?.addFavourite(product: currentProduct)
-                like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                currentProduct.state = true
-            }
+        if isfavorite! {
+            productsView!.showAlert(appDelegate: appDelegate, title: "Remove Item", message: "Are you Sure ?", product: currentProduct)
+            like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+        } else {
+            currentProduct.variants![0].id = UserDefaultsManager.sharedInstance.getUserID()!
+            productsView!.addFavourite(appDelegate: appDelegate, product: currentProduct)
+            like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+        isfavorite = !isfavorite!
 
     }
     
     
     func actionTakenInCellInFavoritesView(currentProduct: Products){
-        favouritesView?.showAlert(title: "Deleting From Favorites", message: "Are you sure ?", product: currentProduct)
+        favouritesView?.showAlert(appDelegate: appDelegate, title: "", message: "Remove Item", product: currentProduct)
     }
     
     
