@@ -162,6 +162,7 @@
                         <outlet property="AdsCollectionView" destination="fJw-Ux-sNu" id="6Xp-Gu-Fjv"/>
                         <outlet property="BrandsCollectionView" destination="AiE-Fp-RTm" id="QGo-oE-ReJ"/>
                         <outlet property="pageControl" destination="IUX-NG-uok" id="UW0-GD-NN3"/>
+                        <outlet property="userName" destination="YOo-vm-bMN" id="7J8-Wq-jXd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

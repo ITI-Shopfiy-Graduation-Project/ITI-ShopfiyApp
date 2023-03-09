@@ -28,3 +28,99 @@ class CartNetwork {
           }
       }
 }
+extension CartNetwork {
+    func postCart(userCart: [String:Any], completionHandler:@escaping (Data?, URLResponse? , Error?)->()){
+        guard let url = URL(string: URLService.draftCart()) else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let session = URLSession.shared
+        request.httpShouldHandleCookies = false
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: userCart, options: .prettyPrinted)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+        //HTTP Headers
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        session.dataTask(with: request) { (data, response, error) in
+            completionHandler(data, response, error)
+            
+        }.resume()
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+extension CartNetwork{
+    
+    
+     static func CartfetchData(url : String?,handlerComplition : @escaping (ShoppingCart?)->Void) {
+     AF.request("\(url!)").responseData {response in
+             guard let data = response.data else {
+                 return
+             }
+             
+             do{
+                 let result = try JSONDecoder().decode(ShoppingCart.self, from: data)
+                 handlerComplition(result)
+             }catch let error {
+                 print(error.localizedDescription)
+                 handlerComplition(nil)
+             }
+             
+           }
+       }
+    
+    
+    
+    
+    
+    
+}
+extension CartNetwork {
+        
+      
+        
+        func putCart(userCart: ShoppingCartPut , completionHandler:@escaping (Data?, URLResponse? , Error?)->()){
+            let cartId = UserDefaultsManager.sharedInstance.getUserCart()!
+            guard let url = URL(string: URLService.putCart(lineId:cartId)) else { return }
+            var request = URLRequest(url: url)
+            request.httpMethod = "PUT"
+            let session = URLSession.shared
+            request.httpShouldHandleCookies = false
+            
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: userCart.asDictionary(), options: .prettyPrinted)
+            } catch let error {
+                print(error.localizedDescription)
+            }
+            
+            //HTTP Headers
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            session.dataTask(with: request) { (data, response, error) in
+                completionHandler(data, response, error)
+            }.resume()
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+
+}

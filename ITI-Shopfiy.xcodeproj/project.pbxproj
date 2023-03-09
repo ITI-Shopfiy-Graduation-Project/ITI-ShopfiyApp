@@ -74,7 +74,6 @@
 		A7FFA85E29A594CC00474CB1 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FFA85D29A594CC00474CB1 /* LoginStoryboard.storyboard */; };
 		A7FFA86029A594EF00474CB1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FFA85F29A594EF00474CB1 /* LoginViewController.swift */; };
 		E2008ED429A41B9F003D55A0 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2008ED329A41B9F003D55A0 /* ViewHelper.swift */; };
-		E23D188529B025E200D4AFB2 /* PaymentServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188429B025E200D4AFB2 /* PaymentServices.swift */; };
 		E23D188729B02A3400D4AFB2 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188629B02A3400D4AFB2 /* PaymentViewModel.swift */; };
 		E23D188929B033F700D4AFB2 /* IPaymentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188829B033F700D4AFB2 /* IPaymentDelegate.swift */; };
 		E23D188B29B03BCE00D4AFB2 /* AddressDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23D188A29B03BCE00D4AFB2 /* AddressDelegate.swift */; };
@@ -106,6 +105,7 @@
 		E29FA94C29A30B1500CE0786 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA94B29A30B1500CE0786 /* CartViewController.swift */; };
 		E29FA94E29A30E3500CE0786 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E29FA94D29A30E3500CE0786 /* SettingsStoryboard.storyboard */; };
 		E29FA95029A310FD00CE0786 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA94F29A310FD00CE0786 /* SettingsViewController.swift */; };
+		E2A52F3429B9235B00482A06 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CD1CA029A60D450079C09A /* PaymentViewController.swift */; };
 		E2B49FA329B25861001F4952 /* AddressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B49FA229B25861001F4952 /* AddressProtocol.swift */; };
 		E2B49FA529B25900001F4952 /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B49FA429B25900001F4952 /* AddressViewModel.swift */; };
 		E2B49FA929B2D2F6001F4952 /* AddressHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B49FA829B2D2F6001F4952 /* AddressHistoryTableViewCell.swift */; };
@@ -214,7 +214,6 @@
 		C2B9DD6EAB0BBBA9777CC60B /* Pods-ITI-Shopfiy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITI-Shopfiy.debug.xcconfig"; path = "Target Support Files/Pods-ITI-Shopfiy/Pods-ITI-Shopfiy.debug.xcconfig"; sourceTree = "<group>"; };
 		E2008ED329A41B9F003D55A0 /* ViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
 		E23D188229AFDAD000D4AFB2 /* ITI-Shopfiy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ITI-Shopfiy.entitlements"; sourceTree = "<group>"; };
-		E23D188429B025E200D4AFB2 /* PaymentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentServices.swift; sourceTree = "<group>"; };
 		E23D188629B02A3400D4AFB2 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		E23D188829B033F700D4AFB2 /* IPaymentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPaymentDelegate.swift; sourceTree = "<group>"; };
 		E23D188A29B03BCE00D4AFB2 /* AddressDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDelegate.swift; sourceTree = "<group>"; };
@@ -443,14 +442,6 @@
 			path = AdsCell;
 			sourceTree = "<group>";
 		};
-		E23D188329B0243000D4AFB2 /* PaymentService */ = {
-			isa = PBXGroup;
-			children = (
-				E23D188429B025E200D4AFB2 /* PaymentServices.swift */,
-			);
-			path = PaymentService;
-			sourceTree = "<group>";
-		};
 		E29FA8F029A2AEE100CE0786 = {
 			isa = PBXGroup;
 			children = (
@@ -524,7 +515,6 @@
 		E29FA93029A2AF7600CE0786 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E23D188329B0243000D4AFB2 /* PaymentService */,
 				E29FA93A29A2B06800CE0786 /* NetworkServices */,
 				E29FA93929A2B05200CE0786 /* CoreDataServices */,
 			);
@@ -985,7 +975,6 @@
 				A7FFA86029A594EF00474CB1 /* LoginViewController.swift in Sources */,
 				5EA83B8829A62A380018E90E /* CategoryViewController.swift in Sources */,
 				E2C45E4829AEFAFA00840AC2 /* DataCaching.swift in Sources */,
-				E23D188529B025E200D4AFB2 /* PaymentServices.swift in Sources */,
 				5E012F7E29B3160000E516CE /* DiscountProtocol.swift in Sources */,
 				5E55DE8C29AAF9C600EB6516 /* CategoryViewModel.swift in Sources */,
 				5E55DE9A29AC15F700EB6516 /* BrandsProtocol.swift in Sources */,
@@ -1079,6 +1068,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E29FA92329A2AEE700CE0786 /* ITI_ShopfiyUITestsLaunchTests.swift in Sources */,
+				E2A52F3429B9235B00482A06 /* PaymentViewController.swift in Sources */,
 				E29FA92129A2AEE700CE0786 /* ITI_ShopfiyUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

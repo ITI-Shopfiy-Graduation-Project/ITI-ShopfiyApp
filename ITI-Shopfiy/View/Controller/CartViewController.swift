@@ -37,7 +37,7 @@ class CartViewController: UIViewController {
         swipe.direction = .right
         view.addGestureRecognizer(swipe)
         getPromoCode()
-        getData()
+        //getData()
     }
     
     @objc func dismissVC() {
@@ -78,7 +78,7 @@ extension CartViewController: UITableViewDataSource {
         cell.itemName.text = cartArray?[indexPath.row].title
         cell.itemPrice.text = cartArray?[indexPath.row].price
        // cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
-        cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].image ?? "ct4")
+        cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].sku ?? "ct4")
         cell.quantityCount.isHidden = true
         cell.decreseItem.isHidden = true
         cell.increaseItem.isHidden = true
@@ -100,7 +100,7 @@ extension CartViewController: UITableViewDelegate {
 }
 
 extension CartViewController {
-    func getData(){
+  /*  func getData(){
         shoppingCartVM.getShoppingCart(userId: 132)
         shoppingCartVM.bindingCart = {
             self.cartArray = self.shoppingCartVM.cartList
@@ -108,7 +108,7 @@ extension CartViewController {
                 self.CartTable.reloadData()
             }
         }
-    }
+    }*/
 }
 
 extension CartViewController {
