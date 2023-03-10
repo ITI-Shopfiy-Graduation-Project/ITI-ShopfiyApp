@@ -24,7 +24,7 @@ class ShoppingCartViewModel {
     func getShoppingCart() {
         CartNetwork.sharedInstance.fetchUserCart(handlerComplition: { result in
             if let result = result {
-                self.cartList = result.line_items
+                self.cartList = result.draft_order?.line_items
             }
         })
             

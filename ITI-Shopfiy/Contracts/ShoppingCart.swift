@@ -11,6 +11,10 @@ class ShoppingCart : Codable{
     
 }
 
+class DraftOrderResponse : Codable {
+    var draft_order : DrafOrder?
+}
+
 class DrafOrder : Codable {
     var id : Int?
     var email: String?

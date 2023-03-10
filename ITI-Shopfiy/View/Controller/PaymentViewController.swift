@@ -24,6 +24,8 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var paymentView: UIStackView!
     var addressFlag: Bool = false
     var braintreeClient: BTAPIClient!
+    var totalPrice: Double = 0
+    var userTotalCost: Double = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
         setUserAddress()
@@ -43,7 +45,6 @@ class PaymentViewController: UIViewController {
             sender.borderColor = UIColor(named: "Green")
             sender.borderWidth = 1.5
             sender.cornerRadius = 10
-            self.setupDictionary()
             self.setupPayPal()
         }
     }
@@ -61,7 +62,7 @@ class PaymentViewController: UIViewController {
     }
     func setUserAddress(){
         let address = UserDefaultsManager.sharedInstance.getUserAddress()
-        if address != "hygtf" {
+        if address != "" {
             self.defaultAddress.text = address
             self.addressFlag = true
         }
@@ -97,7 +98,7 @@ extension PaymentViewController : BTViewControllerPresentingDelegate {
         let payPalDriver = BTPayPalDriver(apiClient: braintreeClient)
         
         // Specify the transaction amount here. "2.32" is used in this example.
-        let request = BTPayPalCheckoutRequest(amount: "2.32")
+        let request = BTPayPalCheckoutRequest(amount: totalPrice.formatted())
         request.currencyCode = UserDefaultsManager.sharedInstance.getCurrency()
         
         payPalDriver.tokenizePayPalAccount(with: request){ tokenizedPayPalAccount, error in
@@ -107,6 +108,12 @@ extension PaymentViewController : BTViewControllerPresentingDelegate {
                 DispatchQueue.main.async {
                     self.setupDictionary()
                 }
+                
+                //userTotalCost = Double(tokenizedPayPalAccount.creditFinancing?.totalCost.)
+          //      if tokenizedPayPalAccount.creditFinancing?.totalCost >= totalPrice 
+                    self.setupDictionary()
+                    
+                
                 // Access additional information
                 //                let email = tokenizedPayPalAccount.email
                 //                let firstName = tokenizedPayPalAccount.firstName
