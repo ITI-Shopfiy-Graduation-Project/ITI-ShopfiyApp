@@ -49,9 +49,17 @@ class ProductDetailsViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.center = view.center
+        view.addSubview(indicator)
+        indicator.startAnimating()
+        
         productDetailsVM = ProductDetailsVM()
-        self.isFav = self.productDetailsVM?.getProductsInFavourites(appDelegate: self.appDelegate, product: &(self.product!))
-        renderView()
+        productDetailsVM?.getProductDetails(Product_ID: self.product_ID ?? 8117840150809)
+        productDetailsVM?.bindingProducts = { () in
+            self.renderView()
+            indicator.stopAnimating()
+        }
 
         cartVM.cartsUrl = self.AllDraftsUrl
         cartVM.getCart()
@@ -141,14 +149,14 @@ class ProductDetailsViewController: UIViewController{
         
         if isFav! {
             like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-            productDetailsVM!.removeProductFromFavourites(appDelegate: appDelegate, product: product!)
+//            productDetailsVM!.removeProductFromFavourites(appDelegate: appDelegate, product: product!)
         } else {
             like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             print( UserDefaultsManager.sharedInstance.getUserID()!)
             product?.variants![0].id = UserDefaultsManager.sharedInstance.getUserID()!
             print(  product?.variants![0].id! ?? 20)
             
-            productDetailsVM!.addProductToFavourites(appDelegate: appDelegate, product: product!)
+//            productDetailsVM!.addProductToFavourites(appDelegate: appDelegate, product: product!)
         }
         isFav = !isFav!
     }
@@ -157,10 +165,6 @@ class ProductDetailsViewController: UIViewController{
         let reviewVC = self.storyboard!.instantiateViewController(withIdentifier: "review") as! ReviewsViewController
         self.navigationController!.pushViewController(reviewVC, animated: true)
     }
-    
-    
-        @IBAction func addToLikesButton(_ sender: Any) {
-        }
     
     
 }
@@ -235,6 +239,7 @@ extension ProductDetailsViewController{
     
     func renderView() {
         DispatchQueue.main.async {
+            self.product = self.productDetailsVM?.productsResults
             self.productName.text = self.product?.title
             self.productDescription.text = self.product?.body_html
             self.ProductImages = self.product?.images

@@ -7,36 +7,59 @@
 
 import Foundation
 
+import Foundation
+
 class FavouritesVM {
-    var databaseManager = CoreManager()
-    var favoritesArray: [Products]? {
+    
+    var bindingData: (([Products]?,Error?) -> Void) = {_, _ in }
+    
+    var savedProductsArray:[Products]? {
         didSet {
-            bindingData(favoritesArray, nil)
+            bindingData(savedProductsArray,nil)
         }
     }
-
     var error: Error? {
         didSet {
             bindingData(nil, error)
         }
     }
-    var bindingData: (([Products]?,Error?) -> Void) = {_, _ in }
+    
+    let dataCaching: IDataCaching
+    init(dataCaching : IDataCaching = DataManager()) {
+        self.dataCaching = dataCaching
+    }
+}
+   
 
-    func fetchfavorites(appDelegate: AppDelegate, userId: Int) {
-        databaseManager.fetchData(appDelegate: appDelegate, userId: userId) { favorites, error in
-            
-            if let favorites = favorites {
-                self.favoritesArray = favorites
+extension FavouritesVM{
+
+    func fetchSavedProducts(userId: Int, appDelegate : AppDelegate){
+        dataCaching.fetchSavedProducts(userId: userId, appDelegate: appDelegate) { result , error in
+            if let products = result {
+                self.savedProductsArray = products
             }
-            
             if let error = error {
                 self.error = error
             }
         }
     }
     
-    func deleteFavourite(appDelegate: AppDelegate, product: Products){
-        databaseManager.deleteProductFromFavourites(appDelegate: appDelegate, product: product)
+    func deleteProductItemFromFavourites (userId: Int, appDeleget : AppDelegate , ProductID: Int)
+    {
+        dataCaching.deleteProductFromFavourites(userId: userId, appDelegate: appDeleget, ProductID: ProductID) { errorMsg in
+            if let error = errorMsg {
+                self.error = error
+            }
+        }
+    }
+    
+    
+    func addFavourite(userId: Int, appDelegate: AppDelegate, product: Products) {
+        self.dataCaching.saveProductToFavourites(userId: userId, appDelegate: appDelegate, product: product)
+    }
+    
+    func isProductsInFavourites(userId: Int, appDelegate: AppDelegate, product: Products) -> Bool {
+        return self.dataCaching.isFavourite(userId: userId, appDelegate: appDelegate, productID: product.id ?? -1)
     }
 
     
