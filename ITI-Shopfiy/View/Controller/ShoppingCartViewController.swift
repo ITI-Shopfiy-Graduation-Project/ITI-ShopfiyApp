@@ -22,7 +22,7 @@ class ShoppingCartViewController: UIViewController {
         lineItem.sku = "ct4"
         cartArray = [lineItem , lineItem , lineItem]
         tableConfiguration()
-      //  getData()
+        getData()
         
     }
     func tableConfiguration(){
@@ -105,16 +105,19 @@ extension ShoppingCartViewController: CounterProtocol {
         return counter
     }
 }
-/*
+
 extension ShoppingCartViewController {
     func getData(){
-        shoppingCartVM.getShoppingCart(userId: 132)
+        shoppingCartVM.getShoppingCart()
         shoppingCartVM.bindingCart = {
+            
+            
+        }
+    }
+    func renderView(){
+        DispatchQueue.main.async {
             self.cartArray = self.shoppingCartVM.cartList
-            DispatchQueue.main.async {
-                self.cartTable.reloadData()
-            }
+            self.cartTable.reloadData()
         }
     }
 }
-*/

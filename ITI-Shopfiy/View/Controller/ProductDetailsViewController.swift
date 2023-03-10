@@ -120,8 +120,10 @@ class ProductDetailsViewController: UIViewController{
                 newLineItem?.grams = product?.variants![0].inventory_quantity
                 newLineItem?.quantity = 1
                 lineAppend?.append(newLineItem!)
-                addtoLine = DrafOrder(line_items: lineAppend )
-                let draftOrderAppend  : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)
+                var draftOrder = DrafOrder()
+                draftOrder.line_items = lineAppend
+                addtoLine = draftOrder
+                let draftOrderAppend : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)
                 putCart(cartt: draftOrderAppend)
                 print ("already used")
            

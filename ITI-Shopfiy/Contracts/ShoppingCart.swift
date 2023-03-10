@@ -11,7 +11,7 @@ class ShoppingCart : Codable{
     
 }
 
-struct DrafOrder : Codable {
+class DrafOrder : Codable {
     var id : Int?
     var email: String?
 //    var currency: String?
