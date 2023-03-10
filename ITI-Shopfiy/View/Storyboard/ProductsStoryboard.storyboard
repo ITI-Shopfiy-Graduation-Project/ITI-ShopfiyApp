@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hyy-so-KB3">
-                                <rect key="frame" x="16" y="175" width="361" height="627"/>
+                                <rect key="frame" x="16" y="229" width="361" height="573"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hn5-1N-3rl">
                                     <size key="itemSize" width="128" height="128"/>
@@ -44,17 +44,37 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="tFt-nx-Ite"/>
                                 </connections>
                             </searchBar>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="125" minValue="0.0" maxValue="250" translatesAutoresizingMaskIntoConstraints="NO" id="HEF-hc-A6G">
+                                <rect key="frame" x="114" y="154" width="265" height="31"/>
+                                <color key="tintColor" name="Green"/>
+                                <connections>
+                                    <action selector="priceActionSlider:" destination="Y6W-OH-hqX" eventType="valueChanged" id="bKZ-Ii-h9T"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4l-4Q-LIC">
+                                <rect key="frame" x="16" y="159" width="92" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="HEF-hc-A6G" secondAttribute="trailing" constant="16" id="4cT-Vh-vm0"/>
                             <constraint firstItem="hyy-so-KB3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="7Nh-at-ysL"/>
                             <constraint firstItem="nc3-4g-oO2" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="7dg-IG-zQ0"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="nc3-4g-oO2" secondAttribute="trailing" constant="16" id="BOg-zH-Gob"/>
-                            <constraint firstItem="hyy-so-KB3" firstAttribute="top" secondItem="nc3-4g-oO2" secondAttribute="bottom" constant="16" id="DHj-Vi-Max"/>
                             <constraint firstItem="nc3-4g-oO2" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Hu2-qq-6z0"/>
+                            <constraint firstItem="hyy-so-KB3" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.672535" id="JXy-xp-KKZ"/>
+                            <constraint firstItem="HEF-hc-A6G" firstAttribute="leading" secondItem="X4l-4Q-LIC" secondAttribute="trailing" constant="8" symbolic="YES" id="UF9-BR-0jc"/>
                             <constraint firstItem="hyy-so-KB3" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-16" id="b00-7b-kIy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hyy-so-KB3" secondAttribute="trailing" constant="16" id="dR5-iA-FSA"/>
+                            <constraint firstItem="X4l-4Q-LIC" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.0246479" id="olQ-P8-E3w"/>
+                            <constraint firstItem="HEF-hc-A6G" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.664122" id="qYq-Vn-ZR5"/>
+                            <constraint firstItem="X4l-4Q-LIC" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="u1z-Mc-sf6"/>
+                            <constraint firstItem="HEF-hc-A6G" firstAttribute="top" secondItem="nc3-4g-oO2" secondAttribute="bottom" constant="-5" id="w4R-gx-QoO"/>
+                            <constraint firstItem="X4l-4Q-LIC" firstAttribute="top" secondItem="nc3-4g-oO2" secondAttribute="bottom" id="yO8-wG-447"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Shopify" id="djS-tc-4sO">
@@ -71,11 +91,19 @@
                                     <action selector="cartScreen:" destination="Y6W-OH-hqX" id="f4X-ba-l49"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem image="line.3.horizontal.decrease.circle" catalog="system" id="jRf-Mm-PjI">
+                                <color key="tintColor" name="Green"/>
+                                <connections>
+                                    <action selector="showSlider:" destination="Y6W-OH-hqX" id="MAD-go-R7u"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="cart_btn" destination="10N-DR-NBn" id="Hzr-0i-9gO"/>
                         <outlet property="like_btn" destination="Y82-vj-ax7" id="s6e-Co-SYl"/>
+                        <outlet property="priceSlider" destination="HEF-hc-A6G" id="D79-jV-6fd"/>
+                        <outlet property="priceValue" destination="X4l-4Q-LIC" id="2dT-ED-yhJ"/>
                         <outlet property="productSearchBar" destination="nc3-4g-oO2" id="71N-X4-ai5"/>
                         <outlet property="productsCollectionView" destination="hyy-so-KB3" id="rcy-Zn-pyL"/>
                     </connections>
@@ -138,6 +166,7 @@
     <resources>
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="heart" catalog="system" width="128" height="107"/>
+        <image name="line.3.horizontal.decrease.circle" catalog="system" width="128" height="123"/>
         <namedColor name="Gray">
             <color red="0.51399999856948853" green="0.51399999856948853" blue="0.51399999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
