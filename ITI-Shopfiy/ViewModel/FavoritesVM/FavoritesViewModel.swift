@@ -6,45 +6,60 @@
 //
 
 import Foundation
-import CoreData
+
+import Foundation
 
 class FavouritesVM {
-    var managedContext: NSManagedObjectContext!
-    var coreDataManager = CoreDataManager.getInstance()
-    let userId = UserDefaultsManager.sharedInstance.getUserID()
-    var results: [NSManagedObject] = []
     
-    var bindingFavorites: (() -> Void) = {}
-    var savedResults: [Products] = [] {
+    var bindingData: (([Products]?,Error?) -> Void) = {_, _ in }
+    
+    var savedProductsArray:[Products]? {
         didSet {
-            bindingFavorites()
+            bindingData(savedProductsArray,nil)
         }
     }
-
+    var error: Error? {
+        didSet {
+            bindingData(nil, error)
+        }
+    }
+    
+    let dataCaching: IDataCaching
+    init(dataCaching : IDataCaching = DataManager()) {
+        self.dataCaching = dataCaching
+    }
 }
    
 
 extension FavouritesVM{
-    
-    func fetchSavedProducts(userID: Int){
-        self.results = coreDataManager.fetchData(userID: userID)
-        for item in (self.results )
-        {
-//            let proudct = Products()
-            for product in savedResults{
-                product.id = item.value(forKey:"product_id") as? Int
-                product.title = item.value(forKey: "title") as? String
-                product.image?.src = item.value(forKey: "src") as? String
-                product.variants?.first?.price = item.value(forKey: "price") as? String
-                product.user_id = item.value(forKey: "user_id") as? Int
-                //            self.savedResults?.append(proudct)
-                print(product.title ?? "")
+
+    func fetchSavedProducts(userId: Int, appDelegate : AppDelegate){
+        dataCaching.fetchSavedProducts(userId: userId, appDelegate: appDelegate) { result , error in
+            if let products = result {
+                self.savedProductsArray = products
+            }
+            if let error = error {
+                self.error = error
             }
         }
     }
     
-    func deleteProductItemFromFavourites (product_id: Int, userID: Int){
-        coreDataManager.deleteProductFromFavourites(product_id: product_id, userID: userID)
+    func deleteProductItemFromFavourites (userId: Int, appDeleget : AppDelegate , ProductID: Int)
+    {
+        dataCaching.deleteProductFromFavourites(userId: userId, appDelegate: appDeleget, ProductID: ProductID) { errorMsg in
+            if let error = errorMsg {
+                self.error = error
+            }
+        }
+    }
+    
+    
+    func addFavourite(userId: Int, appDelegate: AppDelegate, product: Products) {
+        self.dataCaching.saveProductToFavourites(userId: userId, appDelegate: appDelegate, product: product)
+    }
+    
+    func isProductsInFavourites(userId: Int, appDelegate: AppDelegate, product: Products) -> Bool {
+        return self.dataCaching.isFavourite(userId: userId, appDelegate: appDelegate, productID: product.id ?? -1)
     }
 
     

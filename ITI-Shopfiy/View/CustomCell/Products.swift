@@ -13,20 +13,18 @@ class Products : Decodable{
     var body_html: String?
     var product_type: String?
     var created_at: String?
-    var user_id: Int?
     var variants : [variants]?
-    var image : image?
+    var image: Image?
     var images: [Image]?
     var state: Bool? = false
 
-    init(id: Int? = nil, title: String? = nil, vendor: String? = nil, body_html: String? = nil, product_type: String? = nil, created_at: String? = nil, user_id: Int? = nil, variants: [variants]? = nil, image: image? = nil, images: [Image]? = nil, state: Bool? = nil) {
+    init(id: Int? = nil, title: String? = nil, vendor: String? = nil, body_html: String? = nil, product_type: String? = nil, created_at: String? = nil, variants: [variants]? = nil, image: Image? = nil, images: [Image]? = nil, state: Bool? = nil) {
         self.id = id
         self.title = title
         self.vendor = vendor
         self.body_html = body_html
         self.product_type = product_type
         self.created_at = created_at
-        self.user_id = user_id
         self.variants = variants
         self.image = image
         self.images = images
@@ -34,4 +32,11 @@ class Products : Decodable{
     }
    
     
+}
+
+struct Review{
+    var image: String?
+    var rating: Double?
+    var review: String?
+    var user: String?
 }

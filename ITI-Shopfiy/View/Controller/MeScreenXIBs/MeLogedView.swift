@@ -14,6 +14,14 @@ class MeLogedView: UIView {
     
     @IBOutlet weak var userName_txt: UILabel!
     
+    @IBOutlet weak var productName_wishList: UILabel!
+    @IBOutlet weak var productPrice_wishList: UILabel!
+    @IBOutlet weak var productColor_wishList: UILabel!
+    @IBOutlet weak var productImage_wishList: UIImageView!
+
+    
+    
+    
     @IBAction func goToAllOrders(_ sender: UIButton) {
         meProtocol?.goToAllOrders()
     }

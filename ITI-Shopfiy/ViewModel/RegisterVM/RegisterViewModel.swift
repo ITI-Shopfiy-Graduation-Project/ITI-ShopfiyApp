@@ -14,8 +14,8 @@ class RegisterVM: registerProtocol{
             CustomerLogin.login(){ result in
                 guard let customers = result?.customers else {return}
                 for customer in customers {
-                    if (userName == customer.first_name) {
-                        completionHandler("InvalidUserName")
+                    if (email == customer.email){
+                        completionHandler("ErrorEmail")
                         return
                     }
                     
@@ -26,10 +26,10 @@ class RegisterVM: registerProtocol{
                 return
             }
                 
-            if !self.isValidEmail(email) {
-                    completionHandler("ErrorEmail")
-                    return
-                }
+//            if !self.isValidEmail(email) {
+//                    completionHandler("ErrorEmail")
+//                    return
+//                }
                 
             if !self.isValidPassword(password: password, confirmPassword: confirmPassword) {
                     completionHandler("ErrorPassword")

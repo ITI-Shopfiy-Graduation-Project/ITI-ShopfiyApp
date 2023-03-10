@@ -7,10 +7,13 @@
 
 import Foundation
 class image: Decodable{
-    var src : String?
+    var src: String?
    
 }
 
 class Image: Decodable{
     var src: String?
+    init(src: String? = nil) {
+        self.src = src
+    }
 }

@@ -8,50 +8,52 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class DataCaching {
     static let sharedInstance = DataCaching()
     private init(){}
     
-    func fetchSavedProducts(userID: Int, appDelegate : AppDelegate) -> [Products] {
+    //MARK: Fetch
+    func fetchSavedProducts(userId: Int, appDelegate : AppDelegate) -> [Products] {
         var productArray: [Products] = []
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.ProductEntity)
-             fetchRequest.predicate = NSPredicate(format: "user_id == %i", userID )
+        fetchRequest.predicate = NSPredicate(format: "user_id = \(userId)")
+        
         do {
             let fetchedProductArray = try managedContext.fetch(fetchRequest)
             for item in (fetchedProductArray)
             {
-                
-                let proudct = Products()
-                
-                proudct.id = item.value(forKey:"product_id") as? Int
-                proudct.title = item.value(forKey: "title") as? String
-                proudct.image?.src = item.value(forKey: "src") as? String
-                proudct.variants?.first?.price = item.value(forKey: "price") as? String
-                proudct.user_id = item.value(forKey: "user_id") as? Int
-                productArray.append(proudct)
-                print("AI")
+                let id = item.value(forKey:"product_id") as? Int
+                let title = item.value(forKey: "title") as? String
+                let src = item.value(forKey: "src") as? String
+                let price = item.value(forKey: "price") as? String
+                let color = item.value(forKey: "color") as? String
+                let product = Products(id: id, title: title, vendor: nil, body_html: nil, product_type: nil, created_at: nil, variants: [variants(id: nil, product_id: id, inventory_item_id: nil, price: price, inventory_quantity: nil, old_inventory_quantity: nil, option1: nil, option2: color ?? "Black", taxable: nil)], image: Image(src: src), images: nil, state: nil)
+            productArray.append(product)
             }
+            print(productArray.count)
         } catch let error {
             print("fetch all products error :", error)
         }
         return productArray
     }
     
-    func deleteProductFromFavourites(appDelegate: AppDelegate, product_id: Int , complition : (Error?) -> Void?){
+    //MARK: Delete
+    func deleteProductFromFavourites(userId: Int, appDelegate: AppDelegate, product_id: Int , complition : (Error?) -> Void?){
         let managedContext = appDelegate.persistentContainer.viewContext
         do{
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.ProductEntity)
-            fetchRequest.predicate = NSPredicate(format: "product_id == %i", product_id )
+            fetchRequest.predicate = NSPredicate(format: "product_id = \(product_id) AND user_id = \(userId)")
             let product = try managedContext.fetch(fetchRequest)
             
             managedContext.delete((product as! [NSManagedObject]).first!)
             
             try managedContext.save()
-            print("Product deleted")
-            print("me2mo")
+            print("\(product_id ) is Removed")
             complition(nil)
+            
         } catch let error as NSError{
             complition("Error in deleting" as? Error )
             print("Error in deleting")
@@ -59,34 +61,35 @@ class DataCaching {
         }
     }
     
-    func saveProductToFavourites(userID: Int, product : Products, appDelegate : AppDelegate) -> Void
+    //MARK: Save
+    func saveProductToFavourites(userId: Int, product : Products, appDelegate : AppDelegate) -> Void
     {
         let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Product", in: managedContext)
+        let entity = NSEntityDescription.entity(forEntityName: Constants.ProductEntity, in: managedContext)
         let Product = NSManagedObject(entity: entity!, insertInto: managedContext)
         Product.setValue(product.id ?? 0, forKey: "product_id")
         Product.setValue(product.title , forKey: "title")
         Product.setValue(product.image?.src , forKey: "src")
-        Product.setValue(userID , forKey: "user_id")
-//        Product.setValue(product.user_id ?? 0, forKey: "user_id")
-        Product.setValue(product.variants?.first?.price, forKey: "price")
+        Product.setValue(userId, forKey: "user_id")
+        Product.setValue(product.variants?[0].price ?? "38", forKey: "price")
+        Product.setValue(product.variants?[0].option2 ?? "Black", forKey: "color")
         Product.setValue(true , forKey: "product_state")
         do{
             try managedContext.save()
-            print("Product Added!")
-            print("fady")
+            print("\(Product.value(forKey: "title") ?? "Adidas") is Added")
+
         }catch let error{
             print(error.localizedDescription)
         }
     }
     
-    func isFavouriteProduct (productID: Int, appDelegate : AppDelegate) -> Bool
+    //MARK: Is Favorite
+    func isFavouriteProduct (userId: Int, productID: Int, appDelegate : AppDelegate) -> Bool
     {
         var state : Bool = false
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.ProductEntity)
-        let pred = NSPredicate(format: "product_id == %i", productID )
-        fetchRequest.predicate = pred
+        fetchRequest.predicate = NSPredicate(format: "product_id = \(productID) AND user_id = \(userId)")
             do{
                 let fetchedLeagueArray = try managedContext.fetch(fetchRequest)
                 for item in (fetchedLeagueArray)

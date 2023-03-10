@@ -13,7 +13,77 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var Email_txt: UITextField!
     @IBOutlet weak var password_txt: UITextField!
     @IBOutlet weak var confirmPassword_txt: UITextField!
-    @IBOutlet weak var currentAddress_txt: UITextField!
+    
+    //Errors
+    @IBOutlet weak var userName_error: UILabel!
+    @IBOutlet weak var email_error: UILabel!
+    @IBOutlet weak var password_error: UILabel!
+    @IBOutlet weak var confirmPassword_error: UILabel!
+    @IBOutlet weak var phoneNumber_error: UILabel!
+    @IBOutlet weak var address_error: UILabel!
+    @IBOutlet weak var address_txt: UILabel!
+    
+    //Changes
+    @IBAction func userName_changed(_ sender: Any) {
+        if let name = username_txt.text{
+            if let errorMessage = invalidName(name){
+                userName_error.text = errorMessage
+                userName_error.isHidden = false
+            }else{
+                userName_error.isHidden = true
+            }
+        }
+        checkForValidForm()
+    }
+    
+    @IBAction func email_changed(_ sender: Any) {
+        if let email = Email_txt.text{
+            if let errorMessage = invalidEmail(email){
+                email_error.text = errorMessage
+                email_error.isHidden = false
+            }else{
+                email_error.isHidden = true
+            }
+        }
+        checkForValidForm()
+    }
+    
+    @IBAction func password_changed(_ sender: Any) {
+        if let password = password_txt.text{
+            if let errorMessage = invalidPassword(password){
+                password_error.text = errorMessage
+                password_error.isHidden = false
+            }else{
+                password_error.isHidden = true
+            }
+        }
+        checkForValidForm()
+    }
+    
+    @IBAction func confirmPassword_change(_ sender: Any) {
+        if let confirmPassword = confirmPassword_txt.text{
+            if let errorMessage = invalidConfirmPassword(confirmPassword){
+                confirmPassword_error.text = errorMessage
+                confirmPassword_error.isHidden = false
+            }else{
+                confirmPassword_error.isHidden = true
+            }
+        }
+        checkForValidForm()
+    }
+    
+    @IBAction func phoneNumber_changed(_ sender: Any) {
+        if let phoneNumber = phoneNumber_txt.text{
+            if let errorMessage = invalidPhoneNumber(phoneNumber){
+                phoneNumber_error.text = errorMessage
+                phoneNumber_error.isHidden = false
+            }else{
+                phoneNumber_error.isHidden = true
+            }
+        }
+        checkForValidForm()
+    }
+    
     @IBOutlet weak var phoneNumber_txt: UITextField!
     @IBOutlet weak var createAccount_btn: UIButton!
     
@@ -24,6 +94,7 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        resetForm()
         registerVM = RegisterVM()
         // Do any additional setup after loading the view.
         navigationItem.title = "Shopify App"
@@ -41,6 +112,7 @@ class SignUpViewController: UIViewController {
     @IBAction func chooseOnMap(_ sender: UIButton) {
         let addressVC = UIStoryboard(name: "AddressDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "address") as! AddressViewController
         addressVC.addressDelegate = self
+        address_error.isHidden = true
         navigationController?.pushViewController(addressVC, animated: true)
         
     }
@@ -51,7 +123,7 @@ class SignUpViewController: UIViewController {
         guard let password = password_txt.text else {return}
         guard let confirmPassword = confirmPassword_txt.text else {return}
         guard let phone = phoneNumber_txt.text else {return}
-        self.chosenAddress.address1 = currentAddress_txt.text
+        self.chosenAddress.address1 = address_txt.text
         self.adresses?.removeAll()
         self.adresses?.append(chosenAddress)
         
@@ -61,6 +133,7 @@ class SignUpViewController: UIViewController {
         } else {
             showAlertError(title: "Couldnot register", message: "Please try again later.")
         }
+//        resetForm()
         
     }
     
@@ -71,7 +144,7 @@ extension SignUpViewController: AddressDelegate{
     func getAddressInfo(Address userAddress: Address) {
         self.adresses?.removeAll()
         self.adresses?.append(userAddress)
-        self.currentAddress_txt.text = userAddress.address1
+        self.address_txt.text = userAddress.address1
     }
 }
 
@@ -91,17 +164,19 @@ extension SignUpViewController {
                 isSuccess = false
                 self.showAlertError(title: "Check Password", message: "please, enter password again.")
                 
-            case "InvalidUserName":
-                isSuccess = false
-                self.showAlertError(title: "Invalid User Name", message: "please, try another User Name.")
+//            case "InvalidUserName":
+//                isSuccess = false
+//                self.showAlertError(title: "Invalid User Name", message: "please, try another User Name.")
                 
             case "ErrorEmail":
                 isSuccess = false
-                self.showAlertError(title: "Invalid Email", message: "please, enter correct email.")
+                self.showAlertError(title: "Invalid Email", message: "please, enter another email.")
                 
             default:
                 self.showToastMessage(message: "Congratulations", color: UIColor(named: "Green") ?? .systemGreen)
-
+                
+                self.resetForm()
+                
                 isSuccess = true
             }
         })
@@ -132,7 +207,7 @@ extension SignUpViewController {
             print("registered successfully")
             
             DispatchQueue.main.async {
-                let meVC = UIStoryboard(name: "MeStoryboard", bundle: nil).instantiateViewController(withIdentifier: "me") as! MeViewController
+//                let meVC = UIStoryboard(name: "MeStoryboard", bundle: nil).instantiateViewController(withIdentifier: "me") as! MeViewController
 
                 self.navigationController?.popViewController(animated: true)
 //            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
@@ -168,6 +243,83 @@ extension SignUpViewController {
             toastLabel.alpha = 0.0
         }) { _ in
             toastLabel.removeFromSuperview()
+        }
+    }
+    
+    
+    func resetForm(){
+        createAccount_btn.isEnabled = false
+        
+        userName_error.isHidden = false
+        email_error.isHidden = false
+        password_error.isHidden = false
+        confirmPassword_error.isHidden = false
+        phoneNumber_error.isHidden = false
+        address_txt.isHidden = true
+        address_error.isHidden = false
+        
+        userName_error.text = "Required"
+        email_error.text = "Required"
+        password_error.text = "Required"
+        confirmPassword_error.text = "Required"
+        phoneNumber_error.text = "Required"
+        address_error.text = "Required"
+        
+        username_txt.text = ""
+        Email_txt.text = ""
+        password_txt.text = ""
+        confirmPassword_txt.text = ""
+        phoneNumber_txt.text = ""
+        address_txt.text = ""
+    }
+    
+    
+    func invalidPhoneNumber(_ value: String) -> String?{
+        let set = CharacterSet(charactersIn: value)
+        if !CharacterSet.decimalDigits.isSuperset(of: set){
+            return "it must contain digits only"
+        }
+        if value.count != 10{
+            return "Phone Number must be 10 Digits"
+        }
+        return nil
+    }
+    
+    func  invalidName(_ value: String) -> String?{
+        if value.count <= 2{
+            return "It must be 3 at least like [ Ail ]"
+        }
+        return nil
+    }
+    
+    func  invalidEmail(_ value: String) -> String?{
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        if !emailPred.evaluate(with: value){
+            return "Invalid Email address"
+        }
+        return nil
+    }
+    
+    func invalidPassword(_ value: String) -> String?{
+        if value.count <= 4{
+            return "It must be 5 at least"
+        }
+        return nil
+    }
+    
+    func invalidConfirmPassword(_ value: String) -> String?{
+        if value != password_txt.text{
+            return "It must be same as Password"
+        }
+        return nil
+    }
+    
+    func checkForValidForm(){
+        if email_error.isHidden && password_error.isHidden && phoneNumber_error.isHidden && confirmPassword_error.isHidden && userName_error.isHidden && address_error.isHidden{
+            createAccount_btn.isEnabled = true
+        }else{
+            createAccount_btn.isEnabled = false
         }
     }
     

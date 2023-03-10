@@ -13,7 +13,9 @@ class ProductDetailsViewController: UIViewController{
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productPrice: UILabel!
     @IBOutlet weak var productDescription: UITextView!
-    
+    @IBOutlet weak var companyName: UILabel!
+    @IBOutlet weak var productColor: UILabel!
+    @IBOutlet weak var productSize: UILabel!
     
     @IBOutlet weak var cart_btn: UIButton!
     @IBOutlet weak var like_btn: UIButton!
@@ -40,8 +42,9 @@ class ProductDetailsViewController: UIViewController{
     var product: Products?
     var product_ID: Int?
     var ProductImages: [Image]?
-    var currentProduct: Products?
     var productDetailsVM: ProductDetailsVM?
+    var favoritesVM: FavouritesVM?
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +60,7 @@ class ProductDetailsViewController: UIViewController{
             self.renderView()
             indicator.stopAnimating()
         }
+
         cartVM.cartsUrl = self.AllDraftsUrl
         cartVM.getCart()
         cartVM.bindingCartt = {()in
@@ -64,6 +68,8 @@ class ProductDetailsViewController: UIViewController{
             
         }
         
+        favoritesVM = FavouritesVM()
+        viewWillAppear(false)
         // Do any additional setup after loading the view.
         let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
         productImagesCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
@@ -86,20 +92,26 @@ class ProductDetailsViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        checkIsFavourite(product: self.product ?? Products(), userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1)
         productImagesCollectionView.reloadData()
     }
     
     @objc func goToFavoritesScreen(sender: AnyObject) {
+        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
         let favoritesVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
-        
         navigationController?.pushViewController(favoritesVC, animated: true)
-        viewWillAppear(false)
+        }else{
+            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
+        }
     }
     
     @objc func goToCartScreen(sender: AnyObject) {
+        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
         let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
-        
         navigationController?.pushViewController(cartVC, animated: true)
+        }else{
+            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
+        }
         viewWillAppear(false)
     }
     
@@ -139,9 +151,26 @@ class ProductDetailsViewController: UIViewController{
 
     }
     
-    
-        @IBAction func addToLikesButton(_ sender: Any) {
+    @IBAction func addToLikesButton(_ sender: Any) {
+        if (UserDefaultsManager.sharedInstance.isLoggedIn() == false ){
+            showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
+        }else{
+            if favoritesVM?.isProductsInFavourites(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -2, appDelegate: appDelegate, product: self.product ?? Products()) == true{
+                showAlert(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -2, appDelegate: self.appDelegate, title: "Remove Item", message: "Are you sure ?", product: self.product ?? Products())
+            } else {
+                favoritesVM?.addFavourite(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1, appDelegate: appDelegate, product: self.product ?? Products())
+                like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                showToastMessage(message: "Added", color: .green)
+            }
         }
+        
+    
+    }
+    
+    @IBAction func showReviews(_ sender: UIButton) {
+        let reviewVC = self.storyboard!.instantiateViewController(withIdentifier: "review") as! ReviewsViewController
+        self.navigationController!.pushViewController(reviewVC, animated: true)
+    }
     
     
 }
@@ -194,6 +223,58 @@ extension ProductDetailsViewController: UICollectionViewDelegate, UICollectionVi
 }
 
 extension ProductDetailsViewController{
+    func checkIsFavourite(product: Products, userId: Int) {
+        if (favoritesVM?.isProductsInFavourites(userId: userId, appDelegate: appDelegate, product: product) == true) {
+            like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }else{
+            like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+    }
+    
+    func showAlert(userId: Int, appDelegate: AppDelegate, title: String, message: String, product: Products) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
+            favoritesVM?.deleteProductItemFromFavourites(userId: userId, appDeleget: self.appDelegate, ProductID: product.id ?? 0)
+            showToastMessage(message: "Removed !", color: .red)
+            viewWillAppear(false)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showLoginAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
+            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showToastMessage(message: String, color: UIColor) {
+        let toastLabel = UILabel(frame: CGRect(x: view.frame.width / 2 - 120, y: view.frame.height - 130, width: 260, height: 30))
+
+        toastLabel.textAlignment = .center
+        toastLabel.backgroundColor = color
+        toastLabel.textColor = .black
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10
+        toastLabel.clipsToBounds = true
+        toastLabel.text = message
+        view.addSubview(toastLabel)
+
+        UIView.animate(withDuration: 3.0, delay: 1.0, options: .curveEaseIn, animations: {
+            toastLabel.alpha = 0.0
+        }) { _ in
+            toastLabel.removeFromSuperview()
+        }
+    }
+    
     func renderView() {
         DispatchQueue.main.async {
             self.product = self.productDetailsVM?.productsResults
@@ -202,15 +283,18 @@ extension ProductDetailsViewController{
             self.ProductImages = self.product?.images
             self.product?.id = self.product_ID
             self.productPrice.text = self.product?.variants?[0].price
+            self.productSize.text = self.product?.variants?[0].option1 ?? "Medium"
+            self.productColor.text = self.product?.variants?[0].option2 ?? "White"
             self.pageControl.hidesForSinglePage = true
             self.pageControl.currentPage = self.currentCellIndex
             self.pageControl.numberOfPages  = self.ProductImages?.count ?? 5
+            self.checkIsFavourite(product: self.product ?? Products(), userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1)
             self.productImagesCollectionView.reloadData()
         }
     }
 
-    
 }
+
 extension ProductDetailsViewController {
     func postCart(){
         let newdraft  : [String : Any] =  [ "draft_order" :
