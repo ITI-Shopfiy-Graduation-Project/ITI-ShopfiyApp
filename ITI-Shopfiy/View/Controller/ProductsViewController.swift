@@ -10,9 +10,19 @@ import Kingfisher
 import Foundation
 
 class ProductsViewController: UIViewController{
+    @IBOutlet weak var priceValue: UILabel!
+    @IBOutlet weak var priceSlider: UISlider!
     @IBOutlet weak var like_btn: UIBarButtonItem!
     @IBOutlet weak var cart_btn: UIBarButtonItem!
     
+    @IBAction func showSlider(_ sender: Any) {
+        
+        priceSlider.isHidden = !priceSlider.isHidden
+        priceValue.isHidden =  !priceValue.isHidden
+//        priceSlider.minimumValue = 0
+//        priceSlider.maximumValue = 100
+//        "Price: " + String(Int(sender.value))
+    }
     @IBOutlet weak var productSearchBar: UISearchBar!{
         didSet{
             productSearchBar.delegate = self
@@ -26,6 +36,7 @@ class ProductsViewController: UIViewController{
         }
     }
     
+  
     var productsArray: [Products]? = []
     var searchArray: [Products]? = []
     var likedProducts: [Products]? = []
@@ -34,11 +45,13 @@ class ProductsViewController: UIViewController{
     var url: String?
     var vendor: String?
     var indicator: UIActivityIndicatorView?
+
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        priceSlider.isHidden = true
+        priceValue.isHidden = true
         indicator = UIActivityIndicatorView(style: .large)
         indicator?.center = view.center
         view.addSubview(indicator ?? UIActivityIndicatorView() )
@@ -120,6 +133,7 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
         let product = self.productsArray?[indexPath.row]
+
         cell.productTitle.text = product?.title ?? ""
         let productimg = URL(string:product?.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.productImageview?.kf.setImage(with:productimg)
@@ -234,3 +248,26 @@ extension ProductsViewController: FavouriteActionProductScreen{
 
     
 }
+
+extension ProductsViewController {
+    
+    @IBAction func priceActionSlider(_ sender: UISlider) {
+                priceSlider.maximumValue = 300
+        priceValue.text =  "Price: " + String(Int(sender.value))
+        if sender.value < 150 {
+            productsArray = searchArray!.filter({ Products in
+                Double(Products.variants?[0].price ?? "0")! < Double(sender.value)
+                
+                
+            })}
+        if sender.value > 150 {
+            productsArray = searchArray!.filter({ Products in
+                Double(Products.variants?[0].price ?? "0")! >  Double(sender.value)
+                
+            })
+    }
+    self.productsCollectionView.reloadData()
+
+    }
+            }
+
