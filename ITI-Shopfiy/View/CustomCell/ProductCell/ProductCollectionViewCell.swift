@@ -26,7 +26,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     @IBAction func addToLikes(_ sender: UIButton) {
         if (UserDefaultsManager.sharedInstance.isLoggedIn() == false ){
-            productsView?.showLoginAlert(title: "Alert",message: "You must login first")
+            productsView?.showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
         }
         else{
             if ( Location == false ){

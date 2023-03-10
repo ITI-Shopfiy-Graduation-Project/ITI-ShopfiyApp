@@ -18,3 +18,11 @@ protocol FavouriteActionProductScreen{
 protocol FavoriteActionFavoritesScreen{
     func showAlert(userId: Int, appDelegate: AppDelegate, title: String, message: String, product: Products)
 }
+
+protocol FavouriteActionCategoryScreen{
+
+    func addFavourite(userId: Int, appDelegate: AppDelegate, product: Products)
+    func isFavorite(userId: Int, appDelegate: AppDelegate, product: Products) -> Bool
+    func showLoginAlert(title: String, message: String)
+    func showAlert(userId: Int, appDelegate: AppDelegate, title: String, message: String, product: Products)
+}

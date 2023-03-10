@@ -29,7 +29,8 @@ class DataCaching {
                 let title = item.value(forKey: "title") as? String
                 let src = item.value(forKey: "src") as? String
                 let price = item.value(forKey: "price") as? String
-                let product = Products(id: id, title: title, vendor: nil, body_html: nil, product_type: nil, created_at: nil, variants: nil, image: Image(src: src), images: nil, state: nil)
+                let color = item.value(forKey: "color") as? String
+                let product = Products(id: id, title: title, vendor: nil, body_html: nil, product_type: nil, created_at: nil, variants: [variants(id: nil, product_id: id, inventory_item_id: nil, price: price, inventory_quantity: nil, old_inventory_quantity: nil, option1: nil, option2: color ?? "Black", taxable: nil)], image: Image(src: src), images: nil, state: nil)
             productArray.append(product)
             }
             print(productArray.count)
@@ -71,6 +72,7 @@ class DataCaching {
         Product.setValue(product.image?.src , forKey: "src")
         Product.setValue(userId, forKey: "user_id")
         Product.setValue(product.variants?[0].price ?? "38", forKey: "price")
+        Product.setValue(product.variants?[0].option2 ?? "Black", forKey: "color")
         Product.setValue(true , forKey: "product_state")
         do{
             try managedContext.save()
