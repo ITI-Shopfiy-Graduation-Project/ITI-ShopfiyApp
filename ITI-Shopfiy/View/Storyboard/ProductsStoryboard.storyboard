@@ -126,7 +126,7 @@
                 <viewControllerPlaceholder storyboardName="LoginStoryboard" referencedIdentifier="login" id="65Q-Gh-wK9" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFa-YI-Qy6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1537" y="90"/>
+            <point key="canvasLocation" x="2069" y="89"/>
         </scene>
         <!--favorites-->
         <scene sceneID="G3g-WT-QFS">
