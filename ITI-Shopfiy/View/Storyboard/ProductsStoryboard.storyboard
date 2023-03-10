@@ -79,7 +79,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Shopify" id="djS-tc-4sO">
                         <rightBarButtonItems>
-                            <barButtonItem image="heart" catalog="system" id="Y82-vj-ax7">
+                            <barButtonItem image="heart.fill" catalog="system" id="Y82-vj-ax7">
                                 <color key="tintColor" name="Red"/>
                                 <connections>
                                     <action selector="likesScreen:" destination="Y6W-OH-hqX" id="lG8-cs-xua"/>
@@ -165,8 +165,10 @@
     </scenes>
     <resources>
         <image name="cart" catalog="system" width="128" height="102"/>
+
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="line.3.horizontal.decrease.circle" catalog="system" width="128" height="123"/>
+
         <namedColor name="Gray">
             <color red="0.51399999856948853" green="0.51399999856948853" blue="0.51399999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

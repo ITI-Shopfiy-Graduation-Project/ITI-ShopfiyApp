@@ -21,7 +21,9 @@ class CategoryViewController: UIViewController {
     let actionButton = JJFloatingActionButton()
     var CategoryModel: CategoryViewModel?
     var product :[Products] = []
-    
+    var favoritesVM: FavouritesVM?
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
     
     var AllProductsUrl = URLService.allProducts()
        
@@ -32,7 +34,7 @@ class CategoryViewController: UIViewController {
             let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
             navigationController?.pushViewController(cartVC, animated: true)
         }else{
-            showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
+            showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
         }
     }
     @IBAction func favouritesBtn(_ sender: Any) {
@@ -40,7 +42,7 @@ class CategoryViewController: UIViewController {
             let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
             navigationController?.pushViewController(FavVC, animated: true)
         }else{
-            showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
+            showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
         }
     }
   
@@ -93,8 +95,8 @@ class CategoryViewController: UIViewController {
              
         }
      
-        
-        
+        favoritesVM = FavouritesVM()
+        viewWillAppear(false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -153,9 +155,17 @@ extension CategoryViewController :UICollectionViewDataSource{
         let productt = self.product [indexPath.row]
         let productimg = URL(string:productt.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.productImage?.kf.setImage(with:productimg)
-        
-        
         cell.productPrice.text = productt.title
+        
+        //Fady
+        cell.currentProduct = productt
+        if favoritesVM?.isProductsInFavourites(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1, appDelegate: appDelegate, product: productt ) == true {
+            cell.like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }else{
+            cell.like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        cell.categoryDelegate = self
+        //
         
         return cell
         
@@ -214,19 +224,7 @@ extension CategoryViewController {
         
         
     }
-    
-    
-    func showLoginAlert(Title: String, Message: String) {
-        let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
-        
-        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
-            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
-            self.navigationController?.pushViewController(loginVC, animated: true)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
-    }
+
     
     
     
@@ -318,3 +316,61 @@ extension CategoryViewController {
 }
 
 
+extension CategoryViewController: FavouriteActionCategoryScreen {
+    func addFavourite(userId: Int, appDelegate: AppDelegate, product: Products) {
+        favoritesVM?.addFavourite(userId: userId, appDelegate: self.appDelegate, product: product)
+        showToastMessage(message: "Added", color: .green)
+    }
+    
+    func isFavorite(userId: Int, appDelegate: AppDelegate, product: Products) -> Bool {
+        return favoritesVM?.isProductsInFavourites(userId: userId, appDelegate: self.appDelegate, product: product) ?? false
+    }
+    
+    func showAlert(userId: Int, appDelegate: AppDelegate, title: String, message: String, product: Products) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
+            favoritesVM?.deleteProductItemFromFavourites(userId: userId, appDeleget: self.appDelegate, ProductID: product.id ?? 0)
+            showToastMessage(message: "Removed !", color: .red)
+            self.CategoryCollectionView.reloadData()
+            viewWillAppear(false)
+        }))
+        self.CategoryCollectionView.reloadData()
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showLoginAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
+            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func showToastMessage(message: String, color: UIColor) {
+        let toastLabel = UILabel(frame: CGRect(x: view.frame.width / 2 - 120, y: view.frame.height - 130, width: 260, height: 30))
+
+        toastLabel.textAlignment = .center
+        toastLabel.backgroundColor = color
+        toastLabel.textColor = .black
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10
+        toastLabel.clipsToBounds = true
+        toastLabel.text = message
+        view.addSubview(toastLabel)
+
+        UIView.animate(withDuration: 3.0, delay: 1.0, options: .curveEaseIn, animations: {
+            toastLabel.alpha = 0.0
+        }) { _ in
+            toastLabel.removeFromSuperview()
+        }
+    }
+    
+}

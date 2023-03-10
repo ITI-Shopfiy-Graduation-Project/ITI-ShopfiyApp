@@ -28,30 +28,13 @@ class FavoritesViewController: UIViewController {
     var searchArray: [Products] = []
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var favoritesViewModel: FavouritesVM?
-    private var flag: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
         favoritesViewModel = FavouritesVM()
-
-        
-        favoritesViewModel?.bindingData = { favourites, error in
-            if let favourites = favourites {
-                self.savedProductsArray = favourites
-                DispatchQueue.main.async {
-                    self.favoritesCollectionView.reloadData()
-                    
-                }
-            }
-            
-            if let error = error {
-                print(error.localizedDescription)
-                
-            }
-        }
-        favoritesViewModel?.fetchfavorites(appDelegate: appDelegate, userId: UserDefaultsManager.sharedInstance.getUserID() ?? 1)
+        getSavedFavorites()
         
         self.favoritesCollectionView.reloadData()
         
@@ -69,6 +52,7 @@ class FavoritesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        getSavedFavorites()
         self.favoritesCollectionView.reloadData()
     }
     
@@ -102,11 +86,18 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
-        cell.favouritesView = self
         cell.productTitle.text = savedProductsArray?[indexPath.row].title
         let productimg = URL(string:savedProductsArray?[indexPath.row].image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.productImageview?.kf.setImage(with:productimg)
-        cell.configureCell(product: savedProductsArray?[indexPath.row] ?? Products(), isLiked: true, isInFavouriteScreen: true)
+//        cell.like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        if favoritesViewModel?.isProductsInFavourites(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1, appDelegate: appDelegate, product: savedProductsArray?[indexPath.row] ?? Products()) == true {
+            cell.like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }else{
+            cell.like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        cell.Location = true
+        cell.currentProduct = savedProductsArray?[indexPath.row]
+        cell.favouritesView = self
         return cell
     }
 
@@ -115,7 +106,8 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetialsVC = UIStoryboard(name: "ProductDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "productDetails") as! ProductDetailsViewController
         
-        productDetialsVC.product = savedProductsArray?[indexPath.row]
+//        productDetialsVC.product = savedProductsArray?[indexPath.row]
+        productDetialsVC.product_ID = savedProductsArray?[indexPath.row].id
 
         self.navigationController?.pushViewController(productDetialsVC, animated: true)
     }
@@ -142,22 +134,20 @@ extension FavoritesViewController: UISearchBarDelegate{
 
 //MARK: Fetch Data
 extension FavoritesViewController: FavoriteActionFavoritesScreen {
-    func showAlert(appDelegate: AppDelegate, title: String, message: String, product: Products) {
+    func showAlert(userId: Int, appDelegate: AppDelegate, title: String, message: String, product: Products) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
 
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
             
-            favoritesViewModel?.deleteFavourite(appDelegate: appDelegate, product: product)
-            savedProductsArray = savedProductsArray?.filter { $0.id != product.id }
+            favoritesViewModel?.deleteProductItemFromFavourites(userId: userId, appDeleget: self.appDelegate, ProductID: product.id ?? 0)
+            viewWillAppear(false)
             self.favoritesCollectionView.reloadData()
-            product.state = false
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
 
         self.present(alert, animated: true, completion: nil)
     }
-    
-    
+        
     func showLoginAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
 
@@ -170,6 +160,23 @@ extension FavoritesViewController: FavoriteActionFavoritesScreen {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func getSavedFavorites(){
+        favoritesViewModel?.fetchSavedProducts(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1, appDelegate: self.appDelegate)
+        favoritesViewModel?.bindingData = {result , error in
+            if result != nil {
+//                self.savedProductsArray = result
+                
+                DispatchQueue.main.async {
+                    self.savedProductsArray = result
+                    self.savedProductsArray  = self.favoritesViewModel?.savedProductsArray ?? []
+                    self.favoritesCollectionView.reloadData()
+                }
+            }
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
     
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 class image: Decodable{
-    var src : String?
+    var src: String?
    
 }
 
