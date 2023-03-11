@@ -6,11 +6,18 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MeViewController: UIViewController {
+    var savedFavorites: [Products]? = []
+    var favoritesVM: FavouritesVM?
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
 
     @IBOutlet weak var meView: UIView!
-
+    
+    let meLogedVC = (Bundle.main.loadNibNamed("MeLogedView", owner: MeViewController.self, options: nil)?.first as? MeLogedView)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,7 +25,7 @@ class MeViewController: UIViewController {
         
         //MARK: Conditions of view
         // condition: If user is logged
-        
+        favoritesVM = FavouritesVM()
         
         viewWillAppear(false)
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
@@ -34,7 +41,8 @@ class MeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.setHidesBackButton(true, animated: true)
         if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-            let meLogedVC = (Bundle.main.loadNibNamed("MeLogedView", owner: self, options: nil)?.first as? MeLogedView)
+//            let meLogedVC = (Bundle.main.loadNibNamed("MeLogedView", owner: self, options: nil)?.first as? MeLogedView)
+            getSavedFavorites()
             self.meView.addSubview(meLogedVC!)
             self.navigationController?.isNavigationBarHidden = false
             navigationItem.title = "User Name"
@@ -117,6 +125,42 @@ extension MeViewController: logedMeProtocol, unLogedMeProtocol{
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
+    }
+    
+}
+
+//MARK: Wish List
+extension MeViewController{
+    
+    func getSavedFavorites(){
+        favoritesVM?.fetchSavedProducts(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1, appDelegate: self.appDelegate)
+        favoritesVM?.bindingData = {result , error in
+            if result != nil {
+                DispatchQueue.main.async {
+                    self.savedFavorites = result
+                    self.savedFavorites  = self.favoritesVM?.savedProductsArray ?? []
+                    self.meLogedVC?.user_img.image = UIImage(named: "zizo")
+                    //user Image
+                    self.meLogedVC?.user_img.layer.cornerRadius = (self.meLogedVC?.user_img.frame.size.width ?? 0.0) / 2
+                    self.meLogedVC?.user_img.clipsToBounds = true
+                    self.meLogedVC?.user_img.layer.borderColor = UIColor.red.cgColor
+                    //
+                    self.meLogedVC?.userName_txt.text = UserDefaultsManager.sharedInstance.getUserName() ?? "Cristiano Ronaldo"
+                    self.meLogedVC?.productName_wishList.text = self.savedFavorites?[0].title ?? "Adidas"
+                    self.meLogedVC?.productPrice_wishList.text = self.savedFavorites?[0].variants?[0].price ?? "38.00"
+                    self.meLogedVC?.productColor_wishList.text = self.savedFavorites?[0].variants?[0].option2 ?? "Black"
+                    self.meLogedVC?.productImage_wishList.kf.setImage(with: URL(string:self.savedFavorites?[0].image?.src ?? ""))
+                    //product Image
+                    self.meLogedVC?.productImage_wishList.layer.cornerRadius = (self.meLogedVC?.productImage_wishList.frame.size.height ?? 250) / 2
+                    self.meLogedVC?.productImage_wishList.clipsToBounds = true
+
+
+                }
+            }
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
     }
     
 }

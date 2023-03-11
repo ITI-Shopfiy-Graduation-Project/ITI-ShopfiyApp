@@ -72,6 +72,9 @@
                                             <segment title="En"/>
                                             <segment title="Ar"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="action:" destination="Y6W-OH-hqX" eventType="valueChanged" id="6de-dh-JC3"/>
+                                        </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mmx-te-76d">
                                         <rect key="frame" x="71" y="220" width="227" height="35"/>
@@ -143,6 +146,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5S8-28-LAJ"/>
                     <connections>
+                        <outlet property="currenceySegemnt" destination="6qQ-7Q-eim" id="mXl-gb-MAS"/>
                         <outlet property="username" destination="Ful-eX-tjs" id="Wtp-1O-XCZ"/>
                     </connections>
                 </viewController>

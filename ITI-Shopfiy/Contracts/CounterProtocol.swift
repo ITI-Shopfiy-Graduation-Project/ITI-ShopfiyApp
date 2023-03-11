@@ -7,7 +7,9 @@
 
 import Foundation
 protocol CounterProtocol {
-    
+    func showAlert()/*
     func increaseCounter() -> Int8
     func decreaseCounter() -> Int8
+*/
+    
 }
