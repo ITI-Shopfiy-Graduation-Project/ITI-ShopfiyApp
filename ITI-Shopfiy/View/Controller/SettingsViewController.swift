@@ -9,6 +9,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var currenceySegemnt: UISegmentedControl!
     @IBOutlet weak var username: UILabel!
     
     override func viewDidLoad() {
@@ -20,11 +21,26 @@ class SettingsViewController: UIViewController {
         username.text = UserDefaultsManager.sharedInstance.getUserName()
         view.addGestureRecognizer(swipe)
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        let currencey = UserDefaultsManager.sharedInstance.getCurrency()
+        if currencey == "EGP" {
+            currenceySegemnt.selectedSegmentIndex = 1
+        }
+        else
+        {
+            currenceySegemnt.selectedSegmentIndex = 0
+        }
+            
+    }
     @objc func dismissVC() {
         self.navigationController?.popViewController(animated: true)
     }
 
+    @IBAction func action(_ sender: Any) {
+        let meVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
+
+        self.navigationController?.pushViewController(meVC, animated: true)
+    }
     @IBAction func changeCurrencey(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:

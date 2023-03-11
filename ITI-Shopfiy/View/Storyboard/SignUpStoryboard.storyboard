@@ -72,7 +72,7 @@
                                 <rect key="frame" x="8" y="164" width="304" height="20"/>
                                 <color key="textColor" name="Gray"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                 <connections>
                                     <action selector="email_changed:" destination="gdW-Vj-ccv" eventType="editingChanged" id="xwh-yb-jTg"/>
                                 </connections>
@@ -93,7 +93,7 @@
                                 <rect key="frame" x="8" y="230.5" width="304" height="20"/>
                                 <color key="textColor" name="Gray"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                 <connections>
                                     <action selector="password_changed:" destination="gdW-Vj-ccv" eventType="editingChanged" id="bgP-Gp-g9D"/>
                                 </connections>
@@ -114,7 +114,7 @@
                                 <rect key="frame" x="8" y="297" width="304" height="20"/>
                                 <color key="textColor" name="Gray"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                 <connections>
                                     <action selector="confirmPassword_change:" destination="gdW-Vj-ccv" eventType="editingChanged" id="Rxo-yU-IEF"/>
                                 </connections>
