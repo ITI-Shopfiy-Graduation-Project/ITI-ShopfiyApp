@@ -110,7 +110,7 @@ extension PaymentViewController : BTViewControllerPresentingDelegate {
                 }
                 
                 //userTotalCost = Double(tokenizedPayPalAccount.creditFinancing?.totalCost.)
-          //      if tokenizedPayPalAccount.creditFinancing?.totalCost >= totalPrice 
+          //      if tokenizedPayPalAccount.creditFinancing?.totalCost >= totalPrice
                     self.setupDictionary()
                     
                 
