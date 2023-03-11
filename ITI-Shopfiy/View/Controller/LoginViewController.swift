@@ -23,12 +23,18 @@ class LoginViewController: UIViewController {
     var timer : Timer?
     var currentCellIndex = 0
     var loginVM: loginProtocol?
-    
+    var indicator: UIActivityIndicatorView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loginVM = LoginVM()
         // Do any additional setup after loading the view.
+        indicator = UIActivityIndicatorView(style: .large)
+        indicator?.center = view.center
+        view.addSubview(indicator ?? UIActivityIndicatorView() )
+        indicator?.startAnimating()
+        
         let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
         adsCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
         starttimer()
@@ -75,6 +81,7 @@ extension LoginViewController{
         loginVM?.login(userName: userName, password: password, completionHandler: { Customer in
             if Customer != nil {
                 self.showToastMessage(message: "Congratulations", color: UIColor(named: "Green") ?? .systemGreen)
+                self.indicator?.stopAnimating()
                 print("customer logged in successfully")
                 //Navigation
                 self.navigationController?.popViewController(animated: true)

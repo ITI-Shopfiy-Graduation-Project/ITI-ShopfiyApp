@@ -64,7 +64,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHf-3c-Y96">
                                                 <rect key="frame" x="16" y="365.66666666666669" width="361" height="160.00000000000006"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wej-Hc-8D1">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Product Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wej-Hc-8D1">
                                                         <rect key="frame" x="8" y="8" width="119" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -94,7 +94,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shoes" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BHf-69-zGK">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Shoes" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BHf-69-zGK">
                                                         <rect key="frame" x="135" y="8" width="47.333333333333343" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -145,6 +145,7 @@
                                                     <constraint firstItem="1Zs-eB-oSQ" firstAttribute="leading" secondItem="gHf-3c-Y96" secondAttribute="leading" constant="8" id="fgL-nC-iGi"/>
                                                     <constraint firstItem="spE-w5-gAu" firstAttribute="leading" secondItem="6LE-YC-9lU" secondAttribute="trailing" constant="8" id="hWu-MP-cho"/>
                                                     <constraint firstItem="BHf-69-zGK" firstAttribute="top" secondItem="gHf-3c-Y96" secondAttribute="top" constant="8" id="ijq-aa-3K9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="BHf-69-zGK" secondAttribute="trailing" constant="2" id="j2j-Nl-djD"/>
                                                     <constraint firstItem="VSl-RL-1Vo" firstAttribute="centerY" secondItem="lfE-qE-bZS" secondAttribute="centerY" id="jhe-38-gnA"/>
                                                     <constraint firstItem="Wej-Hc-8D1" firstAttribute="leading" secondItem="gHf-3c-Y96" secondAttribute="leading" constant="8" id="o0x-Zf-AZL"/>
                                                     <constraint firstItem="lfE-qE-bZS" firstAttribute="top" secondItem="zrD-Ia-bYi" secondAttribute="bottom" constant="8" id="o2G-W9-MQv"/>

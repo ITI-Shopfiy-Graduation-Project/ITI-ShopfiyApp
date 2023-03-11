@@ -107,7 +107,7 @@ class ProductDetailsViewController: UIViewController{
     
     @objc func goToCartScreen(sender: AnyObject) {
         if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
-        let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
+        let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
         navigationController?.pushViewController(cartVC, animated: true)
         }else{
             showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
@@ -117,35 +117,39 @@ class ProductDetailsViewController: UIViewController{
     
     @IBAction func addToCartButton(_ sender: Any) {
        
-        cartcount.draft_orders?.forEach({ email in
-
-            if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
-            {     addtoLine = email
-                UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
-               lineAppend = email.line_items
-                newLineItem = LineItem()
-                newLineItem?.title = product?.title
-                newLineItem?.price = product?.variants![0].price
-                newLineItem?.sku = product?.image?.src
-                newLineItem?.vendor = product?.vendor
-                newLineItem?.product_id = product?.id
-                newLineItem?.grams = product?.variants![0].inventory_quantity
-                newLineItem?.quantity = 1
-                lineAppend?.append(newLineItem!)
-                var draftOrder = DrafOrder()
-                draftOrder.line_items = lineAppend
-                addtoLine = draftOrder
-                let draftOrderAppend : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)
-                putCart(cartt: draftOrderAppend)
-                print ("already used")
-           
+        if ( UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+            cartcount.draft_orders?.forEach({ email in
+                
+                if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
+                {     addtoLine = email
+                    UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
+                    lineAppend = email.line_items
+                    newLineItem = LineItem()
+                    newLineItem?.title = product?.title
+                    newLineItem?.price = product?.variants![0].price
+                    newLineItem?.sku = product?.image?.src
+                    newLineItem?.vendor = product?.vendor
+                    newLineItem?.product_id = product?.id
+                    newLineItem?.grams = product?.variants![0].inventory_quantity
+                    newLineItem?.quantity = 1
+                    lineAppend?.append(newLineItem!)
+                    var draftOrder = DrafOrder()
+                    draftOrder.line_items = lineAppend
+                    addtoLine = draftOrder
+                    let draftOrderAppend : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)
+                    putCart(cartt: draftOrderAppend)
+                    print ("already used")
+                    
+                }
+                
+            })
+            if addtoLine == nil
+            {
+                self.postCart()
+                
             }
-          
-        })
-        if addtoLine == nil
-                    {
-                    self.postCart()
-          
+        }else{
+            showLoginAlert(title: "UnAuthorized Action", message: "You must loginn first")
         }
         
 

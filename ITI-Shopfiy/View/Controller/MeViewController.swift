@@ -78,7 +78,7 @@ class MeViewController: UIViewController {
     
     @IBAction func goToCartVC(_ sender: Any) {
         if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-            let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
+            let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
             navigationController?.pushViewController(cartVC, animated: true)
         }else{
             showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
