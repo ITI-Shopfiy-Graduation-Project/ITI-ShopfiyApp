@@ -9,4 +9,5 @@ import Foundation
 
 protocol loginProtocol{
     func login(userName: String, password: String, completionHandler: @escaping (Customer?)-> Void)
+    func isValidPassword(password: String) -> Bool
 }

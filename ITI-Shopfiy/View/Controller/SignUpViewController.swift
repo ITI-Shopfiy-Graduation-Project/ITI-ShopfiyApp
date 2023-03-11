@@ -144,6 +144,7 @@ extension SignUpViewController: AddressDelegate{
     func getAddressInfo(Address userAddress: Address) {
         self.adresses?.removeAll()
         self.adresses?.append(userAddress)
+        self.chosenAddress = userAddress
         self.address_txt.text = userAddress.address1
     }
 }
@@ -163,10 +164,6 @@ extension SignUpViewController {
             case "ErrorPassword":
                 isSuccess = false
                 self.showAlertError(title: "Check Password", message: "please, enter password again.")
-                
-//            case "InvalidUserName":
-//                isSuccess = false
-//                self.showAlertError(title: "Invalid User Name", message: "please, try another User Name.")
                 
             case "ErrorEmail":
                 isSuccess = false
@@ -207,13 +204,7 @@ extension SignUpViewController {
             print("registered successfully")
             
             DispatchQueue.main.async {
-//                let meVC = UIStoryboard(name: "MeStoryboard", bundle: nil).instantiateViewController(withIdentifier: "me") as! MeViewController
-
                 self.navigationController?.popViewController(animated: true)
-//            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
-//
-//            loginVC.modalPresentationStyle = .fullScreen
-//            self.present(loginVC, animated: true, completion: nil)
             }
         }
             
