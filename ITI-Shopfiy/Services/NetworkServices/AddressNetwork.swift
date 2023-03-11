@@ -57,9 +57,9 @@ class AddressNetwork : IAdressNetwork{
     func deleteAddress(userAddress : PostAddress,completion: @escaping (Data?, URLResponse?, Error?) -> ()){
         let userID = UserDefaultsManager.sharedInstance.getUserID()
         let addressId = userAddress.customer_address?.id
-        print ("IDDDD : \(userID) , \(addressId) ")
+       // print ("IDDDD : \(userID) , \(addressId) ")
         let url = URLService.deleteAddress(addressID: addressId ?? 0, userId: userID ?? 0)
-        guard let baseURL = URL(string : url ?? "") else { return }
+        guard let baseURL = URL(string : url ) else { return }
             var request = URLRequest(url: baseURL)
             request.httpMethod = "DELETE"
             request.allHTTPHeaderFields = [
@@ -108,18 +108,6 @@ class AddressNetwork : IAdressNetwork{
             }
         }
     
-    /*
-    func fetchAllUserAddresses(userId: Int,handlerComplition : @escaping (CustomerAddress?)->()) {
-            let request = AF.request("https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/customers/\(userId)/addresses.json")
-        request.responseDecodable (of: CustomerAddress.self) {(olddata) in
-                guard let data = olddata.value
-                else{
-                    handlerComplition(nil)
-                    return
-                }
-                handlerComplition(data)
-            }
-      }*/
     func fetchAllUserAddresses(userId: Int,handlerComplition : @escaping (CustomerAddress?)->()) {
         AF.request("https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/customers/\(userId)/addresses.json").responseData {response in
             guard let data = response.data else {
@@ -157,5 +145,47 @@ class AddressNetwork : IAdressNetwork{
     }
     */
     
+    func putAddress(customerAddress : PostAddress ,completion: @escaping (Data?, HTTPURLResponse?, Error?) -> ()) {
+
+        let userID = UserDefaultsManager.sharedInstance.getUserID() ?? 0
+        let addressId = customerAddress.customer_address?.id ?? 0
+        let url = URLService.updateAddress(userID: userID, addressID: addressId)
+           guard let baseURL = URL(string : url) else { return }
+           var request = URLRequest(url: baseURL)
+           request.httpMethod = "PUT"
+           request.allHTTPHeaderFields = [
+               "Content-Type": "application/json",
+               "Accept": "application/json"
+           ]
+           request.httpShouldHandleCookies = false
+
+           do{
+               let data = try JSONSerialization.data(withJSONObject: customerAddress.asDictionary(), options: .prettyPrinted)
+               
+               URLSession.shared.uploadTask(with: request, from: data) { data, response, error in
+                   if let error = error {
+                           print("Error making PUT request: \(error.localizedDescription)")
+                           return
+                       }
+
+                   if let responseCode = (response as? HTTPURLResponse)?.statusCode, let data = data {
+                       guard responseCode == 200 else {
+                           print("Invalid response code: \(responseCode)")
+                           return
+                       }
+
+                       if let responseJSONData = try? JSONSerialization.jsonObject(with: data , options: .allowFragments) {
+                           print("Response JSON data = \(responseJSONData)")
+                       }
+                   }
+                   completion(data, response as? HTTPURLResponse, error)
+               }.resume()
+               print(try! customerAddress.asDictionary())
+           } catch let error {
+               print(error.localizedDescription)
+           }
+
+
+       }
 
 }

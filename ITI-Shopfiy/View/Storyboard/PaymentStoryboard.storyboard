@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
-    <device id="retina6_72" orientation="portrait" appearance="light"/>
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -15,32 +15,32 @@
             <objects>
                 <viewController storyboardIdentifier="payment" id="Y6W-OH-hqX" customClass="PaymentViewController" customModule="ITI_Shopfiy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D2q-f7-tSb">
-                                <rect key="frame" x="8" y="67" width="414" height="24"/>
+                                <rect key="frame" x="8" y="28" width="752" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aey-OR-7tc">
-                                <rect key="frame" x="8" y="246.33333333333337" width="414" height="24"/>
+                                <rect key="frame" x="8" y="293" width="752" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ra-5v-iQ3">
-                                <rect key="frame" x="20" y="99" width="394" height="119.33333333333331"/>
+                                <rect key="frame" x="20" y="60" width="732" height="205"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User's address " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zkw-IS-CxE">
-                                        <rect key="frame" x="66.333333333333343" y="16" width="327.66666666666663" height="29"/>
+                                        <rect key="frame" x="115.5" y="16" width="616.5" height="86.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6m7-Oa-VJs">
-                                        <rect key="frame" x="0.0" y="18" width="50.333333333333336" height="54.333333333333329"/>
+                                        <rect key="frame" x="6" y="17.5" width="93.5" height="170"/>
                                         <imageReference key="image" image="mappin.and.ellipse" catalog="system" symbolScale="small" renderingMode="hierarchical" variableValue="0.20000000000000001">
                                             <hierarchicalColors>
                                                 <color red="0.36399999259999999" green="0.78100001809999997" blue="0.56400001050000004" alpha="0.74344862379999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -50,18 +50,18 @@
                                         </imageReference>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod " textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ww-pK-cHf">
-                                        <rect key="frame" x="64.333333333333329" y="45" width="245.66666666666669" height="62.333333333333343"/>
+                                        <rect key="frame" x="113.5" y="102.5" width="462.5" height="90.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="textColor" name="Gray"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVQ-T7-28P">
-                                        <rect key="frame" x="320" y="36.666666666666657" width="74" height="46"/>
+                                        <rect key="frame" x="594" y="34" width="138" height="137"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="greenRightArrow"/>
                                         <connections>
-                                            <segue destination="Do6-NZ-bW1" kind="show" id="WFz-nE-F4n"/>
+                                            <action selector="chooseAddress:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Avr-sA-Mnj"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -74,23 +74,24 @@
                                     <constraint firstItem="6ww-pK-cHf" firstAttribute="leading" secondItem="Zkw-IS-CxE" secondAttribute="leading" constant="-2" id="cAD-r8-xzp"/>
                                     <constraint firstItem="UVQ-T7-28P" firstAttribute="width" secondItem="6m7-Oa-VJs" secondAttribute="width" multiplier="1.47059" id="cld-NB-6Xa"/>
                                     <constraint firstItem="6m7-Oa-VJs" firstAttribute="height" secondItem="Zkw-IS-CxE" secondAttribute="height" multiplier="2" id="ese-hr-vmV"/>
-                                    <constraint firstItem="6m7-Oa-VJs" firstAttribute="leading" secondItem="2Ra-5v-iQ3" secondAttribute="leading" id="fNX-Ej-WGV"/>
+                                    <constraint firstItem="6m7-Oa-VJs" firstAttribute="leading" secondItem="2Ra-5v-iQ3" secondAttribute="leading" constant="6" id="fNX-Ej-WGV"/>
                                     <constraint firstItem="6m7-Oa-VJs" firstAttribute="top" secondItem="Zkw-IS-CxE" secondAttribute="top" id="fx7-fk-Qwq"/>
                                     <constraint firstItem="Zkw-IS-CxE" firstAttribute="top" secondItem="2Ra-5v-iQ3" secondAttribute="top" constant="16" id="hDb-94-wmA"/>
                                     <constraint firstAttribute="trailing" secondItem="Zkw-IS-CxE" secondAttribute="trailing" id="iqg-ez-f0F"/>
+                                    <constraint firstItem="UVQ-T7-28P" firstAttribute="centerY" secondItem="6m7-Oa-VJs" secondAttribute="centerY" id="kmw-fj-jtK"/>
                                     <constraint firstItem="UVQ-T7-28P" firstAttribute="trailing" secondItem="Zkw-IS-CxE" secondAttribute="trailing" id="lk2-lU-S7Z"/>
                                     <constraint firstItem="6m7-Oa-VJs" firstAttribute="width" secondItem="2Ra-5v-iQ3" secondAttribute="width" multiplier="0.128" id="n7e-lq-fCI"/>
                                     <constraint firstItem="UVQ-T7-28P" firstAttribute="centerY" secondItem="2Ra-5v-iQ3" secondAttribute="centerY" id="ztW-n7-WVQ"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5aK-Y3-YDv">
-                                <rect key="frame" x="20" y="278.33333333333326" width="394" height="310.66666666666674"/>
+                                <rect key="frame" x="20" y="325" width="732" height="341"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dcy-ba-Mkq">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="155.33333333333334"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="732" height="170.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgY-a6-gO2">
-                                                <rect key="frame" x="28" y="15.999999999999993" width="157.66666666666666" height="123.33333333333331"/>
+                                                <rect key="frame" x="28" y="16" width="293" height="138.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="gray" title="Cash on delivery">
                                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
@@ -110,7 +111,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjL-yc-fmU">
-                                                <rect key="frame" x="208.33333333333337" y="15.999999999999993" width="157.66666666666663" height="123.33333333333331"/>
+                                                <rect key="frame" x="411" y="16" width="293" height="138.5"/>
                                                 <size key="titleShadowOffset" width="20" height="20"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="gray" title="PayPal">
@@ -153,7 +154,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ce-Pw-vIy">
-                                        <rect key="frame" x="0.0" y="155.33333333333337" width="394" height="155.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="170.5" width="732" height="170.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>
@@ -169,7 +170,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="5aK-Y3-YDv" firstAttribute="trailing" secondItem="2Ra-5v-iQ3" secondAttribute="trailing" id="3mE-ie-hBG"/>
-                            <constraint firstItem="2Ra-5v-iQ3" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.128" id="4xo-UU-Yiu"/>
+                            <constraint firstItem="2Ra-5v-iQ3" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.2" id="4xo-UU-Yiu"/>
                             <constraint firstItem="2Ra-5v-iQ3" firstAttribute="top" secondItem="D2q-f7-tSb" secondAttribute="bottom" constant="8" id="FtU-cm-2vl"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="D2q-f7-tSb" secondAttribute="trailing" constant="8" id="JFE-gs-76G"/>
                             <constraint firstItem="5aK-Y3-YDv" firstAttribute="width" secondItem="2Ra-5v-iQ3" secondAttribute="width" id="QDw-Sz-haJ"/>
@@ -198,16 +199,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="26.511627906976745" y="-34.763948497854081"/>
-        </scene>
-        <!--AddressDetailsStoryboard-->
-        <scene sceneID="uv0-6g-KCE">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="address" storyboardName="AddressDetailsStoryboard" id="Do6-NZ-bW1" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="fE5-zj-SFd"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lDM-KH-Qa9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="754" y="-187"/>
         </scene>
     </scenes>
     <resources>

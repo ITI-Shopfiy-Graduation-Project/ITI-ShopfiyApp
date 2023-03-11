@@ -64,7 +64,15 @@ extension ShoppingCartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:CartTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CartTableViewCell
         cell.itemName.text = cartArray?[indexPath.row].title
-        cell.itemPrice.text = cartArray?[indexPath.row].price
+        if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
+            let price = (Double(cartArray?[indexPath.row].price ?? "0") ?? 0.0)  * 30
+            cell.itemPrice.text = price.formatted()
+        }
+        else
+        {
+            cell.itemPrice.text = cartArray?[indexPath.row].price
+        }
+        cell.quantityCount.text = cartArray?[indexPath.row].quantity?.formatted()
         //cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
         let image = URL(string: cartArray?[indexPath.row].sku ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.cartImage.kf.setImage(with:image)
@@ -140,20 +148,26 @@ extension ShoppingCartViewController {
 extension ShoppingCartViewController {
     func deleteLineItemProduct(indexPath : IndexPath)
     {
-        
-        cartTable.deleteRows(at: [indexPath], with: .automatic)
+        deletedLineItem = cartArray?[indexPath.row]
         cartArray?.remove(at: indexPath.row)
+        cartTable.deleteRows(at: [indexPath], with: .automatic)
         showSnackBar(index: indexPath.row)
         DispatchQueue.main.asyncAfter(deadline: .now()+5){
             if self.flag == true {
-                self.putDraftOrder(lineItems: self.cartArray ?? [])
+                if !(self.cartArray?.count == 0){
+                    self.putDraftOrder(lineItems: self.cartArray ?? [])
+                }
+                else
+                {
+                    // delete draft order
+                }
             }
         }
     }
     
     func showSnackBar(index : Int){
         let snackbar = TTGSnackbar(
-            message: "Item \(String(describing: cartArray?[index].title)) was unsaved successfully",
+            message: "Item \(String(describing: deletedLineItem?.title)) was unsaved successfully",
             duration: .long,
             actionText: "Undo",
             actionBlock: { (snackbar) in
@@ -179,8 +193,11 @@ extension ShoppingCartViewController {
     }
     
     func putDraftOrder(lineItems : [LineItem]){
-        let shoppingCart = ShoppingCartPut()
-        shoppingCart.draft_order?.line_items = lineItems
+        var draftOrder = DrafOrder()
+        draftOrder.email = UserDefaultsManager.sharedInstance.getUserEmail()
+        draftOrder.line_items = lineItems
+        var shoppingCart = ShoppingCartPut()
+        shoppingCart.draft_order = draftOrder
         shoppingCartVM.putNewCart(userCart: shoppingCart) { data, response, error in
             guard error == nil else {
                 DispatchQueue.main.async {
