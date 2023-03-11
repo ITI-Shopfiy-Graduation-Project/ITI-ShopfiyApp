@@ -19,8 +19,10 @@ class CartViewController: UIViewController {
     private var shoppingCartVM = ShoppingCartViewModel()
     var discount : [Discount] = []
     let discountModel = DiscountViewModel()
-
-     var cartArray: [LineItem]?
+    var subTotal : Double?
+    var discountPrice : Double = 0.0
+    var totalPriceValue : Double = 0.0
+    var cartArray: [LineItem]?
     private var counter: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,7 @@ class CartViewController: UIViewController {
         swipe.direction = .right
         view.addGestureRecognizer(swipe)
         getPromoCode()
+        totalPriceValue = discountPrice
         //getData()
     }
     
@@ -78,7 +81,8 @@ extension CartViewController: UITableViewDataSource {
         cell.itemName.text = cartArray?[indexPath.row].title
         cell.itemPrice.text = cartArray?[indexPath.row].price
        // cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
-        cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].sku ?? "ct4")
+        let image = URL(string: cartArray?[indexPath.row].sku ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
+        cell.cartImage.kf.setImage(with:image)
         cell.quantityCount.isHidden = true
         cell.decreseItem.isHidden = true
         cell.increaseItem.isHidden = true
@@ -91,24 +95,13 @@ extension CartViewController: UITableViewDelegate {
         return 100
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-    }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
     }
 }
 
 extension CartViewController {
-  /*  func getData(){
-        shoppingCartVM.getShoppingCart(userId: 132)
-        shoppingCartVM.bindingCart = {
-            self.cartArray = self.shoppingCartVM.cartList
-            DispatchQueue.main.async {
-                self.CartTable.reloadData()
-            }
-        }
-    }*/
+
 }
 
 extension CartViewController {
@@ -116,26 +109,29 @@ extension CartViewController {
         if promoCodeET.text != "" {
             if promoCodeET.text == discount.first?.code ?? ""
             {
-                if promoCodeET.text == promoCodeET.text //UserDefaultsManager.sharedInstance.getUserStatus()
+                //change it with user second name
+                promoCodeET.text = UserDefaultsManager.sharedInstance.getUserName()
+                if promoCodeET.text != nil
                 {
-                    codeError.text = "validate"
+                    codeError.text = "Valid"
                     codeError.textColor = UIColor(named: "Green")
+                    self.discountPrice = 0.7 * (self.subTotal ?? 0.0)
+                    totalPriceValue = (subTotal ?? 0.0) - discountPrice
+                    promoCodeValue.text = self.discountPrice.formatted()
                 }
                 else
                 {
-                    codeError.text = "Used promo code"
-                    codeError.textColor = UIColor(named: "Red")
+                    self.setInvalidDiscount(msg: "Used Promo code")
                 }
             }
             else{
-                codeError.text = "Not valide"
-                codeError.textColor = UIColor(named: "Red")
+                self.setInvalidDiscount(msg :"Not valid")
+                
             }
         }
         else
         {
-            codeError.text = "Enter promo code"
-            codeError.textColor = UIColor(named: "Red")
+            self.setInvalidDiscount(msg : "Enter promo code")
         }
     }
     
@@ -149,10 +145,16 @@ extension CartViewController {
     }
     
     func renderDiscount () {
-        
         DispatchQueue.main.async {
             self.discount = self.discountModel.discoutsResults ?? []
         }
-        
+    }
+    
+    private func setInvalidDiscount(msg : String){
+        codeError.text = msg
+        codeError.textColor = UIColor(named: "Red")
+        self.discountPrice = 0.0
+        totalPriceValue = subTotal ?? 0.0
+        promoCodeValue.text = "0"
     }
 }
