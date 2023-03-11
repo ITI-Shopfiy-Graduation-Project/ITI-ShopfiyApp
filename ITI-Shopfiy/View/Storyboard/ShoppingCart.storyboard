@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -11,7 +11,7 @@
         <!--Shopping Cart View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="ShoppingCartViewController" customModule="ITI_Shopfiy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="shoppingCart" id="Y6W-OH-hqX" customClass="ShoppingCartViewController" customModule="ITI_Shopfiy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,10 +72,10 @@
             </objects>
             <point key="canvasLocation" x="130.53435114503816" y="-27.464788732394368"/>
         </scene>
-        <!--Storyboard Reference-->
+        <!--CartStoryboard-->
         <scene sceneID="QeB-mz-ZfU">
             <objects>
-                <viewControllerPlaceholder id="bGZ-dA-zeG" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="cart" storyboardName="CartStoryboard" id="bGZ-dA-zeG" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="HjP-bY-2xz"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="38b-jA-hhP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

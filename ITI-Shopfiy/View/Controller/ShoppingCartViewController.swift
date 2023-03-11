@@ -6,14 +6,17 @@
 //
 
 import UIKit
-
+import Reachability
+import TTGSnackbar
 class ShoppingCartViewController: UIViewController {
-    
+    private var flag: Bool = true
     @IBOutlet weak var cartTable: UITableView!
+    private var deletedLineItem : LineItem?
     private var cartArray: [LineItem]?
     var lineItem = LineItem()
-    private var counter: Int8 = 0
+    private var counter: Int8 = 1
     private var shoppingCartVM = ShoppingCartViewModel()
+    private var subTotalPrice = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
         lineItem.price = "231 $"
@@ -22,7 +25,7 @@ class ShoppingCartViewController: UIViewController {
         lineItem.sku = "ct4"
         cartArray = [lineItem , lineItem , lineItem]
         tableConfiguration()
-      //  getData()
+        getData()
         
     }
     func tableConfiguration(){
@@ -32,10 +35,15 @@ class ShoppingCartViewController: UIViewController {
         cartTable.register(nib, forCellReuseIdentifier: "cell")
     }
     @IBAction func processedToCheckout(_ sender: Any) {
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! CartViewController
-        vc.cartArray = self.cartArray
+   /*     let signUpVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! SignUpViewController
+        self.navigationController?.pushViewController(signUpVC, animated: true)
+    */}
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPromoCode" {
+            let vc = segue.destination as! CartViewController
+            vc.cartArray = self.cartArray
+            vc.subTotal = self.subTotalPrice
+        }
     }
 }
 extension ShoppingCartViewController: UITableViewDataSource {
@@ -58,9 +66,21 @@ extension ShoppingCartViewController: UITableViewDataSource {
         cell.itemName.text = cartArray?[indexPath.row].title
         cell.itemPrice.text = cartArray?[indexPath.row].price
         //cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
-        cell.cartImage.image = UIImage(named: cartArray?[indexPath.row].sku ?? "ct4")
+        let image = URL(string: cartArray?[indexPath.row].sku ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
+        cell.cartImage.kf.setImage(with:image)
         cell.counterProtocol = self
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if !Reachability.forInternetConnection().isReachable(){
+                
+            }
+            else{
+                deleteLineItemProduct(indexPath: indexPath)
+            }
+        }
     }
 }
 
@@ -89,32 +109,99 @@ extension ShoppingCartViewController: UITableViewDelegate {
 }
 
 extension ShoppingCartViewController: CounterProtocol {
-    func increaseCounter() -> Int8 {
-        counter = counter + 1
-        print(counter)
-        return counter
+    func showAlert() {
+        self.showAlert(msg: "do u want delete")
     }
     
-    func decreaseCounter() -> Int8{
-        if counter <= 0 {
-            self.showAlert(msg: "do you want to delete this item")
-        }
-        else {
-            counter = counter - 1
-        }
-        return counter
-    }
+    
 }
-/*
+
 extension ShoppingCartViewController {
     func getData(){
-        shoppingCartVM.getShoppingCart(userId: 132)
+        shoppingCartVM.getShoppingCart()
         shoppingCartVM.bindingCart = {
+            self.renderView()
+            
+        }
+    }
+    func renderView(){
+        DispatchQueue.main.async {
+            self.cartArray?.removeAll()
             self.cartArray = self.shoppingCartVM.cartList
-            DispatchQueue.main.async {
-                self.cartTable.reloadData()
+            self.shoppingCartVM.cartList?.forEach({ item in
+                self.subTotalPrice += Double(item.price ?? "0") ?? 0.0
+            })
+            self.cartTable.reloadData()
+            print("sub total : \(self.subTotalPrice)")
+        }
+    }
+}
+
+extension ShoppingCartViewController {
+    func deleteLineItemProduct(indexPath : IndexPath)
+    {
+        
+        cartTable.deleteRows(at: [indexPath], with: .automatic)
+        cartArray?.remove(at: indexPath.row)
+        showSnackBar(index: indexPath.row)
+        DispatchQueue.main.asyncAfter(deadline: .now()+5){
+            if self.flag == true {
+                self.putDraftOrder(lineItems: self.cartArray ?? [])
             }
         }
     }
+    
+    func showSnackBar(index : Int){
+        let snackbar = TTGSnackbar(
+            message: "Item \(String(describing: cartArray?[index].title)) was unsaved successfully",
+            duration: .long,
+            actionText: "Undo",
+            actionBlock: { (snackbar) in
+                print("snack bar Click action!")
+                self.flag = false
+                if self.flag == false{
+                    self.undoDeleting(index: index)
+                }
+               
+            }
+        )
+        snackbar.actionTextColor = .red
+        //snackbar.borderColor = .clear
+        snackbar.messageTextColor = UIColor.black
+        snackbar.show()
+    }
+    
+    private func undoDeleting(index: Int){
+        if let lineItem = deletedLineItem {
+            cartArray?.insert(lineItem, at: index)
+            cartTable.reloadData()
+        }
+    }
+    
+    func putDraftOrder(lineItems : [LineItem]){
+        let shoppingCart = ShoppingCartPut()
+        shoppingCart.draft_order?.line_items = lineItems
+        shoppingCartVM.putNewCart(userCart: shoppingCart) { data, response, error in
+            guard error == nil else {
+                DispatchQueue.main.async {
+                    print ("delete cart Error \n \(error?.localizedDescription ?? "")" )
+                }
+                return
+            }
+            
+            guard response?.statusCode ?? 0 >= 200 && response?.statusCode ?? 0 < 300   else {
+                DispatchQueue.main.async {
+                    print ("delete cart Response \n \(response ?? HTTPURLResponse())" )
+                    
+                }
+                return
+            }
+            
+            print("lineItem was added successfully")
+            
+            
+        }
+        
+    }
 }
-*/
+
