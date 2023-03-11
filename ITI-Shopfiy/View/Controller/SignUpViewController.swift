@@ -110,7 +110,7 @@ class SignUpViewController: UIViewController {
     
     
     @IBAction func chooseOnMap(_ sender: UIButton) {
-        let addressVC = UIStoryboard(name: "AddressDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "address") as! AddressViewController
+        let addressVC = UIStoryboard(name: "AddressDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "addressDetails") as! ViewController
         addressVC.addressDelegate = self
         address_error.isHidden = true
         navigationController?.pushViewController(addressVC, animated: true)

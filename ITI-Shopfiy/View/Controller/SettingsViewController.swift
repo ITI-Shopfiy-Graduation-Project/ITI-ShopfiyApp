@@ -35,12 +35,16 @@ class SettingsViewController: UIViewController {
     @objc func dismissVC() {
         self.navigationController?.popViewController(animated: true)
     }
-
+/*
     @IBAction func action(_ sender: Any) {
         let meVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
 
         self.navigationController?.pushViewController(meVC, animated: true)
+    }*/
+    
+    @IBAction func changePhone(_ sender: Any) {
     }
+    
     @IBAction func changeCurrencey(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
