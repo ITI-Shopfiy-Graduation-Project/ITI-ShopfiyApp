@@ -30,7 +30,7 @@ class CartNetwork {
                     do{
                         let json = try JSONDecoder().decode(DraftOrderResponse.self , from: data) as? DraftOrderResponse
                         
-                        print(json)
+                        //print(json)
                          handlerComplition(json)
                     }
                     catch{ print("erroMsg") }

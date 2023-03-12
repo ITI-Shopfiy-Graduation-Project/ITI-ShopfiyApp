@@ -121,13 +121,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="frs-UL-paH">
                     <rect key="frame" x="18" y="508" width="357" height="109"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guv-JL-Lhy">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Product Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guv-JL-Lhy">
                             <rect key="frame" x="8" y="7.9999999999999982" width="119" height="20.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kGn-F2-gL1">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Adidas" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kGn-F2-gL1">
                             <rect key="frame" x="135" y="7.9999999999999982" width="52" height="20.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
@@ -169,6 +169,7 @@
                         <constraint firstItem="kGn-F2-gL1" firstAttribute="leading" secondItem="guv-JL-Lhy" secondAttribute="trailing" constant="8" id="2ug-zx-cZ9"/>
                         <constraint firstItem="tLi-Yr-RrJ" firstAttribute="leading" secondItem="Xyi-SZ-KVf" secondAttribute="trailing" constant="16" id="7oA-vb-Am1"/>
                         <constraint firstItem="kGn-F2-gL1" firstAttribute="centerY" secondItem="guv-JL-Lhy" secondAttribute="centerY" id="Cgi-Ak-mx3"/>
+                        <constraint firstAttribute="trailing" secondItem="kGn-F2-gL1" secondAttribute="trailing" constant="8" id="DcU-bh-uyH"/>
                         <constraint firstItem="tBX-Mf-eML" firstAttribute="top" secondItem="guv-JL-Lhy" secondAttribute="bottom" constant="8" id="F8s-Ge-0k3"/>
                         <constraint firstItem="tLi-Yr-RrJ" firstAttribute="centerY" secondItem="Xyi-SZ-KVf" secondAttribute="centerY" id="Fjb-TY-NI9"/>
                         <constraint firstItem="lOV-8s-MUb" firstAttribute="centerY" secondItem="tBX-Mf-eML" secondAttribute="centerY" id="HnM-9Z-JJl"/>

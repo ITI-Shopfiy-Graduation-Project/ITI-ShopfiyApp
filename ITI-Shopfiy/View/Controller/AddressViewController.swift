@@ -27,15 +27,18 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
     let indicator = UIActivityIndicatorView(style: .large)
         override func viewDidLoad() {
             super.viewDidLoad()
-            addressHistoryArray = []
-            mabView.delegate = self
-            addressHisoryTable.delegate = self
-            addressHisoryTable.dataSource = self
-            configureLocation()
-            configureAuthority()
-           // getAllAddresses()
-            getAllHistory()
+            
         }
+    override func viewWillAppear(_ animated: Bool) {
+        addressHistoryArray = []
+        mabView.delegate = self
+        addressHisoryTable.delegate = self
+        addressHisoryTable.dataSource = self
+        configureLocation()
+        configureAuthority()
+       // getAllAddresses()
+        getAllHistory()
+    }
     
     @IBAction func saveAddress_btn(_ sender: Any) {
         postAddress()
@@ -78,21 +81,7 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
         dropDown.show()
 
     }
-    @IBAction func show1(_ sender: Any) {
-        dropDown.show()
-        print("2")
 
-    }
-    @IBAction func show(_ sender: Any) {
-        dropDown.show()
-        print("3")
-
-    }
-    @IBAction func showDropDown(_ sender: Any) {
-        dropDown.show()
-        print("4")
-
-    }
   
     func zoomToUserLocation(location : CLLocation)
         {
@@ -267,13 +256,6 @@ extension AddressViewController{
 }
 
 extension AddressViewController {
-    
-    func setUserAddressInfo(){
-        addressDelegate?.getAddressInfo(Address: userAddress!)
-    }
-}
-
-extension AddressViewController {
     func getAllHistory(){
         self.indicator.center = self.view.center
         self.view.addSubview(indicator)
@@ -300,20 +282,7 @@ extension AddressViewController {
             self.indicator.stopAnimating()
         }
     }
-  /*  func getAllAddresses(){
-        
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.center = view.center
-        view.addSubview(indicator)
-        indicator.startAnimating()
-        
-        self.addressVM.getAllUserAddress(userId:6860199723289)
-        self.addressVM.bindingAddress = {
-            self.renderView()
-            indicator.stopAnimating()
-        }
-    }
-    */
+  
     func postAddress(){
         let customerAddress : PostAddress = PostAddress()
         customerAddress.customer_address = address
@@ -335,13 +304,15 @@ extension AddressViewController {
                 }
             DispatchQueue.main.async { [self] in
                 print("address was added successfully")
-                viewDidLoad()
+                viewWillAppear(false)
                 let snackbar = TTGSnackbar(message: "address was added successfully!", duration: .middle)
                 snackbar.tintColor =  UIColor(named: "Green")
                 snackbar.show()
             }
         }
     }
+    
+    
 }
 
 extension AddressViewController : UITableViewDelegate {
@@ -349,8 +320,9 @@ extension AddressViewController : UITableViewDelegate {
         let location = "\(addressHistoryArray?[indexPath.row].address1 ?? ""), \(addressHistoryArray?[indexPath.row].city ?? ""), \(addressHistoryArray?[indexPath.row].country ?? "")"
         setLocation(destination: location)
         print ("cell selected")
+        setUserAddressInfo(address: addressHistoryArray?[indexPath.row] ?? Address())
+        self.navigationController?.popViewController(animated: true)
     }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
@@ -364,14 +336,14 @@ extension AddressViewController : UITableViewDelegate {
            let delete = UIContextualAction(style: .normal, title: "Delete") { (action, view, completionHandler) in
                let postAddress: PostAddress = PostAddress()
                postAddress.customer_address = self.addressHistoryArray?[indexPath.row]
-               print("Data \(postAddress.customer_address)")
+              // print("Data \(postAddress.customer_address )")
                self.addressVM.deleteAddress(userAddress: postAddress )
                self.addressHistoryArray?.remove(at: indexPath.row)
                self.addressHisoryTable.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
                completionHandler(true)
          }
            let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
-               
+               self.navigate(address: self.addressHistoryArray?[indexPath.row] ?? Address())
                completionHandler(true)
          }
            delete.backgroundColor = UIColor(named: "Red")
@@ -410,5 +382,20 @@ extension AddressViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Address History"
     }
+    
+}
+
+extension AddressViewController  {
+    func setUserAddressInfo(address: Address){
+            addressDelegate?.getAddressInfo(Address: address)
+        }
+    
+    func navigate (address : Address){
+        let VC = self.storyboard?.instantiateViewController(withIdentifier: "addressDetails") as! ViewController
+        VC.userAddress = address
+        VC.flag = true
+        navigationController?.pushViewController(VC, animated: true)
+    }
+    
     
 }

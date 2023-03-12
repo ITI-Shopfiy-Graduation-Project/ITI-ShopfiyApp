@@ -63,7 +63,13 @@ struct URLService{
     static func updateCustomer(userID: Int) -> String {
         return baseUrl + "customers/\(userID).json"
     }
+
     static func getOrder() -> String {
         return baseUrl + "orders.json?status=any"
+    }
+    
+    static func updateAddress (userID : Int , addressID : Int) -> String
+    {
+        return baseUrl + "customers/\(userID)/addresses/\(addressID).json"
     }
 }
