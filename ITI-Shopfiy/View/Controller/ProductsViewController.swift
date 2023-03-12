@@ -8,21 +8,15 @@
 import UIKit
 import Kingfisher
 import Foundation
-
+import JJFloatingActionButton
 class ProductsViewController: UIViewController{
     @IBOutlet weak var priceValue: UILabel!
     @IBOutlet weak var priceSlider: UISlider!
     @IBOutlet weak var like_btn: UIBarButtonItem!
     @IBOutlet weak var cart_btn: UIBarButtonItem!
-    
-    @IBAction func showSlider(_ sender: Any) {
-        
-        priceSlider.isHidden = !priceSlider.isHidden
-        priceValue.isHidden =  !priceValue.isHidden
-//        priceSlider.minimumValue = 0
-//        priceSlider.maximumValue = 100
-//        "Price: " + String(Int(sender.value))
-    }
+    let actionButton = JJFloatingActionButton()
+    var titles : [Product]?
+
     @IBOutlet weak var productSearchBar: UISearchBar!{
         didSet{
             productSearchBar.delegate = self
@@ -38,6 +32,7 @@ class ProductsViewController: UIViewController{
     
   
     var productsArray: [Products]? = []
+    var productss: [Products]? = []
     var searchArray: [Products]? = []
     var likedProducts: [Products]? = []
     var productsVM: ProductsVM?
@@ -56,7 +51,7 @@ class ProductsViewController: UIViewController{
         indicator?.center = view.center
         view.addSubview(indicator ?? UIActivityIndicatorView() )
         indicator?.startAnimating()
-        
+        btn ()
         navigationItem.title = vendor
         
         favoritesVM = FavouritesVM()
@@ -166,6 +161,7 @@ extension ProductsViewController{
         DispatchQueue.main.async {
             self.productsArray = self.productsVM?.productsResults ?? []
             self.searchArray = self.productsVM?.productsResults ?? []
+            self.productss = self.productsVM?.productsResults ?? []
             self.productsCollectionView.reloadData()
         }
     }
@@ -270,4 +266,72 @@ extension ProductsViewController {
 
     }
             }
+
+
+extension ProductsViewController {
+    
+    func btn ()
+    {   actionButton.itemAnimationConfiguration = .circularSlideIn(withRadius: 120)
+        actionButton.buttonAnimationConfiguration = .rotation(toAngle: .pi * 3 / 4)
+        actionButton.buttonAnimationConfiguration.opening.duration = 0.8
+        actionButton.buttonAnimationConfiguration.closing.duration = 0.6
+        actionButton.buttonColor = UIColor(named: "Green") ?? .green
+        actionButton.buttonImage =  UIImage(named: "f2")!
+        
+        actionButton.addItem(title: "", image: UIImage(named: "p1")?.withRenderingMode(.alwaysTemplate)) { [self] item in
+         
+            self.priceSlider.isHidden = !self.priceSlider.isHidden
+            priceValue.isHidden =  !self.priceValue.isHidden
+           
+      }
+        actionButton.addItem(title: "", image: UIImage(named: "a1")?.withRenderingMode(.alwaysTemplate)) { item in
+            self.az ()
+          
+        }
+        actionButton.addItem(title: "", image: UIImage(named: "z1")?.withRenderingMode(.alwaysTemplate)) { item in
+            self.za ()
+       
+        }
+        productsArray  = productss
+        actionButton.display(inViewController: self)
+    
+        
+
+    }
+
+    
+    
+    
+    
+    
+}
+
+extension ProductsViewController {
+    
+    func za () {
+     
+        
+        let sortedlist = productsArray!.sorted { $0.title! > $1.title! }
+        productsArray = sortedlist
+  
+        self.productsCollectionView.reloadData()
+}
+    func az()
+    {
+        let sortedlist = productsArray!.sorted { $0.title! < $1.title! }
+        productsArray = sortedlist
+  
+        self.productsCollectionView.reloadData()
+        
+        
+    }
+        
+}
+    
+    
+    
+    
+    
+    
+
 

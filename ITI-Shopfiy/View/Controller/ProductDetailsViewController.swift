@@ -377,7 +377,6 @@ extension ProductDetailsViewController {
         DispatchQueue.main.async {
             self.cartcount = self.cartVM.cartResult!
             
-            print ("heree email\(String(describing: self.cartcount.draft_orders?[1].email))")
          
             
 

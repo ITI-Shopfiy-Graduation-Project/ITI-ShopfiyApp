@@ -9,15 +9,10 @@ import UIKit
 
 class OrdersTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    @IBOutlet weak var userEmail: UILabel!
+    
+    @IBOutlet weak var createdTime: UILabel!
+    @IBOutlet weak var number: UILabel!
+    
+    @IBOutlet weak var price: UILabel!
 }

@@ -34,7 +34,7 @@ class PaymentViewController: UIViewController, AddressDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setDefaultButtonTheme()
-        
+       print("test\(UserDefaultsManager.sharedInstance.getUserEmail())")
         braintreeClient = BTAPIClient(authorization: "sandbox_q7ftqr99_7h4b4rgjq3fptm87")!
     }
     override func viewWillAppear(_ animated: Bool) {
