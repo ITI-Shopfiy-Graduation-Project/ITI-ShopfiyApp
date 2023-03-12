@@ -4,8 +4,8 @@
 //
 //  Created by ahmed on 22/02/2023.
 
-//paypal token sandbox_mf932tgj_bmwnvznx5nj7n6dg
-//"sandbox_jyvqscf2_jpbyz2k4fnvh6fvt"
+// sb-lfkrq25233161@personal.example.com
+// personal123
 
 
 import UIKit
@@ -13,7 +13,14 @@ import PassKit
 import Braintree
 import BraintreeDropIn
 import TTGSnackbar
-class PaymentViewController: UIViewController {
+class PaymentViewController: UIViewController, AddressDelegate {
+    func getAddressInfo(Address: Address) {
+        userAddress = Address
+       // setUserAddress()
+       // setPaymentMethodAccability()
+        print(userAddress)
+    }
+    
     @IBOutlet weak var payPal: UIButton!
     @IBOutlet weak var cashOnDelivery: UIButton!
     @IBOutlet weak var addressDescription: UITextView!
@@ -26,15 +33,23 @@ class PaymentViewController: UIViewController {
     var braintreeClient: BTAPIClient!
     var totalPrice: Double = 0
     var userTotalCost: Double = 0.0
+    private var userAddress : Address?
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUserAddress()
-        setPaymentMethodAccability()
         setDefaultButtonTheme()
-        
+        // aletrnative token sandbox_fwf8wnc6_7h4b4rgjq3fptm87  || "sandbox_jyvqscf2_jpbyz2k4fnvh6fvt"
         braintreeClient = BTAPIClient(authorization: "sandbox_q7ftqr99_7h4b4rgjq3fptm87")!
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        setUserAddress()
+        setPaymentMethodAccability()
+
+    }
+    @IBAction func chooseAddress(_ sender: Any) {
+        let vc = UIStoryboard(name: "AddressDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "address") as! AddressViewController
+        vc.addressDelegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     @IBAction func GooglePay(_ sender: UIButton) {
         DispatchQueue.main.async {
             self.setDefaultButtonTheme()
@@ -46,6 +61,8 @@ class PaymentViewController: UIViewController {
             sender.borderWidth = 1.5
             sender.cornerRadius = 10
             self.setupPayPal()
+            self.setupDictionary()
+
         }
     }
     @IBAction func cashOnDelivery(_ sender: UIButton) {
@@ -59,10 +76,17 @@ class PaymentViewController: UIViewController {
             sender.borderWidth = 1.5
             sender.cornerRadius = 10
         }
+        self.setupDictionary()
     }
     func setUserAddress(){
         let address = UserDefaultsManager.sharedInstance.getUserAddress()
-        if address != "" {
+        if userAddress != nil {
+            self.defaultAddress.text = userAddress?.address1
+            self.addressDescription.text = "\(String(userAddress?.city ?? "city")), \(String(describing: userAddress?.country ?? "country"))"
+            self.addressFlag = true
+
+        }
+        else if address != "" {
             self.defaultAddress.text = address
             self.addressFlag = true
         }
@@ -96,11 +120,20 @@ extension PaymentViewController : BTViewControllerPresentingDelegate {
     
     func setupPayPal(){
         let payPalDriver = BTPayPalDriver(apiClient: braintreeClient)
-        
+       /* let request:BTPayPalCheckoutRequest?
         // Specify the transaction amount here. "2.32" is used in this example.
-        let request = BTPayPalCheckoutRequest(amount: totalPrice.formatted())
-        request.currencyCode = UserDefaultsManager.sharedInstance.getCurrency()
-        
+        if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
+            let price = totalPrice  * 30
+            request = BTPayPalCheckoutRequest(amount: "1532")
+            request?.currencyCode = "EGP"
+        }
+    else
+        {
+        request = BTPayPalCheckoutRequest(amount: totalPrice.formatted())
+        request?.currencyCode = "USD"
+    }*/
+        let request = BTPayPalCheckoutRequest(amount: "1532")
+        request.currencyCode = "EGP"
         payPalDriver.tokenizePayPalAccount(with: request){ tokenizedPayPalAccount, error in
             if let tokenizedPayPalAccount = tokenizedPayPalAccount {
                 print("Got a nonce: \(tokenizedPayPalAccount.nonce)")
@@ -111,7 +144,6 @@ extension PaymentViewController : BTViewControllerPresentingDelegate {
                 
                 //userTotalCost = Double(tokenizedPayPalAccount.creditFinancing?.totalCost.)
           //      if tokenizedPayPalAccount.creditFinancing?.totalCost >= totalPrice
-                    self.setupDictionary()
                     
                 
                 // Access additional information
@@ -181,22 +213,25 @@ extension PaymentViewController : BTViewControllerPresentingDelegate {
             "order" : [
                 "confirmed" : true ,
                 "contact_email" : UserDefaultsManager.sharedInstance.getUserEmail() ?? "",
-                "currency": "USD",
+                "currency": UserDefaultsManager.sharedInstance.getCurrency(),
                 "created_at" : getCurrentDate() ,
                 "number" : 2 ,
                 "order_number" : 123 ,
-                "order_status_url" : "",
-                "current_subtotal_price": "15.0",
-                "current_total_discounts": "0.2",
-                "current_total_price": "15.0",
+                "order_status_url" : UserDefaultsManager.sharedInstance.getUserEmail() ?? "@email.com",
+                "current_subtotal_price": defaultAddress.text ?? "cairo",
+                "current_total_discounts": "01091190679",
+                "current_total_price": totalPrice.formatted(),
                 "line_items" : [[
                     "fulfillable_quantity" : 5,
                     "name":"Egypt",
                     "price":"0.10",
                     "quantity" : 3,
                     "sku" : "okijuhygtrf",
-                    "title" : "Shooes"
-                ]]
+                    "title" : "T-shirt"
+                ]],
+                "customer": [
+                    "id":UserDefaultsManager.sharedInstance.getUserID()
+                        ]
             ]
         ]
         postOrder(orderDictionary: order)

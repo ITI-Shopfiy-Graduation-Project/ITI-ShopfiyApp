@@ -35,20 +35,31 @@ class SettingsViewController: UIViewController {
     @objc func dismissVC() {
         self.navigationController?.popViewController(animated: true)
     }
-
+/*
     @IBAction func action(_ sender: Any) {
         let meVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
 
         self.navigationController?.pushViewController(meVC, animated: true)
+    }*/
+    
+    @IBAction func changePhone(_ sender: Any) {
+        let meVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
+
+        self.navigationController?.pushViewController(meVC, animated: true)
     }
+    
     @IBAction func changeCurrencey(_ sender: UISegmentedControl) {
+        let orderVM = OrderViewModel()
         switch sender.selectedSegmentIndex {
         case 0:
             print("USD")
             UserDefaultsManager.sharedInstance.setCurrency(key: "currency" , value: "USD")
+
         case 1:
             print("EGP")
             UserDefaultsManager.sharedInstance.setCurrency(key: "currency" , value: "EGP")
+            orderVM.updateUserWithCoupon(coupon: "USD")
+
         default:
             UserDefaultsManager.sharedInstance.setCurrency(key: "currency" , value: "USD")
         }

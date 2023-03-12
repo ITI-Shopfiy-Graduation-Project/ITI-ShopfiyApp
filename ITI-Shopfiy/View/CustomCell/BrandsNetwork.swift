@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 class BrandsNetwork:BrandsProtocol{
    
-    static func brandsfetchData(url : String?,handlerComplition : @escaping (BrandsResult?)->Void) {
+static func brandsfetchData(url : String?,handlerComplition : @escaping (BrandsResult?)->Void) {
     AF.request("\(url!)").responseData {response in
             guard let data = response.data else {
                 return

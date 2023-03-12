@@ -91,12 +91,6 @@
                                     <action selector="cartScreen:" destination="Y6W-OH-hqX" id="f4X-ba-l49"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="line.3.horizontal.decrease.circle" catalog="system" id="jRf-Mm-PjI">
-                                <color key="tintColor" name="Green"/>
-                                <connections>
-                                    <action selector="showSlider:" destination="Y6W-OH-hqX" id="MAD-go-R7u"/>
-                                </connections>
-                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -165,10 +159,7 @@
     </scenes>
     <resources>
         <image name="cart" catalog="system" width="128" height="102"/>
-
-        <image name="heart" catalog="system" width="128" height="107"/>
-        <image name="line.3.horizontal.decrease.circle" catalog="system" width="128" height="123"/>
-
+        <image name="heart.fill" catalog="system" width="128" height="107"/>
         <namedColor name="Gray">
             <color red="0.51399999856948853" green="0.51399999856948853" blue="0.51399999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
