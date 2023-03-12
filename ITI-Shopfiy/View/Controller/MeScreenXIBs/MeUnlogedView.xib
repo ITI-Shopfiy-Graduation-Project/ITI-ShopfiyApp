@@ -33,7 +33,7 @@
                     <color key="tintColor" name="White"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1d-nq-Lxl">
-                    <rect key="frame" x="16" y="317.5" width="144.5" height="38.5"/>
+                    <rect key="frame" x="16" y="317.5" width="146" height="38.5"/>
                     <color key="tintColor" name="Green"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="filled" title="Login" cornerStyle="capsule">
@@ -44,13 +44,13 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="njp-X0-CnP">
-                    <rect key="frame" x="176.5" y="325.5" width="22.5" height="23"/>
+                    <rect key="frame" x="178" y="325.5" width="19" height="23"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCc-Q0-C7Z">
-                    <rect key="frame" x="215" y="317.5" width="144" height="38.5"/>
+                    <rect key="frame" x="213" y="317.5" width="146" height="38.5"/>
                     <color key="tintColor" name="Green"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="filled" title="Register" cornerStyle="capsule">
@@ -78,12 +78,12 @@
                 <constraint firstItem="RCc-Q0-C7Z" firstAttribute="height" secondItem="Z1d-nq-Lxl" secondAttribute="height" id="Uhr-DX-tJy"/>
                 <constraint firstItem="njp-X0-CnP" firstAttribute="centerY" secondItem="Z1d-nq-Lxl" secondAttribute="centerY" id="VSN-hu-GJk"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="zRE-8P-hXl" secondAttribute="trailing" constant="16" id="b8Z-Be-pul"/>
+                <constraint firstItem="njp-X0-CnP" firstAttribute="width" secondItem="fkA-TH-4Qq" secondAttribute="width" multiplier="0.1" id="dhA-qS-ddX"/>
                 <constraint firstItem="vlm-2C-idg" firstAttribute="centerX" secondItem="zRE-8P-hXl" secondAttribute="centerX" id="iqR-RU-UrX"/>
                 <constraint firstItem="zRE-8P-hXl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="qoC-oo-iAW"/>
                 <constraint firstItem="zRE-8P-hXl" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ryP-VE-346"/>
                 <constraint firstItem="RCc-Q0-C7Z" firstAttribute="centerY" secondItem="Z1d-nq-Lxl" secondAttribute="centerY" id="sNQ-OF-9iV"/>
                 <constraint firstItem="zRE-8P-hXl" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="tZE-ke-xIo"/>
-                <constraint firstItem="RCc-Q0-C7Z" firstAttribute="width" secondItem="Z1d-nq-Lxl" secondAttribute="width" id="wCP-MB-pl4"/>
                 <constraint firstItem="Z1d-nq-Lxl" firstAttribute="top" secondItem="fkA-TH-4Qq" secondAttribute="bottom" constant="32" id="x4u-re-YKJ"/>
                 <constraint firstItem="Z1d-nq-Lxl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ymA-kS-1ZD"/>
                 <constraint firstItem="vlm-2C-idg" firstAttribute="top" secondItem="zRE-8P-hXl" secondAttribute="bottom" constant="16" id="yrY-2S-HRS"/>

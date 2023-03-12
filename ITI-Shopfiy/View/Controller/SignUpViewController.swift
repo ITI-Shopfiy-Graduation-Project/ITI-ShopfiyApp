@@ -106,7 +106,6 @@ class SignUpViewController: UIViewController {
         navigationItem.title = "Shopify App"
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
-        resetForm()
         view.addGestureRecognizer(swipe)
     }
 
@@ -115,7 +114,7 @@ class SignUpViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        resetForm()
+        checkForValidForm()
     }
     
     
@@ -133,17 +132,14 @@ class SignUpViewController: UIViewController {
         guard let password = password_txt.text else {return}
         guard let confirmPassword = confirmPassword_txt.text else {return}
         guard let phone = phoneNumber_txt.text else {return}
-//        self.chosenAddress.address1 = address_txt.text
-//        self.adresses?.removeAll()
-//        self.adresses?.append(chosenAddress)
         
-//        guard let address = currentAddress_txt.text else {return}
         indicator?.startAnimating()
         
         if ValdiateCustomerInfomation(UserName: name, password: password, confirmPassword: confirmPassword, userPhone: phone, email: email, userAddress: chosenAddress){
             register(UserName: name, password: password, confirmPassword: confirmPassword, UserPhone: phone, email: email, UserAddress: chosenAddress)
         } else {
             showAlertError(title: "Couldnot register", message: "Please try again later.")
+            self.indicator?.stopAnimating()
         }
 //        resetForm()
         
@@ -159,9 +155,6 @@ extension SignUpViewController: AddressDelegate{
         self.chosenAddress = userAddress
         self.address_txt.text = userAddress.address1
         self.address_txt.isHidden = false
-        print(userAddress.address1)
-        print(chosenAddress.address1)
-        print(address_txt.text)
     }
 }
 
@@ -187,8 +180,6 @@ extension SignUpViewController {
                 
             default:
                 self.showToastMessage(message: "Congratulations", color: UIColor(named: "Green") ?? .systemGreen)
-                
-                self.resetForm()
                 
                 isSuccess = true
             }
@@ -221,12 +212,12 @@ extension SignUpViewController {
             CustomerLogin.login(){ result in
                 guard let customers = result?.customers else {return}
                 for customer in customers {
-                    if (email == customer.email){
+                    if (newCustomer.customer?.id == customer.id){
                         let customerID = customer.id
                         UserDefaultsManager.sharedInstance.setUserID(customerID: customerID)
-                        UserDefaultsManager.sharedInstance.setUserName(userName: customer.first_name)
+                        UserDefaultsManager.sharedInstance.setUserName(userName: UserName)
                         UserDefaultsManager.sharedInstance.setUserEmail(userEmail: email)
-                        UserDefaultsManager.sharedInstance.setUserAddress(userAddress: customer.addresses?[0].address1)
+                        UserDefaultsManager.sharedInstance.setUserAddress(userAddress: UserAddress.address1)
                         
                     }
                     
@@ -235,6 +226,7 @@ extension SignUpViewController {
             
             DispatchQueue.main.async {
                 print("registered successfully")
+                self.resetForm()
                 self.indicator?.stopAnimating()
                 self.navigationController?.popViewController(animated: true)
             }

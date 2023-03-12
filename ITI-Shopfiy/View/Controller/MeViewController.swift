@@ -34,16 +34,11 @@ class MeViewController: UIViewController {
         // condition: If user is logged
         orderModel = GetOrderVM()
         orderModel?.getOrdersUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/orders.json?status=any"
-//        orderModel?.getOrder()
-//        orderModel?.bindingOrder = {()in
-//        self.renderOrders()
-//
-//        }
    
-
         favoritesVM = FavouritesVM()
         
         viewWillAppear(false)
+        
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
 
@@ -58,10 +53,19 @@ class MeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.setHidesBackButton(true, animated: true)
         if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-//            let meLogedVC = (Bundle.main.loadNibNamed("MeLogedView", owner: self, options: nil)?.first as? MeLogedView)
-       
-            getSavedFavorites()
+            
             self.meView.addSubview(meLogedVC!)
+
+            //
+            self.meLogedVC?.user_img.image = UIImage(named: "user")
+            //user Image
+            self.meLogedVC?.user_img.layer.cornerRadius = (self.meLogedVC?.user_img.frame.size.width ?? 0.0) / 2
+            self.meLogedVC?.user_img.clipsToBounds = true
+            self.meLogedVC?.user_img.layer.borderColor = UIColor.red.cgColor
+            //
+            self.meLogedVC?.userName_txt.text = UserDefaultsManager.sharedInstance.getUserName() ?? "Cristiano Ronaldo"
+            //
+            getSavedFavorites()
             self.navigationController?.isNavigationBarHidden = false
             navigationItem.title = "Profile"
             meLogedVC?.meProtocol = self
@@ -171,13 +175,13 @@ extension MeViewController{
                   self.savedFavorites = result
 
                     self.savedFavorites  = self.favoritesVM?.savedProductsArray ?? []
-                    self.meLogedVC?.user_img.image = UIImage(named: "user")
-                    //user Image
-                    self.meLogedVC?.user_img.layer.cornerRadius = (self.meLogedVC?.user_img.frame.size.width ?? 0.0) / 2
-                    self.meLogedVC?.user_img.clipsToBounds = true
-                    self.meLogedVC?.user_img.layer.borderColor = UIColor.red.cgColor
-                    //
-                    self.meLogedVC?.userName_txt.text = UserDefaultsManager.sharedInstance.getUserName() ?? "Cristiano Ronaldo"
+//                    self.meLogedVC?.user_img.image = UIImage(named: "user")
+//                    //user Image
+//                    self.meLogedVC?.user_img.layer.cornerRadius = (self.meLogedVC?.user_img.frame.size.width ?? 0.0) / 2
+//                    self.meLogedVC?.user_img.clipsToBounds = true
+//                    self.meLogedVC?.user_img.layer.borderColor = UIColor.red.cgColor
+//                    //
+//                    self.meLogedVC?.userName_txt.text = UserDefaultsManager.sharedInstance.getUserName() ?? "Cristiano Ronaldo"
 
                     if self.savedFavorites?.count ?? 1 > 0{
                         self.meLogedVC?.productName_wishList.text = self.savedFavorites?[0].title
