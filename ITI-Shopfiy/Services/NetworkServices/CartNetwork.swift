@@ -36,7 +36,7 @@ class CartNetwork {
                     catch{ print("erroMsg") }
                     handlerComplition(nil)
                 } else  {
-                    print("Failed")
+                    print("Failed: \(response)")
                     handlerComplition(nil)
                 }
             }

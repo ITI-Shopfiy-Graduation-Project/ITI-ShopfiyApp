@@ -137,7 +137,7 @@ extension MeViewController{
         favoritesVM?.bindingData = {result , error in
             if result != nil {
                 DispatchQueue.main.async {
-                    self.savedFavorites = result
+                  /*  self.savedFavorites = result
                     self.savedFavorites  = self.favoritesVM?.savedProductsArray ?? []
                     self.meLogedVC?.user_img.image = UIImage(named: "zizo")
                     //user Image
@@ -154,7 +154,7 @@ extension MeViewController{
                     self.meLogedVC?.productImage_wishList.layer.cornerRadius = (self.meLogedVC?.productImage_wishList.frame.size.height ?? 250) / 2
                     self.meLogedVC?.productImage_wishList.clipsToBounds = true
 
-
+*/
                 }
             }
             if let error = error {

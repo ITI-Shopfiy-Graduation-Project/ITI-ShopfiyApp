@@ -19,7 +19,7 @@
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i4N-DM-2si">
                         <rect key="frame" x="16" y="16" width="106" height="109"/>
-                        <color key="backgroundColor" name="White"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                 <real key="value" value="1"/>
@@ -35,8 +35,8 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQP-OO-kZ6">
-                        <rect key="frame" x="146" y="16" width="212" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQP-OO-kZ6">
+                        <rect key="frame" x="146" y="16" width="212" height="38"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -99,32 +99,46 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234 $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54M-2N-PnR">
-                        <rect key="frame" x="146" y="43" width="212" height="21"/>
+                        <rect key="frame" x="146" y="60" width="212" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <color key="textColor" name="Red"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qmv-dU-80U">
+                        <rect key="frame" x="349" y="93.666666666666671" width="75" height="35.000000000000014"/>
+                        <color key="tintColor" name="Red"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="trash" catalog="system"/>
+                        <connections>
+                            <action selector="deleteItem:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="sFF-xM-nPI"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" name="White"/>
                 <constraints>
                     <constraint firstItem="i4N-DM-2si" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.25" id="0Ag-ah-lBn"/>
+                    <constraint firstItem="54M-2N-PnR" firstAttribute="centerY" secondItem="i4N-DM-2si" secondAttribute="centerY" id="0ym-Z3-6gL"/>
                     <constraint firstItem="gDz-gi-eDX" firstAttribute="centerY" secondItem="WTH-CJ-RbC" secondAttribute="centerY" id="1Qy-fF-Wme"/>
+                    <constraint firstAttribute="trailing" secondItem="Qmv-dU-80U" secondAttribute="trailing" id="2Sm-fY-LVN"/>
                     <constraint firstItem="gDz-gi-eDX" firstAttribute="leading" secondItem="WTH-CJ-RbC" secondAttribute="trailing" constant="4" id="2Z7-aV-bxd"/>
                     <constraint firstItem="54M-2N-PnR" firstAttribute="leading" secondItem="KQP-OO-kZ6" secondAttribute="leading" id="2qz-FG-itH"/>
                     <constraint firstItem="WTH-CJ-RbC" firstAttribute="leading" secondItem="54M-2N-PnR" secondAttribute="leading" id="2tv-pr-iqb"/>
                     <constraint firstItem="WTH-CJ-RbC" firstAttribute="bottom" secondItem="i4N-DM-2si" secondAttribute="bottom" id="3Fr-DF-Wlh"/>
                     <constraint firstItem="i4N-DM-2si" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="7Cb-xI-cJN"/>
+                    <constraint firstItem="Qmv-dU-80U" firstAttribute="centerY" secondItem="I8k-jB-Nwu" secondAttribute="centerY" id="9Ds-d6-GC6"/>
                     <constraint firstItem="WTH-CJ-RbC" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.05" id="MxY-d2-RIT"/>
                     <constraint firstItem="KQP-OO-kZ6" firstAttribute="leading" secondItem="i4N-DM-2si" secondAttribute="trailing" constant="24" id="RaK-Ll-p0P"/>
                     <constraint firstItem="KQP-OO-kZ6" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" id="TTY-Vu-gN7"/>
                     <constraint firstAttribute="bottom" secondItem="i4N-DM-2si" secondAttribute="bottom" constant="16" id="bNv-yg-xkI"/>
                     <constraint firstItem="54M-2N-PnR" firstAttribute="trailing" secondItem="KQP-OO-kZ6" secondAttribute="trailing" id="dle-tx-Q05"/>
+                    <constraint firstItem="Qmv-dU-80U" firstAttribute="height" secondItem="I8k-jB-Nwu" secondAttribute="height" multiplier="1.25" id="eJf-wV-w1E"/>
                     <constraint firstItem="KQP-OO-kZ6" firstAttribute="top" secondItem="i4N-DM-2si" secondAttribute="top" id="eJn-GF-gEX"/>
                     <constraint firstItem="I8k-jB-Nwu" firstAttribute="centerY" secondItem="WTH-CJ-RbC" secondAttribute="centerY" id="hHF-sS-Ytv"/>
                     <constraint firstItem="I8k-jB-Nwu" firstAttribute="height" secondItem="WTH-CJ-RbC" secondAttribute="height" id="hWH-WB-cYc"/>
                     <constraint firstItem="54M-2N-PnR" firstAttribute="top" secondItem="KQP-OO-kZ6" secondAttribute="bottom" constant="6" id="jlX-VK-Xhc"/>
                     <constraint firstItem="i4N-DM-2si" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="myF-ps-nTg"/>
                     <constraint firstItem="I8k-jB-Nwu" firstAttribute="leading" secondItem="gDz-gi-eDX" secondAttribute="trailing" constant="4" id="uGR-R9-4xS"/>
+                    <constraint firstItem="Qmv-dU-80U" firstAttribute="width" secondItem="I8k-jB-Nwu" secondAttribute="width" multiplier="2.08333" id="x6l-7J-jPm"/>
                     <constraint firstItem="I8k-jB-Nwu" firstAttribute="width" secondItem="WTH-CJ-RbC" secondAttribute="width" id="ywS-SN-z1S"/>
                     <constraint firstItem="i4N-DM-2si" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" constant="-32" id="zTd-Yf-E6u"/>
                 </constraints>
@@ -158,6 +172,7 @@
             <connections>
                 <outlet property="cartImage" destination="i4N-DM-2si" id="2oQ-ad-ebY"/>
                 <outlet property="decreseItem" destination="WTH-CJ-RbC" id="XJl-K5-TBb"/>
+                <outlet property="delete_Btn" destination="Qmv-dU-80U" id="AV0-g2-C2M"/>
                 <outlet property="increaseItem" destination="I8k-jB-Nwu" id="SNP-1P-0Ue"/>
                 <outlet property="itemName" destination="KQP-OO-kZ6" id="Vks-xI-AwI"/>
                 <outlet property="itemPrice" destination="54M-2N-PnR" id="3bP-RL-e6W"/>
@@ -167,6 +182,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="trash" catalog="system" width="117" height="128"/>
         <namedColor name="Black">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
