@@ -57,7 +57,8 @@ class FavoritesViewController: UIViewController {
     }
     
     @IBAction func goToCartViewController(_ sender: UIBarButtonItem) {
-        let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
+        let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
+
         navigationController?.pushViewController(cartVC, animated: true)
     }
     

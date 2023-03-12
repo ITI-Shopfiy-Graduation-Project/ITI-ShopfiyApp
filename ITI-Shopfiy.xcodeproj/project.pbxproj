@@ -46,6 +46,7 @@
 		A705F65A29A8E55300301207 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705F65929A8E55300301207 /* MeViewController.swift */; };
 		A7157ABC29A694D700D9A41A /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7157ABB29A694D700D9A41A /* ProductsViewController.swift */; };
 		A7157ABE29A694EE00D9A41A /* ProductsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7157ABD29A694EE00D9A41A /* ProductsStoryboard.storyboard */; };
+		A71EFBD629BDAB48003D8A44 /* MockingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71EFBD529BDAB48003D8A44 /* MockingTests.swift */; };
 		A72979C629B9B1BA008F2559 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72979C429B9B1BA008F2559 /* ReviewTableViewCell.swift */; };
 		A72979C729B9B1BA008F2559 /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A72979C529B9B1BA008F2559 /* ReviewTableViewCell.xib */; };
 		A72979C929B9B22D008F2559 /* ReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72979C829B9B22D008F2559 /* ReviewsViewController.swift */; };
@@ -84,6 +85,7 @@
 		A78FF3FC29B03D8300F42A7A /* ProductDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78FF3FB29B03D8300F42A7A /* ProductDetailsStoryboard.storyboard */; };
 		A79C157729A81A4D00AB6C20 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79C157629A81A4D00AB6C20 /* FavoritesViewController.swift */; };
 		A79C157929A81A5D00AB6C20 /* FavoritesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A79C157829A81A5D00AB6C20 /* FavoritesStoryboard.storyboard */; };
+		A7E97AB829BD1D240083F17D /* CategoryMockingFromNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E97AB729BD1D240083F17D /* CategoryMockingFromNetwork.swift */; };
 		A7FFA85E29A594CC00474CB1 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FFA85D29A594CC00474CB1 /* LoginStoryboard.storyboard */; };
 		A7FFA86029A594EF00474CB1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FFA85F29A594EF00474CB1 /* LoginViewController.swift */; };
 		E2008ED429A41B9F003D55A0 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2008ED329A41B9F003D55A0 /* ViewHelper.swift */; };
@@ -196,6 +198,7 @@
 		A705F65929A8E55300301207 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		A7157ABB29A694D700D9A41A /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		A7157ABD29A694EE00D9A41A /* ProductsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductsStoryboard.storyboard; sourceTree = "<group>"; };
+		A71EFBD529BDAB48003D8A44 /* MockingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockingTests.swift; sourceTree = "<group>"; };
 		A72979C429B9B1BA008F2559 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		A72979C529B9B1BA008F2559 /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewTableViewCell.xib; sourceTree = "<group>"; };
 		A72979C829B9B22D008F2559 /* ReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +237,7 @@
 		A78FF3FB29B03D8300F42A7A /* ProductDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductDetailsStoryboard.storyboard; sourceTree = "<group>"; };
 		A79C157629A81A4D00AB6C20 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		A79C157829A81A5D00AB6C20 /* FavoritesStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FavoritesStoryboard.storyboard; sourceTree = "<group>"; };
+		A7E97AB729BD1D240083F17D /* CategoryMockingFromNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMockingFromNetwork.swift; sourceTree = "<group>"; };
 		A7FFA85D29A594CC00474CB1 /* LoginStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginStoryboard.storyboard; sourceTree = "<group>"; };
 		A7FFA85F29A594EF00474CB1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B91BC6BDC89668C61B2F645D /* Pods-ITI-ShopfiyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITI-ShopfiyTests.release.xcconfig"; path = "Target Support Files/Pods-ITI-ShopfiyTests/Pods-ITI-ShopfiyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -472,6 +476,15 @@
 			path = ProductsVM;
 			sourceTree = "<group>";
 		};
+		A7E97AB629BD1CD70083F17D /* Mocking */ = {
+			isa = PBXGroup;
+			children = (
+				A7E97AB729BD1D240083F17D /* CategoryMockingFromNetwork.swift */,
+				A71EFBD529BDAB48003D8A44 /* MockingTests.swift */,
+			);
+			path = Mocking;
+			sourceTree = "<group>";
+		};
 		D54FE7A6DF500CBB4F3393F8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,6 +548,7 @@
 			isa = PBXGroup;
 			children = (
 				E29FA91629A2AEE700CE0786 /* ITI_ShopfiyTests.swift */,
+				A7E97AB629BD1CD70083F17D /* Mocking */,
 				A7547B6629BC805F00E599A6 /* AuthenticationTests */,
 				A7547B6B29BC982B00E599A6 /* NetworkTests */,
 			);
@@ -1127,6 +1141,8 @@
 				A7547B7329BCA7C100E599A6 /* CartTests.swift in Sources */,
 				E29FA91729A2AEE700CE0786 /* ITI_ShopfiyTests.swift in Sources */,
 				A7547B7529BCADD200E599A6 /* AddressTests.swift in Sources */,
+				A7E97AB829BD1D240083F17D /* CategoryMockingFromNetwork.swift in Sources */,
+				A71EFBD629BDAB48003D8A44 /* MockingTests.swift in Sources */,
 				A7547B6829BC80A400E599A6 /* SignUpTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

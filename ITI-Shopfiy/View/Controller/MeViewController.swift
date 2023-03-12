@@ -96,7 +96,7 @@ class MeViewController: UIViewController {
     
     @IBAction func goToCartVC(_ sender: Any) {
         if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-            let cartVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! CartViewController
+            let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
             navigationController?.pushViewController(cartVC, animated: true)
         }else{
             showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
@@ -162,7 +162,9 @@ extension MeViewController{
         favoritesVM?.bindingData = {result , error in
             if result != nil {
                 DispatchQueue.main.async {
-                  /*  self.savedFavorites = result
+
+                  self.savedFavorites = result
+
                     self.savedFavorites  = self.favoritesVM?.savedProductsArray ?? []
                     self.meLogedVC?.user_img.image = UIImage(named: "user")
                     //user Image
@@ -173,17 +175,26 @@ extension MeViewController{
                     self.meLogedVC?.userName_txt.text = UserDefaultsManager.sharedInstance.getUserName() ?? "Cristiano Ronaldo"
 
                     if self.savedFavorites?.count ?? 1 > 0{
-                        self.meLogedVC?.productName_wishList.text = self.savedFavorites?[0].title ?? "Adidas"
-                        self.meLogedVC?.productPrice_wishList.text = self.savedFavorites?[0].variants?[0].price ?? "38.00"
-                        self.meLogedVC?.productColor_wishList.text = self.savedFavorites?[0].variants?[0].option2 ?? "Black"
+                        self.meLogedVC?.productName_wishList.text = self.savedFavorites?[0].title
+                        self.meLogedVC?.productPrice_wishList.text = self.savedFavorites?[0].variants?[0].price
+                        self.meLogedVC?.productColor_wishList.text = self.savedFavorites?[0].variants?[0].option2
                         self.meLogedVC?.productImage_wishList.kf.setImage(with: URL(string:self.savedFavorites?[0].image?.src ?? ""))
                     }
+                    //
+                    else{
+                        self.meLogedVC?.productName_wishList.text = "No Products"
+                        self.meLogedVC?.productPrice_wishList.text =  "No Products"
+                        self.meLogedVC?.productColor_wishList.text =  "No Products"
+                        self.meLogedVC?.productImage_wishList.image = UIImage(named: "")
+                        
+                    }
+                    //
                     //product Image
 
                     self.meLogedVC?.productImage_wishList.layer.cornerRadius = (self.meLogedVC?.productImage_wishList.frame.size.height ?? 250) / 2
                     self.meLogedVC?.productImage_wishList.clipsToBounds = true
 
-*/
+
                 }
             }
             

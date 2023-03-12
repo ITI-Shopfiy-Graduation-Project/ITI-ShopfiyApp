@@ -23,6 +23,9 @@ class LoginViewController: UIViewController {
     var timer : Timer?
     var currentCellIndex = 0
     var loginVM: loginProtocol?
+
+    var indicator: UIActivityIndicatorView?
+
     var cartVM = ShoppingCartViewModel()
     var AllDraftsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/draft_orders.json"
     var cartcount = ShoppingCart()
@@ -31,6 +34,11 @@ class LoginViewController: UIViewController {
 
         loginVM = LoginVM()
         // Do any additional setup after loading the view.
+        indicator = UIActivityIndicatorView(style: .large)
+        indicator?.center = view.center
+        view.addSubview(indicator ?? UIActivityIndicatorView() )
+        indicator?.startAnimating()
+        
         let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
         adsCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
         starttimer()
@@ -84,6 +92,7 @@ extension LoginViewController{
         loginVM?.login(userName: userName, password: password, completionHandler: { Customer in
             if Customer != nil {
                 self.showToastMessage(message: "Congratulations", color: UIColor(named: "Green") ?? .systemGreen)
+                self.indicator?.stopAnimating()
                 print("customer logged in successfully")
                 //Navigation
                 self.navigationController?.popViewController(animated: true)

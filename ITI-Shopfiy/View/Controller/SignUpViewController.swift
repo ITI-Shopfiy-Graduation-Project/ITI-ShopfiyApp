@@ -14,7 +14,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var password_txt: UITextField!
     @IBOutlet weak var confirmPassword_txt: UITextField!
     
-    //Errors
+    //MARK: Errors
     @IBOutlet weak var userName_error: UILabel!
     @IBOutlet weak var email_error: UILabel!
     @IBOutlet weak var password_error: UILabel!
@@ -23,7 +23,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var address_error: UILabel!
     @IBOutlet weak var address_txt: UILabel!
     
-    //Changes
+    //MARK: Changes
     @IBAction func userName_changed(_ sender: Any) {
         if let name = username_txt.text{
             if let errorMessage = invalidName(name){
@@ -90,13 +90,20 @@ class SignUpViewController: UIViewController {
     var registerVM: registerProtocol?
     var adresses: [Address]? = []
     var chosenAddress = Address()
-    
+    var indicator: UIActivityIndicatorView?
+
+    //MARK: view did load
     override func viewDidLoad() {
         super.viewDidLoad()
         
         resetForm()
         registerVM = RegisterVM()
         // Do any additional setup after loading the view.
+        indicator = UIActivityIndicatorView(style: .large)
+        indicator?.center = view.center
+        view.addSubview(indicator ?? UIActivityIndicatorView() )
+        indicator?.startAnimating()
+        
         navigationItem.title = "Shopify App"
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
@@ -106,6 +113,10 @@ class SignUpViewController: UIViewController {
 
     @objc func dismissVC() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        resetForm()
     }
     
     
@@ -200,7 +211,20 @@ extension SignUpViewController {
                 }
                 return
             }
+            
+            //
+            CustomerLogin.login(){ result in
+                guard let customers = result?.customers else {return}
+                for customer in customers {
+                    if (email == customer.email){
+                        let customerID = customer.id
+                        UserDefaultsManager.sharedInstance.setUserID(customerID: customerID)
+                    }
                     
+                }}
+            //
+            self.indicator?.stopAnimating()
+
             print("registered successfully")
             
             DispatchQueue.main.async {
