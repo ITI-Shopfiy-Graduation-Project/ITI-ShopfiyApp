@@ -88,6 +88,10 @@ extension SettingsViewController{
         alert.addAction(UIAlertAction(title: "Logout", style: UIAlertAction.Style.destructive, handler: { action in
             UserDefaultsManager.sharedInstance.logut()
             UserDefaultsManager.sharedInstance.setUserID(customerID: nil)
+            UserDefaultsManager.sharedInstance.setUserCart(cartId: nil)
+            UserDefaultsManager.sharedInstance.setUserName(userName: nil)
+            UserDefaultsManager.sharedInstance.setUserAddress(userAddress: nil)
+            UserDefaultsManager.sharedInstance.setUserEmail(userEmail: nil)
             self.navigationController?.popViewController(animated: true)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
