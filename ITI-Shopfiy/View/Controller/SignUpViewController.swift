@@ -102,12 +102,11 @@ class SignUpViewController: UIViewController {
         indicator = UIActivityIndicatorView(style: .large)
         indicator?.center = view.center
         view.addSubview(indicator ?? UIActivityIndicatorView() )
-        indicator?.startAnimating()
         
         navigationItem.title = "Shopify App"
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
-
+        resetForm()
         view.addGestureRecognizer(swipe)
     }
 
@@ -116,7 +115,7 @@ class SignUpViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        resetForm()
+//        resetForm()
     }
     
     
@@ -134,11 +133,13 @@ class SignUpViewController: UIViewController {
         guard let password = password_txt.text else {return}
         guard let confirmPassword = confirmPassword_txt.text else {return}
         guard let phone = phoneNumber_txt.text else {return}
-        self.chosenAddress.address1 = address_txt.text
-        self.adresses?.removeAll()
-        self.adresses?.append(chosenAddress)
+//        self.chosenAddress.address1 = address_txt.text
+//        self.adresses?.removeAll()
+//        self.adresses?.append(chosenAddress)
         
 //        guard let address = currentAddress_txt.text else {return}
+        indicator?.startAnimating()
+        
         if ValdiateCustomerInfomation(UserName: name, password: password, confirmPassword: confirmPassword, userPhone: phone, email: email, userAddress: chosenAddress){
             register(UserName: name, password: password, confirmPassword: confirmPassword, UserPhone: phone, email: email, UserAddress: chosenAddress)
         } else {
@@ -157,6 +158,10 @@ extension SignUpViewController: AddressDelegate{
         self.adresses?.append(userAddress)
         self.chosenAddress = userAddress
         self.address_txt.text = userAddress.address1
+        self.address_txt.isHidden = false
+        print(userAddress.address1)
+        print(chosenAddress.address1)
+        print(address_txt.text)
     }
 }
 
@@ -223,11 +228,10 @@ extension SignUpViewController {
                     
                 }}
             //
-            self.indicator?.stopAnimating()
-
-            print("registered successfully")
             
             DispatchQueue.main.async {
+                print("registered successfully")
+                self.indicator?.stopAnimating()
                 self.navigationController?.popViewController(animated: true)
             }
         }

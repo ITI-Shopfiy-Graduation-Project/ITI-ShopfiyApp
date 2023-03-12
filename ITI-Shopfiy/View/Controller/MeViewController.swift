@@ -34,11 +34,11 @@ class MeViewController: UIViewController {
         // condition: If user is logged
         orderModel = GetOrderVM()
         orderModel?.getOrdersUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/orders.json?status=any"
-        orderModel?.getOrder()
-        orderModel?.bindingOrder = {()in
-        self.renderOrders()
-        
-        }
+//        orderModel?.getOrder()
+//        orderModel?.bindingOrder = {()in
+//        self.renderOrders()
+//
+//        }
    
 
         favoritesVM = FavouritesVM()
@@ -63,8 +63,13 @@ class MeViewController: UIViewController {
             getSavedFavorites()
             self.meView.addSubview(meLogedVC!)
             self.navigationController?.isNavigationBarHidden = false
-            navigationItem.title = "User Name"
+            navigationItem.title = "Profile"
             meLogedVC?.meProtocol = self
+            orderModel?.getOrder()
+            orderModel?.bindingOrder = {()in
+            self.renderOrders()
+            
+            }
         } // condition: If user is unlogged
         else{
             let meUnLogedVC = Bundle.main.loadNibNamed("MeUnlogedView", owner: self, options: nil)?.first as? MeUnlogedView
