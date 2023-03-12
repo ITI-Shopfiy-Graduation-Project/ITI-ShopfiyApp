@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
     var timer : Timer?
     var currentCellIndex = 0
     var loginVM: loginProtocol?
+
     var indicator: UIActivityIndicatorView?
 
     var cartVM = ShoppingCartViewModel()

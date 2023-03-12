@@ -146,13 +146,10 @@ class ProductDetailsViewController: UIViewController{
             if addtoLine == nil
                                 {
                                 self.postCart()
-                      
                     }
         }else{
             showLoginAlert(title: "UnAuthorized Action", message: "You must loginn first")
         }
-
-
     }
     
     @IBAction func addToLikesButton(_ sender: Any) {
@@ -380,6 +377,7 @@ extension ProductDetailsViewController {
     func renderCart() {
         DispatchQueue.main.async {
             self.cartcount = self.cartVM.cartResult!
+           // print ("heree email\(String(describing: self.cartcount.draft_orders?[1].email))")
 
         }
         
