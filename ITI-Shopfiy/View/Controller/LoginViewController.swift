@@ -23,7 +23,9 @@ class LoginViewController: UIViewController {
     var timer : Timer?
     var currentCellIndex = 0
     var loginVM: loginProtocol?
-    
+    var cartVM = ShoppingCartViewModel()
+    var AllDraftsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/draft_orders.json"
+    var cartcount = ShoppingCart()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,6 +41,13 @@ class LoginViewController: UIViewController {
         swipe.direction = .right
 
         view.addGestureRecognizer(swipe)
+        cartVM.cartsUrl = self.AllDraftsUrl
+        cartVM.getCart()
+        cartVM.bindingCartt = {()in
+            self.renderCart()
+            
+        }
+        getCartId()
     }
     
     @objc func dismissVC() {
@@ -170,3 +179,41 @@ extension LoginViewController{
         
     }
 }
+extension LoginViewController {
+    func renderCart() {
+        DispatchQueue.main.async {
+            self.cartcount = self.cartVM.cartResult!
+            
+           
+
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+}
+extension LoginViewController {
+    func getCartId()
+    {
+        
+        cartcount.draft_orders?.forEach({ email in
+            
+            if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
+            {
+                UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
+            }
+            
+            
+            
+            
+        })}
+                                        }
+

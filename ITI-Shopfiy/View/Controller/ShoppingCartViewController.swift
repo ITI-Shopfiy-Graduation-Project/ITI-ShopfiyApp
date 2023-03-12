@@ -190,6 +190,7 @@ extension ShoppingCartViewController {
 extension ShoppingCartViewController {
     func deleteLineItemProduct(indexPath : IndexPath)
     {
+
         deletedLineItem = cartArray?[indexPath.row]
         cartArray?.remove(at: indexPath.row)
         cartTable.deleteRows(at: [indexPath], with: .automatic)
