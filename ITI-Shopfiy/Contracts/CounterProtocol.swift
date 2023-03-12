@@ -7,9 +7,11 @@
 
 import Foundation
 protocol CounterProtocol {
-    func showAlert()/*
-    func increaseCounter() -> Int8
-    func decreaseCounter() -> Int8
-*/
+    func showNIPAlert(msg: String)
+    func deleteItem(indexPath : IndexPath)
+    
+    func increaseCounter() 
+    func decreaseCounter()
+    func setItemQuantityToPut(quantity: Int , index: Int)
     
 }

@@ -16,9 +16,10 @@ class ShoppingCartViewController: UIViewController {
     var lineItem = LineItem()
     private var counter: Int8 = 1
     private var shoppingCartVM = ShoppingCartViewModel()
-    private var subTotalPrice = 0.0
+    private static var subTotalPrice = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
+        ShoppingCartViewController.subTotalPrice = 0.0
         lineItem.price = "231 $"
         lineItem.title = "gray t-shirt"
         lineItem.quantity = 3
@@ -42,9 +43,18 @@ class ShoppingCartViewController: UIViewController {
         if segue.identifier == "toPromoCode" {
             let vc = segue.destination as! CartViewController
             vc.cartArray = self.cartArray
-            vc.subTotal = self.subTotalPrice
+            vc.subTotal = ShoppingCartViewController.subTotalPrice
         }
     }
+    
+    
+    @IBAction func saveChanges(_ sender: Any) {
+        guard let cart = cartArray else {return}
+        putDraftOrder(lineItems: cart)
+    }
+    
+    
+    
 }
 extension ShoppingCartViewController: UITableViewDataSource {
     
@@ -64,11 +74,23 @@ extension ShoppingCartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:CartTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CartTableViewCell
         cell.itemName.text = cartArray?[indexPath.row].title
-        cell.itemPrice.text = cartArray?[indexPath.row].price
+        if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
+            let price = (Double(cartArray?[indexPath.row].price ?? "0") ?? 0.0)  * 30
+            let priceString = "\(price.formatted()) EGP"
+            cell.itemPrice.text = priceString
+        }
+        else
+        {
+            let priceString = "\(cartArray?[indexPath.row].price ?? "0") $"
+            cell.itemPrice.text = priceString
+        }
+        cell.quantityCount.text = cartArray?[indexPath.row].quantity?.formatted()
         //cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
         let image = URL(string: cartArray?[indexPath.row].sku ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.cartImage.kf.setImage(with:image)
         cell.counterProtocol = self
+        cell.indexPath = indexPath
+        cell.lineItem = cartArray
         return cell
     }
     
@@ -109,8 +131,36 @@ extension ShoppingCartViewController: UITableViewDelegate {
 }
 
 extension ShoppingCartViewController: CounterProtocol {
-    func showAlert() {
-        self.showAlert(msg: "do u want delete")
+    func setItemQuantityToPut(quantity: Int, index: Int) {
+        self.cartArray?[index].quantity = quantity
+    }
+    
+    func increaseCounter() {
+        Self.subTotalPrice = 0.0
+        for index in  0...(cartArray?.count ?? 0) - 1
+        {
+            let itemPrice = (Double(cartArray?[index].price ?? "") ?? 0.0) * (Double (cartArray?[index].quantity ?? 0))
+            ShoppingCartViewController.subTotalPrice = Self.subTotalPrice + itemPrice
+        }
+        print("subtotal :\(Self.subTotalPrice)")
+    }
+    
+    func decreaseCounter() {
+        
+        for index in  0...(cartArray?.count ?? 0) - 1
+        {
+            let itemPrice = (Double(cartArray?[index].price ?? "") ?? 0.0)
+            Self.subTotalPrice = Self.subTotalPrice - itemPrice
+        }
+        print("subtotal :\(Self.subTotalPrice)")
+    }
+    
+    func deleteItem(indexPath: IndexPath) {
+        self.deleteLineItemProduct(indexPath: indexPath)
+    }
+    
+    func showNIPAlert(msg: String) {
+        self.showAlert(msg: msg)
     }
     
     
@@ -129,10 +179,10 @@ extension ShoppingCartViewController {
             self.cartArray?.removeAll()
             self.cartArray = self.shoppingCartVM.cartList
             self.shoppingCartVM.cartList?.forEach({ item in
-                self.subTotalPrice += Double(item.price ?? "0") ?? 0.0
+                Self.subTotalPrice += Double(item.price ?? "0") ?? 0.0
             })
             self.cartTable.reloadData()
-            print("sub total : \(self.subTotalPrice)")
+            print("sub total : \(Self.subTotalPrice)")
         }
     }
 }
@@ -140,20 +190,27 @@ extension ShoppingCartViewController {
 extension ShoppingCartViewController {
     func deleteLineItemProduct(indexPath : IndexPath)
     {
-        
-        cartTable.deleteRows(at: [indexPath], with: .automatic)
+
+        deletedLineItem = cartArray?[indexPath.row]
         cartArray?.remove(at: indexPath.row)
+        cartTable.deleteRows(at: [indexPath], with: .automatic)
         showSnackBar(index: indexPath.row)
         DispatchQueue.main.asyncAfter(deadline: .now()+5){
             if self.flag == true {
-                self.putDraftOrder(lineItems: self.cartArray ?? [])
+                if !(self.cartArray?.count == 0){
+                    self.putDraftOrder(lineItems: self.cartArray ?? [])
+                }
+                else
+                {
+                    // delete draft order
+                }
             }
         }
     }
     
     func showSnackBar(index : Int){
         let snackbar = TTGSnackbar(
-            message: "Item \(String(describing: cartArray?[index].title)) was unsaved successfully",
+            message: "Item \(String(describing: deletedLineItem?.title)) was unsaved successfully",
             duration: .long,
             actionText: "Undo",
             actionBlock: { (snackbar) in
@@ -167,7 +224,8 @@ extension ShoppingCartViewController {
         )
         snackbar.actionTextColor = .red
         //snackbar.borderColor = .clear
-        snackbar.messageTextColor = UIColor.black
+        snackbar.backgroundColor = .black
+        snackbar.messageTextColor = .white
         snackbar.show()
     }
     
@@ -179,8 +237,11 @@ extension ShoppingCartViewController {
     }
     
     func putDraftOrder(lineItems : [LineItem]){
-        let shoppingCart = ShoppingCartPut()
-        shoppingCart.draft_order?.line_items = lineItems
+        var draftOrder = DrafOrder()
+        draftOrder.email = UserDefaultsManager.sharedInstance.getUserEmail()
+        draftOrder.line_items = lineItems
+        var shoppingCart = ShoppingCartPut()
+        shoppingCart.draft_order = draftOrder
         shoppingCartVM.putNewCart(userCart: shoppingCart) { data, response, error in
             guard error == nil else {
                 DispatchQueue.main.async {

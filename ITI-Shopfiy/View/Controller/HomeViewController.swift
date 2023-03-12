@@ -103,7 +103,7 @@ extension HomeViewController: UICollectionViewDelegate{
                 snackbar.show()
             }
             else {
-                let snackbar = TTGSnackbar(message: "already used!", duration: .middle)
+                let snackbar = TTGSnackbar(message: "Already Copied!", duration: .middle)
                 snackbar.show()
             }
           
