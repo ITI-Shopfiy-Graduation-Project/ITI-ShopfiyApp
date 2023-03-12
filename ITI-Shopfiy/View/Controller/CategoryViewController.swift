@@ -242,7 +242,6 @@ extension CategoryViewController {
         toolbarBtnClr()
     AllProductsUrl = URLService.mainCategory(category_ID:437787230489)
         MenCtegory.tintColor = UIColor(named: "Green")
-//        AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json?collection_id=437787230489"
       render()
 
     }
@@ -250,7 +249,6 @@ extension CategoryViewController {
         toolbarBtnClr()
         WomenCategory.tintColor = UIColor(named: "Green")
     AllProductsUrl = URLService.mainCategory(category_ID: 437787263257)
-//        AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json?collection_id=437787263257"
          render()
     
 
@@ -259,7 +257,7 @@ extension CategoryViewController {
             toolbarBtnClr()
             kidCategory.tintColor = UIColor(named: "Green")
     AllProductsUrl = URLService.mainCategory(category_ID: 437787296025)
-//            AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json?collection_id=437787296025"
+
              render()
         
 
@@ -268,7 +266,6 @@ extension CategoryViewController {
                 toolbarBtnClr()
     SaleCategory.tintColor = UIColor(named: "Green")
     AllProductsUrl = URLService.mainCategory(category_ID:437787328793)
-//                AllProductsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/products.json?collection_id=437787328793"
                  render()
             
 

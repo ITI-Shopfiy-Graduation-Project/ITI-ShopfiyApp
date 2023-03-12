@@ -31,7 +31,7 @@ class PaymentViewController: UIViewController {
         setUserAddress()
         setPaymentMethodAccability()
         setDefaultButtonTheme()
-        
+       print("test\(UserDefaultsManager.sharedInstance.getUserEmail())")
         braintreeClient = BTAPIClient(authorization: "sandbox_q7ftqr99_7h4b4rgjq3fptm87")!
     }
     

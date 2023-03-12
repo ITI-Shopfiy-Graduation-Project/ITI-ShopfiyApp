@@ -140,9 +140,8 @@ extension ShoppingCartViewController {
 extension ShoppingCartViewController {
     func deleteLineItemProduct(indexPath : IndexPath)
     {
-        
-        cartTable.deleteRows(at: [indexPath], with: .automatic)
         cartArray?.remove(at: indexPath.row)
+        cartTable.deleteRows(at: [indexPath], with: .automatic)
         showSnackBar(index: indexPath.row)
         DispatchQueue.main.asyncAfter(deadline: .now()+5){
             if self.flag == true {
