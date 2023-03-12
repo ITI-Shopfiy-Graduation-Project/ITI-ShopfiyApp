@@ -4,8 +4,8 @@
 //
 //  Created by ahmed on 22/02/2023.
 
-//paypal token sandbox_mf932tgj_bmwnvznx5nj7n6dg
-//"sandbox_jyvqscf2_jpbyz2k4fnvh6fvt"
+// sb-lfkrq25233161@personal.example.com
+// personal123
 
 
 import UIKit
@@ -16,6 +16,9 @@ import TTGSnackbar
 class PaymentViewController: UIViewController, AddressDelegate {
     func getAddressInfo(Address: Address) {
         userAddress = Address
+       // setUserAddress()
+       // setPaymentMethodAccability()
+        print(userAddress)
     }
     
     @IBOutlet weak var payPal: UIButton!
@@ -34,7 +37,7 @@ class PaymentViewController: UIViewController, AddressDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setDefaultButtonTheme()
-       print("test\(UserDefaultsManager.sharedInstance.getUserEmail())")
+        // aletrnative token sandbox_fwf8wnc6_7h4b4rgjq3fptm87  || "sandbox_jyvqscf2_jpbyz2k4fnvh6fvt"
         braintreeClient = BTAPIClient(authorization: "sandbox_q7ftqr99_7h4b4rgjq3fptm87")!
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -73,21 +76,24 @@ class PaymentViewController: UIViewController, AddressDelegate {
             sender.borderWidth = 1.5
             sender.cornerRadius = 10
         }
+        self.setupDictionary()
     }
     func setUserAddress(){
         let address = UserDefaultsManager.sharedInstance.getUserAddress()
         if userAddress != nil {
             self.defaultAddress.text = userAddress?.address1
-            self.addressDescription.text = "\(String(describing: userAddress?.city)), \(String(describing: userAddress?.country))"
+            self.addressDescription.text = "\(String(userAddress?.city ?? "city")), \(String(describing: userAddress?.country ?? "country"))"
+            self.addressFlag = true
+
         }
-        if address != "" {
+        else if address != "" {
             self.defaultAddress.text = address
             self.addressFlag = true
         }
         else{
             self.defaultAddress.text = "Choose Address"
             self.addressDescription.text = "choose address for payment transactions"
-            self.addressFlag = true
+            self.addressFlag = false
         }
     }
     
@@ -114,7 +120,7 @@ extension PaymentViewController : BTViewControllerPresentingDelegate {
     
     func setupPayPal(){
         let payPalDriver = BTPayPalDriver(apiClient: braintreeClient)
-        let request:BTPayPalCheckoutRequest?
+       /* let request:BTPayPalCheckoutRequest?
         // Specify the transaction amount here. "2.32" is used in this example.
         if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
             let price = totalPrice  * 30
@@ -125,9 +131,10 @@ extension PaymentViewController : BTViewControllerPresentingDelegate {
         {
         request = BTPayPalCheckoutRequest(amount: totalPrice.formatted())
         request?.currencyCode = "USD"
-    }
-        
-        payPalDriver.tokenizePayPalAccount(with: request!){ tokenizedPayPalAccount, error in
+    }*/
+        let request = BTPayPalCheckoutRequest(amount: "1532")
+        request.currencyCode = "EGP"
+        payPalDriver.tokenizePayPalAccount(with: request){ tokenizedPayPalAccount, error in
             if let tokenizedPayPalAccount = tokenizedPayPalAccount {
                 print("Got a nonce: \(tokenizedPayPalAccount.nonce)")
                 // post order

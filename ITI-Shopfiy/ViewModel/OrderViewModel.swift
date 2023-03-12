@@ -32,25 +32,32 @@ extension OrderViewModel{
     }
     
     func updateUserWithCoupon(coupon : String) {
-        let userID = UserDefaultsManager.sharedInstance.getUserID()
-        let username = UserDefaultsManager.sharedInstance.getUserName()
-        let userEmail = UserDefaultsManager.sharedInstance.getUserEmail()
-        /*let userAddress = UserDefaultsManager.sharedInstance.getUserAddress()*/
-        let customer = Customer()
-        customer.id = userID
-        customer.email = userEmail
-        customer.first_name = username
-        customer.currency = coupon
-        let newCustomer = NewCustomer()
-        newCustomer.customer = customer
-        OrderNetwork.sharedinstance.putCustomer(customer: customer) { data, response, error in
-            if response != nil {
-                print("response: \(response)")
+            let userID = UserDefaultsManager.sharedInstance.getUserID()
+            //let username = UserDefaultsManager.sharedInstance.getUserName()
+            //let userEmail = UserDefaultsManager.sharedInstance.getUserEmail()
+            /let userAddress = UserDefaultsManager.sharedInstance.getUserAddress()/
+            let customer = Customer()
+            //customer.id = userID
+        //customer.addresses?.first?.first_name = coupon
+            /*customer.email = userEmail
+            customer.first_name = username
+            
+            let newCustomer = NewCustomer()
+            newCustomer.customer = customer
+            */
+            var newCustomer = NewCustomer()
+            newCustomer.customer = customer
+            newCustomer.customer?.last_order_name = "ahmed"
+        newCustomer.customer?.currency = coupon
+        newCustomer.customer?.addresses?.first?.first_name = coupon
+        OrderNetwork.sharedinstance.putCustomer(customer: newCustomer) { data, response, error in
+                if response != nil {
+                    print("response: \(response)")
+                }
+                else if error != nil {
+                    print("error \(error?.localizedDescription)")
+                }
             }
-            else if error != nil {
-                print("error \(error?.localizedDescription)")
-            }
+            
         }
-        
-    }
 }

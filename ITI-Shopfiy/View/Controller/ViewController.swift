@@ -251,15 +251,17 @@ extension ViewController {
                 return
             }
             
-        guard response?.statusCode ?? 0 >= 200 && response?.statusCode ?? 0 < 300   else {
+            guard response?.statusCode ?? 0 >= 200 && response?.statusCode ?? 0 < 300   else {
                 DispatchQueue.main.async {
                     print ("Address Response \n \(response ?? HTTPURLResponse())" )
-
+                    
                 }
                 return
             }
             print("Editted")
-            self.navigationController?.popViewController(animated: true)
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
 }

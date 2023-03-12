@@ -119,34 +119,34 @@ class ProductDetailsViewController: UIViewController{
        
         cartcount.draft_orders?.forEach({ email in
 
-            if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
-            {     addtoLine = email
-                UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
-               lineAppend = email.line_items
-                newLineItem = LineItem()
-                newLineItem?.title = product?.title
-                newLineItem?.price = product?.variants![0].price
-                newLineItem?.sku = product?.image?.src
-                newLineItem?.vendor = product?.vendor
-                newLineItem?.product_id = product?.id
-                newLineItem?.grams = product?.variants![0].inventory_quantity
-                newLineItem?.quantity = 1
-                lineAppend?.append(newLineItem!)
-                var draftOrder = DrafOrder()
-                draftOrder.line_items = lineAppend
-                addtoLine = draftOrder
-                let draftOrderAppend : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)
-                putCart(cartt: draftOrderAppend)
-                print ("already used")
-           
-            }
-          
-        })
+                    if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
+                    {     addtoLine = email
+                        UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
+                       lineAppend = email.line_items
+                        newLineItem = LineItem()
+                        newLineItem?.title = product?.title
+                        newLineItem?.price = product?.variants![0].price
+                        newLineItem?.sku = product?.image?.src
+                        newLineItem?.vendor = product?.vendor
+                        newLineItem?.product_id = product?.id
+                        newLineItem?.grams = product?.variants![0].inventory_quantity
+                        newLineItem?.quantity = 1
+                        lineAppend?.append(newLineItem!)
+                        var draftOrder = DrafOrder()
+                        draftOrder.line_items = lineAppend
+                        addtoLine = draftOrder
+                        let draftOrderAppend : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)
+                        putCart(cartt: draftOrderAppend)
+                        print ("already used")
+                   
+                    }
+                  
+                })
         if addtoLine == nil
-                    {
-                    self.postCart()
-          
-        }
+                            {
+                            self.postCart()
+                  
+                }
         
 
     }
@@ -376,7 +376,8 @@ extension ProductDetailsViewController {
     func renderCart() {
         DispatchQueue.main.async {
             self.cartcount = self.cartVM.cartResult!
-            
+           // print ("heree email\(String(describing: self.cartcount.draft_orders?[1].email))")
+
          
             
 

@@ -27,7 +27,7 @@ class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableConfiguration()
-        codeError.text = ""
+        setInitialValue()
        /* let lineItem = LineItem()
         lineItem.price = "231 $"
         lineItem.title = "gray t-shirt"
@@ -39,10 +39,38 @@ class CartViewController: UIViewController {
         swipe.direction = .right
         view.addGestureRecognizer(swipe)
         getPromoCode()
-        totalPriceValue = discountPrice
+        
         //getData()
     }
     
+    func setInitialValue(){
+        totalPriceValue = 0.0
+        discountPrice = 0.0
+        codeError.text = ""
+        if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
+            let price = (subTotal ?? 0) * 30
+            let priceString = "\(price.formatted()) EGP"
+            allItemsCost.text = priceString
+            promoCodeValue.text = "0 EGP"
+            totalPrice.text = priceString
+        }
+        else
+        {
+            if let subtotal = subTotal {
+                let priceString = "\(subtotal.formatted()) $"
+                allItemsCost.text = priceString
+                totalPrice.text = priceString
+            }
+            else{
+                allItemsCost.text = "0 $"
+                totalPrice.text = "0 $"
+            }
+            
+            promoCodeValue.text = "0 $"
+            
+        }
+
+    }
     @objc func dismissVC() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -79,6 +107,7 @@ extension CartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:CartTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CartTableViewCell
         cell.itemName.text = cartArray?[indexPath.row].title
+        cell.delete_Btn.isHidden = true
         cell.itemPrice.text = cartArray?[indexPath.row].price
        // cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
         let image = URL(string: cartArray?[indexPath.row].sku ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
@@ -101,23 +130,29 @@ extension CartViewController: UITableViewDelegate {
 }
 
 extension CartViewController {
-
-}
-
-extension CartViewController {
     func validatePromoCode(){
         if promoCodeET.text != "" {
             if promoCodeET.text == discount.first?.code ?? ""
             {
                 //change it with user second name
-                promoCodeET.text = UserDefaultsManager.sharedInstance.getUserName()
-                if promoCodeET.text != nil
+                if promoCodeET.text != UserDefaultsManager.sharedInstance.getUserName()
                 {
                     codeError.text = "Valid"
                     codeError.textColor = UIColor(named: "Green")
-                    self.discountPrice = 0.7 * (self.subTotal ?? 0.0)
+                    self.discountPrice = 0.09 * (self.subTotal ?? 0.0)
                     totalPriceValue = (subTotal ?? 0.0) - discountPrice
-                    promoCodeValue.text = self.discountPrice.formatted()
+                    if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
+                        let price = (discountPrice ) * 30
+                        var priceString = "\(price.formatted()) EGP"
+                        promoCodeValue.text = priceString
+                        priceString = "\(totalPriceValue.formatted()) EGP"
+                        totalPrice.text = priceString
+                        
+                    }
+                    else {
+                        promoCodeValue.text = "\(discountPrice) $"
+                        totalPrice.text = "\(totalPriceValue.formatted()) $"
+                    }
                 }
                 else
                 {
@@ -156,5 +191,6 @@ extension CartViewController {
         self.discountPrice = 0.0
         totalPriceValue = subTotal ?? 0.0
         promoCodeValue.text = "0"
+        totalPrice.text = subTotal?.formatted()
     }
 }
