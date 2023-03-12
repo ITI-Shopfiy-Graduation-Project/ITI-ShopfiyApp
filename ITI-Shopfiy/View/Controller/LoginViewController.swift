@@ -98,6 +98,7 @@ extension LoginViewController{
                 self.navigationController?.popViewController(animated: true)
             }else{
                 self.showAlertError(title: "failed to login", message: "please check your Email or Password")
+                self.indicator?.stopAnimating()
                 print("failed to login")
             }
         })
