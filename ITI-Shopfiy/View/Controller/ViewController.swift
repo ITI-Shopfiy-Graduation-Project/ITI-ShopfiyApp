@@ -37,6 +37,11 @@ class ViewController: UIViewController , CLLocationManagerDelegate {
                 putAddress()
             }
         }
+        else{
+            setUserAddressInfo()
+            self.navigationController?.popViewController(animated: true)
+            
+        }
     }
     func configureLocation(){
         locationManager.delegate = self

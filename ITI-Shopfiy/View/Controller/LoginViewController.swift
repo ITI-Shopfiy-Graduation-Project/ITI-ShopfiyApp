@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
         indicator = UIActivityIndicatorView(style: .large)
         indicator?.center = view.center
         view.addSubview(indicator ?? UIActivityIndicatorView() )
-        indicator?.startAnimating()
+        
         
         let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
         adsCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
@@ -65,7 +65,7 @@ class LoginViewController: UIViewController {
     @IBAction func login_btn(_ sender: Any) {
         let userName = username_txt.text ?? ""
         let password = password_txt.text ?? ""
-        
+        indicator?.startAnimating()
         login(userName: userName, password: password)
         
     }
