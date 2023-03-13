@@ -182,3 +182,15 @@ extension FavoritesViewController: FavoriteActionFavoritesScreen {
     
 }
 
+
+extension FavoritesViewController: UITextFieldDelegate{
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.favoritesSearchBar.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.favoritesSearchBar.endEditing(true)
+    }
+
+}

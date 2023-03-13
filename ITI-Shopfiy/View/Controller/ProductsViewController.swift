@@ -335,7 +335,17 @@ extension ProductsViewController {
         
 }
     
+extension ProductsViewController: UITextFieldDelegate{
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.productSearchBar.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.productSearchBar.endEditing(true)
+    }
+
+}
     
     
     
