@@ -78,7 +78,6 @@ class LoginViewController: UIViewController {
     
     @IBAction func skip_btn(_ sender: Any) {
         let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "home") as! HomeViewController
-        UserDefaultsManager.sharedInstance.setUserStatus(userIsLogged: false)
         UserDefaultsManager.sharedInstance.logut()
         navigationController?.pushViewController(homeVC, animated: true)
     }
@@ -90,17 +89,16 @@ extension LoginViewController{
     
     func login(userName: String, password: String){
         loginVM?.login(userName: userName, password: password, completionHandler: { Customer in
-            if Customer != nil {
+            if Customer?.email == userName && Customer?.tags == password{
                 self.showToastMessage(message: "Congratulations", color: UIColor(named: "Green") ?? .systemGreen)
-                self.indicator?.stopAnimating()
                 print("customer logged in successfully")
-                //Navigation
                 self.navigationController?.popViewController(animated: true)
             }else{
                 self.showAlertError(title: "failed to login", message: "please check your Email or Password")
                 print("failed to login")
             }
         })
+        self.indicator?.stopAnimating()
     
     }
     
