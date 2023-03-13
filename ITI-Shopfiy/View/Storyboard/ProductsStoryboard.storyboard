@@ -77,25 +77,8 @@
                             <constraint firstItem="X4l-4Q-LIC" firstAttribute="top" secondItem="nc3-4g-oO2" secondAttribute="bottom" id="yO8-wG-447"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Shopify" id="djS-tc-4sO">
-                        <rightBarButtonItems>
-                            <barButtonItem image="heart.fill" catalog="system" id="Y82-vj-ax7">
-                                <color key="tintColor" name="Red"/>
-                                <connections>
-                                    <action selector="likesScreen:" destination="Y6W-OH-hqX" id="lG8-cs-xua"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="cart" catalog="system" id="10N-DR-NBn">
-                                <color key="tintColor" name="Green"/>
-                                <connections>
-                                    <action selector="cartScreen:" destination="Y6W-OH-hqX" id="f4X-ba-l49"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Shopify" id="djS-tc-4sO"/>
                     <connections>
-                        <outlet property="cart_btn" destination="10N-DR-NBn" id="Hzr-0i-9gO"/>
-                        <outlet property="like_btn" destination="Y82-vj-ax7" id="s6e-Co-SYl"/>
                         <outlet property="priceSlider" destination="HEF-hc-A6G" id="D79-jV-6fd"/>
                         <outlet property="priceValue" destination="X4l-4Q-LIC" id="2dT-ED-yhJ"/>
                         <outlet property="productSearchBar" destination="nc3-4g-oO2" id="71N-X4-ai5"/>
@@ -158,16 +141,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cart" catalog="system" width="128" height="102"/>
-        <image name="heart.fill" catalog="system" width="128" height="107"/>
         <namedColor name="Gray">
             <color red="0.51399999856948853" green="0.51399999856948853" blue="0.51399999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Green">
             <color red="0.37999999523162842" green="0.71399998664855957" blue="0.6470000147819519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Red">
-            <color red="0.89999997615814209" green="0.42199999094009399" blue="0.50400000810623169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -74,12 +74,12 @@ class ProductDetailsViewController: UIViewController{
         let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
         productImagesCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
         
-        let likesScreen = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(goToFavoritesScreen(sender: )))
-        likesScreen.tintColor = UIColor(named: "Red")
-        
-        let cartScreen = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(goToCartScreen(sender: )))
-        cartScreen.tintColor = UIColor(named: "Green")
-        navigationItem.rightBarButtonItems = [likesScreen, cartScreen]
+//        let likesScreen = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(goToFavoritesScreen(sender: )))
+//        likesScreen.tintColor = UIColor(named: "Red")
+//
+//        let cartScreen = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(goToCartScreen(sender: )))
+//        cartScreen.tintColor = UIColor(named: "Green")
+//        navigationItem.rightBarButtonItems = [likesScreen, cartScreen]
         
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
@@ -96,24 +96,24 @@ class ProductDetailsViewController: UIViewController{
         productImagesCollectionView.reloadData()
     }
     
-    @objc func goToFavoritesScreen(sender: AnyObject) {
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
-        let favoritesVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
-        navigationController?.pushViewController(favoritesVC, animated: true)
-        }else{
-            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
-        }
-    }
-    
-    @objc func goToCartScreen(sender: AnyObject) {
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
-        let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
-        navigationController?.pushViewController(cartVC, animated: true)
-        }else{
-            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
-        }
-        viewWillAppear(false)
-    }
+//    @objc func goToFavoritesScreen(sender: AnyObject) {
+//        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
+//        let favoritesVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
+//        navigationController?.pushViewController(favoritesVC, animated: true)
+//        }else{
+//            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
+//        }
+//    }
+//
+//    @objc func goToCartScreen(sender: AnyObject) {
+//        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
+//        let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
+//        navigationController?.pushViewController(cartVC, animated: true)
+//        }else{
+//            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
+//        }
+//        viewWillAppear(false)
+//    }
     
     @IBAction func addToCartButton(_ sender: Any) {
        
@@ -133,7 +133,7 @@ class ProductDetailsViewController: UIViewController{
                             newLineItem?.grams = product?.variants![0].inventory_quantity
                             newLineItem?.quantity = 1
                             lineAppend?.append(newLineItem!)
-                            var draftOrder = DrafOrder()
+                            let draftOrder = DrafOrder()
                             draftOrder.line_items = lineAppend
                             addtoLine = draftOrder
                             let draftOrderAppend : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)

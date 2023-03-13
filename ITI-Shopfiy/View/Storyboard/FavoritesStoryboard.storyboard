@@ -57,16 +57,8 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hyy-so-KB3" secondAttribute="trailing" constant="16" id="dR5-iA-FSA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="djS-tc-4sO">
-                        <barButtonItem key="rightBarButtonItem" image="cart" catalog="system" id="10N-DR-NBn">
-                            <color key="tintColor" name="Green"/>
-                            <connections>
-                                <action selector="goToCartViewController:" destination="Y6W-OH-hqX" id="2QQ-T4-0Ma"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Title" id="djS-tc-4sO"/>
                     <connections>
-                        <outlet property="cart_btn" destination="10N-DR-NBn" id="EOO-5N-per"/>
                         <outlet property="favoritesCollectionView" destination="hyy-so-KB3" id="rcy-Zn-pyL"/>
                         <outlet property="favoritesSearchBar" destination="nc3-4g-oO2" id="71N-X4-ai5"/>
                     </connections>
@@ -95,7 +87,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cart" catalog="system" width="128" height="102"/>
         <namedColor name="Gray">
             <color red="0.51399999856948853" green="0.51399999856948853" blue="0.51399999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

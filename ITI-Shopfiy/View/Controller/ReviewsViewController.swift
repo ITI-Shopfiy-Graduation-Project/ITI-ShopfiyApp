@@ -16,7 +16,7 @@ class ReviewsViewController: UIViewController {
         }
     }
     
-    let reviewsArray = [Review(image: "neuer", rating: 4.5, review: "I bought it from here, the quality is remarkable", user: "Fady Sameh"), Review(image: "cr7", rating: 4.0, review: "it's well worth the money for thier high quality, I highly recommended", user: "Abdullah Ismail"), Review(image: "zizo", rating: 2.0, review: "I didn't like it", user: "Maamoun")]
+    let reviewsArray = [Review(image: "neuer", rating: 4.5, review: "I bought it from here, the quality is remarkable", user: "Fady Sameh"), Review(image: "cr7", rating: 4.0, review: "it's well worth the money for thier high quality, I highly recommended", user: "Abdallah Ismail"), Review(image: "zizo", rating: 2.0, review: "I didn't like it", user: "Maamoun")]
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -83,25 +83,25 @@ class ProductsViewController: UIViewController{
         self.productsCollectionView.reloadData()
     }
     
-    @IBAction func likesScreen(_ sender: UIBarButtonItem) {
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
-        let favoritesVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
-            favoritesVC.savedProductsArray = likedProducts
-        navigationController?.pushViewController(favoritesVC, animated: true)
-        }else{
-            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
-        }
-    }
-    
-    @IBAction func cartScreen(_ sender: UIBarButtonItem) {
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
-        let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
-
-        navigationController?.pushViewController(cartVC, animated: true)
-        }else{
-            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
-        }
-    }
+//    @IBAction func likesScreen(_ sender: UIBarButtonItem) {
+//        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
+//        let favoritesVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
+//            favoritesVC.savedProductsArray = likedProducts
+//        navigationController?.pushViewController(favoritesVC, animated: true)
+//        }else{
+//            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
+//        }
+//    }
+//    
+//    @IBAction func cartScreen(_ sender: UIBarButtonItem) {
+//        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
+//        let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
+//
+//        navigationController?.pushViewController(cartVC, animated: true)
+//        }else{
+//            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
+//        }
+//    }
     
 }
 

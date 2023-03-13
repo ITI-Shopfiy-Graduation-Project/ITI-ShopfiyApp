@@ -134,7 +134,11 @@ extension MeViewController: logedMeProtocol, unLogedMeProtocol{
     
     func goToAllFavorites() {
         let favoritesVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
-        self.navigationController?.pushViewController(favoritesVC, animated: true)
+        if self.savedFavorites?.count == 0{
+            self.showAlert(msg: "No Favorites yet")
+        }else{
+            self.navigationController?.pushViewController(favoritesVC, animated: true)
+        }
     }
     
     
@@ -191,9 +195,9 @@ extension MeViewController{
                     }
                     //
                     else{
-                        self.meLogedVC?.productName_wishList.text = "No Products"
-                        self.meLogedVC?.productPrice_wishList.text =  "No Products"
-                        self.meLogedVC?.productColor_wishList.text =  "No Products"
+                        self.meLogedVC?.productName_wishList.text = "No Products yet"
+                        self.meLogedVC?.productPrice_wishList.text =  "No Products yet"
+                        self.meLogedVC?.productColor_wishList.text =  "No Products yet"
                         self.meLogedVC?.productImage_wishList.image = UIImage(named: "")
                         
                     }
