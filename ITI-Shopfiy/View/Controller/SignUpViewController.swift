@@ -169,17 +169,21 @@ extension SignUpViewController {
             case "ErrorAllInfoIsNotFound":
                 isSuccess = false
                 self.showAlertError(title: "Missing Information", message: "please, enter all the required information.")
+                self.indicator?.stopAnimating()
                 
             case "ErrorPassword":
                 isSuccess = false
                 self.showAlertError(title: "Check Password", message: "please, enter password again.")
+                self.indicator?.stopAnimating()
                 
             case "ErrorEmail":
                 isSuccess = false
                 self.showAlertError(title: "Invalid Email", message: "please, enter another email.")
+                self.indicator?.stopAnimating()
                 
             default:
                 self.showToastMessage(message: "Congratulations", color: UIColor(named: "Green") ?? .systemGreen)
+                self.indicator?.stopAnimating()
                 
                 isSuccess = true
             }
@@ -196,6 +200,7 @@ extension SignUpViewController {
             guard error == nil else {
                 DispatchQueue.main.async {
                     self.showAlertError(title: "Couldnot register", message: "Please, try again later.")
+                    self.indicator?.stopAnimating()
                     print(error?.localizedDescription ?? "errorssssss")
                 }
                 return
@@ -204,6 +209,7 @@ extension SignUpViewController {
             guard response?.statusCode != 422 else {
                 DispatchQueue.main.async {
                     self.showAlertError(title: "Couldnot register", message: "Please, try another email.")
+                    self.indicator?.stopAnimating()
                 }
                 return
             }

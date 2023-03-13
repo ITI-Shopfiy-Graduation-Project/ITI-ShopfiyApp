@@ -165,20 +165,6 @@
                                 <action selector="searchBtn:" destination="Y6W-OH-hqX" id="d6V-bQ-fsJ"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem image="cart" catalog="system" id="4Kr-P0-r2j">
-                                <color key="tintColor" name="Green"/>
-                                <connections>
-                                    <action selector="cartBtn:" destination="Y6W-OH-hqX" id="EvL-1s-cAH"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="heart.fill" catalog="system" id="jtP-eL-JDI">
-                                <color key="tintColor" name="Red"/>
-                                <connections>
-                                    <action selector="favouritesBtn:" destination="Y6W-OH-hqX" id="ElJ-Lv-WS3"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -233,9 +219,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cart" catalog="system" width="128" height="102"/>
         <image name="heart" catalog="system" width="128" height="107"/>
-        <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="noProducts" width="426" height="469"/>
         <image name="square.grid.2x2.fill" catalog="system" width="128" height="114"/>

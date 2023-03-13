@@ -29,22 +29,22 @@ class CategoryViewController: UIViewController {
        
     var id : Int?
     
-    @IBAction func cartBtn(_ sender: Any) {
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-            let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
-            navigationController?.pushViewController(cartVC, animated: true)
-        }else{
-            showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
-        }
-    }
-    @IBAction func favouritesBtn(_ sender: Any) {
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-            let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
-            navigationController?.pushViewController(FavVC, animated: true)
-        }else{
-            showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
-        }
-    }
+//    @IBAction func cartBtn(_ sender: Any) {
+//        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+//            let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
+//            navigationController?.pushViewController(cartVC, animated: true)
+//        }else{
+//            showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
+//        }
+//    }
+//    @IBAction func favouritesBtn(_ sender: Any) {
+//        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+//            let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
+//            navigationController?.pushViewController(FavVC, animated: true)
+//        }else{
+//            showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
+//        }
+//    }
   
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
   

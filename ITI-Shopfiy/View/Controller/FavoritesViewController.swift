@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import TTGSnackbar
 
 class FavoritesViewController: UIViewController {
 

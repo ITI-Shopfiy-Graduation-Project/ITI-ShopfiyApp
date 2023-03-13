@@ -9,6 +9,8 @@ import UIKit
 import Kingfisher
 import Foundation
 import JJFloatingActionButton
+import TTGSnackbar
+
 class ProductsViewController: UIViewController{
     @IBOutlet weak var priceValue: UILabel!
     @IBOutlet weak var priceSlider: UISlider!
@@ -83,25 +85,25 @@ class ProductsViewController: UIViewController{
         self.productsCollectionView.reloadData()
     }
     
-    @IBAction func likesScreen(_ sender: UIBarButtonItem) {
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
-        let favoritesVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
-            favoritesVC.savedProductsArray = likedProducts
-        navigationController?.pushViewController(favoritesVC, animated: true)
-        }else{
-            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
-        }
-    }
-    
-    @IBAction func cartScreen(_ sender: UIBarButtonItem) {
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
-        let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
-
-        navigationController?.pushViewController(cartVC, animated: true)
-        }else{
-            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
-        }
-    }
+//    @IBAction func likesScreen(_ sender: UIBarButtonItem) {
+//        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
+//        let favoritesVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
+//            favoritesVC.savedProductsArray = likedProducts
+//        navigationController?.pushViewController(favoritesVC, animated: true)
+//        }else{
+//            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
+//        }
+//    }
+//    
+//    @IBAction func cartScreen(_ sender: UIBarButtonItem) {
+//        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
+//        let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
+//
+//        navigationController?.pushViewController(cartVC, animated: true)
+//        }else{
+//            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
+//        }
+//    }
     
 }
 
@@ -189,7 +191,9 @@ extension ProductsViewController: UISearchBarDelegate{
 extension ProductsViewController: FavouriteActionProductScreen{
     func addFavourite(userId: Int, appDelegate: AppDelegate, product: Products) {
         favoritesVM?.addFavourite(userId: userId, appDelegate: self.appDelegate, product: product)
-        showToastMessage(message: "Added", color: .green)
+        let snackbar = TTGSnackbar(message: "Item added to favorites!", duration: .middle)
+        snackbar.tintColor =  UIColor(named: "Green")
+        snackbar.show()
     }
     
     func isFavorite(userId: Int, appDelegate: AppDelegate, product: Products) -> Bool {
@@ -201,7 +205,9 @@ extension ProductsViewController: FavouriteActionProductScreen{
 
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
             favoritesVM?.deleteProductItemFromFavourites(userId: userId, appDeleget: self.appDelegate, ProductID: product.id ?? 0)
-            showToastMessage(message: "Removed !", color: .red)
+            let snackbar = TTGSnackbar(message: "Item Removed !", duration: .middle)
+            snackbar.tintColor =  UIColor(named: "Green")
+            snackbar.show()
             self.productsCollectionView.reloadData()
             viewWillAppear(false)
         }))
