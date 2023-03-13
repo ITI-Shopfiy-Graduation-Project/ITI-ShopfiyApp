@@ -13,6 +13,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productImageview: UIImageView!
     @IBOutlet weak var like_btn: UIButton!
     @IBOutlet weak var productTitle: UILabel!
+    @IBOutlet weak var productPrice: UILabel!
+    
     var productsView: FavouriteActionProductScreen?
     var favouritesView: FavoriteActionFavoritesScreen?
     var Location: Bool?

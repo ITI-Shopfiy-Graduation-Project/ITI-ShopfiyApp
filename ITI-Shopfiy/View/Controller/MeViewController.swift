@@ -25,6 +25,8 @@ class MeViewController: UIViewController {
     
     let meLogedVC = (Bundle.main.loadNibNamed("MeLogedView", owner: MeViewController.self, options: nil)?.first as? MeLogedView)
     
+    let meUnLogedVC = Bundle.main.loadNibNamed("MeUnlogedView", owner: MeViewController.self, options: nil)?.first as? MeUnlogedView
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,9 +55,8 @@ class MeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.setHidesBackButton(true, animated: true)
         if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-            
+            self.meUnLogedVC?.removeFromSuperview()//to be removed
             self.meView.addSubview(meLogedVC!)
-
             //
             self.meLogedVC?.user_img.image = UIImage(named: "user")
             //user Image
@@ -76,7 +77,7 @@ class MeViewController: UIViewController {
             }
         } // condition: If user is unlogged
         else{
-            let meUnLogedVC = Bundle.main.loadNibNamed("MeUnlogedView", owner: self, options: nil)?.first as? MeUnlogedView
+            self.meLogedVC?.removeFromSuperview()//to be removed
             meUnLogedVC?.guestImageView.image = UIImage(named: "person")
             self.navigationController?.isNavigationBarHidden = true
             self.meView.addSubview(meUnLogedVC!)

@@ -42,6 +42,7 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="userName_changed:" destination="gdW-Vj-ccv" eventType="editingChanged" id="Zyd-Yp-uA1"/>
+                                    <outlet property="delegate" destination="gdW-Vj-ccv" id="5Nu-es-rzl"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Required" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="joY-Vy-EYG">
@@ -75,6 +76,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                 <connections>
                                     <action selector="email_changed:" destination="gdW-Vj-ccv" eventType="editingChanged" id="xwh-yb-jTg"/>
+                                    <outlet property="delegate" destination="gdW-Vj-ccv" id="VTF-Q4-qvd"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Required" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bz5-00-WTS">
@@ -96,6 +98,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                 <connections>
                                     <action selector="password_changed:" destination="gdW-Vj-ccv" eventType="editingChanged" id="bgP-Gp-g9D"/>
+                                    <outlet property="delegate" destination="gdW-Vj-ccv" id="KqK-6f-CcV"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Required" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.55000000000000004" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IeE-mg-O6g">
@@ -117,6 +120,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                 <connections>
                                     <action selector="confirmPassword_change:" destination="gdW-Vj-ccv" eventType="editingChanged" id="Rxo-yU-IEF"/>
+                                    <outlet property="delegate" destination="gdW-Vj-ccv" id="vxQ-Cd-xR0"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Required" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OXC-yJ-4k8">
@@ -138,6 +142,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                 <connections>
                                     <action selector="phoneNumber_changed:" destination="gdW-Vj-ccv" eventType="editingChanged" id="0Bi-zC-bCZ"/>
+                                    <outlet property="delegate" destination="gdW-Vj-ccv" id="3Kk-fb-1bX"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Required" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.55000000000000004" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xwp-1v-vyC">

@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import TTGSnackbar
 
 class ProductDetailsViewController: UIViewController{
     
@@ -161,7 +162,9 @@ class ProductDetailsViewController: UIViewController{
             } else {
                 favoritesVM?.addFavourite(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1, appDelegate: appDelegate, product: self.product ?? Products())
                 like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                showToastMessage(message: "Added", color: .green)
+                let snackbar = TTGSnackbar(message: "Item Added to favorites!", duration: .middle)
+                snackbar.tintColor =  UIColor(named: "Green")
+                snackbar.show()
             }
         }
         
@@ -237,7 +240,9 @@ extension ProductDetailsViewController{
 
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
             favoritesVM?.deleteProductItemFromFavourites(userId: userId, appDeleget: self.appDelegate, ProductID: product.id ?? 0)
-            showToastMessage(message: "Removed !", color: .red)
+            let snackbar = TTGSnackbar(message: "Item Removed !", duration: .middle)
+            snackbar.tintColor =  UIColor(named: "Green")
+            snackbar.show()
             viewWillAppear(false)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))

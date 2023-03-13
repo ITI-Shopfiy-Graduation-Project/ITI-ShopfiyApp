@@ -9,6 +9,8 @@ import UIKit
 import Kingfisher
 import Foundation
 import JJFloatingActionButton
+import TTGSnackbar
+
 class ProductsViewController: UIViewController{
     @IBOutlet weak var priceValue: UILabel!
     @IBOutlet weak var priceSlider: UISlider!
@@ -131,6 +133,7 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
         let product = self.productsArray?[indexPath.row]
 
         cell.productTitle.text = product?.title ?? ""
+        cell.productPrice.text = product?.variants?[0].price ?? ""
         let productimg = URL(string:product?.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.productImageview?.kf.setImage(with:productimg)
         cell.currentProduct = product
@@ -150,6 +153,7 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
         let productDetialsVC = UIStoryboard(name: "ProductDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "productDetails") as! ProductDetailsViewController
         
         productDetialsVC.product_ID = productsArray?[indexPath.row].id
+//        productDetialsVC.product = productsArray?[indexPath.row]
 
         self.navigationController?.pushViewController(productDetialsVC, animated: true)
     }
@@ -189,7 +193,9 @@ extension ProductsViewController: UISearchBarDelegate{
 extension ProductsViewController: FavouriteActionProductScreen{
     func addFavourite(userId: Int, appDelegate: AppDelegate, product: Products) {
         favoritesVM?.addFavourite(userId: userId, appDelegate: self.appDelegate, product: product)
-        showToastMessage(message: "Added", color: .green)
+        let snackbar = TTGSnackbar(message: "Item added to favorites!", duration: .middle)
+        snackbar.tintColor =  UIColor(named: "Green")
+        snackbar.show()
     }
     
     func isFavorite(userId: Int, appDelegate: AppDelegate, product: Products) -> Bool {
@@ -201,7 +207,9 @@ extension ProductsViewController: FavouriteActionProductScreen{
 
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
             favoritesVM?.deleteProductItemFromFavourites(userId: userId, appDeleget: self.appDelegate, ProductID: product.id ?? 0)
-            showToastMessage(message: "Removed !", color: .red)
+            let snackbar = TTGSnackbar(message: "Item Removed !", duration: .middle)
+            snackbar.tintColor =  UIColor(named: "Green")
+            snackbar.show()
             self.productsCollectionView.reloadData()
             viewWillAppear(false)
         }))
@@ -329,7 +337,17 @@ extension ProductsViewController {
         
 }
     
+extension ProductsViewController: UITextFieldDelegate{
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.productSearchBar.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.productSearchBar.endEditing(true)
+    }
+
+}
     
     
     

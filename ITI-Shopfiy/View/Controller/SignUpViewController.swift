@@ -300,8 +300,8 @@ extension SignUpViewController {
         if !CharacterSet.decimalDigits.isSuperset(of: set){
             return "it must contain digits only"
         }
-        if value.count != 10{
-            return "Phone Number must be 10 Digits"
+        if value.count != 11{
+            return "Phone Number must be 11 Digits"
         }
         return nil
     }
@@ -344,4 +344,17 @@ extension SignUpViewController {
         }
     }
     
+}
+
+extension SignUpViewController: UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
 }

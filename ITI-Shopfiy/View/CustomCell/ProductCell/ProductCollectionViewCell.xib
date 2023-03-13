@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="384" height="199"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Nz-Ei-HWA">
-                                <rect key="frame" x="8" y="8" width="368" height="132.66666666666666"/>
+                                <rect key="frame" x="8" y="7.9999999999999929" width="368" height="119.33333333333331"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                         <color key="value" name="SecondGray"/>
@@ -36,14 +36,14 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dJN-eK-VM4">
-                                <rect key="frame" x="8" y="144.66666666666666" width="33.333333333333336" height="33.333333333333343"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.55000000000000004" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dJN-eK-VM4">
+                                <rect key="frame" x="8" y="131.33333333333334" width="372" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <color key="textColor" name="Green"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LeT-xr-v3C">
-                                <rect key="frame" x="311" y="12" width="69" height="33.333333333333336"/>
+                                <rect key="frame" x="311" y="12" width="69" height="30"/>
                                 <color key="tintColor" name="Red"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
@@ -53,19 +53,28 @@
                                     <action selector="addToLikes:" destination="gTV-IL-0wX" eventType="touchUpInside" id="U58-Oc-2xV"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R9q-eB-2fb">
+                                <rect key="frame" x="8" y="169.33333333333334" width="38.333333333333336" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="Red"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="R9q-eB-2fb" firstAttribute="top" secondItem="dJN-eK-VM4" secondAttribute="bottom" constant="8" id="0eg-q4-qM0"/>
                             <constraint firstItem="LeT-xr-v3C" firstAttribute="top" secondItem="7Nz-Ei-HWA" secondAttribute="top" constant="4" id="5mG-pK-DB9"/>
                             <constraint firstItem="dJN-eK-VM4" firstAttribute="height" secondItem="7Nz-Ei-HWA" secondAttribute="height" multiplier="1:4" id="AIR-uB-cc8"/>
+                            <constraint firstItem="R9q-eB-2fb" firstAttribute="leading" secondItem="oh2-Lv-A95" secondAttribute="leading" constant="8" id="HtU-5I-pgy"/>
                             <constraint firstItem="dJN-eK-VM4" firstAttribute="leading" secondItem="7Nz-Ei-HWA" secondAttribute="leading" id="VsD-H4-0oU"/>
                             <constraint firstItem="dJN-eK-VM4" firstAttribute="top" secondItem="7Nz-Ei-HWA" secondAttribute="bottom" constant="4" id="d3s-Bk-p8n"/>
                             <constraint firstItem="7Nz-Ei-HWA" firstAttribute="leading" secondItem="oh2-Lv-A95" secondAttribute="leading" constant="8" id="eHD-NU-HmT"/>
                             <constraint firstItem="7Nz-Ei-HWA" firstAttribute="top" secondItem="oh2-Lv-A95" secondAttribute="top" constant="8" id="rkZ-6n-6DZ"/>
                             <constraint firstItem="LeT-xr-v3C" firstAttribute="trailing" secondItem="oh2-Lv-A95" secondAttribute="trailing" constant="-4" id="sk4-Mm-6fY"/>
+                            <constraint firstAttribute="trailing" secondItem="dJN-eK-VM4" secondAttribute="trailing" constant="4" id="uNM-hj-7Rh"/>
                             <constraint firstItem="LeT-xr-v3C" firstAttribute="width" secondItem="7Nz-Ei-HWA" secondAttribute="width" multiplier="1.5:8" id="vfv-Oa-pIO"/>
                             <constraint firstItem="LeT-xr-v3C" firstAttribute="height" secondItem="7Nz-Ei-HWA" secondAttribute="height" multiplier="1:4" id="way-hv-63a"/>
-                            <constraint firstItem="7Nz-Ei-HWA" firstAttribute="height" secondItem="oh2-Lv-A95" secondAttribute="height" multiplier="2:3" id="zdS-h2-BLz"/>
+                            <constraint firstItem="7Nz-Ei-HWA" firstAttribute="height" secondItem="oh2-Lv-A95" secondAttribute="height" multiplier="1.8:3" id="zdS-h2-BLz"/>
                             <constraint firstAttribute="trailing" secondItem="7Nz-Ei-HWA" secondAttribute="trailing" constant="8" id="ziJ-mm-htB"/>
                         </constraints>
                     </view>
@@ -91,6 +100,7 @@
             <connections>
                 <outlet property="like_btn" destination="LeT-xr-v3C" id="gUT-9x-icA"/>
                 <outlet property="productImageview" destination="7Nz-Ei-HWA" id="NtV-AA-dxg"/>
+                <outlet property="productPrice" destination="R9q-eB-2fb" id="ibJ-EW-Hn0"/>
                 <outlet property="productTitle" destination="dJN-eK-VM4" id="3Wg-4T-PL1"/>
             </connections>
             <point key="canvasLocation" x="201.52671755725191" y="-86.971830985915503"/>
