@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MeUnlogedView" customModule="ITI_Shopfiy" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="MeUnlogedView" customModule="ITI_Shopfiy" customModuleProvider="target">
+        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="i5M-Pr-FkT" customClass="MeUnlogedView" customModule="ITI_Shopfiy" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -88,6 +88,7 @@
                 <constraint firstItem="Z1d-nq-Lxl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ymA-kS-1ZD"/>
                 <constraint firstItem="vlm-2C-idg" firstAttribute="top" secondItem="zRE-8P-hXl" secondAttribute="bottom" constant="16" id="yrY-2S-HRS"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="guestImageView" destination="fkA-TH-4Qq" id="b8c-v8-Ta5"/>
             </connections>
