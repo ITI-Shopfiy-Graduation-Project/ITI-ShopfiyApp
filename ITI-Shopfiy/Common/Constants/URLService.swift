@@ -16,7 +16,7 @@ struct URLService{
     }
     
     static func produts(Brand_ID: Int) -> String{
-        return baseUrl + "collections/\(Brand_ID)/products.json"
+        return baseUrl + "products.json?collection_id=\(Brand_ID)"
     }
     
     static func productDetails(Product_ID: Int) -> String{

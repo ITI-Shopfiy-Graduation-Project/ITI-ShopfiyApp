@@ -89,6 +89,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionViewCell
         cell.productTitle.text = savedProductsArray?[indexPath.row].title
+        cell.productPrice.text = savedProductsArray?[indexPath.row].variants?[0].price
         let productimg = URL(string:savedProductsArray?[indexPath.row].image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.productImageview?.kf.setImage(with:productimg)
 //        cell.like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -170,6 +171,7 @@ extension FavoritesViewController: FavoriteActionFavoritesScreen {
                 
                 DispatchQueue.main.async {
                     self.savedProductsArray = result
+                    self.searchArray = self.favoritesViewModel?.savedProductsArray ?? []
                     self.savedProductsArray  = self.favoritesViewModel?.savedProductsArray ?? []
                     self.favoritesCollectionView.reloadData()
                 }

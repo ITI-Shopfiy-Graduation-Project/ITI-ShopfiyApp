@@ -133,6 +133,7 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
         let product = self.productsArray?[indexPath.row]
 
         cell.productTitle.text = product?.title ?? ""
+        cell.productPrice.text = product?.variants?[0].price ?? ""
         let productimg = URL(string:product?.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.productImageview?.kf.setImage(with:productimg)
         cell.currentProduct = product
@@ -152,6 +153,7 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
         let productDetialsVC = UIStoryboard(name: "ProductDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "productDetails") as! ProductDetailsViewController
         
         productDetialsVC.product_ID = productsArray?[indexPath.row].id
+//        productDetialsVC.product = productsArray?[indexPath.row]
 
         self.navigationController?.pushViewController(productDetialsVC, animated: true)
     }
