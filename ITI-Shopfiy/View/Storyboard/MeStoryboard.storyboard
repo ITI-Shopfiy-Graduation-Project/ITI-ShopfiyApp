@@ -16,8 +16,22 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IRa-Sv-ckJ">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="GXi-dg-qwe"/>
+                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Se8-Io-85y"/>
+                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="dnx-tr-m47"/>
+                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hyO-wS-Bud"/>
+                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="lkW-X8-OGy"/>
+                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="zgE-P9-H1T"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GK3-eR-vpw">
                         <rightBarButtonItems>
@@ -37,7 +51,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="meView" destination="5EZ-qb-Rvc" id="mlT-Tb-ZYj"/>
+                        <outlet property="meView" destination="IRa-Sv-ckJ" id="rrL-sc-vdz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
