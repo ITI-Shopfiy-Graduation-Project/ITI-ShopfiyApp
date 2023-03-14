@@ -94,16 +94,7 @@ class MeViewController: UIViewController {
                 meUnLogedVC?.meProtocol = self
             }
         } // condition: If user is unlogged
-        else{
-            self.meLogedVC?.removeFromSuperview()//to be removed
-          
-            meUnLogedVC?.guestImageView.image = UIImage(named: "person")
-            self.navigationController?.isNavigationBarHidden = true
-            self.meView.addSubview(meUnLogedVC!)
-            meUnLogedVC?.meProtocol = self
-            self.meView.reloadInputViews()
-            self.meLogedVC?.reloadInputViews()
-        }
+
         
     }
 

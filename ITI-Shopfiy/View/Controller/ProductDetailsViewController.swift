@@ -180,16 +180,27 @@ class ProductDetailsViewController: UIViewController{
                 snackbar.tintColor =  UIColor(named: "Green")
                 snackbar.show()
                     }
-    renderCartData ()
+        }else{
             showLoginAlert(title: "UnAuthorized Action", message: "You must loginn first")
-        
+        }
         renderCartData ()
-                showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
-            }else{
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == false ){
+    }
+    
+    @IBAction func addToLikesButton(_ sender: Any) {
         if (UserDefaultsManager.sharedInstance.isLoggedIn() == false ){
             showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
-            self.showAlert(msg: "Please check your internet connection")
+        }else{
+            if favoritesVM?.isProductsInFavourites(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -2, appDelegate: appDelegate, product: self.product ?? Products()) == true{
+                showAlert(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -2, appDelegate: self.appDelegate, title: "Remove Item", message: "Are you sure ?", product: self.product ?? Products())
+            } else {
+                favoritesVM?.addFavourite(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1, appDelegate: appDelegate, product: self.product ?? Products())
+                like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                let snackbar = TTGSnackbar(message: "Item Added to favorites!", duration: .middle)
+                snackbar.tintColor =  UIColor(named: "Green")
+                snackbar.show()
+            }
+        }
+        self.reloadInputViews()
         self.renderCart()
         self.renderView()
         
@@ -199,11 +210,7 @@ class ProductDetailsViewController: UIViewController{
     
     @IBAction func showReviews(_ sender: UIButton) {
         let reviewVC = self.storyboard!.instantiateViewController(withIdentifier: "review") as! ReviewsViewController
-        if reachability.isReachable(){
-            self.navigationController!.pushViewController(reviewVC, animated: true)
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
-        }
+        self.navigationController!.pushViewController(reviewVC, animated: true)
     }
     
     
@@ -258,19 +265,14 @@ extension ProductDetailsViewController: UICollectionViewDelegate, UICollectionVi
 
 extension ProductDetailsViewController{
     func checkIsFavourite(product: Products, userId: Int) {
-        if reachability.isReachable(){
-            if (favoritesVM?.isProductsInFavourites(userId: userId, appDelegate: appDelegate, product: product) == true) {
-                like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            }else{
-                like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-            }
+        if (favoritesVM?.isProductsInFavourites(userId: userId, appDelegate: appDelegate, product: product) == true) {
+            like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         }else{
-            self.showAlert(msg: "Please check your internet connection")
+            like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
         }
     }
     
     func showAlert(userId: Int, appDelegate: AppDelegate, title: String, message: String, product: Products) {
-        if reachability.isReachable(){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
 
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
@@ -283,25 +285,18 @@ extension ProductDetailsViewController{
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
 
         self.present(alert, animated: true, completion: nil)
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
-        }
     }
     
     func showLoginAlert(title: String, message: String) {
-        if reachability.isReachable(){
-            let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-            
-            alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
-                let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
-                self.navigationController?.pushViewController(loginVC, animated: true)
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
-            
-            self.present(alert, animated: true, completion: nil)
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
-        }
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
+            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
     }
     
     func showToastMessage(message: String, color: UIColor) {

@@ -67,6 +67,7 @@ class LoginViewController: UIViewController {
         }else{
             self.showAlert(msg: "Please check your internet connection")
         }
+    }
     @IBAction func signUp_btn(_ sender: Any) {
         let signUpVC = UIStoryboard(name: "SignUpStoryboard", bundle: nil).instantiateViewController(withIdentifier: "signup") as! SignUpViewController
         if reachability.isReachable(){
