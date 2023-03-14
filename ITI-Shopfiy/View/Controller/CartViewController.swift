@@ -22,7 +22,7 @@ class CartViewController: UIViewController {
     let discountModel = DiscountViewModel()
     var subTotal : Double?
     var discountPrice : Double = 0.0
-    var totalPriceValue : Double = 0.0
+    static var totalPriceValue : Double = 0.0
     var cartArray: [LineItem]?
     private var counter: Int = 0
     
@@ -54,7 +54,7 @@ class CartViewController: UIViewController {
     }
     
     func setInitialValue(){
-        totalPriceValue = 0.0
+        CartViewController.totalPriceValue = 0.0
         discountPrice = 0.0
         codeError.text = ""
         if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
@@ -107,7 +107,11 @@ class CartViewController: UIViewController {
             self.showAlert(msg: "Please check your internet connection")
         }
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! PaymentViewController
+        PaymentViewController.totalPrice = Self.totalPriceValue
+        print("total: \(totalPrice.text)")
+    }
 }
 
 extension CartViewController: UITableViewDataSource {
@@ -129,7 +133,17 @@ extension CartViewController: UITableViewDataSource {
         let cell:CartTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CartTableViewCell
         cell.itemName.text = cartArray?[indexPath.row].title
         cell.delete_Btn.isHidden = true
-        cell.itemPrice.text = cartArray?[indexPath.row].price
+        if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
+            let price = (Double(cartArray?[indexPath.row].price ?? "0") ?? 0.0) * 30
+            let priceString = "\(price.formatted()) EGP  x1"
+            cell.itemPrice.text = priceString
+        }
+        else
+        {
+            let price = (Double(cartArray?[indexPath.row].price ?? "0") ?? 0.0)
+            let priceString = "\(price.formatted()) $ x1"
+            cell.itemPrice.text = priceString
+        }
        // cell.itemQuntity.text = "Qty: \( cartArray?[indexPath.row].quantity?.formatted() ?? "0")"
         let image = URL(string: cartArray?[indexPath.row].sku ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.cartImage.kf.setImage(with:image)
@@ -160,19 +174,19 @@ extension CartViewController {
                 {
                     codeError.text = "Valid"
                     codeError.textColor = UIColor(named: "Green")
-                    self.discountPrice = 0.09 * (self.subTotal ?? 0.0)
-                    totalPriceValue = (subTotal ?? 0.0) - discountPrice
+                    self.discountPrice = 0.1 * (self.subTotal ?? 0.0)
+                    CartViewController.totalPriceValue = (subTotal ?? 0.0) - discountPrice
                     if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
                         let price = (discountPrice ) * 30
                         var priceString = "\(price.formatted()) EGP"
                         promoCodeValue.text = priceString
-                        priceString = "\(totalPriceValue.formatted()) EGP"
+                        priceString = "\(Self.totalPriceValue.formatted()) EGP"
                         totalPrice.text = priceString
                         
                     }
                     else {
                         promoCodeValue.text = "\(discountPrice) $"
-                        totalPrice.text = "\(totalPriceValue.formatted()) $"
+                        totalPrice.text = "\(Self.totalPriceValue.formatted()) $"
                     }
                 }
                 else
@@ -210,8 +224,21 @@ extension CartViewController {
         codeError.text = msg
         codeError.textColor = UIColor(named: "Red")
         self.discountPrice = 0.0
-        totalPriceValue = subTotal ?? 0.0
+        CartViewController.totalPriceValue = subTotal ?? 0.0
         promoCodeValue.text = "0"
         totalPrice.text = subTotal?.formatted()
     }
+}
+
+extension CartViewController: UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
 }

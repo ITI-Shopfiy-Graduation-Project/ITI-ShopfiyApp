@@ -29,6 +29,7 @@ class SettingsViewController: UIViewController {
         view.addGestureRecognizer(swipe)
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         if reachability.isReachable(){
             let currencey = UserDefaultsManager.sharedInstance.getCurrency()
             if currencey == "EGP" {

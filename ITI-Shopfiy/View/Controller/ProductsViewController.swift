@@ -89,9 +89,11 @@ class ProductsViewController: UIViewController{
     
     //MARK: View will appear
     override func viewWillAppear(_ animated: Bool) {
+        
         if reachability.isReachable(){
             navigationItem.title = vendor
             self.productsCollectionView.reloadData()
+            self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         }else{
             self.showAlert(msg: "Please check your internet connection")
         }

@@ -29,6 +29,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate {
         
         reachability = Reachability.forInternetConnection()
 
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         mabView.delegate = self
         
         if reachability.isReachable(){
@@ -294,3 +295,15 @@ extension ViewController {
     }
 }
 
+extension ViewController: UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
+}

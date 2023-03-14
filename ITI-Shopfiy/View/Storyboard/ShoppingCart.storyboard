@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JyF-O7-OSc">
-                                <rect key="frame" x="0.0" y="103" width="393" height="607.66666666666663"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JyF-O7-OSc">
+                                <rect key="frame" x="0.0" y="103" width="393" height="572"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="h3B-Lh-U8v">
@@ -32,7 +32,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1N-l8-qri">
-                                <rect key="frame" x="32" y="742.66666666666663" width="329" height="50"/>
+                                <rect key="frame" x="32" y="739" width="329" height="50"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Processed to checkout" cornerStyle="large">
                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
@@ -44,17 +44,36 @@
                                     <segue destination="bGZ-dA-zeG" kind="show" identifier="toPromoCode" id="8DM-EX-Faq"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SubTotal" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhx-lL-B0m">
+                                <rect key="frame" x="32" y="691" width="164.66666666666666" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 $" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZY-A5-k4i">
+                                <rect key="frame" x="196.66666666666663" y="691" width="164.33333333333337" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <color key="textColor" name="Green"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="JyF-O7-OSc" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.85" id="4Jn-qE-2x8"/>
+                            <constraint firstItem="HZY-A5-k4i" firstAttribute="width" secondItem="m1N-l8-qri" secondAttribute="width" multiplier="0.5" id="0aF-zG-IsW"/>
+                            <constraint firstItem="mhx-lL-B0m" firstAttribute="top" secondItem="JyF-O7-OSc" secondAttribute="bottom" constant="16" id="2J1-rj-0kO"/>
+                            <constraint firstItem="HZY-A5-k4i" firstAttribute="trailing" secondItem="m1N-l8-qri" secondAttribute="trailing" id="3pQ-Ml-LeD"/>
+                            <constraint firstItem="JyF-O7-OSc" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.8" id="4Jn-qE-2x8"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="JyF-O7-OSc" secondAttribute="trailing" id="HhT-ZW-Ore"/>
+                            <constraint firstItem="mhx-lL-B0m" firstAttribute="leading" secondItem="m1N-l8-qri" secondAttribute="leading" id="U7U-sH-LAL"/>
                             <constraint firstItem="m1N-l8-qri" firstAttribute="width" secondItem="JyF-O7-OSc" secondAttribute="width" constant="-64" id="XUw-aR-NAJ"/>
                             <constraint firstItem="m1N-l8-qri" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.07" id="XkP-oT-cqh"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="JyF-O7-OSc" secondAttribute="bottom" id="ZUG-dC-5Yj"/>
+                            <constraint firstItem="HZY-A5-k4i" firstAttribute="centerY" secondItem="mhx-lL-B0m" secondAttribute="centerY" id="eqc-jF-oLj"/>
                             <constraint firstItem="m1N-l8-qri" firstAttribute="top" secondItem="JyF-O7-OSc" secondAttribute="bottom" constant="32" id="fOW-Ve-Gki"/>
+                            <constraint firstItem="mhx-lL-B0m" firstAttribute="width" secondItem="m1N-l8-qri" secondAttribute="width" multiplier="0.5" id="jyl-J8-f6Q"/>
                             <constraint firstItem="m1N-l8-qri" firstAttribute="trailing" secondItem="JyF-O7-OSc" secondAttribute="trailing" constant="-32" id="kjR-Vp-w1D"/>
+                            <constraint firstItem="m1N-l8-qri" firstAttribute="top" secondItem="mhx-lL-B0m" secondAttribute="bottom" constant="24" id="mkE-0L-YVr"/>
                             <constraint firstItem="JyF-O7-OSc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sBJ-Ve-ojI"/>
                             <constraint firstItem="m1N-l8-qri" firstAttribute="leading" secondItem="JyF-O7-OSc" secondAttribute="leading" constant="32" id="sbD-DF-Q24"/>
                             <constraint firstItem="JyF-O7-OSc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="zur-o7-KFy"/>
@@ -62,11 +81,12 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="ZUG-dC-5Yj"/>
+                                <exclude reference="fOW-Ve-Gki"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="w4Y-4B-Hp2">
-                        <barButtonItem key="rightBarButtonItem" title="Done" image="archivebox.circle" catalog="system" id="KtK-db-sAT">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="KtK-db-sAT">
                             <color key="tintColor" name="Green"/>
                             <connections>
                                 <action selector="saveChanges:" destination="Y6W-OH-hqX" id="eeb-NC-pMc"/>
@@ -75,11 +95,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cartTable" destination="JyF-O7-OSc" id="pXf-FB-GBc"/>
+                        <outlet property="subTotal_lable" destination="HZY-A5-k4i" id="i1O-L5-5us"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057.2519083969464" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="1054.1984732824426" y="-27.464788732394368"/>
         </scene>
         <!--CartStoryboard-->
         <scene sceneID="QeB-mz-ZfU">
@@ -100,6 +121,7 @@
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.41013585670000002" green="0.77147899730000002" blue="0.70166644619999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.41013585670000002" green="0.77147899730000002" blue="0.70166644619999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -112,7 +134,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="archivebox.circle" catalog="system" width="128" height="123"/>
         <namedColor name="Green">
             <color red="0.37999999523162842" green="0.71399998664855957" blue="0.6470000147819519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -12,7 +12,7 @@ class OrdersViewController: UIViewController {
 
     @IBOutlet weak var OrdersTblView: UITableView!
     override func viewDidLoad() {
-      
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         super.viewDidLoad()
         OrdersTblView.dataSource = self
         OrdersTblView.delegate = self

@@ -49,6 +49,7 @@ class MeViewController: UIViewController {
         swipe.direction = .right
 
         view.addGestureRecognizer(swipe)
+        
        
     }
     
@@ -57,7 +58,7 @@ class MeViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         self.navigationItem.setHidesBackButton(true, animated: true)
         if !reachability.isReachable(){
             self.showAlert(msg: "Please check your internet connection")
@@ -92,6 +93,16 @@ class MeViewController: UIViewController {
                 self.meView.addSubview(meUnLogedVC!)
                 meUnLogedVC?.meProtocol = self
             }
+        } // condition: If user is unlogged
+        else{
+            self.meLogedVC?.removeFromSuperview()//to be removed
+          
+            meUnLogedVC?.guestImageView.image = UIImage(named: "person")
+            self.navigationController?.isNavigationBarHidden = true
+            self.meView.addSubview(meUnLogedVC!)
+            meUnLogedVC?.meProtocol = self
+            self.meView.reloadInputViews()
+            self.meLogedVC?.reloadInputViews()
         }
         
     }

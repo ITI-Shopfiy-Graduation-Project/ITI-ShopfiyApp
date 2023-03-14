@@ -92,6 +92,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgY-a6-gO2">
                                                 <rect key="frame" x="28" y="15.999999999999993" width="157.66666666666666" height="123.33333333333331"/>
+                                                <size key="titleShadowOffset" width="20" height="20"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="gray" title="Cash on delivery">
                                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
@@ -100,7 +101,7 @@
                                                 </buttonConfiguration>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" name="Green"/>
+                                                        <color key="value" name="Black"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                         <real key="value" value="1.5"/>
@@ -108,7 +109,16 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" name="Gray"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowSize">
+                                                        <size key="value" width="200" height="200"/>
+                                                    </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="cashOnDelivery:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="lmG-c2-cle"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjL-yc-fmU">
                                                 <rect key="frame" x="208.33333333333337" y="15.999999999999993" width="157.66666666666663" height="123.33333333333331"/>

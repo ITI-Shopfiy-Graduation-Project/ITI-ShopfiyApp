@@ -63,12 +63,10 @@ class LoginViewController: UIViewController {
             let password = password_txt.text ?? ""
             indicator?.startAnimating()
             login(userName: userName, password: password)
+            getCartId()
         }else{
             self.showAlert(msg: "Please check your internet connection")
         }
-    }
-    
-    
     @IBAction func signUp_btn(_ sender: Any) {
         let signUpVC = UIStoryboard(name: "SignUpStoryboard", bundle: nil).instantiateViewController(withIdentifier: "signup") as! SignUpViewController
         if reachability.isReachable(){
@@ -153,11 +151,15 @@ extension LoginViewController {
         
         cartcount.draft_orders?.forEach({ email in
             
-            if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
+            if  email.email ==  username_txt.text ?? ""
             {
                 UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
+                UserDefaultsManager.sharedInstance.setCartState(cartState: true)
+
             }
-            
+            else {
+                UserDefaultsManager.sharedInstance.setCartState(cartState: false)
+            }
             
             
             

@@ -10,6 +10,7 @@ import Reachability
 import TTGSnackbar
 class ShoppingCartViewController: UIViewController {
     private var flag: Bool = true
+    @IBOutlet weak var subTotal_lable: UILabel!
     @IBOutlet weak var cartTable: UITableView!
     private var deletedLineItem : LineItem?
     private var cartArray: [LineItem]?
@@ -17,26 +18,20 @@ class ShoppingCartViewController: UIViewController {
     private var counter: Int8 = 1
     private var shoppingCartVM = ShoppingCartViewModel()
     private static var subTotalPrice = 0.0
+    private let indicator = UIActivityIndicatorView(style: .large)
+
     var reachability:Reachability!
     
     override func viewDidLoad() {
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         super.viewDidLoad()
-        
-        reachability = Reachability.forInternetConnection()
-
-        if reachability.isReachable(){
-            ShoppingCartViewController.subTotalPrice = 0.0
-            lineItem.price = "231 $"
-            lineItem.title = "gray t-shirt"
-            lineItem.quantity = 3
-            lineItem.sku = "ct4"
-            cartArray = [lineItem , lineItem , lineItem]
-            tableConfiguration()
-            getData()
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
-        }
-        
+        ShoppingCartViewController.subTotalPrice = 0.0
+        tableConfiguration()
+    //    subTotal_lable.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getData()
     }
     func tableConfiguration(){
         cartTable.delegate = self
@@ -110,6 +105,8 @@ extension ShoppingCartViewController: UITableViewDataSource {
         cell.counterProtocol = self
         cell.indexPath = indexPath
         cell.lineItem = cartArray
+        cell.disableDecreaseBtn()
+        self.setSubTotal()
         return cell
     }
     
@@ -131,7 +128,11 @@ extension ShoppingCartViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+        print("me2mo")
+        let vc = UIStoryboard(name: "ProductDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "productDetails") as! ProductDetailsViewController
+        vc.product_ID = cartArray?[indexPath.row].product_id
+        self.navigationController?.pushViewController(vc, animated: true)
+        //self.navigationController?.pushViewController(vc, animated: true)
     }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
@@ -162,6 +163,7 @@ extension ShoppingCartViewController: CounterProtocol {
             ShoppingCartViewController.subTotalPrice = Self.subTotalPrice + itemPrice
         }
         print("subtotal :\(Self.subTotalPrice)")
+        setSubTotal()
     }
     
     func decreaseCounter() {
@@ -172,17 +174,17 @@ extension ShoppingCartViewController: CounterProtocol {
             Self.subTotalPrice = Self.subTotalPrice - itemPrice
         }
         print("subtotal :\(Self.subTotalPrice)")
+        setSubTotal()
     }
     
     func deleteItem(indexPath: IndexPath) {
         self.deleteLineItemProduct(indexPath: indexPath)
+        setSubTotal()
     }
     
     func showNIPAlert(msg: String) {
         self.showAlert(msg: msg)
     }
-    
-    
 }
 
 extension ShoppingCartViewController {
@@ -195,14 +197,24 @@ extension ShoppingCartViewController {
     }
     func renderView(){
         DispatchQueue.main.async {
+            self.indicator.stopAnimating()
             self.cartArray?.removeAll()
             self.cartArray = self.shoppingCartVM.cartList
+            self.configureView()
+            print("sub total : \(Self.subTotalPrice)")
+        }
+    }
+    
+    func configureView(){
+        if cartArray != nil {
             self.shoppingCartVM.cartList?.forEach({ item in
                 Self.subTotalPrice += Double(item.price ?? "0") ?? 0.0
             })
             self.cartTable.reloadData()
-            print("sub total : \(Self.subTotalPrice)")
+            setSubTotal()
+            UserDefaultsManager.sharedInstance.setCartState(cartState: true)
         }
+        else {        }
     }
 }
 
@@ -214,14 +226,14 @@ extension ShoppingCartViewController {
             cartArray?.remove(at: indexPath.row)
             cartTable.deleteRows(at: [indexPath], with: .automatic)
             showSnackBar(index: indexPath.row)
-            DispatchQueue.main.asyncAfter(deadline: .now()+5){
+            DispatchQueue.main.asyncAfter(deadline: .now()+3.5){
                 if self.flag == true {
                     if !(self.cartArray?.count == 0){
                         self.putDraftOrder(lineItems: self.cartArray ?? [])
                     }
                     else
                     {
-                        // delete draft order
+                        self.deleteCart()
                     }
                 }
             }
@@ -233,7 +245,7 @@ extension ShoppingCartViewController {
     func showSnackBar(index : Int){
         let snackbar = TTGSnackbar(
             message: "Item \(String(describing: deletedLineItem?.title)) was unsaved successfully",
-            duration: .long,
+            duration: .middle,
             actionText: "Undo",
             actionBlock: { (snackbar) in
                 print("snack bar Click action!")
@@ -241,7 +253,6 @@ extension ShoppingCartViewController {
                 if self.flag == false{
                     self.undoDeleting(index: index)
                 }
-               
             }
         )
         snackbar.actionTextColor = .red
@@ -255,6 +266,7 @@ extension ShoppingCartViewController {
         if let lineItem = deletedLineItem {
             cartArray?.insert(lineItem, at: index)
             cartTable.reloadData()
+            setSubTotal()
         }
     }
     
@@ -275,16 +287,42 @@ extension ShoppingCartViewController {
             guard response?.statusCode ?? 0 >= 200 && response?.statusCode ?? 0 < 300   else {
                 DispatchQueue.main.async {
                     print ("delete cart Response \n \(response ?? HTTPURLResponse())" )
-                    
                 }
                 return
             }
-            
+            self.setSubTotal()
             print("lineItem was added successfully")
-            
-            
         }
-        
+    }
+    func deleteCart(){
+        shoppingCartVM.deleteCart { error in
+            if error != nil {
+                UserDefaultsManager.sharedInstance.setUserCart(cartId: nil)
+                UserDefaultsManager.sharedInstance.setCartState(cartState: false)
+                self.setSubTotal()
+            }
+            else
+            {
+                print(error?.localizedDescription ?? "")
+            }
+        }
     }
 }
 
+extension ShoppingCartViewController {
+    func setSubTotal(){
+        if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
+            let price = (Double(Self.subTotalPrice) )  * 30
+            let priceString = "\(price.formatted()) EGP"
+            subTotal_lable.text = priceString
+        }
+        else
+        {
+            let price = (Double(Self.subTotalPrice) )
+            let priceString = "\(price.formatted()) $"
+            DispatchQueue.main.async {
+                self.subTotal_lable.text = priceString
+            }
+        }
+    }
+}

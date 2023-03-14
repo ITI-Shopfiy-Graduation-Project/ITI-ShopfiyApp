@@ -25,6 +25,8 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
     private var userAddress : Address?
     var addressDelegate : AddressDelegate?
     private var locationManager = CLLocationManager()
+    private var deletedAddress : Address?
+    private var addressFlag : Bool = true
     let indicator = UIActivityIndicatorView(style: .large)
     var reachability:Reachability!
 
@@ -350,12 +352,7 @@ extension AddressViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
            let delete = UIContextualAction(style: .normal, title: "Delete") { (action, view, completionHandler) in
-               let postAddress: PostAddress = PostAddress()
-               postAddress.customer_address = self.addressHistoryArray?[indexPath.row]
-              // print("Data \(postAddress.customer_address )")
-               self.addressVM.deleteAddress(userAddress: postAddress )
-               self.addressHistoryArray?.remove(at: indexPath.row)
-               self.addressHisoryTable.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+               self.deleteAddressItem(indexPath: indexPath)
                completionHandler(true)
          }
            let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
@@ -417,6 +414,68 @@ extension AddressViewController  {
         }
         
     }
+}
+extension AddressViewController {
+    func deleteAddressItem(indexPath : IndexPath)
+    {
+        if (indexPath.row > 0)
+        {
+            deletedAddress = addressHistoryArray?[indexPath.row]
+            addressHistoryArray?.remove(at: indexPath.row)
+            addressHisoryTable.deleteRows(at: [indexPath], with: .automatic)
+            showSnackBar(index: indexPath.row)
+            DispatchQueue.main.asyncAfter(deadline: .now()+3.5){
+                if self.addressFlag == true {
+                        self.deleteAddress(addressArray: self.deletedAddress!)
+                }
+            }
+        }
+        else
+        {
+            showAlert(msg: "You can't delete your default address")
+        }
+    }
+    func showSnackBar(index : Int){
+        let snackbar = TTGSnackbar(
+            message: "address \(String(describing: deletedAddress?.address1)) was deleted successfully",
+            duration: .middle,
+            actionText: "Undo",
+            actionBlock: { (snackbar) in
+                print("snack bar Click action!")
+                self.addressFlag = false
+                if self.addressFlag == false{
+                    self.undoDeleting(index: index)
+                }
+            }
+        )
+        snackbar.actionTextColor = .red
+        //snackbar.borderColor = .clear
+        snackbar.backgroundColor = .black
+        snackbar.messageTextColor = .white
+        snackbar.show()
+    }
     
+    private func undoDeleting(index: Int){
+        if let lineItem = deletedAddress {
+            addressHistoryArray?.insert(lineItem, at: index)
+            addressHisoryTable.reloadData()
+        }
+    }
     
+    func deleteAddress(addressArray : Address){
+        let postAddress: PostAddress = PostAddress()
+        postAddress.customer_address = addressArray
+       // print("Data \(postAddress.customer_address )")
+        self.addressVM.deleteAddress(userAddress: postAddress )
+    }
+    
+}
+extension AddressViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
