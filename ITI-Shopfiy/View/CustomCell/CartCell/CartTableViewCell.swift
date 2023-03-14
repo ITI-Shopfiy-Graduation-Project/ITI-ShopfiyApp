@@ -26,6 +26,7 @@ class CartTableViewCell: UITableViewCell {
         // Initialization code
     }
     
+ 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -35,7 +36,7 @@ class CartTableViewCell: UITableViewCell {
     @IBAction func deleteItem(_ sender: Any) {
         counterProtocol?.deleteItem(indexPath: indexPath)
     }
-    @IBAction func increaseBtn(_ sender: UIButton) {
+    @IBAction func increaseBtn(_ sender: UIButton) { 
         if counter < ((lineItem[indexPath.row].grams ?? 1) - 2) {
             counter = counter + 1
             quantityCount.text = String (counter)
@@ -47,6 +48,8 @@ class CartTableViewCell: UITableViewCell {
         {
              counterProtocol?.showNIPAlert(msg: "sorry you have reached the inventory quantity limit" )
         }
+        
+        disableDecreaseBtn()
 }
     @IBAction func dcreaseBtn(_ sender: UIButton) {
         if counter > 1 {//Renlace the static with lineItem?.arams num +
@@ -56,9 +59,22 @@ class CartTableViewCell: UITableViewCell {
             counterProtocol?.decreaseCounter()
             counterProtocol?.setItemQuantityToPut(quantity: counter, index: indexPath.row)
         }
-         else
+//         else
+//        {
+//             counterProtocol?.showNIPAlert(msg: "do you want to delete this item?" )
+//        }
+        disableDecreaseBtn()
+    }
+    
+    func disableDecreaseBtn (){
+        if counter < 2
         {
-             counterProtocol?.showNIPAlert(msg: "do you want to delete this item?" )
+            decreseItem.isEnabled = true
+            decreseItem.alpha = 0.5
+        }
+        else {
+            decreseItem.isEnabled = true
+            decreseItem.alpha = 1
         }
     }
 }

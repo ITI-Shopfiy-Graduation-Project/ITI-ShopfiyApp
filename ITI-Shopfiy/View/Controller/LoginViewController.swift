@@ -53,9 +53,8 @@ class LoginViewController: UIViewController {
         cartVM.getCart()
         cartVM.bindingCartt = {()in
             self.renderCart()
-            
+
         }
-        getCartId()
     }
     
     @objc func dismissVC() {
@@ -67,7 +66,8 @@ class LoginViewController: UIViewController {
         let password = password_txt.text ?? ""
         indicator?.startAnimating()
         login(userName: userName, password: password)
-        
+        getCartId()
+
     }
     
     
@@ -213,11 +213,15 @@ extension LoginViewController {
         
         cartcount.draft_orders?.forEach({ email in
             
-            if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
+            if  email.email ==  username_txt.text ?? ""
             {
                 UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
+                UserDefaultsManager.sharedInstance.setCartState(cartState: true)
+
             }
-            
+            else {
+                UserDefaultsManager.sharedInstance.setCartState(cartState: false)
+            }
             
             
             

@@ -118,6 +118,14 @@ class UserDefaultsManager: UserDefaultProtocol{
     func getUserCart()-> Int?{
         return UserDefaults.standard.integer(forKey: "Cart_ID")
     }
+    
+    func setCartState(cartState: Bool) {
+        UserDefaults.standard.set(cartState, forKey: "Cart_State")
+    }
+    
+    func getCartState(cartState: Bool) -> Bool{
+        return UserDefaults.standard.bool(forKey: "Cart_State")
+    }
 }
 
 //For favorites

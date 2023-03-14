@@ -30,9 +30,20 @@ extension UIViewController {
     
     func showAlert(msg: String ) {
         let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
-        
         alert.addAction(UIAlertAction(title: "close", style: .cancel))
         self.present(alert, animated: true, completion: nil)
-        
+    }
+    
+    func showAlertForCart(msg: String)
+    {
+            let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "close", style: .cancel , handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        }))
+            alert.addAction(UIAlertAction(title: "Add products", style: .default , handler: { action in
+                let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
+                self.navigationController?.pushViewController(productsVC, animated: true)
+            }))
+            self.present(alert, animated: true, completion: nil)
     }
 }

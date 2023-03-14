@@ -31,7 +31,7 @@ class PaymentViewController: UIViewController, AddressDelegate {
     @IBOutlet weak var paymentView: UIStackView!
     var addressFlag: Bool = false
     var braintreeClient: BTAPIClient!
-    var totalPrice: Double = 0
+    static var totalPrice: Double = 0
     var userTotalCost: Double = 0.0
     private var userAddress : Address?
     override func viewDidLoad() {
@@ -61,8 +61,6 @@ class PaymentViewController: UIViewController, AddressDelegate {
             sender.borderWidth = 1.5
             sender.cornerRadius = 10
             self.setupPayPal()
-            self.setupDictionary()
-
         }
     }
     @IBAction func cashOnDelivery(_ sender: UIButton) {
@@ -75,8 +73,8 @@ class PaymentViewController: UIViewController, AddressDelegate {
             sender.borderColor = UIColor(named: "Green")
             sender.borderWidth = 1.5
             sender.cornerRadius = 10
+            self.showAlertForCashPayment(msg: "Do you want to complete your payment transaction")
         }
-        self.setupDictionary()
     }
     func setUserAddress(){
         let address = UserDefaultsManager.sharedInstance.getUserAddress()
@@ -86,7 +84,7 @@ class PaymentViewController: UIViewController, AddressDelegate {
             self.addressFlag = true
 
         }
-        else if address != "" {
+        else if address != "" && address != nil {
             self.defaultAddress.text = address
             self.addressFlag = true
         }
@@ -132,8 +130,9 @@ extension PaymentViewController : BTViewControllerPresentingDelegate {
         request = BTPayPalCheckoutRequest(amount: totalPrice.formatted())
         request?.currencyCode = "USD"
     }*/
-        let request = BTPayPalCheckoutRequest(amount: "1532")
-        request.currencyCode = "EGP"
+        print("total price : \(Self.totalPrice)")
+        let request = BTPayPalCheckoutRequest(amount: "8465")
+        request.currencyCode = "USD"
         payPalDriver.tokenizePayPalAccount(with: request){ tokenizedPayPalAccount, error in
             if let tokenizedPayPalAccount = tokenizedPayPalAccount {
                 print("Got a nonce: \(tokenizedPayPalAccount.nonce)")
@@ -194,6 +193,18 @@ extension PaymentViewController : BTViewControllerPresentingDelegate {
                 let snackbar = TTGSnackbar(message: "order was added successfully!", duration: .middle)
                 snackbar.tintColor =  UIColor(named: "Green")
                 snackbar.show()
+                let cartVM = ShoppingCartViewModel()
+                cartVM.deleteCart { error in
+                    if error != nil {
+                        UserDefaultsManager.sharedInstance.setUserCart(cartId: nil)
+                        UserDefaultsManager.sharedInstance.setCartState(cartState: false)
+
+                    }
+                    else
+                    {
+                        print(error?.localizedDescription ?? "")
+                    }
+                }
                 orderVM.updateUserWithCoupon(coupon: "btgvfcd")
                 print ("post order Response \n \(response ?? HTTPURLResponse())" )
                 print("order was added successfully")
@@ -220,7 +231,7 @@ extension PaymentViewController : BTViewControllerPresentingDelegate {
                 "order_status_url" : UserDefaultsManager.sharedInstance.getUserEmail() ?? "@email.com",
                 "current_subtotal_price": defaultAddress.text ?? "cairo",
                 "current_total_discounts": "01091190679",
-                "current_total_price": totalPrice.formatted(),
+                "current_total_price": PaymentViewController.totalPrice.formatted(),
                 "line_items" : [[
                     "fulfillable_quantity" : 5,
                     "name":"Egypt",
@@ -235,5 +246,18 @@ extension PaymentViewController : BTViewControllerPresentingDelegate {
             ]
         ]
         postOrder(orderDictionary: order)
+    }
+}
+
+extension PaymentViewController {
+    func showAlertForCashPayment(msg: String)
+    {
+            let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "close", style: .cancel))
+                        
+            alert.addAction(UIAlertAction(title: "Pay Now", style: .default , handler: { action in
+                self.setupDictionary()
+            }))
+            self.present(alert, animated: true, completion: nil)
     }
 }

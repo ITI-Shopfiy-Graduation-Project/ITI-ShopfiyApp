@@ -72,4 +72,7 @@ struct URLService{
     {
         return baseUrl + "customers/\(userID)/addresses/\(addressID).json"
     }
+    static func deleteCart (cartID: Int) -> String {
+        return baseUrl + "draft_orders/\(cartID).json"
+    }
 }
