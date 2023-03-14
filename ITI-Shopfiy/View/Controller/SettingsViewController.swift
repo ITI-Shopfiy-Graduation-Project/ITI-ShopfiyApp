@@ -43,9 +43,6 @@ class SettingsViewController: UIViewController {
     }*/
     
     @IBAction func changePhone(_ sender: Any) {
-        let meVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
-
-        self.navigationController?.pushViewController(meVC, animated: true)
     }
     
     @IBAction func changeCurrencey(_ sender: UISegmentedControl) {

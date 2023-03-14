@@ -27,12 +27,6 @@ class ShoppingCartViewModel {
                 self.cartList = result.draft_order?.line_items
             }
         })
-            
-       /* AddressNetwork.sharedInstance.fetchAllUserAddresses(userId: userId) { result in
-            if let result = result {
-                self.addressList = result.addresses
-            }
-        }*/
     }
 }
 
@@ -64,11 +58,6 @@ extension ShoppingCartViewModel {
             self.cartResult = result
 //            print ("draft email\(result?.draft_order![1].email)")
         } )}
-
-    
-    
-    
-    
 }
 extension ShoppingCartViewModel {
     func putNewCart(userCart: ShoppingCartPut, completion: @escaping (Data?, HTTPURLResponse?, Error?) -> ()) {
@@ -89,18 +78,20 @@ extension ShoppingCartViewModel {
             completion(data, response as? HTTPURLResponse, nil)
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+}
+
+extension ShoppingCartViewModel {
+    func deleteCart(completion: @escaping (Error?) -> ()) {
+        CartNetwork.sharedInstance.deleteCart { error in
+            guard error == nil else {
+                print("draft order deleting error")
+                completion(error)
+                return
+            }
+            print("draft order deleted")
+            completion(nil)
+        }
+    }
 }
     
     

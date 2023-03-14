@@ -67,16 +67,6 @@ extension CartNetwork {
             
         }.resume()
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 extension CartNetwork{
     
@@ -97,12 +87,6 @@ extension CartNetwork{
              
            }
        }
-    
-    
-    
-    
-    
-    
 }
 extension CartNetwork {
     
@@ -128,13 +112,60 @@ extension CartNetwork {
                 completionHandler(data, response, error)
             }.resume()
         }
-        
-        
-        
-        
-        
-        
-        
-        
+}
 
+
+extension CartNetwork {
+    func deleteCart(completion: @escaping ( Error?) -> ()){
+        guard let draftOrderID = UserDefaultsManager.sharedInstance.getUserCart() else { return }
+        let url = URLService.deleteCart(cartID: draftOrderID)
+        guard let baseURL = URL(string : url ) else { return }
+        var request = URLRequest(url: baseURL)
+        request.httpMethod = "DELETE"
+        request.allHTTPHeaderFields = [
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        ]
+        request.httpShouldHandleCookies = false
+        
+        do{
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                guard error == nil else {
+                    print("Error: error calling DELETE")
+                    print(error!)
+                    return
+                }
+                guard let data = data else {
+                    print("Error: Did not receive data")
+                    return
+                }
+                guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                    print(response)
+                    print("Error: HTTP request failed")
+                    return
+                }
+                do {
+                    guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                        print("Error: Cannot convert data to JSON")
+                        return
+                    }
+                    guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                        print("Error: Cannot convert JSON object to Pretty JSON data")
+                        return
+                    }
+                    guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                        print("Error: Could print JSON in String")
+                        return
+                    }
+                    print("Draft order successfully deleted")
+                    print(prettyPrintedJson)
+                } catch {
+                    print("Error: Trying to convert JSON data to string")
+                    return
+                }
+            }.resume()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
 }
