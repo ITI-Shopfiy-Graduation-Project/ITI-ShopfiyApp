@@ -24,6 +24,7 @@ class ShoppingCartViewController: UIViewController {
         super.viewDidLoad()
         ShoppingCartViewController.subTotalPrice = 0.0
         tableConfiguration()
+    //    subTotal_lable.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,6 +92,8 @@ extension ShoppingCartViewController: UITableViewDataSource {
         cell.counterProtocol = self
         cell.indexPath = indexPath
         cell.lineItem = cartArray
+        cell.disableDecreaseBtn()
+        self.setSubTotal()
         return cell
     }
     
@@ -147,6 +150,7 @@ extension ShoppingCartViewController: CounterProtocol {
             ShoppingCartViewController.subTotalPrice = Self.subTotalPrice + itemPrice
         }
         print("subtotal :\(Self.subTotalPrice)")
+        setSubTotal()
     }
     
     func decreaseCounter() {
@@ -157,10 +161,12 @@ extension ShoppingCartViewController: CounterProtocol {
             Self.subTotalPrice = Self.subTotalPrice - itemPrice
         }
         print("subtotal :\(Self.subTotalPrice)")
+        setSubTotal()
     }
     
     func deleteItem(indexPath: IndexPath) {
         self.deleteLineItemProduct(indexPath: indexPath)
+        setSubTotal()
     }
     
     func showNIPAlert(msg: String) {
@@ -192,6 +198,8 @@ extension ShoppingCartViewController {
                 Self.subTotalPrice += Double(item.price ?? "0") ?? 0.0
             })
             self.cartTable.reloadData()
+            setSubTotal()
+            UserDefaultsManager.sharedInstance.setCartState(cartState: true)
         }
         else {        }
     }
@@ -241,6 +249,7 @@ extension ShoppingCartViewController {
         if let lineItem = deletedLineItem {
             cartArray?.insert(lineItem, at: index)
             cartTable.reloadData()
+            setSubTotal()
         }
     }
     
@@ -264,6 +273,7 @@ extension ShoppingCartViewController {
                 }
                 return
             }
+            self.setSubTotal()
             print("lineItem was added successfully")
         }
     }
@@ -271,6 +281,8 @@ extension ShoppingCartViewController {
         shoppingCartVM.deleteCart { error in
             if error != nil {
                 UserDefaultsManager.sharedInstance.setUserCart(cartId: nil)
+                UserDefaultsManager.sharedInstance.setCartState(cartState: false)
+                self.setSubTotal()
             }
             else
             {
@@ -280,3 +292,20 @@ extension ShoppingCartViewController {
     }
 }
 
+extension ShoppingCartViewController {
+    func setSubTotal(){
+        if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
+            let price = (Double(Self.subTotalPrice) )  * 30
+            let priceString = "\(price.formatted()) EGP"
+            subTotal_lable.text = priceString
+        }
+        else
+        {
+            let price = (Double(Self.subTotalPrice) )
+            let priceString = "\(price.formatted()) $"
+            DispatchQueue.main.async {
+                self.subTotal_lable.text = priceString
+            }
+        }
+    }
+}

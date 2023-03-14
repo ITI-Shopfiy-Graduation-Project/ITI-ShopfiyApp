@@ -59,17 +59,17 @@ class CartTableViewCell: UITableViewCell {
             counterProtocol?.decreaseCounter()
             counterProtocol?.setItemQuantityToPut(quantity: counter, index: indexPath.row)
         }
-         else
-        {
-             counterProtocol?.showNIPAlert(msg: "do you want to delete this item?" )
-        }
+//         else
+//        {
+//             counterProtocol?.showNIPAlert(msg: "do you want to delete this item?" )
+//        }
         disableDecreaseBtn()
     }
     
     func disableDecreaseBtn (){
         if counter < 2
         {
-            decreseItem.isEnabled = false
+            decreseItem.isEnabled = true
             decreseItem.alpha = 0.5
         }
         else {
