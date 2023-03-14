@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import TTGSnackbar
+import Reachability
 
 class ProductDetailsViewController: UIViewController{
     
@@ -46,31 +47,36 @@ class ProductDetailsViewController: UIViewController{
     var productDetailsVM: ProductDetailsVM?
     var favoritesVM: FavouritesVM?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var reachability:Reachability!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.center = view.center
-        view.addSubview(indicator)
-        indicator.startAnimating()
-        
-        productDetailsVM = ProductDetailsVM()
-        productDetailsVM?.getProductDetails(Product_ID: self.product_ID ?? 8117840150809)
-        productDetailsVM?.bindingProducts = { () in
-            self.renderView()
-            indicator.stopAnimating()
-        }
+        reachability = Reachability.forInternetConnection()
 
-        cartVM.cartsUrl = self.AllDraftsUrl
-        cartVM.getCart()
-        cartVM.bindingCartt = {()in
-            self.renderCart()
+        if reachability.isReachable(){
+            let indicator = UIActivityIndicatorView(style: .large)
+            indicator.center = view.center
+            view.addSubview(indicator)
+            indicator.startAnimating()
             
+            productDetailsVM = ProductDetailsVM()
+            productDetailsVM?.getProductDetails(Product_ID: self.product_ID ?? 8117840150809)
+            productDetailsVM?.bindingProducts = { () in
+                self.renderView()
+                indicator.stopAnimating()
+            }
+            
+            cartVM.cartsUrl = self.AllDraftsUrl
+            cartVM.getCart()
+            cartVM.bindingCartt = {()in
+                self.renderCart()
+            }
+            
+            favoritesVM = FavouritesVM()
+//            viewWillAppear(false)
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
         }
-        
-        favoritesVM = FavouritesVM()
-        viewWillAppear(false)
         // Do any additional setup after loading the view.
         let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
         productImagesCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
@@ -93,8 +99,12 @@ class ProductDetailsViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        checkIsFavourite(product: self.product ?? Products(), userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1)
-        productImagesCollectionView.reloadData()
+        if reachability.isReachable(){
+            checkIsFavourite(product: self.product ?? Products(), userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1)
+            productImagesCollectionView.reloadData()
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
     }
     
 //    @objc func goToFavoritesScreen(sender: AnyObject) {
@@ -117,63 +127,74 @@ class ProductDetailsViewController: UIViewController{
 //    }
     
     @IBAction func addToCartButton(_ sender: Any) {
-       
-        if ( UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-            cartcount.draft_orders?.forEach({ email in
-
-                        if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
-                        {     addtoLine = email
-                            UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
-                           lineAppend = email.line_items
-                            newLineItem = LineItem()
-                            newLineItem?.title = product?.title
-                            newLineItem?.price = product?.variants![0].price
-                            newLineItem?.sku = product?.image?.src
-                            newLineItem?.vendor = product?.vendor
-                            newLineItem?.product_id = product?.id
-                            newLineItem?.grams = product?.variants![0].inventory_quantity
-                            newLineItem?.quantity = 1
-                            lineAppend?.append(newLineItem!)
-                            let draftOrder = DrafOrder()
-                            draftOrder.line_items = lineAppend
-                            addtoLine = draftOrder
-                            let draftOrderAppend : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)
-                            putCart(cartt: draftOrderAppend)
-                            print ("already used")
-                       
-                        }
-                      
-                    })
-            if addtoLine == nil
-                                {
-                                self.postCart()
+        if reachability.isReachable(){
+            if ( UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+                cartcount.draft_orders?.forEach({ email in
+                    
+                    if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
+                    {     addtoLine = email
+                        UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
+                        lineAppend = email.line_items
+                        newLineItem = LineItem()
+                        newLineItem?.title = product?.title
+                        newLineItem?.price = product?.variants![0].price
+                        newLineItem?.sku = product?.image?.src
+                        newLineItem?.vendor = product?.vendor
+                        newLineItem?.product_id = product?.id
+                        newLineItem?.grams = product?.variants![0].inventory_quantity
+                        newLineItem?.quantity = 1
+                        lineAppend?.append(newLineItem!)
+                        let draftOrder = DrafOrder()
+                        draftOrder.line_items = lineAppend
+                        addtoLine = draftOrder
+                        let draftOrderAppend : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)
+                        putCart(cartt: draftOrderAppend)
+                        print ("already used")
+                        
                     }
+                    
+                })
+                if addtoLine == nil
+                {
+                    self.postCart()
+                }
+            }else{
+                showLoginAlert(title: "UnAuthorized Action", message: "You must loginn first")
+            }
         }else{
-            showLoginAlert(title: "UnAuthorized Action", message: "You must loginn first")
+            self.showAlert(msg: "Please check your internet connection")
         }
+        
     }
     
     @IBAction func addToLikesButton(_ sender: Any) {
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == false ){
-            showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
-        }else{
-            if favoritesVM?.isProductsInFavourites(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -2, appDelegate: appDelegate, product: self.product ?? Products()) == true{
-                showAlert(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -2, appDelegate: self.appDelegate, title: "Remove Item", message: "Are you sure ?", product: self.product ?? Products())
-            } else {
-                favoritesVM?.addFavourite(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1, appDelegate: appDelegate, product: self.product ?? Products())
-                like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                let snackbar = TTGSnackbar(message: "Item Added to favorites!", duration: .middle)
-                snackbar.tintColor =  UIColor(named: "Green")
-                snackbar.show()
+        if reachability.isReachable(){
+            if (UserDefaultsManager.sharedInstance.isLoggedIn() == false ){
+                showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
+            }else{
+                if favoritesVM?.isProductsInFavourites(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -2, appDelegate: appDelegate, product: self.product ?? Products()) == true{
+                    showAlert(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -2, appDelegate: self.appDelegate, title: "Remove Item", message: "Are you sure ?", product: self.product ?? Products())
+                } else {
+                    favoritesVM?.addFavourite(userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1, appDelegate: appDelegate, product: self.product ?? Products())
+                    like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                    let snackbar = TTGSnackbar(message: "Item Added to favorites!", duration: .middle)
+                    snackbar.tintColor =  UIColor(named: "Green")
+                    snackbar.show()
+                }
             }
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
         }
-        
     
     }
     
     @IBAction func showReviews(_ sender: UIButton) {
         let reviewVC = self.storyboard!.instantiateViewController(withIdentifier: "review") as! ReviewsViewController
-        self.navigationController!.pushViewController(reviewVC, animated: true)
+        if reachability.isReachable(){
+            self.navigationController!.pushViewController(reviewVC, animated: true)
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
     }
     
     
@@ -228,14 +249,19 @@ extension ProductDetailsViewController: UICollectionViewDelegate, UICollectionVi
 
 extension ProductDetailsViewController{
     func checkIsFavourite(product: Products, userId: Int) {
-        if (favoritesVM?.isProductsInFavourites(userId: userId, appDelegate: appDelegate, product: product) == true) {
-            like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        if reachability.isReachable(){
+            if (favoritesVM?.isProductsInFavourites(userId: userId, appDelegate: appDelegate, product: product) == true) {
+                like_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            }else{
+                like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+            }
         }else{
-            like_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+            self.showAlert(msg: "Please check your internet connection")
         }
     }
     
     func showAlert(userId: Int, appDelegate: AppDelegate, title: String, message: String, product: Products) {
+        if reachability.isReachable(){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
 
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
@@ -248,18 +274,25 @@ extension ProductDetailsViewController{
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
 
         self.present(alert, animated: true, completion: nil)
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
     }
     
     func showLoginAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-
-        alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
-            let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
-            self.navigationController?.pushViewController(loginVC, animated: true)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
-
-        self.present(alert, animated: true, completion: nil)
+        if reachability.isReachable(){
+            let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+            
+            alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
+                let loginVC = UIStoryboard(name: "LoginStoryboard", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginViewController
+                self.navigationController?.pushViewController(loginVC, animated: true)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
     }
     
     func showToastMessage(message: String, color: UIColor) {

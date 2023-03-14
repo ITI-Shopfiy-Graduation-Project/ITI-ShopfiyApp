@@ -8,6 +8,9 @@
 import UIKit
 import Kingfisher
 import JJFloatingActionButton
+import Reachability
+import TTGSnackbar
+
 class CategoryViewController: UIViewController {
     
     @IBOutlet weak var AllBtn: UIBarButtonItem!
@@ -23,28 +26,42 @@ class CategoryViewController: UIViewController {
     var product :[Products] = []
     var favoritesVM: FavouritesVM?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var reachability:Reachability!
 
     
     var AllProductsUrl = URLService.allProducts()
        
     var id : Int?
     
-//    @IBAction func cartBtn(_ sender: Any) {
-//        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-//            let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
-//            navigationController?.pushViewController(cartVC, animated: true)
-//        }else{
-//            showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
-//        }
-//    }
-//    @IBAction func favouritesBtn(_ sender: Any) {
-//        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-//            let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
-//            navigationController?.pushViewController(FavVC, animated: true)
-//        }else{
-//            showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
-//        }
-//    }
+    @IBAction func cartBtn(_ sender: Any) {
+        if !reachability.isReachable(){
+            self.showAlert(msg: "Please check your internet connection")
+        }else{
+            
+            if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+                let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
+                navigationController?.pushViewController(cartVC, animated: true)
+            }else{
+                showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
+            }
+        }
+        
+    }
+    
+    @IBAction func favouritesBtn(_ sender: Any) {
+        if !reachability.isReachable(){
+            self.showAlert(msg: "Please check your internet connection")
+        }else{
+            
+            if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+                let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
+                navigationController?.pushViewController(FavVC, animated: true)
+            }else{
+                showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
+            }
+        }
+        
+    }
   
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
   
@@ -52,49 +69,59 @@ class CategoryViewController: UIViewController {
     @IBAction func searchBtn(_ sender: Any) {
         
 //        search button here
-        let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-        
-        switch self.AllProductsUrl {
-        case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787230489/products.json":
-            productsVC.url = AllProductsUrl
-            productsVC.vendor = "Men"
-        case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787263257/products.json":
-            productsVC.url = AllProductsUrl
-            productsVC.vendor = "Women"
-        case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787296025/products.json":
-            productsVC.url = AllProductsUrl
-            productsVC.vendor = "Kids"
-        case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787328793/products.json":
-            productsVC.url = AllProductsUrl
-            productsVC.vendor = "Sale"
-        default:
-            productsVC.url = AllProductsUrl
-            productsVC.vendor = "All Categories"
+        if reachability.isReachable(){
+            let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
+            
+            switch self.AllProductsUrl {
+            case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787230489/products.json":
+                productsVC.url = AllProductsUrl
+                productsVC.vendor = "Men"
+            case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787263257/products.json":
+                productsVC.url = AllProductsUrl
+                productsVC.vendor = "Women"
+            case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787296025/products.json":
+                productsVC.url = AllProductsUrl
+                productsVC.vendor = "Kids"
+            case "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/collections/437787328793/products.json":
+                productsVC.url = AllProductsUrl
+                productsVC.vendor = "Sale"
+            default:
+                productsVC.url = AllProductsUrl
+                productsVC.vendor = "All Categories"
+            }
+            
+            navigationController?.pushViewController(productsVC, animated: true)
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
         }
-
-        
-        navigationController?.pushViewController(productsVC, animated: true)
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        indicator.center = view.center
-        view.addSubview(indicator)
-        indicator.startAnimating()
-        CategoryModel = CategoryViewModel()
+        reachability = Reachability.forInternetConnection()
+        
         CategoryCollectionView.dataSource = self
         CategoryCollectionView.delegate = self
-        CategoryModel?.ProductsUrl = self.AllProductsUrl
-        CategoryModel?.getProductsFromCategory()
-        CategoryModel?.bindingProducts = {()in
-        self.renderProducts()
-            self.btn()
-         
-             
+        
+        if reachability.isReachable(){
+            indicator.center = view.center
+            view.addSubview(indicator)
+            indicator.startAnimating()
+            CategoryModel = CategoryViewModel()
+            CategoryModel?.ProductsUrl = self.AllProductsUrl
+            CategoryModel?.getProductsFromCategory()
+            CategoryModel?.bindingProducts = {()in
+                self.renderProducts()
+                self.btn()
+                
+                
+            }
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
         }
-     
+        
         favoritesVM = FavouritesVM()
         viewWillAppear(false)
     }
@@ -130,11 +157,14 @@ extension CategoryViewController :UICollectionViewDataSource{
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetialsVC = UIStoryboard(name: "ProductDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "productDetails") as! ProductDetailsViewController
+        if reachability.isReachable(){
+            productDetialsVC.product_ID = product[indexPath.row].id
+            
+            self.navigationController?.pushViewController(productDetialsVC, animated: true)
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
         
-        productDetialsVC.product_ID = product[indexPath.row].id
-        
-        self.navigationController?.pushViewController(productDetialsVC, animated: true)
-       
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -316,7 +346,9 @@ extension CategoryViewController {
 extension CategoryViewController: FavouriteActionCategoryScreen {
     func addFavourite(userId: Int, appDelegate: AppDelegate, product: Products) {
         favoritesVM?.addFavourite(userId: userId, appDelegate: self.appDelegate, product: product)
-        showToastMessage(message: "Added", color: .green)
+        let snackbar = TTGSnackbar(message: "Item added to favorites!", duration: .middle)
+        snackbar.tintColor =  UIColor(named: "Green")
+        snackbar.show()
     }
     
     func isFavorite(userId: Int, appDelegate: AppDelegate, product: Products) -> Bool {
@@ -328,7 +360,9 @@ extension CategoryViewController: FavouriteActionCategoryScreen {
 
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
             favoritesVM?.deleteProductItemFromFavourites(userId: userId, appDeleget: self.appDelegate, ProductID: product.id ?? 0)
-            showToastMessage(message: "Removed !", color: .red)
+            let snackbar = TTGSnackbar(message: "Item Removed !", duration: .middle)
+            snackbar.tintColor =  UIColor(named: "Green")
+            snackbar.show()
             self.CategoryCollectionView.reloadData()
             viewWillAppear(false)
         }))

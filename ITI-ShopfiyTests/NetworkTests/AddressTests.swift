@@ -16,7 +16,7 @@ final class AddressTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         user1_Id = 123
-        user2_Id = 6874931691801
+        user2_Id = 6880117391641
     }
 
     override func tearDownWithError() throws {

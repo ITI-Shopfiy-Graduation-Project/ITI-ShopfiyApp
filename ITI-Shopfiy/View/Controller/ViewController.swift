@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Reachability
 
 class ViewController: UIViewController , CLLocationManagerDelegate {
     @IBOutlet weak var country: UITextField!
@@ -21,28 +22,43 @@ class ViewController: UIViewController , CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
     let indicator = UIActivityIndicatorView(style: .large)
     let addressVM = AddressViewModel()
+    var reachability:Reachability!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        reachability = Reachability.forInternetConnection()
+
         mabView.delegate = self
-        configureLocation()
-        configureAuthority()
-        configureView()
+        
+        if reachability.isReachable(){
+            configureLocation()
+            configureAuthority()
+            configureView()
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
     }
     
     @IBAction func done_btn(_ sender: Any) {
-        setUserAddressInfo()
-        if flag {
-            if UserDefaultsManager.sharedInstance.getUserID() != nil
-            {
-                putAddress()
-            }
-        }
-        else{
+        if reachability.isReachable(){
             setUserAddressInfo()
-            self.navigationController?.popViewController(animated: true)
-            
+            if flag {
+                if UserDefaultsManager.sharedInstance.getUserID() != nil
+                {
+                    putAddress()
+                }
+            }
+            else{
+                setUserAddressInfo()
+                self.navigationController?.popViewController(animated: true)
+            }
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
         }
+        
     }
+    
     func configureLocation(){
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest // accuracy best is not better for battery
@@ -77,14 +93,21 @@ class ViewController: UIViewController , CLLocationManagerDelegate {
     
     
     @IBAction func search(_ sender: Any) {
-        let destination = street.text
-        if destination != "" {
-            setLocation(destination: destination ?? "")
+        if reachability.isReachable(){
+            let destination = street.text
+            if destination != "" {
+                setLocation(destination: destination ?? "")
+            }
+            else{
+                showAlert(msg: "enter valid data")
+            }
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
         }
-        else{
-            showAlert(msg: "enter valid data")
-        }
+        
     }
+    
+    
 }
 
     // MARK: - peremssion

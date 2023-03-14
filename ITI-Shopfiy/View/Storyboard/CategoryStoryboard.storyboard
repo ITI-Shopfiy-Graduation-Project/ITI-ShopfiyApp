@@ -165,6 +165,20 @@
                                 <action selector="searchBtn:" destination="Y6W-OH-hqX" id="d6V-bQ-fsJ"/>
                             </connections>
                         </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="cart" catalog="system" id="RHk-0R-d1L">
+                                <color key="tintColor" name="Green"/>
+                                <connections>
+                                    <action selector="cartBtn:" destination="Y6W-OH-hqX" id="8iC-Cu-aYO"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="heart" catalog="system" id="Md3-cJ-1lH">
+                                <color key="tintColor" name="Red"/>
+                                <connections>
+                                    <action selector="favouritesBtn:" destination="Y6W-OH-hqX" id="6wL-Cp-mKD"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -219,6 +233,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cart" catalog="system" width="128" height="102"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="noProducts" width="426" height="469"/>

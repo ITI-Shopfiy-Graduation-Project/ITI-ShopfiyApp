@@ -25,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1000"/>
                                         <subviews>
                                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="85Z-Qm-JdY">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="266.66666666666669"/>
+                                                <rect key="frame" x="16" y="16" width="361" height="266.66666666666669"/>
                                                 <color key="backgroundColor" name="White"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xST-Es-Jbr">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -36,24 +36,33 @@
                                                 <cells/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                        <color key="value" name="White"/>
+                                                        <color key="value" name="SecondGray"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" systemColor="systemGray5Color"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </collectionView>
                                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Heh-gE-Tux">
-                                                <rect key="frame" x="16" y="212.66666666666669" width="361" height="38"/>
+                                                <rect key="frame" x="16" y="228.66666666666669" width="361" height="38"/>
                                                 <color key="tintColor" name="Green"/>
                                                 <color key="pageIndicatorTintColor" name="Gray"/>
                                                 <color key="currentPageIndicatorTintColor" name="Green"/>
                                             </pageControl>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IE-dK-S3y">
-                                                <rect key="frame" x="8" y="320.66666666666669" width="151" height="37"/>
+                                                <rect key="frame" x="8" y="336.66666666666669" width="151" height="37"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                                 <color key="textColor" name="Red"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjo-fi-qhy">
-                                                <rect key="frame" x="236" y="274.66666666666669" width="165" height="46"/>
+                                                <rect key="frame" x="236" y="290.66666666666669" width="165" height="46"/>
                                                 <color key="tintColor" name="Green"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="greenRightArrow" imagePlacement="trailing" title="Show Reviews"/>
@@ -62,7 +71,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHf-3c-Y96">
-                                                <rect key="frame" x="16" y="365.66666666666669" width="361" height="160.00000000000006"/>
+                                                <rect key="frame" x="16" y="381.66666666666669" width="361" height="160.00000000000006"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Product Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wej-Hc-8D1">
                                                         <rect key="frame" x="8" y="8" width="119" height="21"/>
@@ -71,7 +80,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Price:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrD-Ia-bYi">
-                                                        <rect key="frame" x="7.9999999999999929" y="37" width="113.33333333333331" height="21"/>
+                                                        <rect key="frame" x="7.9999999999999929" y="36.999999999999943" width="113.33333333333331" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -101,7 +110,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="38.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQu-nV-7OP">
-                                                        <rect key="frame" x="16" y="37" width="44.666666666666657" height="21"/>
+                                                        <rect key="frame" x="16" y="36.999999999999943" width="44.666666666666657" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -125,7 +134,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" name="thirdGray"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
                                                     <constraint firstItem="6LE-YC-9lU" firstAttribute="top" secondItem="1Zs-eB-oSQ" secondAttribute="bottom" constant="8" id="3IR-PI-umI"/>
                                                     <constraint firstItem="BHf-69-zGK" firstAttribute="centerY" secondItem="Wej-Hc-8D1" secondAttribute="centerY" id="9KZ-Ju-lFZ"/>
@@ -151,15 +160,26 @@
                                                     <constraint firstItem="lfE-qE-bZS" firstAttribute="top" secondItem="zrD-Ia-bYi" secondAttribute="bottom" constant="8" id="o2G-W9-MQv"/>
                                                     <constraint firstItem="WQu-nV-7OP" firstAttribute="leading" secondItem="BHf-69-zGK" secondAttribute="leading" id="pgz-es-JHv"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" name="SecondGray"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnU-No-qCc">
-                                                <rect key="frame" x="8" y="557.66666666666663" width="377" height="37"/>
+                                                <rect key="frame" x="8" y="573.66666666666663" width="377" height="37"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                                 <color key="textColor" name="Red"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtS-6p-i5U">
-                                                <rect key="frame" x="16" y="602.66666666666663" width="361" height="168"/>
+                                                <rect key="frame" x="16" y="618.66666666666663" width="361" height="168"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <color key="textColor" systemColor="labelColor"/>
@@ -167,7 +187,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18B-fS-2ys">
-                                                <rect key="frame" x="125.33333333333333" y="802.66666666666663" width="235.66666666666669" height="36.666666666666629"/>
+                                                <rect key="frame" x="125.33333333333333" y="818.66666666666663" width="235.66666666666669" height="36.666666666666629"/>
                                                 <color key="tintColor" name="Green"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="Add to Cart" cornerStyle="capsule">
@@ -178,7 +198,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lfa-FX-K8b">
-                                                <rect key="frame" x="32.000000000000007" y="802.66666666666663" width="70.666666666666686" height="36.666666666666629"/>
+                                                <rect key="frame" x="32.000000000000007" y="818.66666666666663" width="70.666666666666686" height="36.666666666666629"/>
                                                 <color key="tintColor" name="Red"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain">
@@ -203,7 +223,7 @@
                                             <constraint firstAttribute="trailing" secondItem="GtS-6p-i5U" secondAttribute="trailing" constant="16" id="QiD-Ro-6hI"/>
                                             <constraint firstItem="18B-fS-2ys" firstAttribute="width" secondItem="Mpf-2U-HUd" secondAttribute="width" multiplier="1.2:2" id="RL3-kf-cDb"/>
                                             <constraint firstItem="18B-fS-2ys" firstAttribute="top" secondItem="GtS-6p-i5U" secondAttribute="bottom" constant="32" id="RXZ-Pi-mp9"/>
-                                            <constraint firstAttribute="trailing" secondItem="85Z-Qm-JdY" secondAttribute="trailing" id="SKf-ZV-ZWN"/>
+                                            <constraint firstAttribute="trailing" secondItem="85Z-Qm-JdY" secondAttribute="trailing" constant="16" id="SKf-ZV-ZWN"/>
                                             <constraint firstItem="3IE-dK-S3y" firstAttribute="top" secondItem="tjo-fi-qhy" secondAttribute="bottom" id="T8T-Q5-zh1"/>
                                             <constraint firstItem="GtS-6p-i5U" firstAttribute="height" secondItem="gHf-3c-Y96" secondAttribute="height" multiplier="1.05" id="TZt-mf-rNz"/>
                                             <constraint firstItem="GtS-6p-i5U" firstAttribute="top" secondItem="DnU-No-qCc" secondAttribute="bottom" constant="8" id="Ud0-Or-EWa"/>
@@ -214,7 +234,7 @@
                                             <constraint firstAttribute="trailing" secondItem="gHf-3c-Y96" secondAttribute="trailing" constant="16" id="fsF-T8-wpC"/>
                                             <constraint firstItem="GtS-6p-i5U" firstAttribute="leading" secondItem="Mpf-2U-HUd" secondAttribute="leading" constant="16" id="gjX-Ob-fcw"/>
                                             <constraint firstItem="Lfa-FX-K8b" firstAttribute="leading" secondItem="Mpf-2U-HUd" secondAttribute="leading" constant="32" id="hVG-Fw-V6s"/>
-                                            <constraint firstItem="85Z-Qm-JdY" firstAttribute="leading" secondItem="Mpf-2U-HUd" secondAttribute="leading" id="iJM-zl-z9x"/>
+                                            <constraint firstItem="85Z-Qm-JdY" firstAttribute="leading" secondItem="Mpf-2U-HUd" secondAttribute="leading" constant="16" id="iJM-zl-z9x"/>
                                             <constraint firstItem="DnU-No-qCc" firstAttribute="top" secondItem="gHf-3c-Y96" secondAttribute="bottom" constant="32" id="ksq-jS-eYN"/>
                                             <constraint firstAttribute="trailing" secondItem="tjo-fi-qhy" secondAttribute="trailing" constant="-8" id="n5o-GX-C22"/>
                                             <constraint firstItem="DnU-No-qCc" firstAttribute="height" secondItem="3IE-dK-S3y" secondAttribute="height" id="nIX-CV-O0H"/>
@@ -225,7 +245,7 @@
                                             <constraint firstItem="tjo-fi-qhy" firstAttribute="top" secondItem="85Z-Qm-JdY" secondAttribute="bottom" constant="8" id="wdu-wN-JJF"/>
                                             <constraint firstItem="3IE-dK-S3y" firstAttribute="leading" secondItem="Mpf-2U-HUd" secondAttribute="leading" constant="8" id="xDI-vE-nhh"/>
                                             <constraint firstItem="Lfa-FX-K8b" firstAttribute="height" secondItem="18B-fS-2ys" secondAttribute="height" id="z40-fa-I0m"/>
-                                            <constraint firstItem="85Z-Qm-JdY" firstAttribute="top" secondItem="Mpf-2U-HUd" secondAttribute="top" id="zZR-Ch-MVD"/>
+                                            <constraint firstItem="85Z-Qm-JdY" firstAttribute="top" secondItem="Mpf-2U-HUd" secondAttribute="top" constant="16" id="zZR-Ch-MVD"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -344,17 +364,23 @@
         <namedColor name="Red">
             <color red="0.89999997615814209" green="0.42199999094009399" blue="0.50400000810623169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="SecondGray">
+            <color red="0.76899999380111694" green="0.76899999380111694" blue="0.76899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="White">
             <color red="0.98000001907348633" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="thirdGray">
-            <color red="0.76899999380111694" green="0.76899999380111694" blue="0.76899999380111694" alpha="0.48800000548362732" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

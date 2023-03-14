@@ -17,16 +17,25 @@ class ShoppingCartViewController: UIViewController {
     private var counter: Int8 = 1
     private var shoppingCartVM = ShoppingCartViewModel()
     private static var subTotalPrice = 0.0
+    var reachability:Reachability!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        ShoppingCartViewController.subTotalPrice = 0.0
-        lineItem.price = "231 $"
-        lineItem.title = "gray t-shirt"
-        lineItem.quantity = 3
-        lineItem.sku = "ct4"
-        cartArray = [lineItem , lineItem , lineItem]
-        tableConfiguration()
-        getData()
+        
+        reachability = Reachability.forInternetConnection()
+
+        if reachability.isReachable(){
+            ShoppingCartViewController.subTotalPrice = 0.0
+            lineItem.price = "231 $"
+            lineItem.title = "gray t-shirt"
+            lineItem.quantity = 3
+            lineItem.sku = "ct4"
+            cartArray = [lineItem , lineItem , lineItem]
+            tableConfiguration()
+            getData()
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
         
     }
     func tableConfiguration(){
@@ -40,17 +49,27 @@ class ShoppingCartViewController: UIViewController {
         self.navigationController?.pushViewController(signUpVC, animated: true)
     */}
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toPromoCode" {
-            let vc = segue.destination as! CartViewController
-            vc.cartArray = self.cartArray
-            vc.subTotal = ShoppingCartViewController.subTotalPrice
-        }
+       if reachability.isReachable(){
+           if segue.identifier == "toPromoCode" {
+               let vc = segue.destination as! CartViewController
+               vc.cartArray = self.cartArray
+               vc.subTotal = ShoppingCartViewController.subTotalPrice
+           }
+       }else{
+           self.showAlert(msg: "Please check your internet connection")
+       }
+       
     }
     
     
     @IBAction func saveChanges(_ sender: Any) {
         guard let cart = cartArray else {return}
-        putDraftOrder(lineItems: cart)
+        if reachability.isReachable(){
+            putDraftOrder(lineItems: cart)
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
+        
     }
     
     
@@ -97,7 +116,7 @@ extension ShoppingCartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if !Reachability.forInternetConnection().isReachable(){
-                
+                self.showAlert(msg: "Please check your internet connection")
             }
             else{
                 deleteLineItemProduct(indexPath: indexPath)
@@ -190,21 +209,24 @@ extension ShoppingCartViewController {
 extension ShoppingCartViewController {
     func deleteLineItemProduct(indexPath : IndexPath)
     {
-
-        deletedLineItem = cartArray?[indexPath.row]
-        cartArray?.remove(at: indexPath.row)
-        cartTable.deleteRows(at: [indexPath], with: .automatic)
-        showSnackBar(index: indexPath.row)
-        DispatchQueue.main.asyncAfter(deadline: .now()+5){
-            if self.flag == true {
-                if !(self.cartArray?.count == 0){
-                    self.putDraftOrder(lineItems: self.cartArray ?? [])
-                }
-                else
-                {
-                    // delete draft order
+        if reachability.isReachable(){
+            deletedLineItem = cartArray?[indexPath.row]
+            cartArray?.remove(at: indexPath.row)
+            cartTable.deleteRows(at: [indexPath], with: .automatic)
+            showSnackBar(index: indexPath.row)
+            DispatchQueue.main.asyncAfter(deadline: .now()+5){
+                if self.flag == true {
+                    if !(self.cartArray?.count == 0){
+                        self.putDraftOrder(lineItems: self.cartArray ?? [])
+                    }
+                    else
+                    {
+                        // delete draft order
+                    }
                 }
             }
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
         }
     }
     

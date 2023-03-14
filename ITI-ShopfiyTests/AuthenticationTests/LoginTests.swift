@@ -25,7 +25,7 @@ final class LoginTests: XCTestCase {
         customer1Email = "fedo"
         customer1Password = "123"
         
-        customer2Email = "maamoun22@mo2.com"
+        customer2Email = "fady10@gmail.com"
         customer2Password = "123456"
         
     }

@@ -9,6 +9,8 @@ import UIKit
 import Foundation
 import Kingfisher
 import TTGSnackbar
+import Reachability
+
 class HomeViewController: UIViewController {
     @IBOutlet weak var userName: UILabel!
     var brandsModel: BrandViewModel?
@@ -18,72 +20,98 @@ class HomeViewController: UIViewController {
     var AllBrandsUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com/admin/api/2023-01/smart_collections.json?since_id=482865238"
     var dicountUrl = "https://55d695e8a36c98166e0ffaaa143489f9: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@ios-q2-new-capital-2022-2023.myshopify.com//admin/api/2023-01/price_rules/1377368047897/discount_codes.json"
     let indicator = UIActivityIndicatorView(style: .large)
+    
     @IBAction func searchBtn(_ sender: Any) {
         let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-        productsVC.url = URLService.allProducts()
-        productsVC.vendor = "All Products"
-        navigationController?.pushViewController(productsVC, animated: true)
-       
-    }
-    @IBAction func cartBtn(_ sender: Any) {
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-            let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
-            navigationController?.pushViewController(cartVC, animated: true)
+        if reachability.isReachable(){
+            productsVC.url = URLService.allProducts()
+            productsVC.vendor = "All Products"
+            navigationController?.pushViewController(productsVC, animated: true)
         }else{
-            showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
+            self.showAlert(msg: "Please check your internet connection")
         }
+        
+    }
+    
+    @IBAction func cartBtn(_ sender: Any) {
+        if reachability.isReachable(){
+            if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+                let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
+                navigationController?.pushViewController(cartVC, animated: true)
+            }else{
+                showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
+            }
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
+        
     }
     @IBAction func favBtn(_ sender: Any) {
-        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-            let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
-            navigationController?.pushViewController(FavVC, animated: true)
+        if reachability.isReachable(){
+            if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+                let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
+                navigationController?.pushViewController(FavVC, animated: true)
+            }else{
+                showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
+            }
         }else{
-            showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
+            self.showAlert(msg: "Please check your internet connection")
         }
     }
+    
     @IBOutlet weak var pageControl: UIPageControl!
     var staticimgs = [UIImage(named: "ad1")!,UIImage(named: "ad2")!,UIImage(named: "ad3")!]
     var timer : Timer?
     @IBOutlet weak var BrandsCollectionView: UICollectionView!
     var currentCellIndex = 0
     @IBOutlet weak var AdsCollectionView: UICollectionView!
+    var reachability:Reachability!
+    
     override func viewDidLoad() {
      
         super.viewDidLoad()
-        indicator.center = view.center
-        view.addSubview(indicator)
-        AdsCollectionView.delegate = self
-        AdsCollectionView.dataSource = self
-        BrandsCollectionView.delegate = self
-        BrandsCollectionView.dataSource = self
-        let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
-        AdsCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
-        starttimer()
-        pageControl.numberOfPages  = staticimgs.count
-        brandsModel = BrandViewModel()
-        brandsModel?.BrandssUrl = self.AllBrandsUrl
-        brandsModel?.getBrands()
-        brandsModel?.bindingBrands = {()in
-        self.renderBrands()
-        }
-        discountModel = DiscountViewModel()
-        discountModel?.discountUrl = self.dicountUrl
-        discountModel?.getDiscount()
-        discountModel?.bindingDiscount =
-        {()in
-        self.renderDiscount()
-        }
         
-        navigationItem.title = "Shopify App"
+        reachability = Reachability.forInternetConnection()
         
+        viewWillAppear(false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if UserDefaultsManager.sharedInstance.isLoggedIn() == false{
-            userName.text = "Guest"
-        }
-        else {
-            userName.text = UserDefaultsManager.sharedInstance.getUserName()
+        if reachability.isReachable(){
+            indicator.center = view.center
+            view.addSubview(indicator)
+            AdsCollectionView.delegate = self
+            AdsCollectionView.dataSource = self
+            BrandsCollectionView.delegate = self
+            BrandsCollectionView.dataSource = self
+            let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
+            AdsCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
+            starttimer()
+            pageControl.numberOfPages  = staticimgs.count
+            brandsModel = BrandViewModel()
+            brandsModel?.BrandssUrl = self.AllBrandsUrl
+            brandsModel?.getBrands()
+            brandsModel?.bindingBrands = {()in
+                self.renderBrands()
+            }
+            discountModel = DiscountViewModel()
+            discountModel?.discountUrl = self.dicountUrl
+            discountModel?.getDiscount()
+            discountModel?.bindingDiscount =
+            {()in
+                self.renderDiscount()
+            }
+            
+            navigationItem.title = "Shopify App"
+            
+            if UserDefaultsManager.sharedInstance.isLoggedIn() == false{
+                userName.text = "Guest"
+            }
+            else {
+                userName.text = UserDefaultsManager.sharedInstance.getUserName()
+            }
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
         }
     }
    
@@ -94,17 +122,22 @@ extension HomeViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //Code Here
+        
         if collectionView == AdsCollectionView {
-            if   UIPasteboard.general.string != discount[0].code {
-               
-                UIPasteboard.general.string = discount[0].code!
-                let snackbar = TTGSnackbar(message: "🎉 congratulations you get discount code!", duration: .middle)
-                snackbar.tintColor =  UIColor(named: "Green")
-                snackbar.show()
-            }
-            else {
-                let snackbar = TTGSnackbar(message: "Already Copied!", duration: .middle)
-                snackbar.show()
+            if reachability.isReachable(){
+                if UIPasteboard.general.string != discount[0].code {
+                    
+                    UIPasteboard.general.string = discount[0].code!
+                    let snackbar = TTGSnackbar(message: "🎉 congratulations you get discount code!", duration: .middle)
+                    snackbar.tintColor =  UIColor(named: "Green")
+                    snackbar.show()
+                }
+                else {
+                    let snackbar = TTGSnackbar(message: "Already Copied!", duration: .middle)
+                    snackbar.show()
+                }
+            }else{
+                self.showAlert(msg: "Please check your internet connection")
             }
           
             
@@ -113,10 +146,16 @@ extension HomeViewController: UICollectionViewDelegate{
         }
         else
         {
-            let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-            productsVC.url = URLService.produts(Brand_ID: brand[indexPath.row].id ?? 437786837273)
-            productsVC.vendor = brand[indexPath.row].title
-            navigationController?.pushViewController(productsVC, animated: true)}
+            if reachability.isReachable(){
+                let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
+                productsVC.url = URLService.produts(Brand_ID: brand[indexPath.row].id ?? 437786837273)
+                productsVC.vendor = brand[indexPath.row].title
+                navigationController?.pushViewController(productsVC, animated: true)
+            }else{
+                self.showAlert(msg: "Please check your internet connection")
+            }
+        }
+        
     }
   
 }
