@@ -14,7 +14,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
         // Do any additional setup after loading the view.
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
@@ -22,6 +22,7 @@ class SettingsViewController: UIViewController {
         view.addGestureRecognizer(swipe)
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         let currencey = UserDefaultsManager.sharedInstance.getCurrency()
         if currencey == "EGP" {
             currenceySegemnt.selectedSegmentIndex = 1

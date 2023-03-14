@@ -23,6 +23,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate {
     let addressVM = AddressViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         mabView.delegate = self
         configureLocation()
         configureAuthority()

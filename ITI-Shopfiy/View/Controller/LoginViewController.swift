@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
     var cartcount = ShoppingCart()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         loginVM = LoginVM()
         // Do any additional setup after loading the view.
         indicator = UIActivityIndicatorView(style: .large)

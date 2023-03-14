@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IRa-Sv-ckJ">
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IRa-Sv-ckJ">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -25,11 +25,15 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="1FE-hL-8gS"/>
+                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="3cE-ld-cm7"/>
                             <constraint firstItem="IRa-Sv-ckJ" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="GXi-dg-qwe"/>
                             <constraint firstItem="IRa-Sv-ckJ" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Se8-Io-85y"/>
+                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="XST-mo-KqW"/>
                             <constraint firstItem="IRa-Sv-ckJ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="dnx-tr-m47"/>
                             <constraint firstItem="IRa-Sv-ckJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hyO-wS-Bud"/>
                             <constraint firstItem="IRa-Sv-ckJ" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="lkW-X8-OGy"/>
+                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="mxJ-gj-Yw0"/>
                             <constraint firstItem="IRa-Sv-ckJ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="zgE-P9-H1T"/>
                         </constraints>
                     </view>

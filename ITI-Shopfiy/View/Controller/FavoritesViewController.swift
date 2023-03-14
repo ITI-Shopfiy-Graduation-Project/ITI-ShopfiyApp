@@ -53,6 +53,7 @@ class FavoritesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         getSavedFavorites()
         self.favoritesCollectionView.reloadData()
     }

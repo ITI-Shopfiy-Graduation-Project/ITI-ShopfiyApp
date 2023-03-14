@@ -83,6 +83,7 @@ class ProductsViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         navigationItem.title = vendor
         self.productsCollectionView.reloadData()
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
     }
     
 //    @IBAction func likesScreen(_ sender: UIBarButtonItem) {

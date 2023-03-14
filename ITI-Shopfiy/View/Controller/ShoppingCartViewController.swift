@@ -21,6 +21,7 @@ class ShoppingCartViewController: UIViewController {
     private let indicator = UIActivityIndicatorView(style: .large)
 
     override func viewDidLoad() {
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         super.viewDidLoad()
         ShoppingCartViewController.subTotalPrice = 0.0
         tableConfiguration()
