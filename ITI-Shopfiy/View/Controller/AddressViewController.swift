@@ -10,6 +10,7 @@ import MapKit
 import CoreLocation
 import DropDown
 import TTGSnackbar
+import Reachability
 
 class AddressViewController: UIViewController , CLLocationManagerDelegate {
     @IBOutlet weak var addressHisoryTable: UITableView!
@@ -27,9 +28,11 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
     private var deletedAddress : Address?
     private var addressFlag : Bool = true
     let indicator = UIActivityIndicatorView(style: .large)
+    var reachability:Reachability!
+
         override func viewDidLoad() {
             super.viewDidLoad()
-            
+            reachability = Reachability.forInternetConnection()
         }
     override func viewWillAppear(_ animated: Bool) {
         addressHistoryArray = []
@@ -38,13 +41,19 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
         addressHisoryTable.dataSource = self
         configureLocation()
         configureAuthority()
-       // getAllAddresses()
+        // getAllAddresses()
         getAllHistory()
     }
     
     @IBAction func saveAddress_btn(_ sender: Any) {
-        postAddress()
+        if reachability.isReachable(){
+            postAddress()
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
+        
     }
+    
     func setupDropDown(){
         dropDown.anchorView = searchTF
         dropDown.dataSource = addressArray
@@ -93,14 +102,21 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
     
 
     @IBAction func search(_ sender: Any) {
-        let destination = searchTF.text
-        if destination != "" {
-            setLocation(destination: destination ?? "")
+        if reachability.isReachable(){
+            let destination = searchTF.text
+            if destination != "" {
+                setLocation(destination: destination ?? "")
+            }
+            else{
+                showAlert(msg: "error")
+            }
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
         }
-        else{
-            showAlert(msg: "error")
-        }
+        
     }
+    
+    
 }
 
 // MARK: - peremssion
@@ -389,9 +405,14 @@ extension AddressViewController  {
     
     func navigate (address : Address){
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "addressDetails") as! ViewController
-        VC.userAddress = address
-        VC.flag = true
-        navigationController?.pushViewController(VC, animated: true)
+        if !reachability.isReachable(){
+            self.showAlert(msg: "Please check your internet connection")
+        }else{
+            VC.userAddress = address
+            VC.flag = true
+            navigationController?.pushViewController(VC, animated: true)
+        }
+        
     }
 }
 extension AddressViewController {

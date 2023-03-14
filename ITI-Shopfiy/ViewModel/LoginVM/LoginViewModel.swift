@@ -34,11 +34,19 @@ class LoginVM: loginProtocol{
         guard let userEmail = customer.email else {return}
         guard let userFirstName = customer.first_name else {return}
         guard let userPassword = customer.tags  else {return}
+        guard let userPhone = customer.state  else {return}
+        guard let userAddress = customer.addresses?[0].address1  else {return}
+        guard let userAddressID = customer.addresses?[0].id  else {return}
         
         UserDefaultsManager.sharedInstance.setUserID(customerID: customerID)
         UserDefaultsManager.sharedInstance.setUserName(userName: userFirstName)
         UserDefaultsManager.sharedInstance.setUserEmail(userEmail: userEmail)
         UserDefaultsManager.sharedInstance.setUserPassword(userPassword: userPassword)
+        //
+        UserDefaultsManager.sharedInstance.setUserPhone(userPhone: userPhone)
+        UserDefaultsManager.sharedInstance.setUserAddress(userAddress: userAddress)
+        UserDefaultsManager.sharedInstance.setUserAddressID(userAddressID: userAddressID)
+//
         UserDefaultsManager.sharedInstance.login()
     }
     

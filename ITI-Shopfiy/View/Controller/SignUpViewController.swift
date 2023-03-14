@@ -7,6 +7,7 @@
 
 import UIKit
 import Foundation
+import Reachability
 
 class SignUpViewController: UIViewController {
     @IBOutlet weak var username_txt: UITextField!
@@ -91,19 +92,26 @@ class SignUpViewController: UIViewController {
     var adresses: [Address]? = []
     var chosenAddress = Address()
     var indicator: UIActivityIndicatorView?
-
+    var reachability:Reachability!
+    
     //MARK: view did load
     override func viewDidLoad() {
         super.viewDidLoad()
         
         resetForm()
         registerVM = RegisterVM()
-        // Do any additional setup after loading the view.
-        indicator = UIActivityIndicatorView(style: .large)
-        indicator?.center = view.center
-        view.addSubview(indicator ?? UIActivityIndicatorView() )
+        reachability = Reachability.forInternetConnection()
         
-        navigationItem.title = "Shopify App"
+        // Do any additional setup after loading the view.
+        if reachability.isReachable(){
+            indicator = UIActivityIndicatorView(style: .large)
+            indicator?.center = view.center
+            view.addSubview(indicator ?? UIActivityIndicatorView() )
+            
+            navigationItem.title = "Shopify App"
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
         view.addGestureRecognizer(swipe)
@@ -120,10 +128,13 @@ class SignUpViewController: UIViewController {
     
     @IBAction func chooseOnMap(_ sender: UIButton) {
         let addressVC = UIStoryboard(name: "AddressDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "addressDetails") as! ViewController
-        addressVC.addressDelegate = self
-        address_error.isHidden = true
-        navigationController?.pushViewController(addressVC, animated: true)
-        
+        if reachability.isReachable(){
+            addressVC.addressDelegate = self
+            address_error.isHidden = true
+            navigationController?.pushViewController(addressVC, animated: true)
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
     }
     
     @IBAction func createAccount_btn(_ sender: UIButton){
@@ -135,11 +146,15 @@ class SignUpViewController: UIViewController {
         
         indicator?.startAnimating()
         
-        if ValdiateCustomerInfomation(UserName: name, password: password, confirmPassword: confirmPassword, userPhone: phone, email: email, userAddress: chosenAddress){
-            register(UserName: name, password: password, confirmPassword: confirmPassword, UserPhone: phone, email: email, UserAddress: chosenAddress)
-        } else {
-            showAlertError(title: "Couldnot register", message: "Please try again later.")
-            self.indicator?.stopAnimating()
+        if reachability.isReachable(){
+            if ValdiateCustomerInfomation(UserName: name, password: password, confirmPassword: confirmPassword, userPhone: phone, email: email, userAddress: chosenAddress){
+                register(UserName: name, password: password, confirmPassword: confirmPassword, UserPhone: phone, email: email, UserAddress: chosenAddress)
+            } else {
+                showAlertError(title: "Couldnot register", message: "Please try again later.")
+                self.indicator?.stopAnimating()
+            }
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
         }
 //        resetForm()
         

@@ -13,6 +13,8 @@ import PassKit
 import Braintree
 import BraintreeDropIn
 import TTGSnackbar
+import Reachability
+
 class PaymentViewController: UIViewController, AddressDelegate {
     func getAddressInfo(Address: Address) {
         userAddress = Address
@@ -34,8 +36,14 @@ class PaymentViewController: UIViewController, AddressDelegate {
     static var totalPrice: Double = 0
     var userTotalCost: Double = 0.0
     private var userAddress : Address?
+    
+    var reachability:Reachability!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        reachability = Reachability.forInternetConnection()
+
         setDefaultButtonTheme()
         // aletrnative token sandbox_fwf8wnc6_7h4b4rgjq3fptm87  || "sandbox_jyvqscf2_jpbyz2k4fnvh6fvt"
         braintreeClient = BTAPIClient(authorization: "sandbox_q7ftqr99_7h4b4rgjq3fptm87")!
@@ -46,36 +54,54 @@ class PaymentViewController: UIViewController, AddressDelegate {
 
     }
     @IBAction func chooseAddress(_ sender: Any) {
-        let vc = UIStoryboard(name: "AddressDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "address") as! AddressViewController
-        vc.addressDelegate = self
-        self.navigationController?.pushViewController(vc, animated: true)
+        if !reachability.isReachable(){
+            self.showAlert(msg: "Please check your internet connection")
+        }else{
+            let vc = UIStoryboard(name: "AddressDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "address") as! AddressViewController
+            vc.addressDelegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
+    
     @IBAction func GooglePay(_ sender: UIButton) {
-        DispatchQueue.main.async {
-            self.setDefaultButtonTheme()
-            sender.setTitleColor(UIColor(named: "Green"), for: .selected)
-            sender.alpha = 1
-            sender.self.backgroundColor = .black
-            sender.backgroundColor = UIColor(ciColor: .gray)
-            sender.borderColor = UIColor(named: "Green")
-            sender.borderWidth = 1.5
-            sender.cornerRadius = 10
-            self.setupPayPal()
+        if !reachability.isReachable(){
+            self.showAlert(msg: "Please check your internet connection")
+        }else{
+            
+            DispatchQueue.main.async {
+                self.setDefaultButtonTheme()
+                sender.setTitleColor(UIColor(named: "Green"), for: .selected)
+                sender.alpha = 1
+                sender.self.backgroundColor = .black
+                sender.backgroundColor = UIColor(ciColor: .gray)
+                sender.borderColor = UIColor(named: "Green")
+                sender.borderWidth = 1.5
+                sender.cornerRadius = 10
+                self.setupPayPal()
+                
+            }
         }
     }
+    
     @IBAction func cashOnDelivery(_ sender: UIButton) {
-        DispatchQueue.main.async {
-            self.setDefaultButtonTheme()
-            sender.titleLabel?.textColor = UIColor(named: "Green")
-            sender.alpha = 1
-            sender.backgroundColor = UIColor(ciColor: .gray)
-            sender.setTitleColor(UIColor(named: "Green"), for: .selected)
-            sender.borderColor = UIColor(named: "Green")
-            sender.borderWidth = 1.5
-            sender.cornerRadius = 10
+        if !reachability.isReachable(){
+            self.showAlert(msg: "Please check your internet connection")
+        }else{
+            DispatchQueue.main.async {
+                self.setDefaultButtonTheme()
+                sender.titleLabel?.textColor = UIColor(named: "Green")
+                sender.alpha = 1
+                sender.backgroundColor = UIColor(ciColor: .gray)
+                sender.setTitleColor(UIColor(named: "Green"), for: .selected)
+                sender.borderColor = UIColor(named: "Green")
+                sender.borderWidth = 1.5
+                sender.cornerRadius = 10
+            }
             self.showAlertForCashPayment(msg: "Do you want to complete your payment transaction")
         }
     }
+    
     func setUserAddress(){
         let address = UserDefaultsManager.sharedInstance.getUserAddress()
         if userAddress != nil {

@@ -90,7 +90,6 @@
                 <constraint firstItem="Z1d-nq-Lxl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ymA-kS-1ZD"/>
                 <constraint firstItem="vlm-2C-idg" firstAttribute="top" secondItem="zRE-8P-hXl" secondAttribute="bottom" constant="16" id="yrY-2S-HRS"/>
             </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="guestImageView" destination="fkA-TH-4Qq" id="b8c-v8-Ta5"/>
             </connections>

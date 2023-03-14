@@ -85,6 +85,7 @@
 		A78FF3FC29B03D8300F42A7A /* ProductDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78FF3FB29B03D8300F42A7A /* ProductDetailsStoryboard.storyboard */; };
 		A79C157729A81A4D00AB6C20 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79C157629A81A4D00AB6C20 /* FavoritesViewController.swift */; };
 		A79C157929A81A5D00AB6C20 /* FavoritesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A79C157829A81A5D00AB6C20 /* FavoritesStoryboard.storyboard */; };
+		A7B4C1D129C07FBC007DA0FC /* ITI_ShopfiyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA92029A2AEE700CE0786 /* ITI_ShopfiyUITests.swift */; };
 		A7E97AB829BD1D240083F17D /* CategoryMockingFromNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E97AB729BD1D240083F17D /* CategoryMockingFromNetwork.swift */; };
 		A7FFA85E29A594CC00474CB1 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FFA85D29A594CC00474CB1 /* LoginStoryboard.storyboard */; };
 		A7FFA86029A594EF00474CB1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FFA85F29A594EF00474CB1 /* LoginViewController.swift */; };
@@ -113,7 +114,6 @@
 		E29FA90929A2AEE700CE0786 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29FA90829A2AEE700CE0786 /* Assets.xcassets */; };
 		E29FA90C29A2AEE700CE0786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E29FA90A29A2AEE700CE0786 /* LaunchScreen.storyboard */; };
 		E29FA91729A2AEE700CE0786 /* ITI_ShopfiyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA91629A2AEE700CE0786 /* ITI_ShopfiyTests.swift */; };
-		E29FA92129A2AEE700CE0786 /* ITI_ShopfiyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA92029A2AEE700CE0786 /* ITI_ShopfiyUITests.swift */; };
 		E29FA92329A2AEE700CE0786 /* ITI_ShopfiyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA92229A2AEE700CE0786 /* ITI_ShopfiyUITestsLaunchTests.swift */; };
 		E29FA94729A2D6B400CE0786 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FA94629A2D6B400CE0786 /* HomeViewController.swift */; };
 		E29FA94A29A2F4F000CE0786 /* CartStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E29FA94929A2F4F000CE0786 /* CartStoryboard.storyboard */; };
@@ -1151,9 +1151,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7B4C1D129C07FBC007DA0FC /* ITI_ShopfiyUITests.swift in Sources */,
 				E29FA92329A2AEE700CE0786 /* ITI_ShopfiyUITestsLaunchTests.swift in Sources */,
 				E2A52F3429B9235B00482A06 /* PaymentViewController.swift in Sources */,
-				E29FA92129A2AEE700CE0786 /* ITI_ShopfiyUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

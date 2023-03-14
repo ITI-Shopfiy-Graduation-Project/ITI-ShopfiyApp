@@ -26,7 +26,7 @@ final class SignUpTests: XCTestCase {
         customer1Email = "fedo"
         customer1Password = "123"
         
-        customer2Email = "abdo22@iti.com"
+        customer2Email = "fady10@gmail.com"
         customer2Password = "12345"
     }
 

@@ -34,6 +34,20 @@
                ReferencedContainer = "container:ITI-Shopfiy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E29FA91129A2AEE700CE0786"
+               BuildableName = "ITI-ShopfiyTests.xctest"
+               BlueprintName = "ITI-ShopfiyTests"
+               ReferencedContainer = "container:ITI-Shopfiy.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -53,11 +67,6 @@
                BlueprintName = "ITI-ShopfiyTests"
                ReferencedContainer = "container:ITI-Shopfiy.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "ITI_ShopfiyTests">
-               </Test>
-            </SkippedTests>
             <LocationScenarioReference
                identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
                referenceType = "1">

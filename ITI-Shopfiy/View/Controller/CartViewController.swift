@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Reachability
 
 class CartViewController: UIViewController {
 
@@ -24,10 +25,19 @@ class CartViewController: UIViewController {
     static var totalPriceValue : Double = 0.0
     var cartArray: [LineItem]?
     private var counter: Int = 0
+    
+    var reachability:Reachability!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableConfiguration()
-        setInitialValue()
+        
+        reachability = Reachability.forInternetConnection()
+        if reachability.isReachable(){
+            setInitialValue()
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
        /* let lineItem = LineItem()
         lineItem.price = "231 $"
         lineItem.title = "gray t-shirt"
@@ -82,10 +92,20 @@ class CartViewController: UIViewController {
     }
     
     @IBAction func applyPromoCode(_ sender: Any) {
-        validatePromoCode()
+        if reachability.isReachable(){
+            validatePromoCode()
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
+        
     }
     
     @IBAction func proceedToCheckout(_ sender: Any) {
+        if reachability.isReachable(){
+            
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! PaymentViewController

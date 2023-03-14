@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="R3c-sa-Uac">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -14,26 +14,22 @@
             <objects>
                 <viewController storyboardIdentifier="me" id="Y6W-OH-hqX" customClass="MeViewController" customModule="ITI_Shopfiy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IRa-Sv-ckJ">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IRa-Sv-ckJ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="1FE-hL-8gS"/>
-                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="3cE-ld-cm7"/>
                             <constraint firstItem="IRa-Sv-ckJ" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="GXi-dg-qwe"/>
                             <constraint firstItem="IRa-Sv-ckJ" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Se8-Io-85y"/>
-                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="XST-mo-KqW"/>
                             <constraint firstItem="IRa-Sv-ckJ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="dnx-tr-m47"/>
                             <constraint firstItem="IRa-Sv-ckJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hyO-wS-Bud"/>
                             <constraint firstItem="IRa-Sv-ckJ" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="lkW-X8-OGy"/>
-                            <constraint firstItem="IRa-Sv-ckJ" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="mxJ-gj-Yw0"/>
                             <constraint firstItem="IRa-Sv-ckJ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="zgE-P9-H1T"/>
                         </constraints>
                     </view>
@@ -108,7 +104,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="R3c-sa-Uac" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="OBK-Nb-KVd">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
