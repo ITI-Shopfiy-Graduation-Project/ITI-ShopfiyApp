@@ -21,12 +21,13 @@ class ProductDetailsViewController: UIViewController{
     @IBOutlet weak var cart_btn: UIButton!
     @IBOutlet weak var like_btn: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
-    
+    var check = true
     var currentCellIndex = 0
     var cart : DrafOrder = DrafOrder()
     var cartVM = ShoppingCartViewModel()
     var lineitem = LineItem()
     var newLineItem : LineItem?
+    var itemtitle : String?
     //    var lineitemarr:LineItem = [LineItem]
     var lineItemArray:[LineItem] = []
     var lineAppend : [LineItem]?
@@ -50,24 +51,7 @@ class ProductDetailsViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.center = view.center
-        view.addSubview(indicator)
-        indicator.startAnimating()
-        
-        productDetailsVM = ProductDetailsVM()
-        productDetailsVM?.getProductDetails(Product_ID: self.product_ID ?? 8117840150809)
-        productDetailsVM?.bindingProducts = { () in
-            self.renderView()
-            indicator.stopAnimating()
-        }
-
-        cartVM.cartsUrl = self.AllDraftsUrl
-        cartVM.getCart()
-        cartVM.bindingCartt = {()in
-            self.renderCart()
-            
-        }
+      
         
         favoritesVM = FavouritesVM()
         viewWillAppear(false)
@@ -93,8 +77,27 @@ class ProductDetailsViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         checkIsFavourite(product: self.product ?? Products(), userId: UserDefaultsManager.sharedInstance.getUserID() ?? -1)
         productImagesCollectionView.reloadData()
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.center = view.center
+        view.addSubview(indicator)
+        indicator.startAnimating()
+        
+        productDetailsVM = ProductDetailsVM()
+        productDetailsVM?.getProductDetails(Product_ID: self.product_ID ?? 8117840150809)
+        productDetailsVM?.bindingProducts = { () in
+            self.renderView()
+            indicator.stopAnimating()
+        }
+
+        cartVM.cartsUrl = self.AllDraftsUrl
+        cartVM.getCart()
+        cartVM.bindingCartt = {()in
+            self.renderCart()
+            
+        }
     }
     
 //    @objc func goToFavoritesScreen(sender: AnyObject) {
@@ -120,26 +123,51 @@ class ProductDetailsViewController: UIViewController{
        
         if ( UserDefaultsManager.sharedInstance.isLoggedIn() == true){
             cartcount.draft_orders?.forEach({ email in
-
-                        if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
-                        {     addtoLine = email
-                            UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
-                           lineAppend = email.line_items
-                            newLineItem = LineItem()
-                            newLineItem?.title = product?.title
-                            newLineItem?.price = product?.variants![0].price
-                            newLineItem?.sku = product?.image?.src
-                            newLineItem?.vendor = product?.vendor
-                            newLineItem?.product_id = product?.id
-                            newLineItem?.grams = product?.variants![0].inventory_quantity
-                            newLineItem?.quantity = 1
-                            lineAppend?.append(newLineItem!)
-                            let draftOrder = DrafOrder()
-                            draftOrder.line_items = lineAppend
-                            addtoLine = draftOrder
-                            let draftOrderAppend : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)
-                            putCart(cartt: draftOrderAppend)
-                            print ("already used")
+    
+        if  email.email ==  UserDefaultsManager.sharedInstance.getUserEmail()!
+                {
+            
+            renderCartData ()
+            
+            addtoLine = email
+            UserDefaultsManager.sharedInstance.setUserCart(cartId: email.id)
+            lineAppend = email.line_items
+            renderCartData ()
+            lineAppend?.forEach({itemm in
+                if itemm.title == self.product?.title  {
+                    renderCartData ()
+                    
+                    itemtitle = itemm.title
+                    let snackbar = TTGSnackbar(message: "Already in cart", duration: .middle)
+                    snackbar.tintColor =  UIColor(named: "Green")
+                    snackbar.show()
+                    print ("done")
+                    renderCartData ()
+                }
+            })
+                if itemtitle == nil {
+                    renderCartData ()
+            newLineItem = LineItem()
+            newLineItem?.title = product?.title
+            newLineItem?.price = product?.variants![0].price
+            newLineItem?.sku = product?.image?.src
+            newLineItem?.vendor = product?.vendor
+            newLineItem?.product_id = product?.id
+            newLineItem?.grams = product?.variants![0].inventory_quantity
+            newLineItem?.quantity = 1
+            lineAppend?.append(newLineItem!)
+            let draftOrder = DrafOrder()
+            draftOrder.line_items = lineAppend
+            addtoLine = draftOrder
+            let draftOrderAppend : ShoppingCartPut = ShoppingCartPut(draft_order:addtoLine)
+            putCart(cartt: draftOrderAppend)
+            let snackbar = TTGSnackbar(message: "Added to cart ✅", duration: .middle)
+            snackbar.tintColor =  UIColor(named: "Green")
+            snackbar.show()
+            print ("already used")
+                    print ("put")
+                    renderCartData ()
+                        }
                        
                         }
                       
@@ -147,10 +175,15 @@ class ProductDetailsViewController: UIViewController{
             if addtoLine == nil
                                 {
                                 self.postCart()
+                print ("posted")
+                let snackbar = TTGSnackbar(message: "Added to cart ✅", duration: .middle)
+                snackbar.tintColor =  UIColor(named: "Green")
+                snackbar.show()
                     }
         }else{
             showLoginAlert(title: "UnAuthorized Action", message: "You must loginn first")
         }
+        renderCartData ()
     }
     
     @IBAction func addToLikesButton(_ sender: Any) {
@@ -167,6 +200,10 @@ class ProductDetailsViewController: UIViewController{
                 snackbar.show()
             }
         }
+        self.reloadInputViews()
+        self.renderCart()
+        self.renderView()
+        
         
     
     }
@@ -288,7 +325,16 @@ extension ProductDetailsViewController{
             self.productDescription.text = self.product?.body_html
             self.ProductImages = self.product?.images
             self.product?.id = self.product_ID
-            self.productPrice.text = self.product?.variants?[0].price
+            if UserDefaultsManager.sharedInstance.getCurrency() == "EGP"
+            {
+            let price = Double(self.product?.variants?[0].price ?? "")
+            let priceString = "\(((price ?? 0) * 30).formatted()) EGP"
+            self.productPrice.text = priceString
+                        }
+            else {
+                let priceString = "\(self.product?.variants?[0].price ?? "0") $"
+                self.productPrice.text = priceString
+            }
             self.productSize.text = self.product?.variants?[0].option1 ?? "Medium"
             self.productColor.text = self.product?.variants?[0].option2 ?? "White"
             self.pageControl.hidesForSinglePage = true
@@ -385,12 +431,7 @@ extension ProductDetailsViewController {
            // print ("heree email\(String(describing: self.cartcount.draft_orders?[1].email))")
 
         }
-        
-        
-        
-        
-        
-        
+    
         
     }
     
@@ -424,6 +465,27 @@ extension ProductDetailsViewController {
             }
     }
     
+    
+    
+    
+    
+    
+}
+extension ProductDetailsViewController {
+    
+    func renderCartData () {
+        cartVM.cartsUrl = self.AllDraftsUrl
+        cartVM.getCart()
+        cartVM.bindingCartt = {()in
+            self.renderCart()
+            
+        }
+        
+        
+        
+        
+        
+    }
     
     
     

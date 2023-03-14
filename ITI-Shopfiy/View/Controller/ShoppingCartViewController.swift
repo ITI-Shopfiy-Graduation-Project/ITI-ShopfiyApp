@@ -18,6 +18,7 @@ class ShoppingCartViewController: UIViewController {
     private var shoppingCartVM = ShoppingCartViewModel()
     private static var subTotalPrice = 0.0
     override func viewDidLoad() {
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         super.viewDidLoad()
         ShoppingCartViewController.subTotalPrice = 0.0
         lineItem.price = "231 $"

@@ -45,6 +45,7 @@ class MeViewController: UIViewController {
         swipe.direction = .right
 
         view.addGestureRecognizer(swipe)
+        
        
     }
     
@@ -53,10 +54,15 @@ class MeViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         self.navigationItem.setHidesBackButton(true, animated: true)
+        self.meView.reloadInputViews()
         if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
+           
             self.meUnLogedVC?.removeFromSuperview()//to be removed
             self.meView.addSubview(meLogedVC!)
+            self.meView.reloadInputViews()
+            self.meLogedVC?.reloadInputViews()
             //
             self.meLogedVC?.user_img.image = UIImage(named: "user")
             //user Image
@@ -78,11 +84,15 @@ class MeViewController: UIViewController {
         } // condition: If user is unlogged
         else{
             self.meLogedVC?.removeFromSuperview()//to be removed
+          
             meUnLogedVC?.guestImageView.image = UIImage(named: "person")
             self.navigationController?.isNavigationBarHidden = true
             self.meView.addSubview(meUnLogedVC!)
             meUnLogedVC?.meProtocol = self
+            self.meView.reloadInputViews()
+            self.meLogedVC?.reloadInputViews()
         }
+        self.meView.reloadInputViews()
     }
 
     /*
