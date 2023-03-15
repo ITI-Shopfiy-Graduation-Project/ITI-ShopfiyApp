@@ -179,6 +179,7 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
     
 }
 
+
 extension ProductsViewController{
     
     func renderView() {
