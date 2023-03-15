@@ -155,7 +155,9 @@ extension MeViewController: logedMeProtocol, unLogedMeProtocol{
                 
                 
                 ordersVC.orderr = ordr
-                self.navigationController?.pushViewController(ordersVC, animated: true)}
+                self.navigationController?.pushViewController(ordersVC, animated: true)
+                ordr.removeAll()
+            }
         }
     }
     

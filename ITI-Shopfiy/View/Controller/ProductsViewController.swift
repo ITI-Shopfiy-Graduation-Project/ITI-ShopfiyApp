@@ -136,8 +136,8 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
     // MARK: Dimensions
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        return CGSize(width: (collectionView.frame.width/2) - 8, height: (collectionView.frame.height / 3 ) + 10)
+   
+        return CGSize(width: self.view.frame.width*0.45, height: self.view.frame.height*0.32)
     }
 
     // MARK: Cells

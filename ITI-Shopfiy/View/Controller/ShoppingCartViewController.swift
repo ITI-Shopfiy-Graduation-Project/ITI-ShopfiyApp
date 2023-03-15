@@ -43,17 +43,18 @@ class ShoppingCartViewController: UIViewController {
    /*     let signUpVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! SignUpViewController
         self.navigationController?.pushViewController(signUpVC, animated: true)
     */}
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       if Reachability.forInternetConnection().isReachable(){
-           if segue.identifier == "toPromoCode" {
-               let vc = segue.destination as! CartViewController
-               vc.cartArray = self.cartArray
-               vc.subTotal = ShoppingCartViewController.subTotalPrice
-           }
-       }else{
-           self.showAlert(msg: "Please check your internet connection")
-       }
-       
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if Reachability.forInternetConnection().isReachable(){
+            
+            if segue.identifier == "toPromoCode" {
+                let vc = segue.destination as! CartViewController
+                vc.cartArray = self.cartArray
+                vc.subTotal = ShoppingCartViewController.subTotalPrice
+            }
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
     }
     
     
