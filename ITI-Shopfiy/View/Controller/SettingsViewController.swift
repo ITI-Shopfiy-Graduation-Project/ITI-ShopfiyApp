@@ -47,18 +47,10 @@ class SettingsViewController: UIViewController {
     @objc func dismissVC() {
         self.navigationController?.popViewController(animated: true)
     }
-/*
-    @IBAction func action(_ sender: Any) {
-        let meVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
 
-        self.navigationController?.pushViewController(meVC, animated: true)
-    }*/
-    
     @IBAction func changePhone(_ sender: Any) {
         if reachability.isReachable(){
-            let meVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
-            
-            self.navigationController?.pushViewController(meVC, animated: true)
+            showPhoneAlert()
         }else{
             self.showAlert(msg: "Please check your internet connection")
         }
@@ -127,5 +119,33 @@ extension SettingsViewController{
             self.present(alert, animated: true, completion: nil)
         }
     }
+}
+
+extension SettingsViewController {
+    func showPhoneAlert(){
+        let alert = UIAlertController(title: "Change Phone Number", message: "Enter your phone number", preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            if let phone = UserDefaultsManager.sharedInstance.getUserPhone()
+            {
+                textField.text = "01091190679"
+            }
+            else {
+                textField.placeholder = "phone number"
+            }
+        }
+        
+        alert.addAction(UIAlertAction(title: "close", style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            UserDefaultsManager.sharedInstance.setUserPhone(userPhone: textField?.text)
+            print("Text field: \(String(describing: textField?.text))")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     
+    func validatePhoneNumber(){
+        
+    }
 }

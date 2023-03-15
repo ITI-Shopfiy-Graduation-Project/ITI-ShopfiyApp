@@ -28,11 +28,9 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
     private var deletedAddress : Address?
     private var addressFlag : Bool = true
     let indicator = UIActivityIndicatorView(style: .large)
-    var reachability:Reachability!
 
         override func viewDidLoad() {
             super.viewDidLoad()
-            reachability = Reachability.forInternetConnection()
         }
     override func viewWillAppear(_ animated: Bool) {
         addressHistoryArray = []
@@ -46,7 +44,7 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
     }
     
     @IBAction func saveAddress_btn(_ sender: Any) {
-        if reachability.isReachable(){
+        if Reachability.forInternetConnection().isReachable(){
             postAddress()
         }else{
             self.showAlert(msg: "Please check your internet connection")
@@ -102,7 +100,7 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
     
 
     @IBAction func search(_ sender: Any) {
-        if reachability.isReachable(){
+        if Reachability.forInternetConnection().isReachable(){
             let destination = searchTF.text
             if destination != "" {
                 setLocation(destination: destination ?? "")
@@ -405,7 +403,7 @@ extension AddressViewController  {
     
     func navigate (address : Address){
         let VC = self.storyboard?.instantiateViewController(withIdentifier: "addressDetails") as! ViewController
-        if !reachability.isReachable(){
+        if !Reachability.forInternetConnection().isReachable(){
             self.showAlert(msg: "Please check your internet connection")
         }else{
             VC.userAddress = address

@@ -235,6 +235,7 @@ extension SignUpViewController {
                 for customer in customers {
                     if (newCustomer.customer?.id == customer.id){
                         let customerID = customer.id
+                        UserDefaultsManager.sharedInstance.setUserPhone(userPhone: UserPhone )
                         UserDefaultsManager.sharedInstance.setUserID(customerID: customerID)
                         UserDefaultsManager.sharedInstance.setUserName(userName: UserName)
                         UserDefaultsManager.sharedInstance.setUserEmail(userEmail: email)

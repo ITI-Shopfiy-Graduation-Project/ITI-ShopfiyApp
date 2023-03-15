@@ -26,14 +26,13 @@ class CartViewController: UIViewController {
     var cartArray: [LineItem]?
     private var counter: Int = 0
     
-    var reachability:Reachability!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableConfiguration()
         
-        reachability = Reachability.forInternetConnection()
-        if reachability.isReachable(){
+        
+        if Reachability.forInternetConnection().isReachable(){
             setInitialValue()
         }else{
             self.showAlert(msg: "Please check your internet connection")
@@ -92,7 +91,7 @@ class CartViewController: UIViewController {
     }
     
     @IBAction func applyPromoCode(_ sender: Any) {
-        if reachability.isReachable(){
+        if Reachability.forInternetConnection().isReachable(){
             validatePromoCode()
         }else{
             self.showAlert(msg: "Please check your internet connection")
@@ -101,16 +100,16 @@ class CartViewController: UIViewController {
     }
     
     @IBAction func proceedToCheckout(_ sender: Any) {
-        if reachability.isReachable(){
+        if Reachability.forInternetConnection().isReachable(){
             
         }else{
             self.showAlert(msg: "Please check your internet connection")
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! PaymentViewController
+        _ = segue.destination as! PaymentViewController
         PaymentViewController.totalPrice = Self.totalPriceValue
-        print("total: \(totalPrice.text)")
+        print("total: \(String(describing: totalPrice.text))")
     }
 }
 

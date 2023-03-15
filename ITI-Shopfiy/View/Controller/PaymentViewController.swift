@@ -14,7 +14,6 @@ import Braintree
 import BraintreeDropIn
 import TTGSnackbar
 import Reachability
-
 class PaymentViewController: UIViewController, AddressDelegate {
     func getAddressInfo(Address: Address) {
         userAddress = Address
@@ -37,12 +36,10 @@ class PaymentViewController: UIViewController, AddressDelegate {
     var userTotalCost: Double = 0.0
     private var userAddress : Address?
     
-    var reachability:Reachability!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reachability = Reachability.forInternetConnection()
 
         setDefaultButtonTheme()
         // aletrnative token sandbox_fwf8wnc6_7h4b4rgjq3fptm87  || "sandbox_jyvqscf2_jpbyz2k4fnvh6fvt"
@@ -54,7 +51,7 @@ class PaymentViewController: UIViewController, AddressDelegate {
 
     }
     @IBAction func chooseAddress(_ sender: Any) {
-        if !reachability.isReachable(){
+        if !Reachability.forInternetConnection().isReachable(){
             self.showAlert(msg: "Please check your internet connection")
         }else{
             let vc = UIStoryboard(name: "AddressDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "address") as! AddressViewController
@@ -65,7 +62,7 @@ class PaymentViewController: UIViewController, AddressDelegate {
     }
     
     @IBAction func GooglePay(_ sender: UIButton) {
-        if !reachability.isReachable(){
+        if !Reachability.forInternetConnection().isReachable(){
             self.showAlert(msg: "Please check your internet connection")
         }else{
             
@@ -85,7 +82,7 @@ class PaymentViewController: UIViewController, AddressDelegate {
     }
     
     @IBAction func cashOnDelivery(_ sender: UIButton) {
-        if !reachability.isReachable(){
+        if !Reachability.forInternetConnection().isReachable(){
             self.showAlert(msg: "Please check your internet connection")
         }else{
             DispatchQueue.main.async {
@@ -281,7 +278,7 @@ extension PaymentViewController {
             let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "close", style: .cancel))
                         
-            alert.addAction(UIAlertAction(title: "Pay Now", style: .default , handler: { action in
+            alert.addAction(UIAlertAction(title: "ok", style: .default , handler: { action in
                 self.setupDictionary()
             }))
             self.present(alert, animated: true, completion: nil)

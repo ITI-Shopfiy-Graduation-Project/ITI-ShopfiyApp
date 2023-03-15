@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import Reachability
 import TTGSnackbar
+import Reachability
 class ShoppingCartViewController: UIViewController {
     private var flag: Bool = true
     @IBOutlet weak var subTotal_lable: UILabel!
@@ -20,7 +20,7 @@ class ShoppingCartViewController: UIViewController {
     private static var subTotalPrice = 0.0
     private let indicator = UIActivityIndicatorView(style: .large)
 
-    var reachability:Reachability!
+ 
     
     override func viewDidLoad() {
         self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
@@ -43,23 +43,24 @@ class ShoppingCartViewController: UIViewController {
    /*     let signUpVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! SignUpViewController
         self.navigationController?.pushViewController(signUpVC, animated: true)
     */}
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//       if reachability.isReachable(){
-           if segue.identifier == "toPromoCode" {
-               let vc = segue.destination as! CartViewController
-               vc.cartArray = self.cartArray
-               vc.subTotal = ShoppingCartViewController.subTotalPrice
-           }
-//       }else{
-//           self.showAlert(msg: "Please check your internet connection")
-//       }
-//
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if Reachability.forInternetConnection().isReachable(){
+            
+            if segue.identifier == "toPromoCode" {
+                let vc = segue.destination as! CartViewController
+                vc.cartArray = self.cartArray
+                vc.subTotal = ShoppingCartViewController.subTotalPrice
+            }
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
+        }
     }
     
     
     @IBAction func saveChanges(_ sender: Any) {
         guard let cart = cartArray else {return}
-        if reachability.isReachable(){
+        if Reachability.forInternetConnection().isReachable(){
             putDraftOrder(lineItems: cart)
         }else{
             self.showAlert(msg: "Please check your internet connection")
@@ -221,7 +222,7 @@ extension ShoppingCartViewController {
 extension ShoppingCartViewController {
     func deleteLineItemProduct(indexPath : IndexPath)
     {
-        if reachability.isReachable(){
+        if Reachability.forInternetConnection().isReachable(){
             deletedLineItem = cartArray?[indexPath.row]
             cartArray?.remove(at: indexPath.row)
             cartTable.deleteRows(at: [indexPath], with: .automatic)

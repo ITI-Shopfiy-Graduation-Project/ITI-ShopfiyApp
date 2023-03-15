@@ -68,7 +68,6 @@ class RegisterVM: registerProtocol{
         let defaultAdress = customerAddress?["address1"] as? String ?? ""
         let defaultAdressID = customerAddress?["id"] as? Int ?? 0
         
-        
         UserDefaultsManager.sharedInstance.setUserID(customerID: customerID)
         UserDefaultsManager.sharedInstance.setUserName(userName: customerUserName)
         UserDefaultsManager.sharedInstance.setUserPassword(userPassword: customerPassword)
