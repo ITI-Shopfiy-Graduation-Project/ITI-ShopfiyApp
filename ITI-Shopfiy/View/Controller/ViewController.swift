@@ -22,17 +22,15 @@ class ViewController: UIViewController , CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
     let indicator = UIActivityIndicatorView(style: .large)
     let addressVM = AddressViewModel()
-    var reachability:Reachability!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reachability = Reachability.forInternetConnection()
 
         self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         mabView.delegate = self
         
-        if reachability.isReachable(){
+        if Reachability.forInternetConnection().isReachable(){
             configureLocation()
             configureAuthority()
             configureView()
@@ -42,7 +40,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate {
     }
     
     @IBAction func done_btn(_ sender: Any) {
-        if reachability.isReachable(){
+        if Reachability.forInternetConnection().isReachable(){
             setUserAddressInfo()
             if flag {
                 if UserDefaultsManager.sharedInstance.getUserID() != nil
@@ -94,7 +92,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate {
     
     
     @IBAction func search(_ sender: Any) {
-        if reachability.isReachable(){
+        if Reachability.forInternetConnection().isReachable(){
             let destination = street.text
             if destination != "" {
                 setLocation(destination: destination ?? "")
@@ -179,7 +177,7 @@ extension ViewController {
             let geoCoder = CLGeocoder()
             geoCoder.geocodeAddressString(destination) { places, error in
                 guard let place = places?.first , error == nil else {
-                    self.showAlert(msg: "error")
+                    self.showAlert(msg: "enter correct address for searching")
                     return
                 }
                 guard  let location = place.location else {

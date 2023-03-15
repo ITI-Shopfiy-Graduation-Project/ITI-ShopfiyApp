@@ -42,11 +42,11 @@ class LoginVM: loginProtocol{
         UserDefaultsManager.sharedInstance.setUserName(userName: userFirstName)
         UserDefaultsManager.sharedInstance.setUserEmail(userEmail: userEmail)
         UserDefaultsManager.sharedInstance.setUserPassword(userPassword: userPassword)
-        //
-        UserDefaultsManager.sharedInstance.setUserPhone(userPhone: userPhone)
+        
+       // UserDefaultsManager.sharedInstance.setUserPhone(userPhone: userPhone)
         UserDefaultsManager.sharedInstance.setUserAddress(userAddress: userAddress)
         UserDefaultsManager.sharedInstance.setUserAddressID(userAddressID: userAddressID)
-//
+
         UserDefaultsManager.sharedInstance.login()
     }
     
