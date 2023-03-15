@@ -16,6 +16,7 @@ class OrdersViewController: UIViewController {
         super.viewDidLoad()
         OrdersTblView.dataSource = self
         OrdersTblView.delegate = self
+       
     }
     
 
@@ -36,6 +37,7 @@ extension OrdersViewController : UITableViewDataSource
         cell.number.text =  String((orderr[indexPath.row].id)!)
 
         return cell
+ 
     }
 }
 extension OrdersViewController : UITableViewDelegate {

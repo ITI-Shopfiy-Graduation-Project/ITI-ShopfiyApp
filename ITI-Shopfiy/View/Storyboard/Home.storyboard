@@ -19,23 +19,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fJw-Ux-sNu">
-                                <rect key="frame" x="0.0" y="164" width="430" height="256"/>
+                                <rect key="frame" x="0.0" y="164" width="430" height="264"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tTe-cV-znV">
-                                    <size key="itemSize" width="392" height="159"/>
+                                    <size key="itemSize" width="392" height="196"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3A3-VL-ouz">
-                                        <rect key="frame" x="0.0" y="48.666666666666664" width="392" height="159"/>
+                                        <rect key="frame" x="0.0" y="34" width="392" height="196"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fMR-ua-wpH">
-                                            <rect key="frame" x="0.0" y="0.0" width="392" height="159"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="392" height="196"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="392" height="159"/>
+                                        <size key="customSize" width="392" height="196"/>
                                     </collectionViewCell>
                                 </cells>
                                 <userDefinedRuntimeAttributes>
@@ -45,7 +45,7 @@
                                 </userDefinedRuntimeAttributes>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="IUX-NG-uok">
-                                <rect key="frame" x="157" y="431.33333333333331" width="116" height="26"/>
+                                <rect key="frame" x="157" y="442.33333333333331" width="116" height="26"/>
                                 <color key="pageIndicatorTintColor" name="Gray"/>
                                 <color key="currentPageIndicatorTintColor" name="Green"/>
                             </pageControl>
@@ -117,35 +117,33 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="IUX-NG-uok" secondAttribute="trailing" constant="157" id="4Z0-4C-Uk3"/>
-                            <constraint firstItem="fJw-Ux-sNu" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.274678" id="6Nn-jg-t6l"/>
-                            <constraint firstItem="AiE-Fp-RTm" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.316881" id="74G-4X-OqD"/>
-                            <constraint firstItem="KMu-QS-TTI" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.28062" id="9aM-zV-Abl"/>
-                            <constraint firstItem="KMu-QS-TTI" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.0422031" id="9ar-EO-vpR"/>
-                            <constraint firstItem="fJw-Ux-sNu" firstAttribute="top" secondItem="YOo-vm-bMN" secondAttribute="bottom" constant="25" id="9it-cd-a3B"/>
-                            <constraint firstItem="AiE-Fp-RTm" firstAttribute="top" secondItem="KMu-QS-TTI" secondAttribute="bottom" constant="19" id="DzP-mh-Gnc"/>
-                            <constraint firstItem="Poe-dz-Xwp" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.0257511" id="OF9-8L-d25"/>
-                            <constraint firstItem="IUX-NG-uok" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.027897" id="Qlx-er-ucZ"/>
-                            <constraint firstItem="Poe-dz-Xwp" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="12" id="Qq9-Gi-6Oe"/>
-                            <constraint firstItem="KMu-QS-TTI" firstAttribute="top" secondItem="IUX-NG-uok" secondAttribute="bottom" constant="28.999999999999943" id="SNX-0s-vBl"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KMu-QS-TTI" secondAttribute="trailing" constant="157.66666666666674" id="SUt-Ua-KwN"/>
-                            <constraint firstItem="YOo-vm-bMN" firstAttribute="centerY" secondItem="Poe-dz-Xwp" secondAttribute="centerY" id="WsY-wb-u8j"/>
-                            <constraint firstItem="AiE-Fp-RTm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="XSU-Ca-aBY"/>
-                            <constraint firstItem="fJw-Ux-sNu" firstAttribute="top" secondItem="Poe-dz-Xwp" secondAttribute="bottom" constant="25" id="eWg-pa-347"/>
-                            <constraint firstItem="Poe-dz-Xwp" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.13457" id="fXw-II-fMG"/>
-                            <constraint firstItem="fJw-Ux-sNu" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="g9B-yz-Oai"/>
-                            <constraint firstItem="Poe-dz-Xwp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="15" id="k5w-wr-hsK"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="AiE-Fp-RTm" secondAttribute="bottom" constant="9" id="kUA-w6-NZB"/>
-                            <constraint firstItem="AiE-Fp-RTm" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="pDn-Iz-sCX"/>
-                            <constraint firstItem="KMu-QS-TTI" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="151.66666666666663" id="pyg-Kf-CBG"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="YOo-vm-bMN" secondAttribute="trailing" constant="185" id="rLE-0M-1Hr"/>
-                            <constraint firstItem="YOo-vm-bMN" firstAttribute="leading" secondItem="Poe-dz-Xwp" secondAttribute="trailing" constant="2.6666666666666572" id="s7N-7Q-dfv"/>
-                            <constraint firstItem="fJw-Ux-sNu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="uo0-5W-8Kf"/>
-                            <constraint firstItem="IUX-NG-uok" firstAttribute="top" secondItem="fJw-Ux-sNu" secondAttribute="bottom" constant="11.333333333333258" id="wVe-vp-1Hx"/>
-                            <constraint firstItem="YOo-vm-bMN" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="12" id="xJo-TU-ez9"/>
-                            <constraint firstItem="IUX-NG-uok" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="157" id="xNf-II-2D3"/>
-                            <constraint firstItem="IUX-NG-uok" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.269767" id="xdP-pG-WQ0"/>
-                            <constraint firstItem="YOo-vm-bMN" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.402326" id="yly-6E-7lX"/>
+                            <constraint firstItem="AiE-Fp-RTm" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="2B7-PY-73u"/>
+                            <constraint firstItem="Poe-dz-Xwp" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.134884" id="3Bz-BL-Q3n"/>
+                            <constraint firstItem="YOo-vm-bMN" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="12" id="3y1-vV-H43"/>
+                            <constraint firstItem="YOo-vm-bMN" firstAttribute="leading" secondItem="Poe-dz-Xwp" secondAttribute="trailing" constant="2.6666666666666714" id="4IK-fu-7np"/>
+                            <constraint firstItem="fJw-Ux-sNu" firstAttribute="top" secondItem="YOo-vm-bMN" secondAttribute="bottom" constant="25" id="8Fo-IR-GoE"/>
+                            <constraint firstItem="KMu-QS-TTI" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.0422031" id="9JI-BS-UDi"/>
+                            <constraint firstItem="KMu-QS-TTI" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.28062" id="EnA-Ok-HtH"/>
+                            <constraint firstItem="YOo-vm-bMN" firstAttribute="centerY" secondItem="Poe-dz-Xwp" secondAttribute="centerY" id="HxO-ne-in5"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="AiE-Fp-RTm" secondAttribute="bottom" constant="9" id="Lcl-sh-BXn"/>
+                            <constraint firstItem="IUX-NG-uok" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.269767" id="QMp-ju-Ycy"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="YOo-vm-bMN" secondAttribute="trailing" constant="185" id="StR-XO-9MH"/>
+                            <constraint firstItem="fJw-Ux-sNu" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.283262" id="Ug2-oj-34V"/>
+                            <constraint firstItem="fJw-Ux-sNu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Vgd-n1-ZxG"/>
+                            <constraint firstItem="AiE-Fp-RTm" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.316881" id="XOr-be-ToF"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KMu-QS-TTI" secondAttribute="trailing" constant="157.66666666666669" id="ZTf-Ih-PDk"/>
+                            <constraint firstItem="Poe-dz-Xwp" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="12" id="Zgp-my-DNh"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="IUX-NG-uok" secondAttribute="trailing" constant="157" id="Zku-iV-472"/>
+                            <constraint firstItem="KMu-QS-TTI" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="151.66666666666666" id="ZsY-jM-TsX"/>
+                            <constraint firstItem="AiE-Fp-RTm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ctw-az-Usb"/>
+                            <constraint firstItem="IUX-NG-uok" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="157" id="fyr-OH-SXm"/>
+                            <constraint firstItem="IUX-NG-uok" firstAttribute="top" secondItem="fJw-Ux-sNu" secondAttribute="bottom" constant="14.333333333333314" id="ifp-Kc-7dh"/>
+                            <constraint firstItem="KMu-QS-TTI" firstAttribute="top" secondItem="IUX-NG-uok" secondAttribute="bottom" constant="18" id="j7s-hd-W5I"/>
+                            <constraint firstItem="YOo-vm-bMN" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.393798" id="jTx-RT-ae8"/>
+                            <constraint firstItem="fJw-Ux-sNu" firstAttribute="top" secondItem="Poe-dz-Xwp" secondAttribute="bottom" constant="25" id="qPF-b6-Qhq"/>
+                            <constraint firstItem="Poe-dz-Xwp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="15" id="tf4-XU-JpC"/>
+                            <constraint firstItem="AiE-Fp-RTm" firstAttribute="top" secondItem="KMu-QS-TTI" secondAttribute="bottom" constant="19" id="x7k-qk-EwK"/>
+                            <constraint firstItem="fJw-Ux-sNu" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="zdJ-Py-24f"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">

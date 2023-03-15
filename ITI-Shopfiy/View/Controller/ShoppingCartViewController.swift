@@ -44,16 +44,16 @@ class ShoppingCartViewController: UIViewController {
         self.navigationController?.pushViewController(signUpVC, animated: true)
     */}
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       if reachability.isReachable(){
+//       if reachability.isReachable(){
            if segue.identifier == "toPromoCode" {
                let vc = segue.destination as! CartViewController
                vc.cartArray = self.cartArray
                vc.subTotal = ShoppingCartViewController.subTotalPrice
            }
-       }else{
-           self.showAlert(msg: "Please check your internet connection")
-       }
-       
+//       }else{
+//           self.showAlert(msg: "Please check your internet connection")
+//       }
+//
     }
     
     

@@ -23,13 +23,13 @@ class HomeViewController: UIViewController {
     
     @IBAction func searchBtn(_ sender: Any) {
         let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-        if reachability.isReachable(){
+      
             productsVC.url = URLService.allProducts()
             productsVC.vendor = "All Products"
             navigationController?.pushViewController(productsVC, animated: true)
-        }else{
+      
             self.showAlert(msg: "Please check your internet connection")
-        }
+      
         
     }
     
@@ -67,51 +67,44 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var AdsCollectionView: UICollectionView!
     var reachability:Reachability!
     
+    
     override func viewDidLoad() {
      
         super.viewDidLoad()
+        indicator.center = view.center
+        view.addSubview(indicator)
+        AdsCollectionView.delegate = self
+        AdsCollectionView.dataSource = self
+        BrandsCollectionView.delegate = self
+        BrandsCollectionView.dataSource = self
+        let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
+        AdsCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
+        starttimer()
+        pageControl.numberOfPages  = staticimgs.count
+        brandsModel = BrandViewModel()
+        brandsModel?.BrandssUrl = self.AllBrandsUrl
+        brandsModel?.getBrands()
+        brandsModel?.bindingBrands = {()in
+        self.renderBrands()
+        }
+        discountModel = DiscountViewModel()
+        discountModel?.discountUrl = self.dicountUrl
+        discountModel?.getDiscount()
+        discountModel?.bindingDiscount =
+        {()in
+        self.renderDiscount()
+        }
         
-        reachability = Reachability.forInternetConnection()
+        navigationItem.title = "Shopify App"
         
-        viewWillAppear(false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if reachability.isReachable(){
-            indicator.center = view.center
-            view.addSubview(indicator)
-            AdsCollectionView.delegate = self
-            AdsCollectionView.dataSource = self
-            BrandsCollectionView.delegate = self
-            BrandsCollectionView.dataSource = self
-            let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
-            AdsCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
-            starttimer()
-            pageControl.numberOfPages  = staticimgs.count
-            brandsModel = BrandViewModel()
-            brandsModel?.BrandssUrl = self.AllBrandsUrl
-            brandsModel?.getBrands()
-            brandsModel?.bindingBrands = {()in
-                self.renderBrands()
-            }
-            discountModel = DiscountViewModel()
-            discountModel?.discountUrl = self.dicountUrl
-            discountModel?.getDiscount()
-            discountModel?.bindingDiscount =
-            {()in
-                self.renderDiscount()
-            }
-            
-            navigationItem.title = "Shopify App"
-            
-            if UserDefaultsManager.sharedInstance.isLoggedIn() == false{
-                userName.text = "Guest"
-            }
-            else {
-                userName.text = UserDefaultsManager.sharedInstance.getUserName()
-            }
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
+        if UserDefaultsManager.sharedInstance.isLoggedIn() == false{
+            userName.text = "Guest"
+        }
+        else {
+            userName.text = UserDefaultsManager.sharedInstance.getUserName()
         }
     }
    
@@ -122,22 +115,17 @@ extension HomeViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //Code Here
-        
         if collectionView == AdsCollectionView {
-            if reachability.isReachable(){
-                if UIPasteboard.general.string != discount[0].code {
-                    
-                    UIPasteboard.general.string = discount[0].code!
-                    let snackbar = TTGSnackbar(message: "🎉 congratulations you get discount code!", duration: .middle)
-                    snackbar.tintColor =  UIColor(named: "Green")
-                    snackbar.show()
-                }
-                else {
-                    let snackbar = TTGSnackbar(message: "Already Copied!", duration: .middle)
-                    snackbar.show()
-                }
-            }else{
-                self.showAlert(msg: "Please check your internet connection")
+            if   UIPasteboard.general.string != discount[0].code {
+               
+                UIPasteboard.general.string = discount[0].code!
+                let snackbar = TTGSnackbar(message: "🎉 congratulations you get discount code!", duration: .middle)
+                snackbar.tintColor =  UIColor(named: "Green")
+                snackbar.show()
+            }
+            else {
+                let snackbar = TTGSnackbar(message: "Already Copied!", duration: .middle)
+                snackbar.show()
             }
           
             
@@ -146,16 +134,10 @@ extension HomeViewController: UICollectionViewDelegate{
         }
         else
         {
-            if reachability.isReachable(){
-                let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-                productsVC.url = URLService.produts(Brand_ID: brand[indexPath.row].id ?? 437786837273)
-                productsVC.vendor = brand[indexPath.row].title
-                navigationController?.pushViewController(productsVC, animated: true)
-            }else{
-                self.showAlert(msg: "Please check your internet connection")
-            }
-        }
-        
+            let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
+            productsVC.url = URLService.produts(Brand_ID: brand[indexPath.row].id ?? 437786837273)
+            productsVC.vendor = brand[indexPath.row].title
+            navigationController?.pushViewController(productsVC, animated: true)}
     }
   
 }
