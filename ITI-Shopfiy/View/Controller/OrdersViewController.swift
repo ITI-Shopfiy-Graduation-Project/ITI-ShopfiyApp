@@ -19,6 +19,9 @@ class OrdersViewController: UIViewController {
        
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        orderr.removeAll()
+    }
 
  
 

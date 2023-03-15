@@ -186,6 +186,7 @@ extension CategoryViewController :UICollectionViewDataSource{
         let productimg = URL(string:productt.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.productImage?.kf.setImage(with:productimg)
         cell.productPrice.text = productt.title
+        cell.price.text  = productt.variants?[0].price
         
         //Fady
         cell.currentProduct = productt
@@ -212,7 +213,7 @@ extension CategoryViewController :UICollectionViewDataSource{
         
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: self.view.frame.width*0.45, height: self.view.frame.height*0.32)
+            return CGSize(width: self.view.frame.width*0.45, height: self.view.frame.height*0.35)
         }
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
             return 10

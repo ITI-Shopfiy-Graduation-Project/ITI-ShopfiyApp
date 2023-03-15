@@ -31,7 +31,7 @@ struct URLService{
         return baseUrl + "collections/\(category_ID)/products.json"
     }
    static func mainCategory(category_ID: Int) -> String {
-        return baseUrl + "products.json?collection_id=\(category_ID)"
+        return baseUrl + "/products.json?collection_id=\(category_ID)"
     }
     
     static func postAddress(userID : Int) -> String{

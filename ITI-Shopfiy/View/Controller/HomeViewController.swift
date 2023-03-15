@@ -34,7 +34,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func cartBtn(_ sender: Any) {
-        if reachability.isReachable(){
+        if Reachability.forInternetConnection().isReachable(){
             if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
                 let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
                 navigationController?.pushViewController(cartVC, animated: true)

@@ -13,6 +13,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productPrice: UILabel!
     var currentProduct: Products?
     var categoryDelegate: FavouriteActionCategoryScreen?
+    @IBOutlet weak var price: UILabel!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     

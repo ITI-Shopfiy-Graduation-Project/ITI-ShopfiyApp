@@ -269,7 +269,7 @@ extension MeViewController {
                 {  self.addtoLine = emaill
                     self.ordr.append(emaill)
                     self.meLogedVC?.email.text = emaill.email
-                    self.meLogedVC?.Price.text = emaill.current_subtotal_price ?? "no" + " " + (emaill.currency!)
+                    self.meLogedVC?.Price.text = emaill.current_subtotal_price
                     self.meLogedVC?.createdTime.text = emaill.created_at
                     self.meLogedVC?.orderId.text = String((emaill.id)!)
                 }
