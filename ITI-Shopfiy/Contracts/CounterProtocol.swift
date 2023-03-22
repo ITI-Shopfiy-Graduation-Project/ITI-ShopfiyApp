@@ -11,7 +11,7 @@ protocol CounterProtocol {
     func deleteItem(indexPath : IndexPath)
     
     func increaseCounter() 
-    func decreaseCounter()
+    func decreaseCounter(price: String)
     func setItemQuantityToPut(quantity: Int , index: Int)
     
 }

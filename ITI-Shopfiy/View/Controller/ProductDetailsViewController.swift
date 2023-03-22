@@ -28,7 +28,6 @@ class ProductDetailsViewController: UIViewController{
     var lineitem = LineItem()
     var newLineItem : LineItem?
     var itemtitle : String?
-    //    var lineitemarr:LineItem = [LineItem]
     var lineItemArray:[LineItem] = []
     var lineAppend : [LineItem]?
     var addtoLine : DrafOrder?
@@ -55,16 +54,11 @@ class ProductDetailsViewController: UIViewController{
         
         favoritesVM = FavouritesVM()
         viewWillAppear(false)
-        // Do any additional setup after loading the view.
+
         let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
         productImagesCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
         
-//        let likesScreen = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(goToFavoritesScreen(sender: )))
-//        likesScreen.tintColor = UIColor(named: "Red")
-//
-//        let cartScreen = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(goToCartScreen(sender: )))
-//        cartScreen.tintColor = UIColor(named: "Green")
-//        navigationItem.rightBarButtonItems = [likesScreen, cartScreen]
+
         
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
@@ -100,24 +94,7 @@ class ProductDetailsViewController: UIViewController{
         }
     }
     
-//    @objc func goToFavoritesScreen(sender: AnyObject) {
-//        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
-//        let favoritesVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
-//        navigationController?.pushViewController(favoritesVC, animated: true)
-//        }else{
-//            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
-//        }
-//    }
-//
-//    @objc func goToCartScreen(sender: AnyObject) {
-//        if (UserDefaultsManager.sharedInstance.isLoggedIn() == true) {
-//        let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
-//        navigationController?.pushViewController(cartVC, animated: true)
-//        }else{
-//            showLoginAlert(title: "UnAuthorized Action", message: "Please, try to login first")
-//        }
-//        viewWillAppear(false)
-//    }
+
     
     @IBAction func addToCartButton(_ sender: Any) {
        
@@ -164,6 +141,7 @@ class ProductDetailsViewController: UIViewController{
             let snackbar = TTGSnackbar(message: "Added to cart ✅", duration: .middle)
             snackbar.tintColor =  UIColor(named: "Green")
             snackbar.show()
+            UserDefaultsManager.sharedInstance.setCartState(cartState: true)
             print ("already used")
                     print ("put")
                     renderCartData ()
@@ -179,6 +157,7 @@ class ProductDetailsViewController: UIViewController{
                 let snackbar = TTGSnackbar(message: "Added to cart ✅", duration: .middle)
                 snackbar.tintColor =  UIColor(named: "Green")
                 snackbar.show()
+                UserDefaultsManager.sharedInstance.setCartState(cartState: true)
                     }
         }else{
             showLoginAlert(title: "UnAuthorized Action", message: "You must loginn first")
@@ -351,41 +330,25 @@ extension ProductDetailsViewController {
     func postCart(){
         let newdraft  : [String : Any] =  [ "draft_order" :
                                         [
-                                          //"id": user_id  ,//
-//                                          "note": "rush order",
+
                                             "email": UserDefaultsManager.sharedInstance.getUserEmail()!,
-//                                          "taxes_included": false,
+
                                             "currency": "Egp",
 
-//                                          "name": "#d1",
-//                                          "status": "completed",
                                           "line_items" : [
                                             [
-//                                              "id": 58237889282329,
+
                                                 "product_id": (self.product?.id)!,
                                                 "title": (self.product?.title)! ,
-//                                              "variant_title": nil,
+
                                                 "sku": (product?.image?.src)!,
                                                 "vender" : (self.product?.vendor)!,
                                               "quantity": 1,
-//                                              "requires_shipping": true,
-//                                              "taxable": true,
-//                                              "gift_card": false,
-//                                              "fulfillment_service": "manual",
+
                                               "grams":self.product!.variants![0].inventory_quantity!,
-//                                              "tax_lines": [            [
-//                                                  "rate":0.14,
-//                                                  "title":"GST",
-//                                                  "price":"28.00"
-//                                               ]
-//                                              ],
-//                                              "applied_discount":,
-//                                              "name": nil,
-//                                              "properties": [],
-//                                              "custom": false,
+
                                                 "price": (self.product?.variants![0].price)!,
-//                                              "admin_graphql_api_id": "gid://shopify/DraftOrderLineItem/498266019"
-                                          
+
                                            ]
                                           ],
                                         "customer": [
@@ -427,8 +390,8 @@ extension ProductDetailsViewController {
 extension ProductDetailsViewController {
     func renderCart() {
         DispatchQueue.main.async {
-            self.cartcount = self.cartVM.cartResult!
-           // print ("heree email\(String(describing: self.cartcount.draft_orders?[1].email))")
+            self.cartcount = self.cartVM.cartResult ?? ShoppingCart()
+           
 
         }
     

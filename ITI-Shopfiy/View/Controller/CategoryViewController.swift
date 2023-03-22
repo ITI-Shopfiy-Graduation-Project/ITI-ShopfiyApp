@@ -39,8 +39,11 @@ class CategoryViewController: UIViewController {
         }else{
             
             if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-                let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
-                navigationController?.pushViewController(cartVC, animated: true)
+                if ((UserDefaultsManager.sharedInstance.getCartState() == true)){
+                    let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
+                    navigationController?.pushViewController(cartVC, animated: true)
+                }
+                else {  self.showAlert(msg: "No produts Added Yet")}
             }else{
                 showLoginAlert(title: "UnAuthorized Action",message: "You must login first")
             }
@@ -186,7 +189,16 @@ extension CategoryViewController :UICollectionViewDataSource{
         let productimg = URL(string:productt.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.productImage?.kf.setImage(with:productimg)
         cell.productPrice.text = productt.title
-        cell.price.text  = productt.variants?[0].price
+        if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
+            let price = (Double(productt.variants?[0].price ?? "0") ?? 0.0)  * 30
+            let priceString = "\(price.formatted()) EGP"
+            cell.price.text = priceString
+        }
+        else
+        {
+            let priceString = "\(productt.variants?[0].price ?? "0") $"
+            cell.price.text = priceString
+        }
         
         //Fady
         cell.currentProduct = productt

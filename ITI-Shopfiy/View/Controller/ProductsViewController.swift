@@ -10,7 +10,6 @@ import Kingfisher
 import Foundation
 import JJFloatingActionButton
 import TTGSnackbar
-import Reachability
 
 class ProductsViewController: UIViewController{
     @IBOutlet weak var priceValue: UILabel!
@@ -43,7 +42,6 @@ class ProductsViewController: UIViewController{
     var url: String?
     var vendor: String?
     var indicator: UIActivityIndicatorView?
-    var reachability:Reachability!
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -51,9 +49,7 @@ class ProductsViewController: UIViewController{
         super.viewDidLoad()
         priceSlider.isHidden = true
         priceValue.isHidden = true
-        reachability = Reachability.forInternetConnection()
         
-        if reachability.isReachable(){
             indicator = UIActivityIndicatorView(style: .large)
             indicator?.center = view.center
             view.addSubview(indicator ?? UIActivityIndicatorView() )
@@ -73,9 +69,7 @@ class ProductsViewController: UIViewController{
             
             let productNib = UINib(nibName: "ProductCollectionViewCell", bundle: nil)
             productsCollectionView.register(productNib, forCellWithReuseIdentifier: "cell")
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
-        }
+       
         
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipe.direction = .right
@@ -90,13 +84,10 @@ class ProductsViewController: UIViewController{
     //MARK: View will appear
     override func viewWillAppear(_ animated: Bool) {
         
-        if reachability.isReachable(){
             navigationItem.title = vendor
             self.productsCollectionView.reloadData()
             self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
-        }
+      
     }
     
 //    @IBAction func likesScreen(_ sender: UIBarButtonItem) {
@@ -147,8 +138,16 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
         let product = self.productsArray?[indexPath.row]
 
         cell.productTitle.text = product?.title ?? ""
-        let currency = UserDefaultsManager.sharedInstance.getCurrency()
-        cell.productPrice.text = "\(product?.variants?[0].price ?? "") \(currency)"
+        if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
+            let price = (Double(product?.variants?[0].price ?? "0") ?? 0.0)  * 30
+            let priceString = "\(price.formatted()) EGP"
+            cell.productPrice.text = priceString
+        }
+        else
+        {
+            let priceString = "\(product?.variants?[0].price ?? "0") $"
+            cell.productPrice.text = priceString
+        }
         let productimg = URL(string:product?.image?.src ?? "https://apiv2.allsportsapi.com//logo//players//100288_diego-bri.jpg")
         cell.productImageview?.kf.setImage(with:productimg)
         cell.currentProduct = product
@@ -165,16 +164,13 @@ extension ProductsViewController: UICollectionViewDataSource, UICollectionViewDe
     // MARK: Navigation
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if reachability.isReachable(){
             let productDetialsVC = UIStoryboard(name: "ProductDetailsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "productDetails") as! ProductDetailsViewController
             
             productDetialsVC.product_ID = productsArray?[indexPath.row].id
             //        productDetialsVC.product = productsArray?[indexPath.row]
             
             self.navigationController?.pushViewController(productDetialsVC, animated: true)
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
-        }
+       
     }
     
 }
@@ -212,27 +208,19 @@ extension ProductsViewController: UISearchBarDelegate{
 //MARK: Check cell & Alerts
 extension ProductsViewController: FavouriteActionProductScreen{
     func addFavourite(userId: Int, appDelegate: AppDelegate, product: Products) {
-        if reachability.isReachable(){
             favoritesVM?.addFavourite(userId: userId, appDelegate: self.appDelegate, product: product)
             let snackbar = TTGSnackbar(message: "Item added to favorites!", duration: .middle)
             snackbar.tintColor =  UIColor(named: "Green")
             snackbar.show()
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
-        }
+
     }
     
     func isFavorite(userId: Int, appDelegate: AppDelegate, product: Products) -> Bool {
-        if reachability.isReachable(){
         return favoritesVM?.isProductsInFavourites(userId: userId, appDelegate: self.appDelegate, product: product) ?? false
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
-            return false
-        }
+ 
     }
     
     func showAlert(userId: Int, appDelegate: AppDelegate, title: String, message: String, product: Products) {
-        if reachability.isReachable(){
             let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { [self] action in
@@ -247,13 +235,10 @@ extension ProductsViewController: FavouriteActionProductScreen{
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
             
             self.present(alert, animated: true, completion: nil)
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
-        }
+
     }
     
     func showLoginAlert(title: String, message: String) {
-        if reachability.isReachable(){
             let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
             
             alert.addAction(UIAlertAction(title: "Login", style: UIAlertAction.Style.cancel, handler: { [self] action in
@@ -263,9 +248,7 @@ extension ProductsViewController: FavouriteActionProductScreen{
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
             
             self.present(alert, animated: true, completion: nil)
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
-        }
+
     }
     
     func showToastMessage(message: String, color: UIColor) {

@@ -22,13 +22,15 @@ class HomeViewController: UIViewController {
     let indicator = UIActivityIndicatorView(style: .large)
     
     @IBAction func searchBtn(_ sender: Any) {
-        let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
-      
+        if Reachability.forInternetConnection().isReachable(){
+            let productsVC = UIStoryboard(name: "ProductsStoryboard", bundle: nil).instantiateViewController(withIdentifier: "products") as! ProductsViewController
+            
             productsVC.url = URLService.allProducts()
             productsVC.vendor = "All Products"
             navigationController?.pushViewController(productsVC, animated: true)
-      
+        }else{
             self.showAlert(msg: "Please check your internet connection")
+        }
       
         
     }
@@ -36,8 +38,10 @@ class HomeViewController: UIViewController {
     @IBAction func cartBtn(_ sender: Any) {
         if Reachability.forInternetConnection().isReachable(){
             if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-                let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
-                navigationController?.pushViewController(cartVC, animated: true)
+                if ((UserDefaultsManager.sharedInstance.getCartState() == true)){
+                    let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
+                    navigationController?.pushViewController(cartVC, animated: true)}
+                else { self.showAlert(msg: "No product Adeed Yet")}
             }else{
                 showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
             }
@@ -47,16 +51,13 @@ class HomeViewController: UIViewController {
         
     }
     @IBAction func favBtn(_ sender: Any) {
-        if reachability.isReachable(){
             if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
                 let FavVC = UIStoryboard(name: "FavoritesStoryboard", bundle: nil).instantiateViewController(withIdentifier: "favorites") as! FavoritesViewController
                 navigationController?.pushViewController(FavVC, animated: true)
             }else{
                 showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
             }
-        }else{
-            self.showAlert(msg: "Please check your internet connection")
-        }
+
     }
     
     @IBOutlet weak var pageControl: UIPageControl!
@@ -79,23 +80,28 @@ class HomeViewController: UIViewController {
         BrandsCollectionView.dataSource = self
         let nib = UINib(nibName: "AdsCollectionViewCell", bundle: nil)
         AdsCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
+        
         starttimer()
-        pageControl.numberOfPages  = staticimgs.count
-        brandsModel = BrandViewModel()
-        brandsModel?.BrandssUrl = self.AllBrandsUrl
-        brandsModel?.getBrands()
-        brandsModel?.bindingBrands = {()in
-        self.renderBrands()
-        }
-        discountModel = DiscountViewModel()
-        discountModel?.discountUrl = self.dicountUrl
-        discountModel?.getDiscount()
-        discountModel?.bindingDiscount =
-        {()in
-        self.renderDiscount()
+        if Reachability.forInternetConnection().isReachable(){
+            pageControl.numberOfPages  = staticimgs.count
+            brandsModel = BrandViewModel()
+            brandsModel?.BrandssUrl = self.AllBrandsUrl
+            brandsModel?.getBrands()
+            brandsModel?.bindingBrands = {()in
+                self.renderBrands()
+            }
+            discountModel = DiscountViewModel()
+            discountModel?.discountUrl = self.dicountUrl
+            discountModel?.getDiscount()
+            discountModel?.bindingDiscount =
+            {()in
+                self.renderDiscount()
+            }
+        }else{
+            self.showAlert(msg: "Please check your internet connection")
         }
         
-        navigationItem.title = "Shopify App"
+        navigationItem.title = "Home"
         
     }
     

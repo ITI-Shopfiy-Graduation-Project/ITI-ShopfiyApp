@@ -126,9 +126,10 @@ class MeViewController: UIViewController {
             self.showAlert(msg: "Please check your internet connection")
         }else{
             if (UserDefaultsManager.sharedInstance.isLoggedIn() == true){
-                let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
-                navigationController?.pushViewController(cartVC, animated: true)
-            }else{
+                if ((UserDefaultsManager.sharedInstance.getCartState() == true)){
+                    let cartVC = UIStoryboard(name: "ShoppingCart", bundle: nil).instantiateViewController(withIdentifier: "shoppingCart") as! ShoppingCartViewController
+                    navigationController?.pushViewController(cartVC, animated: true)
+                }else {   self.showAlert(msg: "no products Added Yet")}}else{
                 showLoginAlert(Title: "UnAuthorized Action", Message: "Please, try to login first")
             }
         }
@@ -235,7 +236,19 @@ extension MeViewController{
 
                     if self.savedFavorites?.count ?? 1 > 0{
                         self.meLogedVC?.productName_wishList.text = self.savedFavorites?[0].title
-                        self.meLogedVC?.productPrice_wishList.text = self.savedFavorites?[0].variants?[0].price
+//                        self.meLogedVC?.productPrice_wishList.text = self.savedFavorites?[0].variants?[0].price
+                        
+                        if UserDefaultsManager.sharedInstance.getCurrency() == "EGP" {
+                            let price = (Double(self.savedFavorites?[0].variants?[0].price ?? "0") ?? 0.0)  * 30
+                            let priceString = "\(price.formatted()) EGP"
+                            self.meLogedVC?.productPrice_wishList.text = priceString
+                        }
+                        else
+                        {
+                            let priceString = "\(self.savedFavorites?[0].variants?[0].price ?? "0") $"
+                            self.meLogedVC?.productPrice_wishList.text = priceString
+                        }
+                        
                         self.meLogedVC?.productColor_wishList.text = self.savedFavorites?[0].variants?[0].option2
                         self.meLogedVC?.productImage_wishList.kf.setImage(with: URL(string:self.savedFavorites?[0].image?.src ?? ""))
                     }
@@ -269,7 +282,7 @@ extension MeViewController {
                 {  self.addtoLine = emaill
                     self.ordr.append(emaill)
                     self.meLogedVC?.email.text = emaill.email
-                    self.meLogedVC?.Price.text = emaill.current_subtotal_price
+                    self.meLogedVC?.Price.text = "estimited Delivery in 2 days"
                     self.meLogedVC?.createdTime.text = emaill.created_at
                     self.meLogedVC?.orderId.text = String((emaill.id)!)
                 }
