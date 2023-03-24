@@ -20,11 +20,13 @@ class ShoppingCartViewController: UIViewController {
     private static var subTotalPrice = 0.0
     private let indicator = UIActivityIndicatorView(style: .large)
 
- 
+    @IBOutlet weak var processed_btn: UIButton!
+    
     
     override func viewDidLoad() {
         self.navigationController!.navigationBar.tintColor = UIColor(named: "Green") ?? .green
         super.viewDidLoad()
+        cartArray = nil
         ShoppingCartViewController.subTotalPrice = 0.0
         tableConfiguration()
     //    subTotal_lable.isHidden = true
@@ -40,9 +42,7 @@ class ShoppingCartViewController: UIViewController {
         cartTable.register(nib, forCellReuseIdentifier: "cell")
     }
     @IBAction func processedToCheckout(_ sender: Any) {
-   /*     let signUpVC = UIStoryboard(name: "CartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "cart") as! SignUpViewController
-        self.navigationController?.pushViewController(signUpVC, animated: true)
-    */}
+ }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if Reachability.forInternetConnection().isReachable(){
@@ -167,13 +167,12 @@ extension ShoppingCartViewController: CounterProtocol {
         setSubTotal()
     }
     
-    func decreaseCounter() {
+    func decreaseCounter(price: String) {
         
-        for index in  0...(cartArray?.count ?? 0) - 1
-        {
-            let itemPrice = (Double(cartArray?[index].price ?? "") ?? 0.0)
+        
+        let itemPrice = Double(price) ?? 0.0
             Self.subTotalPrice = Self.subTotalPrice - itemPrice
-        }
+        
         print("subtotal :\(Self.subTotalPrice)")
         setSubTotal()
     }
@@ -203,9 +202,18 @@ extension ShoppingCartViewController {
             self.cartArray = self.shoppingCartVM.cartList
             self.configureView()
             print("sub total : \(Self.subTotalPrice)")
-        }
+            if self.cartArray?.count == 0 {
+            self.cartTable.isHidden = true
+            }
+            else {
+                self.cartTable.isHidden = false
+                self.processed_btn.isHidden = false
+            }
+            
+            }
+   
     }
-    
+
     func configureView(){
         if cartArray != nil {
             self.shoppingCartVM.cartList?.forEach({ item in
@@ -267,7 +275,7 @@ extension ShoppingCartViewController {
         if let lineItem = deletedLineItem {
             cartArray?.insert(lineItem, at: index)
             cartTable.reloadData()
-            setSubTotal()
+            self.increaseCounter()
         }
     }
     
@@ -291,7 +299,7 @@ extension ShoppingCartViewController {
                 }
                 return
             }
-            self.setSubTotal()
+            self.increaseCounter()
             print("lineItem was added successfully")
         }
     }
@@ -299,8 +307,10 @@ extension ShoppingCartViewController {
         shoppingCartVM.deleteCart { error in
             if error != nil {
                 UserDefaultsManager.sharedInstance.setUserCart(cartId: nil)
-                UserDefaultsManager.sharedInstance.setCartState(cartState: false)
-                self.setSubTotal()
+                UserDefaultsManager.sharedInstance.setCartState(cartState:false)
+                self.increaseCounter()
+                self.subTotal_lable.text = "0"
+                
             }
             else
             {

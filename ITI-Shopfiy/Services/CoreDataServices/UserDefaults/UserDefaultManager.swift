@@ -123,7 +123,7 @@ class UserDefaultsManager: UserDefaultProtocol{
         UserDefaults.standard.set(cartState, forKey: "Cart_State")
     }
     
-    func getCartState(cartState: Bool) -> Bool{
+    func getCartState() -> Bool{
         return UserDefaults.standard.bool(forKey: "Cart_State")
     }
 }

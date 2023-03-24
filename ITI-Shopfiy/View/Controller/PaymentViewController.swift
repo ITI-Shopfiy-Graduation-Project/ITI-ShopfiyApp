@@ -107,10 +107,10 @@ class PaymentViewController: UIViewController, AddressDelegate {
             self.addressFlag = true
 
         }
-        else if address != "" && address != nil {
+        /*else if address != "" && address != nil {
             self.defaultAddress.text = address
             self.addressFlag = true
-        }
+        }*/
         else{
             self.defaultAddress.text = "Choose Address"
             self.addressDescription.text = "choose address for payment transactions"

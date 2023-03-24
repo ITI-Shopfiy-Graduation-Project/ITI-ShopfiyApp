@@ -56,7 +56,7 @@ class CartTableViewCell: UITableViewCell {
             counter = counter - 1
             lineItem[indexPath.row].quantity = counter
             quantityCount.text = String (counter)
-            counterProtocol?.decreaseCounter()
+            counterProtocol?.decreaseCounter(price: lineItem[indexPath.row].price ?? "")
             counterProtocol?.setItemQuantityToPut(quantity: counter, index: indexPath.row)
         }
 //         else

@@ -13,6 +13,7 @@ import TTGSnackbar
 import Reachability
 
 class AddressViewController: UIViewController , CLLocationManagerDelegate {
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var addressHisoryTable: UITableView!
     var addressHistoryArray: [Address]?
     var address : Address = Address()
@@ -41,6 +42,7 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
         configureAuthority()
         // getAllAddresses()
         getAllHistory()
+        searchBar.delegate = self
     }
     
     @IBAction func saveAddress_btn(_ sender: Any) {
@@ -53,7 +55,7 @@ class AddressViewController: UIViewController , CLLocationManagerDelegate {
     }
     
     func setupDropDown(){
-        dropDown.anchorView = searchTF
+        dropDown.anchorView = searchBar
         dropDown.dataSource = addressArray
         dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
 
@@ -191,7 +193,7 @@ extension AddressViewController {
             guard  let location = place.location else {
                 return
             }
-            self.searchTF.text = ""
+            //self.searchTF.text = ""
             let pin = MKPointAnnotation()
             pin.coordinate = location.coordinate
             pin.title = "\(place.name ?? destination) "
@@ -468,12 +470,20 @@ extension AddressViewController {
     }
     
 }
-extension AddressViewController: UITextFieldDelegate{
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
+extension AddressViewController: UITextFieldDelegate , UISearchBarDelegate{
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.searchBar.endEditing(true)
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText != "" {
+            let destination = searchText
+            setLocation(destination: destination )
+        }
     }
 }
